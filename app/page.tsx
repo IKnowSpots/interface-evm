@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="bg-gradient-to-r from-[#000] from-50% to-[#af16e3]  text-white w-full  ">
+      <div className="bg-gradient-to-r from-[#000] from-50% to-[#af16e3]  text-white w-full overflow-hidden ">
         <nav className="flex justify-evenly items-center py-8 w-full absolute">
           <Image
             src="/iks-logo.png"
@@ -36,23 +36,30 @@ export default function Home() {
             <h1 className="  text-8xl  font-bold  ">
               Introducing <span className="block">iknowspots</span>
             </h1>
-            <p className="my-5 text-xl">Seamless granular events hosting with NFT tickets.</p>
+            <p className="my-5 text-xl">
+              Seamless granular events hosting with NFT tickets.
+            </p>
             <button className="outline ">Claim Now</button>
           </div>
-          <Image
-            src="/circles.png"
-            width="1500"
-            height="50"
-            className="circle-1"
-            alt="Circle"
-          />
-          <Image
-            src="/circles-mirror.png"
-            width="1500"
-            height="100"
-            className="circle-2"
-            alt="Circle"
-          />
+          <div id="parent-div" className="relative w-full p-6">
+            <Image
+              src="/circles.png"
+              width="1400"
+              height="50"
+              className="opacity-20 -rotate-12 "
+              alt="Circle"
+            />
+            <Image
+              src="/circles-mirror.png"
+              width="1500"
+              height="100"
+              className="absolute top-0 rotate-12 opacity-20"
+              alt="Circle"
+            />
+          </div>
+          <div>
+            
+          </div>
         </div>
       </div>
     </>
