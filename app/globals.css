@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.gradient-bg {
+    background-size: 100% 100%;
+    background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+    background-image: radial-gradient(49% 81% at -104% 139%, #1E1F23F2 0%, #073AFF00 100%),
+                      radial-gradient(60% 46% at 126% 40%, #030004f2 1%, #073AFF00 97%),
+                      radial-gradient(106% 86% at 52% 13%, #1E1F23F2 1%, #FF000000 99%),
+                      radial-gradient(137% 101% at 54% 96%, #1E1F23F2 22%, #FF000000 99%),
+                      radial-gradient(142% 91% at 108% 103%, #AF16E3F2 0%, #AF16E3F2 100%);
+}
+  
+.text-gradient{
+    color: transparent;
+    background: linear-gradient(90deg, #801EE1 4%, #FFFFFF 87%,);
+    background: linear-gradient(19deg, #801EE1 30%, #FFFFFF 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

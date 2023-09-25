@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="bg-gradient-to-r from-[#000] from-50% to-[#af16e3]  text-white w-full  ">
+      <div className="gradient-bg text-white w-full">
         <nav className="flex justify-evenly items-center py-8 w-full absolute">
           <Image
             src="/iks-logo.png"
@@ -33,7 +33,7 @@ export default function Home() {
         </nav>
         <div className="">
           <div className=" top-1/4 text-center w-full absolute">
-            <h1 className="  text-8xl  font-bold  ">
+            <h1 className="  text-8xl  font-bold text-gradient ">
               Introducing <span className="block">iknowspots</span>
             </h1>
             <p className="my-5 text-xl">Seamless granular events hosting with NFT tickets.</p>
