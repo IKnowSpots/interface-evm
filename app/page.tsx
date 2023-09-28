@@ -188,11 +188,66 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div>
-          <h1>Our Mission</h1>
-          <p>Lorum</p>
-          <p>Lorum</p>
-          <p>Lorum</p>
+        <div className="bg-[#3C3C3C] flex justify-between px-8  mx-12 my-16 rounded-xl bg-opacity-40 bg-blur-md">
+          <div>
+            <h1 className="text-5xl mt-12 ">Our Mission</h1>
+            <div className="flex justify-around w-1/4 pt-6">
+              <p className="underline underline-offset-3 pb-2">Lorum</p>
+              <p>Lorum</p>
+              <p>Lorum</p>
+            </div>
+            <p className="w-3/4 pt-8">With NFTs, ticket authenticity can be easily verified, preventing counterfeiting and ensuring that only valid tickets are bought and sold.</p>
+          </div>
+          <div>
+            <Image
+              src="/dics.png"
+              width="200"
+              height="200"
+            />
+          </div>
+        </div>
+        <div className='text-center '>
+          <h1 className="text-6xl font-semibold">Explore the Solutions</h1>
+          <p className="w-[550px] my-8 mx-auto">With NFTs, ticket authenticity can be easily verified,
+            preventing counterfeiting and ensuring that only valid tickets are bought and sold.</p>
+        </div>
+        <div className ="flex justify-evenly ">
+          <div>
+            <h1 className ="text-5xl font-bold pt-12 " >Powerful suite of tools</h1>
+            <p className ="w-[600px] py-4 pb-14">I Know Spots desires to lead the ticketing industry,
+              both operationally and in digital ticketing.</p>
+            <div className ="flex justify-between w-3/4 bg-[#56565680] px-4 py-6  my-8  rounded-xl">
+             <p>Custom Subdomains.</p> 
+             <Image
+              src ="/icons/bubble.png"
+              width = "20"
+              height = "50"
+             />
+            </div>
+            <div className ="flex justify-between w-3/4 bg-[#56565680] px-4 py-6  my-8 rounded-xl">
+             <p>Custom Subdomains.</p> 
+             <Image
+              src ="/icons/bubble.png"
+              width = "20"
+              height = "50"
+             />
+            </div>
+            <div className ="flex justify-between w-3/4 bg-[#56565680] px-4 py-6  my-4 rounded-xl">
+             <p>Custom Subdomains.</p> 
+             <Image
+              src ="/icons/bubble.png"
+              width = "20"
+              height = "50"
+             />
+            </div>
+          </div>
+         <div>
+          <Image
+            src ="/features-demo-img.png"
+            width ="600"
+            height ="100"
+          />
+         </div> 
         </div>
       </div>
     </>
