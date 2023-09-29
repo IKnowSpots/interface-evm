@@ -21,3 +21,20 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.CS-text-gradient{
+    background: linear-gradient(90deg, #850CFF 0.1%, rgba(19, 71, 255, 0.00) 120.29%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -2.24px;
+  }
+  
+.box-background{
+    border-radius: 1.25rem;
+border: 1px solid #3C3C3C;
+background: rgba(68, 68, 68, 0.30);
+box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.35);
+backdrop-filter: blur(20px);
+}
+  
