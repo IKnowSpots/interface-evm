@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    outline: none;
+}
+
+.cta-button{
+    border-radius: 1.875rem;
+    border: 2px solid rgba(255, 255, 255, 0.50);
+    background: linear-gradient(94deg, rgba(64, 104, 205, 0.44) -45.99%, rgba(175, 30, 224, 0.65) 110.78%);
+    backdrop-filter: blur(20px);
+}
 
 .gradient-bg {
     background-size: 100% 100%;
@@ -38,3 +48,15 @@ box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.35);
 backdrop-filter: blur(20px);
 }
   
+.subscribe-button{
+outline: none;
+border-radius: 1.875rem;
+/* border: 1px solid #FFF; */
+background: linear-gradient(109deg, rgba(248, 179, 92, 0.53) 24.14%, rgba(176, 30, 225, 0.13) 54.75%, rgba(253, 0, 71, 0.38) 95.84%);
+}
+
+.email-input{
+border-radius: 1.875rem;
+border: 1px solid #B01EE1;
+background: linear-gradient(95deg, rgba(255, 255, 255, 0.38) 22.83%, rgba(255, 255, 255, 0.00) 112.69%);
+}
