@@ -258,7 +258,7 @@ export default function Home() {
                 </div>
              </div>
         </div>
-        <div className="flex ">
+        <div className="flex justify-between pt-6 mt-12 mx-12 border-white">
           <div className="flex flex-col">
           <div className="">
           <img src='./iks-logo.png' 
@@ -268,36 +268,36 @@ export default function Home() {
             alt="I know spots logo" />
             <p className="text-[#ffffffbf] text-m">Seamless granular events hosting with NFT tickets.</p>
           </div>
-           <div className="flex">
-           <input className="rounded-md" />
-            <button>Subscribe</button>
+           <div className="flex justify-between  my-12">
+           <input className="email-input px-5" placeholder="Email" ></input>
+           <button className="subscribe-button px-5 py-1">Subscribe</button>
            </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between my-6">
             <img src="./facebook.png" alt="facebook" />
             <img src="./twitter.png" alt="twitter" />
             <img src="./instagram.png" alt="instagram" />
             <img src="./linkedin.png" alt="linkedin" />
             <img src="./discord.png" alt="discord" />
           </div>
-          <p>
+          <p className="my-6">
             @2023 All rights reserved.
           </p>
           </div>
           <div className="flex justify-evenly">
-            <div>
+            <div className="px-8">
             Network
             <ul>
-            <li className="tracking-tighter">Text 1</li>
-            <li className="tracking-tighter">Text 1</li>
+            <li className="">Text 1</li>
+            <li className="">Text 1</li>
             </ul>
             </div>
             <div>
             Network
             <ul>
-            <li className="tracking-tighter">Text 1</li>
-            <li className="tracking-tighter">Text 1</li>
-            <li className="tracking-tighter">Text 1</li>
-            <li className="tracking-tighter">Text 1</li>
+            <li className="">Text 1</li>
+            <li className="">Text 1</li>
+            <li className="">Text 1</li>
+            <li className="">Text 1</li>
             </ul>
             </div>
           </div>
