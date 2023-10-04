@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import footerGradient from "../public/mediumGradient.png";
 export default function Home() {
   return (
     <>
@@ -258,7 +258,7 @@ export default function Home() {
                 </div>
              </div>
         </div>
-        <div className="flex justify-between pt-6 mt-12 mx-12 border-white">
+        <div className="flex justify-between pt-6 mx-5 mt-12 mx-12 border-white footer-gradient z-10 overflow-hidden footerDiv">
           <div className="flex flex-col">
           <div className="">
           <img src='./iks-logo.png' 
@@ -283,6 +283,22 @@ export default function Home() {
             @2023 All rights reserved.
           </p>
           </div>
+      <div className="footerGradientDiv flex">
+      <Image 
+          src="/largerGradient.png"
+          alt="footer gradient"
+          width="300"
+          height="300"
+          className="footerGradient"
+          />
+      <Image 
+          src="/largerGradient.png"
+          alt="footer gradient"
+          width="500"
+          height="100"
+          className="footerGradient"
+          />
+      </div>
           <div className="flex justify-evenly">
             <div className="px-8">
             Network
