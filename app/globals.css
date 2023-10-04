@@ -4,6 +4,7 @@
 
 *{
     outline: none;
+    z-index: 1;
 }
 
 .cta-button{
@@ -59,4 +60,43 @@ background: linear-gradient(109deg, rgba(248, 179, 92, 0.53) 24.14%, rgba(176, 3
 border-radius: 1.875rem;
 border: 1px solid #B01EE1;
 background: linear-gradient(95deg, rgba(255, 255, 255, 0.38) 22.83%, rgba(255, 255, 255, 0.00) 112.69%);
+}
+
+/* .footer-gradient{
+    background-image: url('../public/largerGradient.png'), url('../public/largerGradient.png');
+    background-repeat: no-repeat;
+  background-position: right top;
+  filter: blur(1.5rem);
+} */
+
+.footerDiv{
+    border: 4px solid #5C5C5C30;
+    margin-left: 40px;
+    margin-right: 40px;  
+    padding: 40px;
+    border-radius: 40px;
+    border-bottom: 0px solid #FFFFFF;  
+}
+
+.footerGradientDiv{
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    margin-left: auto;
+    overflow: hidden;
+    width: auto; /* Match the width of your image */
+    height: 325px;
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+.footerGradient{
+    position: relative;
+    filter: blur(1.5rem);
+    right: 0;
+    z-index: 5;
+    margin-left: auto;
+    opacity: 1;
+    overflow: hidden;
 }
