@@ -7,6 +7,10 @@
     z-index: 1;
 }
 
+body{
+    background-color: #090312;
+}
+
 .cta-button{
     border-radius: 1.875rem;
     border: 2px solid rgba(255, 255, 255, 0.50);
@@ -14,7 +18,7 @@
     backdrop-filter: blur(20px);
 }
 
-.gradient-bg {
+/* .gradient-bg {
     background-size: 100% 100%;
     background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
     background-image: radial-gradient(49% 81% at -104% 139%, #1E1F23F2 0%, #073AFF00 100%),
@@ -22,8 +26,18 @@
                       radial-gradient(106% 86% at 52% 13%, #1E1F23F2 1%, #FF000000 99%),
                       radial-gradient(137% 101% at 54% 96%, #1E1F23F2 22%, #FF000000 99%),
                       radial-gradient(142% 91% at 108% 103%, #AF16E3F2 0%, #AF16E3F2 100%);
+} */
+
+.grad1 {
+    overflow: hidden;
+    background-image: radial-gradient(#9303C6,#420294, #000000);
 }
-  
+
+.grad2 {
+    overflow: hidden;
+    background-image: radial-gradient(farthest-corner at 60% 55%,#9303C6,#420294, #000000);
+}
+
 .text-gradient{
     color: transparent;
     background: linear-gradient(90deg, #801EE1 4%, #FFFFFF 87%,);

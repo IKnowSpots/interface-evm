@@ -4,6 +4,9 @@ const ToolSection = () => {
   return (
     <div className="flex justify-evenly ">
       <div>
+        <div className="w-full flex justify-end">
+          <div className="grad1 blur-[300px] z-[-1] flex h-[639px] w-[660px] absolute"></div>
+        </div>
         <h1 className="text-5xl font-bold pt-12 ">Powerful suite of tools</h1>
         <p className="w-[600px] py-4 pb-14">
           I Know Spots desires to lead the ticketing industry, both
@@ -33,6 +36,9 @@ const ToolSection = () => {
         </div>
       </div>
       <div>
+        <div className="w-full flex justify-end">
+          <div className="grad1 blur-[100px] z-[-1] flex h-[639px] w-[660px] absolute"></div>
+        </div>
         <Image src="/features-demo-img.png" width="600" height="100" alt="" />
       </div>
     </div>

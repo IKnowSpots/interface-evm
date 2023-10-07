@@ -15,8 +15,11 @@ export default function Home() {
     <>
       <div className="gradient-bg text-white w-full overflow-hidden">
         <Navbar />
+        <div className="w-full flex justify-end">
+          <div className="grad1 blur-[140px] flex h-[1200px] w-[660px] absolute"></div>
+        </div>
         <HeroSection />
-        <div className="">
+        <div className="relative">
           <Image
             src="/patners.png"
             width="1500"
@@ -24,11 +27,17 @@ export default function Home() {
             alt="Patners of IKS"
           />
         </div>
+        <div>
+          <div className="grad2 absolute blur-[400px] w-full h-[800px] z-[-1]"></div>
+        </div>
         <div id="hotevent">
           <h1 className="text-5xl my-20 mx-12 ">HOT EVENT</h1>
           <CardsSection />
         </div>
         <div>
+          <div className="grad2 blur-[220px] absolute w-full h-[700px]"></div>
+        </div>
+        <div className="relative">
           <h1 className="text-6xl text-center w-full font-semibold">
             How it works
           </h1>
