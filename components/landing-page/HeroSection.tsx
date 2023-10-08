@@ -10,9 +10,9 @@ const HeroSection = () => {
             <p className="my-5 text-xl">
               Seamless granular events hosting with NFT tickets.
             </p>
-            <button className="cta-button px-8 py-1">Claim Now</button>
+            <button className="cta-button px-8 py-1">Demo Video</button>
           </div>
-          <div id="parent-div" className="relative w-full p-6">
+          <div id="parent-div" className="relative w-full p-6 flex justify-center items-center">
             <Image
               src="/circles.png"
               width="1500"

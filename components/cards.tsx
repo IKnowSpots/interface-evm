@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Cards = ({ image }) => {
+const Cards = ({ image }: {image:any}) => {
   return (
     <div className="flex flex-col ">
       <Image
@@ -16,7 +16,7 @@ const Cards = ({ image }) => {
       <hr />
       <div className="flex justify-between my-6">
         <p>End&apos;s In 01.34.45</p>
-        <button className="px-4 py-1 outline rounded-lg">Bid</button>
+        <button className="px-4 py-1 outline rounded-lg">Get</button>
       </div>
     </div>
   );
