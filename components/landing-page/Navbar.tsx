@@ -19,7 +19,7 @@ const Navbar = () => {
             <p>Pricing</p>
           </Link>
           <Link href="/product">
-            <p>FAQ's</p>
+            <p>FAQ&apos;s</p>
           </Link>
           <Link href="/product">
             <p>About</p>

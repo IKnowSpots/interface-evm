@@ -15,7 +15,7 @@ const Cards = ({ image }) => {
       </div>
       <hr />
       <div className="flex justify-between my-6">
-        <p>End's In 01.34.45</p>
+        <p>End&apos;s In 01.34.45</p>
         <button className="px-4 py-1 outline rounded-lg">Bid</button>
       </div>
     </div>
