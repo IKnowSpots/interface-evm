@@ -1,6 +1,24 @@
+"use client"
 import Image from "next/image";
+import { useState } from "react";
 
 const Create = () => {
+    const [form, setForm] = useState({
+        shortlist: false,
+        stake: false,
+        name: "",
+        description: "",
+        supply: "",
+        venue: "",
+        date: "",
+        uri: "",
+        stakePrice: "",
+    })
+
+    function formURI() {}
+
+    function publish() {}
+
     return (
         <div className="bg-[#420294] text-white  px-8">
             <div className="flex justify-between items-center py-4">
@@ -167,9 +185,9 @@ const Create = () => {
                         </div>
                     </div>
                     <div className="w-3/4 mx-auto flex justify-evenly my-6">
-                        <button className="px-4 py-2 border rounded-lg">
+                        {/* <button className="px-4 py-2 border rounded-lg">
                             Preview
-                        </button>
+                        </button> */}
                         <button className="px-4 py-2 border rounded-lg">
                             Publish
                         </button>

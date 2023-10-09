@@ -1,5 +1,9 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Wallets = dynamic(() => import("../../components-integration/wallets"), { ssr: false });
 
 const Navbar = () => {
     return (
@@ -32,9 +36,10 @@ const Navbar = () => {
             </div>
 
             <Link href="/">
-                <button className="border border-[#C584F5] px-4 py-2 rounded-xl ">
+                {/* <button className="border border-[#C584F5] px-4 py-2 rounded-xl ">
                     Connect Wallet
-                </button>
+                </button> */}
+                <Wallets />
             </Link>
         </nav>
     );
