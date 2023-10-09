@@ -2,11 +2,11 @@ import Image from "next/image";
 
 const DashNav = () => {
     return(
-        <div id="dash-navbar" className="flex">
+        <div id="dash-navbar" className="flex pt-4">
         <input
             type="text"
-            placeholder="Search"
-            className="text-white w-1/4 bg-[#1C1C1C] mx-auto rounded-full px-4 "
+            placeholder="Search events"
+            className="text-white h-[34px] border-white w-1/4 bg-[#1C1C1C] mx-auto rounded-full px-4 "
         />
         <Image
             src={"/icons/Question.svg"}

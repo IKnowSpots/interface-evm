@@ -1,5 +1,3 @@
-import Sidebar from "@/components/dashboard/Sidebar";
-
 const Support = () => {
     return (
         <div>
