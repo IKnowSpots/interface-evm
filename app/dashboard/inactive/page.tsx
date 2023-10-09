@@ -1,6 +1,6 @@
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import Cards from "@/components/cards";
+import CardsInactive from "@/components/cardsInactive";
 import DashNav from "@/components/dashboard/DashNav";
 
 const InactiveEvents = () => {
@@ -11,14 +11,8 @@ const InactiveEvents = () => {
                 <DashNav />
                 <div className="grid grid-cols-4">
                     <div className="text-white px-4 bg-[#0F0F0FD9] py-8 rounded-xl mx-4 my-4">
-                        <Cards image={"3.png"} />
+                        <CardsInactive image={"3.png"} />
                     </div>
-                    {/* <Cards image={"3.png"} />
-            <Cards image={"3.png"} />
-            <Cards image={"3.png"} />
-            <Cards image={"3.png"} />
-            <Cards image={"3.png"} />
-            <Cards image={"3.png"} /> */}
                     <div className="">
                         {/* <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " /> */}
                     </div>

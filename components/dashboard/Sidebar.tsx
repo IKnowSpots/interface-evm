@@ -51,11 +51,13 @@ const Sidebar = () => {
                 </Link>
             </div>
             <div className="opacity-40 pt-[30%] text-lg text-white">
-                <Link href="/support">
+                <Link target="_blank" href="/support">
                     <p className="py-1">Support</p>
                 </Link>
-                <p className="py-1">Documents</p>
-                <Link href="https://github.com/IKnowSpots">
+                <Link target="_blank" href="/">
+                    <p className="py-1">Documents</p>
+                </Link>
+                <Link target="_blank" href="https://github.com/IKnowSpots">
                     <div className="flex py-1">
                         <p className="pr-4">GitHub </p>
                         <Image
@@ -66,7 +68,7 @@ const Sidebar = () => {
                         />
                     </div>
                 </Link>
-                <Link href="https://twitter.com/iknowspots">
+                <Link target="_blank" href="https://twitter.com/iknowspots">
                     <div className="flex py-1">
                         <p className="pr-4">Twitter</p>
                         <Image

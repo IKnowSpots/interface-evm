@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Cards = ({ image }: {image:any}) => {
+const CardsActive = ({ image }: {image:any}) => {
   return (
     <div className="flex flex-col ">
       <Image
@@ -11,14 +11,15 @@ const Cards = ({ image }: {image:any}) => {
       />
       <div className="flex justify-between my-6">
         <p>Lorum Ipsum</p>
-        <p>1.20 Weth</p>
+        {/* <p>1.20 Weth</p> */}
+        <button className="px-4 py-1 outline rounded-lg">Pause</button>
       </div>
-      <hr />
+      {/* <hr />
       <div className="flex justify-between my-6">
         <p>End&apos;s In 01.34.45</p>
-        <button className="px-4 py-1 outline rounded-lg">Get</button>
-      </div>
+        <button className="px-4 py-1 outline rounded-lg">Run</button>
+      </div> */}
     </div>
   );
 };
-export default Cards;
+export default CardsActive;

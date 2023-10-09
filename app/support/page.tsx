@@ -1,11 +1,11 @@
-import Sidebar from "@/components/dashboard/Sidebar"
+import Sidebar from "@/components/dashboard/Sidebar";
 
 const Support = () => {
-    return(
+    return (
         <div>
-            support
+            <p className="text-white">Support</p>
         </div>
-    )
-}
+    );
+};
 
 export default Support;

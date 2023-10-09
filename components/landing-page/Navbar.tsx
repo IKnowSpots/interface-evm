@@ -14,7 +14,7 @@ const Navbar = () => {
                 />
             </Link>
             <div className="flex gap-[5rem] justify-center items-center">
-                <Link href="/product">
+                <Link href="/">
                     <p>Product</p>
                 </Link>
                 {/* <Link href="/infra">
@@ -23,7 +23,7 @@ const Navbar = () => {
                 <Link href="/dashboard/active">
                     <p>Dashboard</p>
                 </Link>
-                <Link href="/docs">
+                <Link href="/">
                     <p>Docs</p>
                 </Link>
                 <Link href="/support">
@@ -31,7 +31,7 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <Link href="/product">
+            <Link href="/">
                 <button className="border border-[#C584F5] px-4 py-2 rounded-xl ">
                     Connect Wallet
                 </button>
