@@ -25,20 +25,25 @@ const Navbar = () => {
                 />
             </Link>
             <div className="flex gap-[5rem] justify-center items-center">
-                <Link href="/">
-                    <p>Product</p>
+                <Link href="/dashboard/active">
+                    <p className="hoverUnderline">Dashboard</p>
+                </Link>
+
+                <Link href="#howitworks">
+                    <p className="hoverUnderline">Product</p>
                 </Link>
                 {/* <Link href="/infra">
                     <p>Infra</p>
                 </Link> */}
-                <Link href="/dashboard/active">
-                    <p>Dashboard</p>
-                </Link>
-                <Link href="/">
-                    <p>Docs</p>
+
+                <Link
+                    target="_blank"
+                    href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit"
+                >
+                    <p className="hoverUnderline">Docs</p>
                 </Link>
                 <Link href="/support">
-                    <p>Support</p>
+                    <p className="hoverUnderline">Support</p>
                 </Link>
             </div>
 

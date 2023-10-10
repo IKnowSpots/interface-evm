@@ -3,7 +3,7 @@ import Link from "next/link";
 import footerGradient from "../public/mediumGradient.png";
 import Navbar from "@/components/landing-page/Navbar";
 import HeroSection from "@/components/landing-page/HeroSection";
-import CardsSection from "@/components/landing-page/CardsSection";
+import FeaturedEvents from "@/components/landing-page/FeaturedEvents";
 import HowItWork from "@/components/landing-page/HowItWork";
 import Missions from "@/components/landing-page/Missions";
 import ExploreSolutions from "@/components/landing-page/ExploreSolution";
@@ -35,7 +35,7 @@ export default function Home() {
                 </div>
                 <div id="hotevent" className="mb-[10rem]">
                     <h1 className="text-5xl my-10 mx-12 ">HOT EVENT</h1>
-                    <CardsSection />
+                    <FeaturedEvents />
                 </div>
                 <div>
                     <div className="grad2 blur-[220px] absolute w-full h-[700px]"></div>

@@ -1,23 +1,39 @@
-"use client"
+"use client";
+import { createEvent, uploadToIPFS } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 
 const Create = () => {
-    const [form, setForm] = useState({
+    const [formInput, setFormInput] = useState({
         shortlist: false,
         stake: false,
         name: "",
         description: "",
-        supply: "",
         venue: "",
         date: "",
+        supply: "",
         uri: "",
         stakePrice: "",
-    })
+    });
+    const [loading, setLoading] = useState(false);
 
-    function formURI() {}
+    async function formURI() {
+        const { name, description, venue, date } = formInput;
+        if (!name || !description || !venue || !date) return;
+        const data = JSON.stringify({ name, description, venue, date });
+        const files = [new File([data], "data.json")];
+        const metaCID = await uploadToIPFS(files);
+        const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
+        console.log(url);
+        return url;
+    }
 
-    function publish() {}
+    async function publish() {
+        setLoading(true);
+        const uri = await formURI();
+        await createEvent();
+        setLoading(false);
+    }
 
     return (
         <div className="bg-[#420294] text-white  px-8">
@@ -133,11 +149,25 @@ const Create = () => {
                             id="event-name"
                             placeholder="eg. name of the event"
                             className="bg-[#1E1e1ea6] rounded-lg p-2"
+                            onChange={(e) =>
+                                setFormInput({
+                                    ...formInput,
+                                    name: e.target.value,
+                                })
+                            }
                         />
                     </div>
                     <div className="flex flex-col w-3/4 mx-auto my-4">
                         <label>Description</label>
-                        <textarea className="bg-[#1E1E1EA6] rounded-lg resize-none "></textarea>
+                        <input
+                            className="bg-[#1E1E1EA6] rounded-lg resize-none "
+                            onChange={(e) =>
+                                setFormInput({
+                                    ...formInput,
+                                    description: e.target.value,
+                                })
+                            }
+                        ></input>
                     </div>
                     <div className="flex justify-evenly mx-4 ">
                         <div className="flex flex-col ">
@@ -147,6 +177,12 @@ const Create = () => {
                                 id="event-name"
                                 placeholder="2000"
                                 className="bg-[#1E1e1ea6] w-full rounded-lg p-2"
+                                onChange={(e) =>
+                                    setFormInput({
+                                        ...formInput,
+                                        supply: e.target.value,
+                                    })
+                                }
                             />
                         </div>
                         <div className="flex flex-col ">
@@ -156,6 +192,12 @@ const Create = () => {
                                 id="event-name"
                                 placeholder="Example Text"
                                 className="bg-[#1E1e1ea6] rounded-lg p-2"
+                                onChange={(e) =>
+                                    setFormInput({
+                                        ...formInput,
+                                        venue: e.target.value,
+                                    })
+                                }
                             />
                         </div>
                     </div>
@@ -165,6 +207,12 @@ const Create = () => {
                             type="date"
                             id="event-name"
                             className="bg-[#1E1e1ea6]  rounded-lg p-2"
+                            onChange={(e) =>
+                                setFormInput({
+                                    ...formInput,
+                                    date: e.target.value,
+                                })
+                            }
                         />
                     </div>
                     <div className="flex flex-col w-3/4 mx-auto ">
@@ -175,11 +223,33 @@ const Create = () => {
                                 id="event-name"
                                 placeholder="0.01ETH"
                                 className="bg-[#1E1e1ea6] rounded-lg w-3/4 mx-auto relative p-2"
+                                onChange={(e) =>
+                                    setFormInput({
+                                        ...formInput,
+                                        stakePrice: e.target.value,
+                                    })
+                                }
                             />
-                            <button className="px-2 py-2 border ">
+                            <button
+                                className="px-2 py-2 border "
+                                onClick={() =>
+                                    setFormInput({
+                                        ...formInput,
+                                        stake: true,
+                                    })
+                                }
+                            >
                                 Enable
                             </button>
-                            <button className="px-1 py-2 bg-white text-black">
+                            <button
+                                className="px-1 py-2 bg-white text-black"
+                                onClick={() =>
+                                    setFormInput({
+                                        ...formInput,
+                                        stake: false,
+                                    })
+                                }
+                            >
                                 Disable
                             </button>
                         </div>
@@ -188,7 +258,10 @@ const Create = () => {
                         {/* <button className="px-4 py-2 border rounded-lg">
                             Preview
                         </button> */}
-                        <button className="px-4 py-2 border rounded-lg">
+                        <button
+                            className="px-4 py-2 border rounded-lg"
+                            onClick={publish}
+                        >
                             Publish
                         </button>
                     </div>
@@ -197,4 +270,5 @@ const Create = () => {
         </div>
     );
 };
+
 export default Create;

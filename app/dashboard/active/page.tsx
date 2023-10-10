@@ -1,10 +1,27 @@
+"use client"
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
 import CardsActive from "@/components/cardsActive";
 import DashNav from "@/components/dashboard/DashNav";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { fetchActiveEvents } from "../../../utils"
 
 const ActiveEvents = () => {
+    const [activeEvents, setActiveEvents] = useState<any>();
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetchActiveEventsCall;
+    }, []);
+
+    async function fetchActiveEventsCall() {
+        setLoading(true)
+        let activeEventsData: any = await fetchActiveEvents()
+        setActiveEvents(activeEventsData);
+        setLoading(false)
+    }
+
     return (
         <div className="flex h-[100vh] w-[100vw]">
             <Sidebar />

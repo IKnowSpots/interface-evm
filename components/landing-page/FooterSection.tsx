@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 
 const FooterSection = () => {
@@ -57,16 +58,16 @@ const FooterSection = () => {
                 <div className="px-8">
                     <p className="mb-2 font-semibold">Company</p>
                     <ul>
-                        <li className="">Branding Kit</li>
-                        <li className="">Terms</li>
-                        <li className="">Privacy</li>
+                        <li className="hoverFooter">Branding Kit</li>
+                        <li className="hoverFooter">Terms</li>
+                        <li className="hoverFooter">Privacy</li>
                     </ul>
                 </div>
                 <div>
                     <p className="mb-2 font-semibold">Support</p>
                     <ul>
-                        <li className="">Contact Us</li>
-                        <li className="">Docs</li>
+                        <li className="hoverFooter">Contact Us</li>
+                        <li className="hoverFooter">Docs</li>
                         {/* <li className="">Text 1</li>
             <li className="">Text 1</li> */}
                     </ul>
