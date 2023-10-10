@@ -24,7 +24,7 @@ const Navbar = () => {
                     alt="I know spots logo"
                 />
             </Link>
-            <div className="flex gap-[5rem] justify-center items-center">
+            <div className="flex justify-center items-center">
                 {/* <Link href="/dashboard">
                     <p className="hoverUnderline">Dashboard</p>
                 </Link>
@@ -49,11 +49,11 @@ const Navbar = () => {
                 <input
                     type="text"
                     placeholder="Search events"
-                    className="text-white h-[34px] border-white w-[2000%] bg-[#1C1C1C] mx-auto rounded-full px-4 "
+                    className="text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C] mx-auto rounded-full px-4 "
                 />
             </div>
 
-            <p className="bg-white text-black  px-4 py-2 rounded-[1.5rem] ">
+            <p className="bg-white text-center w-[12%] text-black  px-4 py-2 rounded-[1.5rem] ">
                 {/* Connect Wallet */}
                 <Wallets />
             </p>

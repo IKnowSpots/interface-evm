@@ -1,6 +1,6 @@
 import { Web3Storage } from "web3.storage";
 
-export async function getUsername() {
+export async function fetchUsername() {
     // if new user then return this
     return ""
 }
