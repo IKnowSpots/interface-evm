@@ -11,8 +11,7 @@ return (
     <button
     onClick={() => select(wallets[0].adapter.name)}
     >
-
-        Phantom
+        Connect
     </button>
 ) 
 

@@ -7,7 +7,7 @@ const Sidebar = () => {
     return (
         <div
             id="sidebar"
-            className="pl-8 bg-[rgb(61,23,111)] w-[20%] py-8 h-[100vh]"
+            className="pl-8 bg-[rgb(61,23,111)] w-[25%] py-8"
         >
             <Link href="/">
                 <Image

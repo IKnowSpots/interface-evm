@@ -1,11 +1,18 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useWallet } from "@solana/wallet-adapter-react";
 
-const Wallets = dynamic(() => import("../../components-integration/wallets"), { ssr: false });
+const Wallets = dynamic(() => import("../../components-integration/wallets"), {
+    ssr: false,
+});
 
 const Navbar = () => {
+    const { wallets } = useWallet();
+
+    console.log("check", wallets);
+
     return (
         <nav className="z-[10] flex gap-[15rem] justify-center items-center py-8 w-full absolute">
             <Link href="/">
@@ -36,10 +43,10 @@ const Navbar = () => {
             </div>
 
             <Link href="/">
-                {/* <button className="border border-[#C584F5] px-4 py-2 rounded-xl ">
-                    Connect Wallet
-                </button> */}
-                <Wallets />
+                <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
+                    {/* Connect Wallet */}
+                    <Wallets />
+                </p>
             </Link>
         </nav>
     );
