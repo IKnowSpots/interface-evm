@@ -1,6 +1,6 @@
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import DashNav from "@/components/dashboard/DashNav";
+import DashNav from "@/components/dashboard/Navbar";
 
 const Feature = () => {
     return (

@@ -2,7 +2,7 @@
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
 import CardsActive from "@/components/cardsActive";
-import DashNav from "@/components/dashboard/DashNav";
+import DashNav from "@/components/dashboard/Navbar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fetchActiveEvents } from "../../../utils"

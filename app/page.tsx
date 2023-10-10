@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import footerGradient from "../public/mediumGradient.png";
-import Navbar from "@/components/landing-page/Navbar";
-import HeroSection from "@/components/landing-page/HeroSection";
-import FeaturedEvents from "@/components/landing-page/FeaturedEvents";
-import HowItWork from "@/components/landing-page/HowItWork";
-import Missions from "@/components/landing-page/Missions";
-import ExploreSolutions from "@/components/landing-page/ExploreSolution";
-import ToolSection from "@/components/landing-page/ToolsSection";
-import SdkSection from "@/components/landing-page/sdk";
-import FooterSection from "@/components/landing-page/FooterSection";
+import Navbar from "@/components/landing/Navbar";
+import HeroSection from "@/components/landing/HeroSection";
+import FeaturedEvents from "@/components/landing/FeaturedEvents";
+import HowItWork from "@/components/landing/HowItWork";
+import Missions from "@/components/landing/Missions";
+import ExploreSolutions from "@/components/landing/ExploreSolution";
+import ToolSection from "@/components/landing/ToolsSection";
+import SdkSection from "@/components/landing/sdk";
+import FooterSection from "@/components/landing/FooterSection";
 export default function Home() {
     return (
         <>

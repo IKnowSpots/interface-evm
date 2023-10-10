@@ -11,7 +11,7 @@ return (
     <button
     onClick={() => select(wallets[0].adapter.name)}
     >
-        Connect
+        Connect Wallet
     </button>
 ) 
 

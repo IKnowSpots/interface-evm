@@ -14,7 +14,7 @@ const Navbar = () => {
     console.log("check", wallets);
 
     return (
-        <nav className="z-[10] flex gap-[15rem] justify-center items-center py-8 w-full absolute">
+        <nav className=" flex gap-[15rem] justify-center items-center py-8 w-full">
             <Link href="/">
                 <Image
                     src="/iks-logo.png"
@@ -25,18 +25,18 @@ const Navbar = () => {
                 />
             </Link>
             <div className="flex gap-[5rem] justify-center items-center">
-                <Link href="/dashboard/active">
+                {/* <Link href="/dashboard">
                     <p className="hoverUnderline">Dashboard</p>
                 </Link>
 
                 <Link href="#howitworks">
                     <p className="hoverUnderline">Product</p>
                 </Link>
-                {/* <Link href="/infra">
+                <Link href="/infra">
                     <p>Infra</p>
                 </Link> */}
 
-                <Link
+                {/* <Link
                     target="_blank"
                     href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit"
                 >
@@ -44,15 +44,19 @@ const Navbar = () => {
                 </Link>
                 <Link href="/support">
                     <p className="hoverUnderline">Support</p>
-                </Link>
+                </Link> */}
+
+                <input
+                    type="text"
+                    placeholder="Search events"
+                    className="text-white h-[34px] border-white w-[2000%] bg-[#1C1C1C] mx-auto rounded-full px-4 "
+                />
             </div>
 
-            <Link href="/">
-                <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
-                    {/* Connect Wallet */}
-                    <Wallets />
-                </p>
-            </Link>
+            <p className="bg-white text-black  px-4 py-2 rounded-[1.5rem] ">
+                {/* Connect Wallet */}
+                <Wallets />
+            </p>
         </nav>
     );
 };

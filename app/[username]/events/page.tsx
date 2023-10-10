@@ -1,9 +1,15 @@
-const HostEvents = () => {
+import Navbar from "@/components/hostee/Navbar"
+
+const EventsByHost = () => {
     return (
-        <div>
-            <p className="text-white">Host Events</p>
+        <div className=" bg-[#25143a] text-white w-full overflow-hidden">
+            <Navbar />
+            <div>
+            <p className="w-full text-white">Host Events</p>
+
+            </div>
         </div>
     )
 }
 
-export default HostEvents
+export default EventsByHost
