@@ -1,7 +1,20 @@
+"use client"
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 
+const ZIP_FILE_URL = "http://localhost:3001/brandingkit.zip";
 const FooterSection = () => {
+    const downloadFileAtURL = (url:any) => {
+        const fileName = url.split("/").pop();  
+        const aTag = document.createElement("a");
+        aTag.href = url;
+        aTag.setAttribute("download", fileName);
+        document.body.appendChild(aTag);
+        aTag.click();
+        aTag.remove();
+
+    }
+
     return (
         <div className="flex justify-between pt-6 mt-12 mx-8 border-white footer-gradient z-10 overflow-hidden footerDiv">
             <div className="flex flex-col">
@@ -29,8 +42,14 @@ const FooterSection = () => {
                 </div>
                 
                 <div className="flex gap-5">
-                    <img src="./twitter.png" alt="twitter" />
+                    <a href="https://twitter.com/iknowspots">
+                    <img src="./twitter.png" alt="twitter"/>
+
+                    </a>
+                    <a href="https://www.linkedin.com/company/iknowspots">
                     <img src="./linkedin.png" alt="linkedin" />
+
+                    </a>
                     {/* <img src="./facebook.png" alt="facebook" /> */}
                     {/* <img src="./instagram.png" alt="instagram" /> */}
                     {/* <img src="./discord.png" alt="discord" /> */}
@@ -58,7 +77,14 @@ const FooterSection = () => {
                 <div className="px-8">
                     <p className="mb-2 font-semibold">Company</p>
                     <ul>
-                        <li className="hoverFooter">Branding Kit</li>
+
+                        <li className="hoverFooter">
+                            <button onClick={() => {
+                                downloadFileAtURL(ZIP_FILE_URL);
+                            }}>
+                                Branding Kit
+                            </button>
+                            </li>
                         <li className="hoverFooter">Terms</li>
                         <li className="hoverFooter">Privacy</li>
                     </ul>
@@ -67,7 +93,8 @@ const FooterSection = () => {
                     <p className="mb-2 font-semibold">Support</p>
                     <ul>
                         <li className="hoverFooter">Contact Us</li>
-                        <li className="hoverFooter">Docs</li>
+                        <li className="hoverFooter">
+                            <a href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit">Docs</a></li>
                         {/* <li className="">Text 1</li>
             <li className="">Text 1</li> */}
                     </ul>

@@ -42,7 +42,7 @@ export default function Home() {
                 </div>
                 <div id="howitworks" className="relative mb-[10rem]">
                     <h1 className="text-6xl text-center w-full font-semibold">
-                        How it works
+                    How we stand out
                     </h1>
                     <HowItWork />
                 </div>
