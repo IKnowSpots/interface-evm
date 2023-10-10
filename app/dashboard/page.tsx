@@ -1,5 +1,5 @@
 "use client";
-import { getUsername } from "@/utils";
+import { fetchUsername } from "@/utils";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     async function getUsernameCall() {
         setLoading(true);
-        let varUsername: any = await getUsername();
+        let varUsername: any = await fetchUsername();
         setUsername(varUsername);
         // setUsername("");
         setLoading(false);
