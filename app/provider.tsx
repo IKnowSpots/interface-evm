@@ -40,7 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       );
     // const endpoint = web3.clusterApiUrl("devnet");
     // const wallets = [new walletAdapterWallets.PhantomWalletAdapter()];
-    const endpoint = useMemo(() => clusterApiUrl("mainnet-beta"), []);
+    const endpoint = useMemo(() => clusterApiUrl("devnet"), []);
 
     const [mounted, setMounted] = React.useState(false);
     React.useEffect(() => setMounted(true), []);
