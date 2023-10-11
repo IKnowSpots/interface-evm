@@ -44,14 +44,15 @@ const ActiveEvents = () => {
                     </div> */}
                     </div>
                     <a href="/dashboard/create">
-                        <div className="flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+                        <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
                             <Image
                                 src={"/icons/qr.svg"}
                                 width={20}
                                 height={20}
                                 alt="qr code svg"
+                                className=""
                             />
-                            <p className="text-white">Create an Event</p>
+                            <p className=" text-white">Create an Event</p>
                         </div>
                     </a>
                 </div>

@@ -32,6 +32,48 @@ body {
     z-index: 9999999;
 } */
 
+.view-btn:hover {
+    background-color: white;
+    color: black;
+    transition: 0.5s;
+}
+
+.login-hostee-btn:hover {
+    background-color: transparent;
+    color: white;
+    border-radius: 1.5rem;
+    border-width: 1px;
+    border-color: #C584F5;
+    transition: 0.5s;
+}
+
+.get-started-btn:hover {
+    background-color: #10222c;
+    transition: 1s;
+}
+
+.sidebar-elements:hover {
+    color:white;
+    opacity: 75%;
+    transition: 0.3s;
+}
+
+.sidebar-btn:hover {
+    color:white;
+    opacity: 100%;
+    transition: 0.3s;
+}
+
+.create-event-btn:hover {
+    transition: all .5s ease-in-out;
+    transform: scale(1.1);
+}
+
+.generate-qr-btn:hover {
+    background-color: #000000;
+    color: white;
+    transition: all .5s;
+}
 
 .cta-button {
     border-radius: 1.875rem;

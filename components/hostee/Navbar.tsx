@@ -17,7 +17,7 @@ const Navbar = () => {
     console.log("check", wallets);
 
     return (
-        <nav className=" flex gap-[15rem] justify-center items-center py-8 w-full">
+        <nav className=" flex gap-[20rem] justify-center items-center py-8">
             <Link href="/">
                 <Image
                     src="/iks-logo.png"
@@ -49,14 +49,23 @@ const Navbar = () => {
                     <p className="hoverUnderline">Support</p>
                 </Link> */}
 
-                <input
+                {/* <input
                     type="text"
                     placeholder="Search events"
                     className="text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C] mx-auto rounded-full px-4 "
-                />
+                /> */}
+
+                <div className="flex gap-6">
+                    <Link href="/inventory">
+                        <p className="hoverUnderline text-xl">Inventory</p>
+                    </Link>
+                    <Link href="/support">
+                        <p className="hoverUnderline text-xl">Support</p>
+                    </Link>
+                </div>
             </div>
 
-            <p className="bg-white text-center w-[12%] text-black  px-4 py-2 rounded-[1.5rem] ">
+            <p className="login-hostee-btn bg-white text-center w-[12%] text-black  px-4 py-2 rounded-[1.5rem] ">
                 {/* Connect Wallet */}
                 <WalletsProvider />
             </p>

@@ -15,6 +15,16 @@ const WalletsProvider = dynamic(
 const Sidebar = () => {
     const { publicKey, wallets, sendTransaction } = useWallet();
 
+    function shortenString(input: any, maxLength: any) {
+        if (input.length <= maxLength) {
+            return input; // No need to shorten if it's already shorter than maxLength.
+        } else {
+            const firstPart = input.slice(0, maxLength / 2);
+            const lastPart = input.slice(-maxLength / 2);
+            return firstPart + "..." + lastPart;
+        }
+    }
+
     return (
         <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[25%] py-8">
             <Link href="/">
@@ -28,14 +38,15 @@ const Sidebar = () => {
             <div className="py-16 text-white">
                 {/* <SidebarItems icon_name="Home_fill" section_name="Dashboard" /> */}
 
-                <Link href="/dashboard/active">
+                <Link href="/dashboard/active" className="opacity-75 sidebar-btn">
                     <SidebarItems
                         icon_name="Fire_fill"
                         section_name="Active Events"
+                        
                     />
                 </Link>
 
-                <Link href="/dashboard/inactive">
+                <Link href="/dashboard/inactive" className="opacity-75 sidebar-btn">
                     <SidebarItems
                         icon_name="3d_box_fill"
                         section_name="Inactive Events"
@@ -47,43 +58,45 @@ const Sidebar = () => {
                     section_name="Minted Collection"
                 /> */}
 
-                <Link href="/dashboard/shortlist">
+                <Link href="/dashboard/shortlist" className="opacity-75 sidebar-btn">
                     <SidebarItems icon_name="CPU" section_name="Shortlist" />
                 </Link>
 
-                <Link href="/dashboard/feature">
+                <Link href="/dashboard/feature" className="opacity-75 sidebar-btn">
                     <SidebarItems
                         icon_name="lightning_fill"
                         section_name="Feature"
                     />
                 </Link>
             </div>
-            <div className="opacity-40 pt-[30%] text-lg text-white">
+            <div className="pt-[30%] text-lg text-white">
                 <Link target="_blank" href="/support">
-                    <p className="py-1">Support</p>
+                    <p className="py-1 opacity-40 sidebar-elements">Support</p>
                 </Link>
                 <Link target="_blank" href="/">
-                    <p className="py-1">Documents</p>
+                    <p className="py-1 opacity-40 sidebar-elements">Documents</p>
                 </Link>
                 <Link target="_blank" href="https://github.com/IKnowSpots">
-                    <div className="flex py-1">
-                        <p className="pr-4">GitHub </p>
+                    <div className="flex py-1 sidebar-elements">
+                        <p className="pr-4 opacity-40 sidebar-elements">GitHub </p>
                         <Image
                             src="/icons/arrow.svg"
                             width="13"
                             height="100"
                             alt="arrow icon"
+                            className="rotate-180 opacity-40"
                         />
                     </div>
                 </Link>
                 <Link target="_blank" href="https://twitter.com/iknowspots">
-                    <div className="flex py-1">
-                        <p className="pr-4">Twitter</p>
+                    <div className="flex py-1 sidebar-elements">
+                        <p className="pr-4 opacity-40 sidebar-elements sidebar-elements">Twitter</p>
                         <Image
                             src="/icons/arrow.svg"
                             width="13"
                             height="100"
                             alt="arrow icon"
+                            className="rotate-180 opacity-40"
                         />
                     </div>
                 </Link>
@@ -96,7 +109,7 @@ const Sidebar = () => {
                                 src={wallets[0].adapter.icon}
                                 width="30"
                                 height="100"
-                                alt="metamask logo"
+                                alt="wallet logo"
                             />
                             <p className="px-4 text-white">
                                 {publicKey?.toBase58()}

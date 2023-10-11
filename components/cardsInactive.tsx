@@ -25,7 +25,7 @@ const CardsInactive = ({ image, name }: { image: any, name: string }) => {
                 <div className="flex justify-between">
                     <p>{name}</p>
                     {/* <p>1.20 Weth</p> */}
-                    <button className="px-4 py-0.5 outline rounded-lg" onClick={runEventCall}>
+                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={runEventCall}>
                         Run
                     </button>
                 </div>

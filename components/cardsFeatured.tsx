@@ -27,7 +27,7 @@ const CardsFeatured = ({ image, name, price, date }: { image: any; name: string,
             <hr />
             <div className="flex justify-between my-6">
                 <p>Happening {date}</p>
-                <button className="px-4 py-1 outline rounded-lg">Stake</button>
+                <button className="view-btn px-4 py-1 outline rounded-lg">Stake</button>
             </div>
         </div>
     );

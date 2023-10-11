@@ -10,8 +10,8 @@ const HowItWorksSingleComponent = ({icons, title, desc}: {icons: any, title: any
                 height="50"
                 alt="icon drive add icon"
               />
-              <h3 className="font-semibold mt-2">{title}</h3>
-              <p>
+              <h3 className="font-semibold mt-2 mb-3">{title}</h3>
+              <p className="opacity-75">
                 {desc}
               </p>
             </div>

@@ -96,7 +96,7 @@ function RenderSetUsername() {
                             onChange={(e) => setUsernameHook(e)}
                         />
                         <button
-                            className=" py-3 rounded-xl bg-[#162D3A] my-2"
+                            className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
                             onClick={setUsernameCall}
                         >
                             Get Started

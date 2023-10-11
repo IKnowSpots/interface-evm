@@ -21,8 +21,12 @@ export default function Home() {
                 <HeroSection />
                 <div
                     id="partners"
-                    className="relative mt-[5rem] mb-[10rem] flex justify-center items-center "
+                    className="flex flex-col relative mt-[-5rem] mb-[10rem] justify-center items-center "
                 >
+                    <p className="text-xl w-[40rem] flex text-center mb-[4rem]">
+                        Trusted by the world&apos; best product teams. From
+                        next-gen startups to established communities.
+                    </p>
                     <Image
                         src="/patners.png"
                         width="1500"
@@ -42,20 +46,20 @@ export default function Home() {
                 </div>
                 <div id="howitworks" className="relative mb-[10rem]">
                     <h1 className="text-6xl text-center w-full font-semibold">
-                    How we stand out
+                        How we stand out
                     </h1>
                     <HowItWork />
                 </div>
                 <div className="mb-[10rem]">
                     <Missions />
                 </div>
-                <div  className="mb-[5rem]">
+                <div className="mb-[5rem]">
                     <ExploreSolutions />
                 </div>
-                <div  className="mb-[10rem]">
+                <div className="mb-[10rem]">
                     <ToolSection />
                 </div>
-                <div  className="mb-[10rem]">
+                <div className="mb-[10rem]">
                     <SdkSection />
                 </div>
                 <FooterSection />

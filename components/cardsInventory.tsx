@@ -4,7 +4,7 @@ import { useState } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-const CardsHostee = ({
+const CardsInventory = ({
     image,
     name,
     price,
@@ -31,6 +31,8 @@ const CardsHostee = ({
                     alt="Event's Image"
                 />
 
+                <button className="generate-qr-btn mx-7 mt-[9rem] absolute bg-white text-black py-2 px-4 rounded-lg">Generate QR</button>
+
                 <div className="flex justify-between">
                     <p>{name}</p>
                     <p>{price} Sol</p>
@@ -50,4 +52,4 @@ const CardsHostee = ({
         </div>
     );
 };
-export default CardsHostee;
+export default CardsInventory;
