@@ -1,12 +1,17 @@
 "use client";
-import { createEvent, uploadToIPFS } from "@/utils";
+import { uploadToIPFS } from "@/utils";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { fetchUsername } from "@/utils";
 // import ToggleButton from "react-toggle-button";
 import Link from "next/link";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { Transaction, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Keypair, sendAndConfirmTransaction, Connection, clusterApiUrl } from "@solana/web3.js";
+
 
 const Create = () => {
+
+    const { publicKey,wallets, sendTransaction } = useWallet();
     const [formInput, setFormInput] = useState({
         shortlist: false,
         stake: false,
@@ -24,6 +29,29 @@ const Create = () => {
     useEffect(() => {
         fetchUsernameCall();
     }, []);
+
+    async function createEvent(amount: number) {
+        const connection = new Connection(clusterApiUrl("devnet"));
+        const transaction = new Transaction();
+        const kpid = Keypair.generate();
+        console.log(`Sender is ${publicKey} and the receiver is ${kpid.publicKey}`);
+        
+        const sendSolInstruction = SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: kpid.publicKey,
+          lamports: LAMPORTS_PER_SOL * amount,
+        });
+      
+        transaction.add(sendSolInstruction);
+      
+        
+      
+        sendTransaction(transaction, connection).then((sig) => {
+            console.log(sig);
+          });
+        console.log("public key detected", publicKey);
+        console.log("event created");
+    }
 
     async function fetchUsernameCall() {
         setLoading(true);
@@ -47,7 +75,7 @@ const Create = () => {
     async function publish() {
         setLoading(true);
         const uri = await formURI();
-        await createEvent();
+        await createEvent(0.1);
         setLoading(false);
     }
 
@@ -76,12 +104,12 @@ const Create = () => {
                     {/* remaning: fix the basic gradients of this */}
                     <button className="flex items-center py-3 px-3 rounded-lg border border-white">
                         <Image
-                            src={"/icons/metamask-icon.svg"}
+                            src={wallets[0].adapter.icon}
                             width={"30"}
                             height={"30"}
                             alt="Metamask fox svg"
                         />
-                        <p>0x7c........a3f208d7</p>
+                        <p className="ml-2">{publicKey?.toString()}</p>
                     </button>
                 </div>
             </div>
