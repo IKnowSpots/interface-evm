@@ -1,12 +1,18 @@
 "use client";
-import { createEvent, uploadToIPFS } from "@/utils";
+import { uploadToIPFS } from "@/utils";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { fetchUsername } from "@/utils";
+import CreateNav from "@/components/dashboard/CreateNav";
+
 // import ToggleButton from "react-toggle-button";
 import Link from "next/link";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { Transaction, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Keypair, sendAndConfirmTransaction, Connection, clusterApiUrl } from "@solana/web3.js";
+
 
 const Create = () => {
+
+    const { publicKey,wallets, sendTransaction } = useWallet();
     const [formInput, setFormInput] = useState({
         shortlist: false,
         stake: false,
@@ -18,20 +24,41 @@ const Create = () => {
         uri: "",
         stakePrice: "",
     });
-    const [username, setUsername] = useState("iamacid");
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        fetchUsernameCall();
-    }, []);
 
-    async function fetchUsernameCall() {
-        setLoading(true);
-        let user = await fetchUsername();
-        // setUsername(user);
-        setUsername("iamacid");
-        setLoading(false);
+    async function createEvent() {
+        const generateUniqueId = (() => {
+            let id = 0;
+          
+            return () => {
+              return ++id;
+            };
+          })();
+        //   const connection = new Connection(clusterApiUrl("devnet"));
+        const connection = new Connection(clusterApiUrl("devnet"));
+        const transaction = new Transaction();
+        const kpid = Keypair.generate();
+        console.log(`Sender is ${publicKey} and the receiver is ${kpid.publicKey}`);
+        
+        const sendSolInstruction = SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: kpid.publicKey,
+          lamports: LAMPORTS_PER_SOL * amount,
+        });
+      
+        transaction.add(sendSolInstruction);
+      
+        
+      
+        sendTransaction(transaction, connection).then((sig) => {
+            console.log(sig);
+          });
+        console.log("public key detected", publicKey);
+        console.log("event created");
     }
+
+
 
     async function formURI() {
         const { name, description, venue, date } = formInput;
@@ -47,44 +74,13 @@ const Create = () => {
     async function publish() {
         setLoading(true);
         const uri = await formURI();
-        await createEvent();
+        await createEvent(0.1);
         setLoading(false);
     }
 
     return (
         <div className="bg-[#25143a] text-white  px-8">
-            <div className="flex justify-between items-center py-4">
-                <Link href="/">
-                    <Image
-                        src={"/iks-logo.png"}
-                        width={300}
-                        height={300}
-                        alt="iks logo"
-                    />
-                </Link>
-                <div className="flex  ">
-                    <button className="rounded-full h-[] px-8 mr-8 flex items-center bg-gradient-to-r from-[#9000FF] to-[#1D102700] ">
-                        {/* <Image
-              src={"/bored_ape_image.png"}
-              width={30}
-              height={50}
-              alt="bored ape nft image"
-              className="rounded-xl"
-            /> */}
-                        <p>@{username}</p>
-                    </button>
-                    {/* remaning: fix the basic gradients of this */}
-                    <button className="flex items-center py-3 px-3 rounded-lg border border-white">
-                        <Image
-                            src={"/icons/metamask-icon.svg"}
-                            width={"30"}
-                            height={"30"}
-                            alt="Metamask fox svg"
-                        />
-                        <p>0x7c........a3f208d7</p>
-                    </button>
-                </div>
-            </div>
+            <CreateNav />
             <div className="grid grid-cols-2">
                 <div className="">
                     <div>

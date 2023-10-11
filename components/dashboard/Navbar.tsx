@@ -29,7 +29,7 @@ const DashNav = () => {
             />
 
             <div className="flex gap-2">
-                <p className="text-white h-[90%] text-sm flex items-center gap-1 px-3 border rounded-lg">
+                <div className="text-white h-[90%] text-sm flex items-center gap-1 px-3 border rounded-lg">
                     {/* <Image
                         src={"/bored_ape_image.png"}
                         width={25}
@@ -38,7 +38,7 @@ const DashNav = () => {
                         className="rounded-full"
                     /> */}
                     <p className="">@{username}</p>
-                </p>
+                </div>
                 <Link href="/test/events">
                     <Image
                         src={"/icons/Question.svg"}
