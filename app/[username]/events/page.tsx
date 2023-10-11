@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const EventsByHost = () => {
     const [username, setUsername] = useState("iamacid");
-    const [hostAddress, setHostAddress] = useState("88J...MVL8yw");
+    const [hostAddress, setHostAddress] = useState<String | undefined>();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const EventsByHost = () => {
     }
 
     async function getHosteeAddress() {
-        let hostee = "88J...MVL8yw";
+        let hostee = "88JigRuKKTdiH72sCdBPXQRuKDKCHAQBaQTkJ4RMV8yw";
         setHostAddress(hostee);
     }
 
@@ -40,7 +40,7 @@ const EventsByHost = () => {
                     </p>
                 </div>
 
-                <div className="flex gap-x-[4rem] gap-y-[3rem] flex-wrap pt-4 px-[4rem] pb-[5rem]">
+                <div className="flex gap-x-[4rem] gap-y-[3rem] flex-wrap pt-4 px-[3rem] pb-[5rem]">
                     <CardsHostee
                         image={"1.png"}
                         name="Lorem Ipsum"

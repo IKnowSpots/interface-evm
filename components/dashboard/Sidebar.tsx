@@ -1,14 +1,22 @@
+"use client";
 import Image from "next/image";
 import SidebarItems from "./sidebarItems";
 import Link from "next/link";
-import DashboardButton from "./DashboardButton";
+import { useWallet } from "@solana/wallet-adapter-react";
+import dynamic from "next/dynamic";
+
+const WalletsProvider = dynamic(
+    () => import("../../components-integration/wallets"),
+    {
+        ssr: false,
+    }
+);
 
 const Sidebar = () => {
+    const { publicKey, wallets, sendTransaction } = useWallet();
+
     return (
-        <div
-            id="sidebar"
-            className="pl-8 bg-[rgb(61,23,111)] w-[25%] py-8"
-        >
+        <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[25%] py-8">
             <Link href="/">
                 <Image
                     src="/iks-logo.png"
@@ -81,7 +89,23 @@ const Sidebar = () => {
                 </Link>
             </div>
             <div>
-                <DashboardButton />
+                {publicKey?.toBase58() ? (
+                    <button className="block my-6">
+                        <div className="flex border border-white px-3 py-4">
+                            <Image
+                                src={wallets[0].adapter.icon}
+                                width="30"
+                                height="100"
+                                alt="metamask logo"
+                            />
+                            <p className="px-4 text-white">
+                                {publicKey?.toBase58()}
+                            </p>
+                        </div>
+                    </button>
+                ) : (
+                    <WalletsProvider />
+                )}
                 <button className="block  bg-black my-6 ">
                     <div className="flex px-6 py-4">
                         <Image
@@ -90,7 +114,7 @@ const Sidebar = () => {
                             height="100"
                             alt="metamask logo"
                         />
-                        <p className="px-2 text-white">PLS Mainnet</p>
+                        <p className="px-2 text-white">Solana Testnet</p>
                     </div>
                 </button>
             </div>

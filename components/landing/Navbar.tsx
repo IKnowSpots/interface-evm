@@ -4,19 +4,68 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
 import { WalletConnectButton } from "@solana/wallet-adapter-react-ui";
-// import WalletsProvider from "../../components-integration/wallets";
 
-const WalletsProvider = dynamic(() => import("../../components-integration/wallets"), {
-    ssr: false,
-});
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const WalletsProvider = dynamic(
+    () => import("../../components-integration/wallets"),
+    {
+        ssr: false,
+    }
+);
 
 const Navbar = () => {
-    const { wallets } = useWallet();
+    const { publicKey } = useWallet();
 
-    console.log("check", wallets);
+    function pushingDashboard() {
+        if (!publicKey?.toBase58()) {
+            toast.warn("Connect your wallet to proceed further!", {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } else {
+            window.location.replace("/dashboard");
+        }
+    }
+
+    function pushingInventory() {
+        if (!publicKey?.toBase58()) {
+            toast.warn("Connect your wallet to proceed further!", {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } else {
+            window.location.replace("/inventory");
+        }
+    }
 
     return (
-        <nav className="z-[10] flex gap-[15rem] justify-center items-center py-8 w-full absolute">
+        <nav className="z-[10] ml-[-10%] flex gap-[8%] justify-center items-center py-8 w-[110%] absolute">
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <Link href="/">
                 <Image
                     src="/iks-logo.png"
@@ -26,10 +75,10 @@ const Navbar = () => {
                     alt="I know spots logo"
                 />
             </Link>
-            <div className="flex gap-[5rem] justify-center items-center">
-                <Link href="/dashboard">
+            <div className="flex gap-[10%] justify-center items-center">
+                <button onClick={pushingDashboard}>
                     <p className="hoverUnderline">Dashboard</p>
-                </Link>
+                </button>
 
                 <Link href="#howitworks">
                     <p className="hoverUnderline">Product</p>
@@ -37,7 +86,6 @@ const Navbar = () => {
                 {/* <Link href="/infra">
                     <p>Infra</p>
                 </Link> */}
-
                 <Link
                     target="_blank"
                     href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit"
@@ -49,12 +97,17 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <Link href="/">
-                <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
-                    {/* Connect Wallet */}
+            <div className="flex gap-[10%]">
+                <p className="border border-[#C584F5] px-4 py-2 rounded-xl w-[210px]">
                     <WalletsProvider />
                 </p>
-            </Link>
+
+                <button onClick={pushingInventory}>
+                    <p className="border border-[#C584F5] px-4 py-2 rounded-xl">
+                        Inventory
+                    </p>
+                </button>
+            </div>
         </nav>
     );
 };
