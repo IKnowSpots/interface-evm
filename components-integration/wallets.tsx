@@ -1,55 +1,49 @@
-// import { VStack, Button, Image, Text } from "@chakra-ui/react";
+"use client";
 import { useWallet } from "@solana/wallet-adapter-react";
+import Image from "next/image";
+import { useEffect } from "react";
 
-const Wallets = () => {
+
+const WalletsProvider = () => {
   const { select, wallets, publicKey, disconnect } = useWallet();
-  
-// console.log("wallets: ", wallets[0].adapter.name)
-{console.log("wallets: ", wallets[0].adapter.name)}
 
-return (
-    <button
-    onClick={() => select(wallets[0].adapter.name)}
-    >
-        Connect Wallet
-    </button>
-) 
-
-//   return !publicKey ? (
-//     <VStack gap={4}>
-//       {wallets.filter((wallet) => wallet.readyState === "Installed").length >
-//       0 ? (
-//         wallets
-//           .filter((wallet) => wallet.readyState === "Installed")
-//           .map((wallet) => (
-//             <Button
-//               key={wallet.adapter.name}
-//               onClick={() => select(wallet.adapter.name)}
-//               w="64"
-//               size="lg"
-//               fontSize="md"
-//               leftIcon={
-//                 <Image
-//                   src={wallet.adapter.icon}
-//                   alt={wallet.adapter.name}
-//                   h={6}
-//                   w={6}
-//                 />
-//               }
-//             >
-//               {wallet.adapter.name}
-//             </Button>
-//           ))
-//       ) : (
-//         <Text>No wallet found. Please download a supported Solana wallet</Text>
-//       )}
-//     </VStack>
-//   ) : (
-//     <VStack gap={4}>
-//       <Text>{publicKey.toBase58()}</Text>
-//       <Button onClick={disconnect}>disconnect wallet</Button>
-//     </VStack>
-//   );
+  useEffect(()=>{
+    console.log("Public Key is ", publicKey);
+    
+  },[publicKey])
+  return !publicKey ? (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {wallets.filter((wallet) => wallet.readyState === "Installed").length > 0 ? (
+        wallets
+          .filter((wallet) => wallet.readyState === "Installed")
+          .map((wallet) => (
+            <button
+              key={wallet.adapter.name}
+              onClick={() => select(wallet.adapter.name)}
+              style={{
+                width: '64px',
+                height: '48px',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+            >
+              <Image src={wallet.adapter.icon} alt={wallet.adapter.name} height={24} width={24} />
+              <span>{wallet.adapter.name}</span>
+            </button>
+          ))
+      ) : (
+        <p>No wallet found. Please download a supported Solana wallet</p>
+      )}
+    </div>
+  ) : (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <p>{publicKey.toBase58()}</p>
+      <button onClick={disconnect}>Disconnect Wallet</button>
+    </div>
+  );
 };
 
-export default Wallets;
+export default WalletsProvider;

@@ -2,9 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
+import { WalletConnectButton } from "@solana/wallet-adapter-react-ui";
+// import WalletsProvider from "../../components-integration/wallets";
 
-const Wallets = dynamic(() => import("../../components-integration/wallets"), {
+const WalletsProvider = dynamic(() => import("../../components-integration/wallets"), {
     ssr: false,
 });
 
@@ -47,10 +49,12 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
-                {/* Connect Wallet */}
-                <Wallets />
-            </p>
+            <Link href="/">
+                <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
+                    {/* Connect Wallet */}
+                    <WalletsProvider />
+                </p>
+            </Link>
         </nav>
     );
 };
