@@ -1,13 +1,24 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { fetchUsername } from "@/utils";
 
 const DashNav = () => {
+    const [username, setUsername] = useState("iamacid");
+    const [loading, setLoading] = useState(false);
 
-    const[ username, setUsername ] = useState("iamacid")
+    useEffect(() => {
+        fetchUsernameCall();
+    }, []);
 
-    useEffect(() => {}, [])
+    async function fetchUsernameCall() {
+        setLoading(true);
+        let user = await fetchUsername();
+        // setUsername(user);
+        setUsername("iamacid");
+        setLoading(false);
+    }
 
     return (
         <div id="dash-navbar" className="flex pt-8 pb-4 px-4">

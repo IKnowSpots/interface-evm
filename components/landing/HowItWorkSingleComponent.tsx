@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-const HowItWorksSingleComponent = ({icons, title, desc}) =>{
+const HowItWorksSingleComponent = ({icons, title, desc}: {icons: any, title: any, desc: any}) =>{
     return(
         
             <div className="bg-[#141118] flex flex-col w-1/4 rounded-lg px-12 py-8 mx-4 items-center text-center">

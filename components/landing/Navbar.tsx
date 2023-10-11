@@ -27,7 +27,7 @@ const Navbar = () => {
                 />
             </Link>
             <div className="flex gap-[5rem] justify-center items-center">
-                <Link href="/dashboard/active">
+                <Link href="/dashboard">
                     <p className="hoverUnderline">Dashboard</p>
                 </Link>
 
@@ -49,12 +49,19 @@ const Navbar = () => {
                 </Link>
             </div>
 
+<<<<<<< HEAD:components/landing-page/Navbar.tsx
             <Link href="/">
                 <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
                     {/* Connect Wallet */}
                     <WalletsProvider />
                 </p>
             </Link>
+=======
+            <p className="border border-[#C584F5] px-4 py-2 rounded-xl ">
+                {/* Connect Wallet */}
+                <Wallets />
+            </p>
+>>>>>>> 9c15a0601cb5561f05a54aa4def680fc8d313217:components/landing/Navbar.tsx
         </nav>
     );
 };

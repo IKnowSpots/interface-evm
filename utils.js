@@ -1,6 +1,9 @@
 import { Web3Storage } from "web3.storage";
 
-export async function getUsername() {}
+export async function fetchUsername() {
+    // if new user then return this
+    return ""
+}
 
 export async function fetchActiveEvents() {}
 
@@ -18,9 +21,13 @@ export async function createEvent() {}
 
 export async function getTicket() {}
 
-export async function pauseEvent() {}
+export async function pauseEvent() {
+    console.log("event paused")
+}
 
-export async function runEvent() {}
+export async function runEvent() {
+    console.log("event paused")
+}
 
 // inactive as of now
 export async function uploadShortlist() {}
