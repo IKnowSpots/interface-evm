@@ -6,12 +6,21 @@ import { fetchUsername } from "@/utils";
 // import ToggleButton from "react-toggle-button";
 import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Transaction, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Keypair, sendAndConfirmTransaction, Connection, clusterApiUrl } from "@solana/web3.js";
+import { Transaction, LAMPORTS_PER_SOL, PublicKey, SystemProgram, sendAndConfirmRawTransaction, Keypair, sendAndConfirmTransaction, Connection, clusterApiUrl } from "@solana/web3.js";
+import * as anchor from "@project-serum/anchor";
+import { Program } from "@project-serum/anchor";
+import { BN } from "bn.js";
+import { Iknowspots } from "../../../target/types/iknowspots";
+import { anchorProgram } from "@/program/contract";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
+
 
 
 const Create = () => {
-
+    const wallet = useAnchorWallet();
     const { publicKey,wallets, sendTransaction } = useWallet();
+    const program = anchorProgram(wallet);
+
     const [formInput, setFormInput] = useState({
         shortlist: false,
         stake: false,
@@ -30,25 +39,55 @@ const Create = () => {
         fetchUsernameCall();
     }, []);
 
-    async function createEvent(amount: number) {
+    async function createEvent() {
+        const generateUniqueId = (() => {
+            let id = 0;
+          
+            return () => {
+              return ++id;
+            };
+          })();
+        //   const connection = new Connection(clusterApiUrl("devnet"));
         const connection = new Connection(clusterApiUrl("devnet"));
         const transaction = new Transaction();
         const kpid = Keypair.generate();
         console.log(`Sender is ${publicKey} and the receiver is ${kpid.publicKey}`);
+        let event_id = generateUniqueId();
+        console.log("event_id is :", event_id);
+        let date = 4348374;
+        let [eventAccount, eventAccountBumb] = await anchor.web3.PublicKey.findProgramAddress(
+          [Buffer.from("event-data"), new BN(event_id).toArrayLike(Buffer,"le",8)],
+          program.programId
+        );
+        let [eventTokenAccount, eventTokenAccountBumb] = await anchor.web3.PublicKey.findProgramAddress(
+          [Buffer.from("event-asset"), new BN(event_id).toArrayLike(Buffer,"le",8)],
+          program.programId
+        );
+        const tokenMintAddress = new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+        const ix = await program.methods.eventCreation(
+            new anchor.BN(event_id),
+            new anchor.BN(formInput.stakePrice),
+            new anchor.BN(formInput.supply),
+            new anchor.BN(date)
+            ).accounts(
+            {
+              authority : publicKey,
+              eventAccount : eventAccount,
+              tokenMint : tokenMintAddress,
+              eventTokenAccount : eventTokenAccount
+            }
+          ).instruction();
+            console.log("instruction added :");
+        const { blockhash } = await connection.getLatestBlockhash();
+        transaction.recentBlockhash = blockhash;
+        transaction.feePayer = publicKey;
+            transaction.add(ix);
+        const serialized_transaction = transaction.serialize();
+        console.log("Here's the transaction",transaction);
         
-        const sendSolInstruction = SystemProgram.transfer({
-          fromPubkey: publicKey,
-          toPubkey: kpid.publicKey,
-          lamports: LAMPORTS_PER_SOL * amount,
-        });
       
-        transaction.add(sendSolInstruction);
-      
-        
-      
-        sendTransaction(transaction, connection).then((sig) => {
-            console.log(sig);
-          });
+        const sig = await connection.sendRawTransaction(serialized_transaction);
+        console.log("signature is : ", sig);
         console.log("public key detected", publicKey);
         console.log("event created");
     }
