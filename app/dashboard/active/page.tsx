@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
 import CardsActive from "@/components/cardsActive";
 import DashNav from "@/components/dashboard/Navbar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { fetchActiveEvents } from "../../../utils"
+import { fetchActiveEvents } from "../../../utils";
 
 const ActiveEvents = () => {
     const [activeEvents, setActiveEvents] = useState<any>();
@@ -16,10 +16,10 @@ const ActiveEvents = () => {
     }, []);
 
     async function fetchActiveEventsCall() {
-        setLoading(true)
-        let activeEventsData: any = await fetchActiveEvents()
+        setLoading(true);
+        let activeEventsData: any = await fetchActiveEvents();
         setActiveEvents(activeEventsData);
-        setLoading(false)
+        setLoading(false);
     }
 
     return (
@@ -27,7 +27,6 @@ const ActiveEvents = () => {
             <Sidebar />
             <div className="bg-[#25143a]">
                 <DashNav />
-                {/* <div className="grid grid-cols-4 py-4"> */}
                 <div className="px-8">
                     <p className="text-white font-semibold pl-4 pt-2">
                         Active Events
@@ -40,23 +39,21 @@ const ActiveEvents = () => {
                         <CardsActive image={"3.png"} name="Lorem Ipsum" />
                         <CardsActive image={"3.png"} name="Lorem Ipsum" />
 
-                        {/* <div className="">
+                    {/* <div className="">
                         <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " />
                     </div> */}
                     </div>
-                    <div className="w-[11rem] mx-auto mt-4">
-                        <Link href="/dashboard/create">
-                            <p className="text-white flex justify-between items-center px-2 py-2 border">
-                                <Image
-                                    src={"/icons/qr.svg"}
-                                    width={20}
-                                    height={20}
-                                    alt="qr code svg"
-                                />
-                                Create an Event
-                            </p>
-                        </Link>
-                    </div>
+                    <a href="/dashboard/create">
+                        <div className="flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+                            <Image
+                                src={"/icons/qr.svg"}
+                                width={20}
+                                height={20}
+                                alt="qr code svg"
+                            />
+                            <p className="text-white">Create an Event</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

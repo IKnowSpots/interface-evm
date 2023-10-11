@@ -15,7 +15,7 @@ export async function fetchFeaturedEvents() {}
 // inactive as of now
 export async function checkIfShortlisted() {}
 
-export async function setUsername() {}
+export async function setUsername(username) {}
 
 // export async function createEvent(publicKey : PublicKey, amount: number) {
 //   const connection = new Connection(clusterApiUrl("devnet"));
