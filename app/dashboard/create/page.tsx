@@ -7,12 +7,19 @@ import CreateNav from "@/components/dashboard/CreateNav";
 // import ToggleButton from "react-toggle-button";
 import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Transaction, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Keypair, sendAndConfirmTransaction, Connection, clusterApiUrl } from "@solana/web3.js";
-
+import {
+    Transaction,
+    LAMPORTS_PER_SOL,
+    PublicKey,
+    SystemProgram,
+    Keypair,
+    sendAndConfirmTransaction,
+    Connection,
+    clusterApiUrl,
+} from "@solana/web3.js";
 
 const Create = () => {
-
-    const { publicKey,wallets, sendTransaction } = useWallet();
+    const { publicKey, wallets, sendTransaction } = useWallet();
     const [formInput, setFormInput] = useState({
         shortlist: false,
         stake: false,
@@ -26,39 +33,38 @@ const Create = () => {
     });
     const [loading, setLoading] = useState(false);
 
-
-    async function createEvent() {
+    async function createEvent(amount: any) {
         const generateUniqueId = (() => {
             let id = 0;
-          
+
             return () => {
-              return ++id;
+                return ++id;
             };
-          })();
+        })();
+        
         //   const connection = new Connection(clusterApiUrl("devnet"));
         const connection = new Connection(clusterApiUrl("devnet"));
         const transaction = new Transaction();
         const kpid = Keypair.generate();
-        console.log(`Sender is ${publicKey} and the receiver is ${kpid.publicKey}`);
-        
+        console.log(
+            `Sender is ${publicKey} and the receiver is ${kpid.publicKey}`
+        );
+
+        if (publicKey == null) return;
         const sendSolInstruction = SystemProgram.transfer({
-          fromPubkey: publicKey,
-          toPubkey: kpid.publicKey,
-          lamports: LAMPORTS_PER_SOL * amount,
+            fromPubkey: publicKey,
+            toPubkey: kpid.publicKey,
+            lamports: LAMPORTS_PER_SOL * amount,
         });
-      
+
         transaction.add(sendSolInstruction);
-      
-        
-      
+
         sendTransaction(transaction, connection).then((sig) => {
             console.log(sig);
-          });
+        });
         console.log("public key detected", publicKey);
         console.log("event created");
     }
-
-
 
     async function formURI() {
         const { name, description, venue, date } = formInput;

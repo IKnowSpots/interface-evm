@@ -37,7 +37,7 @@ const EventsByHost = () => {
     }
 
     async function fetchHosteeAddressCall() {
-        let hostee = await fetchHosteeAddress()
+        let hostee: any = await fetchHosteeAddress()
         hostee = "88J...4RMV8yw";
         setHostAddress(hostee);
     }

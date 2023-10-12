@@ -43,7 +43,7 @@ const Dashboard = () => {
 };
 
 function RenderSetUsername() {
-    const [username, setUsernameHook] = useState();
+    const [username, setUsernameHook] = useState<String>();
 
     async function setUsernameCall() {
         await setUsername(username);
@@ -93,7 +93,7 @@ function RenderSetUsername() {
                             id="username"
                             placeholder="iknowspots"
                             className="px-4 py-2 rounded-xl my-2 text-black"
-                            onChange={(e) => setUsernameHook(e)}
+                            onChange={(e) => setUsernameHook(e.target.value)}
                         />
                         <button
                             className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
