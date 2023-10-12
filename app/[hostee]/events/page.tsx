@@ -1,35 +1,56 @@
 "use client";
 import CardsHostee from "@/components/cardsHostee";
 import Navbar from "@/components/hostee/Navbar";
-import { fetchUsername } from "@/utils";
+import { fetchHosteeAddress, fetchUsernameValidity } from "@/utils";
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
+import { usePathname } from 'next/navigation';
 
 const EventsByHost = () => {
-    const [username, setUsername] = useState("iamacid");
+
+    const pathName = usePathname();
+    const id = pathName?.split("/")[1];
+
+    const [username, setUsername] = useState(`${id}`);
+    const [isUsernameValid, setIsUsernameValid] = useState(false)
+    const [activeEvents, setActiveEvents] = useState([]);
     const [hostAddress, setHostAddress] = useState<String | undefined>();
     const [loading, setLoading] = useState(false);
 
     const { wallets } = useWallet();
 
+
     useEffect(() => {
-        fetchUsernameCall();
+        if (id) {
+            checkUsernameValidityData();
+        }
+    }, [id]);
+
+    useEffect(() => {
+        fetchHosteeAddressCall();
     }, []);
 
-    async function fetchUsernameCall() {
-        setLoading(true);
-        let user = await fetchUsername();
-        // setUsername(user);
-        setUsername("iamacid");
-        await getHosteeAddress();
-        setLoading(false);
+    async function checkUsernameValidityData() {
+        const data = await fetchUsernameValidity(id)
+        // setIsUsernameValid(data)
     }
 
-    async function getHosteeAddress() {
-        let hostee = "88J...4RMV8yw";
+    async function fetchHosteeAddressCall() {
+        let hostee = await fetchHosteeAddress()
+        hostee = "88J...4RMV8yw";
         setHostAddress(hostee);
     }
+
+    if (loading == true) return <div className="text-white">Fetching..</div>
+
+    // if (loading == false && isUsernameValid == false) return (
+    //     <div  className="text-white">User do not exist</div>
+    // )
+
+    // if (loading == false && isUsernameValid == true && activeEvents.length == 0) return (
+    //     <div>ACTIVE EVENTS <br /> No events</div>
+    // )
 
     return (
         <div className="bg-[#25143a] h-[100%] text-white w-full overflow-hidden">
@@ -38,7 +59,7 @@ const EventsByHost = () => {
                 <div className="flex justify-between px-[6rem]">
                     <div className="pb-8">
                         <p className="w-full text-white text-[2rem] ml-[0rem]">
-                            @{username}
+                            @{id}
                         </p>
                         <div className="flex gap-2 justify-center text-center">
                             <Image
@@ -66,6 +87,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                     <CardsHostee
                         image={"2.png"}
@@ -73,6 +95,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                     <CardsHostee
                         image={"3.png"}
@@ -80,6 +103,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                     <CardsHostee
                         image={"4.png"}
@@ -87,6 +111,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
 
                     <CardsHostee
@@ -95,6 +120,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                     <CardsHostee
                         image={"2.png"}
@@ -102,6 +128,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                     <CardsHostee
                         image={"3.png"}
@@ -109,6 +136,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                     <CardsHostee
                         image={"4.png"}
@@ -116,6 +144,7 @@ const EventsByHost = () => {
                         price="1.20"
                         date="01.34.45"
                         username={username}
+                        eventId="01"
                     />
                 </div>
             </div>

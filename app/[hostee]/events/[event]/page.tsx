@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Navbar from "@/components/dashboard/create/Navbar";
 import Image from "next/image";
 

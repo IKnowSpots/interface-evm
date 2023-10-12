@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { fetchUsername, setUsername } from "@/utils";
+import { fetchUsernameValidity, setUsername } from "@/utils";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     async function getUsernameCall() {
         setLoading(true);
-        let varUsername: any = await fetchUsername();
+        let varUsername: any = await fetchUsernameValidity();
         setUsername(varUsername);
         // setUsername("");
         setLoading(false);

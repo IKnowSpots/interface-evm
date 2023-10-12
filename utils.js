@@ -1,9 +1,13 @@
 import { Web3Storage } from "web3.storage";
 import { Transaction, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Keypair, sendAndConfirmTransaction, Connection, clusterApiUrl } from "@solana/web3.js";
+export async function fetchHosteeAddress() {}
+
 export async function fetchUsername() {
   // if new user then return this
   return "";
 }
+
+export async function fetchUsernameValidity(username) {}
 
 export async function fetchActiveEvents() {}
 
