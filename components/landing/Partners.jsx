@@ -4,7 +4,7 @@ export default function Partners() {
   return (
     <div className='flex flex-col justify-center '>
         <div className='flex items-center justify-center'>
-        <p className="text-xl w-[40rem] flex text-center mb-[4rem]">
+        <p className=" text-base sm:text-xl sm:w-[40rem] flex text-center px-4 mb-4 sm:mb-16">
             Trusted by the world&apos; best product teams. From next-gen startups to established communities.
         </p>
         </div>

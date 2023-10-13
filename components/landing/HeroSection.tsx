@@ -3,8 +3,8 @@ import Link from "next/link"
 
 const HeroSection = () => {
   return (
-    <div className="w-full h-[475px] md:h-[650px] lg:h-[800px] xl:h-auto">
-      <div className="top-[50%] flex flex-col justify-center items-center text-center w-full absolute">
+    <div className="w-full h-[440px] md:h-[650px] lg:h-[800px] xl:h-auto">
+      <div className="top-[17%] lg:top-[35%] flex flex-col justify-center items-center text-center w-full absolute">
         <h1 className="text-[2.5rem] sm:text-8xl font-bold text-gradient ">
           Introducing <span className="block">iknowspots</span>
         </h1>
