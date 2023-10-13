@@ -10,6 +10,8 @@ import ExploreSolutions from "@/components/landing/ExploreSolution";
 import ToolSection from "@/components/landing/ToolsSection";
 import SdkSection from "@/components/landing/sdk";
 import FooterSection from "@/components/landing/FooterSection";
+import Partners from "@/components/landing/Partners";
+
 export default function Home() {
     return (
         <>
@@ -19,21 +21,7 @@ export default function Home() {
                     <div className="grad1 blur-[140px] flex h-[1200px] w-[660px] absolute"></div>
                 </div>
                 <HeroSection />
-                <div
-                    id="partners"
-                    className="flex flex-col relative mt-[-5rem] mb-[10rem] justify-center items-center "
-                >
-                    <p className="text-xl w-[40rem] flex text-center mb-[4rem]">
-                        Trusted by the world&apos; best product teams. From
-                        next-gen startups to established communities.
-                    </p>
-                    <Image
-                        src="/patners.png"
-                        width="1500"
-                        height="100"
-                        alt="Patners of IKS"
-                    />
-                </div>
+                <Partners/>
                 <div>
                     <div className="grad2 absolute blur-[400px] w-full h-[800px] z-[-1]"></div>
                 </div>
