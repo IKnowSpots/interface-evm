@@ -6,7 +6,9 @@ import CreateNav from "@/components/dashboard/CreateNav";
 
 // import ToggleButton from "react-toggle-button";
 import Link from "next/link";
+
 import { useWallet } from "@solana/wallet-adapter-react";
+
 import {
     Transaction,
     LAMPORTS_PER_SOL,
@@ -33,7 +35,7 @@ const Create = () => {
     });
     const [loading, setLoading] = useState(false);
 
-    async function createEvent(amount: any) {
+    async function createEvent(amount) {
         const generateUniqueId = (() => {
             let id = 0;
 
