@@ -15,7 +15,7 @@ import Partners from "@/components/landing/Partners";
 export default function Home() {
     return (
         <>
-            <div className="gradient-bg text-white w-full overflow-hidden">
+            <div className=" text-white w-full overflow-hidden">
                 <Navbar />
                 <div className="w-full flex justify-end">
                     <div className="grad1 blur-[140px] flex h-[1200px] w-[660px] absolute"></div>
@@ -25,29 +25,29 @@ export default function Home() {
                 <div>
                     <div className="grad2 absolute blur-[400px] w-full h-[800px] z-[-1]"></div>
                 </div>
-                <div id="hotevent" className="mb-[10rem]">
-                    <h1 className="text-5xl my-10 mx-12 ">HOT EVENT</h1>
+                <div id="hotevent" className="relative mb-[5rem] sm:mb-[10rem]">
+                    <h1 className="text-[2rem] sm:text-5xl my-10 mx-12 ">HOT EVENT</h1>
                     <FeaturedEvents />
                 </div>
                 <div>
                     <div className="grad2 blur-[220px] absolute w-full h-[700px]"></div>
                 </div>
-                <div id="howitworks" className="relative mb-[10rem]">
-                    <h1 className="text-6xl text-center w-full font-semibold">
+                <div id="howitworks" className="relative mb-[5rem] sm:mb-[10rem]">
+                    <h1 className="text-3xl sm:text-6xl text-center w-full font-semibold">
                         How we stand out
                     </h1>
                     <HowItWork />
                 </div>
-                <div className="mb-[10rem]">
+                <div className="mb-[5rem] sm:mb-[10rem] flex justify-center items-center">
                     <Missions />
                 </div>
-                <div className="mb-[5rem]">
+                <div className="mb-[3rem]">
                     <ExploreSolutions />
                 </div>
-                <div className="mb-[10rem]">
+                <div className="mb-[5rem] sm:mb-[10rem]">
                     <ToolSection />
                 </div>
-                <div className="mb-[10rem]">
+                <div className="mb-[5rem] sm:mb-[10rem]">
                     <SdkSection />
                 </div>
                 <FooterSection />

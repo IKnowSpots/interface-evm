@@ -4,7 +4,7 @@ const Missions = () => {
     function RenderLorem1() {
         return (
             <div>
-                <p className="w-3/4 pt-8">
+                <p className="w-3/4 text-[0.9rem] sm:text-[1rem] pt-8">
                     With NFTs, ticket authenticity can be easily verified,
                     preventing counterfeiting and ensuring that only valid
                     tickets are bought and sold.
@@ -20,10 +20,10 @@ const Missions = () => {
     }
 
     return (
-        <div className="bg-[#3C3C3C] relative flex justify-between px-8  mx-12 my-16 rounded-xl bg-opacity-40 bg-blur-md">
-            <div>
-                <h1 className="text-5xl mt-12 ">Our Mission</h1>
-                <div className="flex justify-around w-1/4 pt-6">
+        <div className="bg-[#3C3C3C] relative flex justify-center p-8 w-[80%] rounded-xl bg-opacity-40 bg-blur-md">
+            <div className="flex flex-col justify-center items-start">
+                <h1 className="text-4xl sm:text-5xl mt-12 ">Our Mission</h1>
+                <div className="flex justify-around gap-4 pt-6">
                     <p className="hoverUnderline">Lorum</p>
                     <p className="hoverUnderline">Lorum</p>
                     <p className="hoverUnderline">Lorum</p>

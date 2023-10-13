@@ -3,19 +3,19 @@ import Link from "next/link"
 
 const HeroSection = () => {
   return (
-    <div>
-      <div className=" top-1/4 text-center w-full absolute">
-        <h1 className="  text-8xl  font-bold text-gradient ">
+    <div className="w-full h-[475px] md:h-[650px] lg:h-[800px] xl:h-auto">
+      <div className="top-[50%] flex flex-col justify-center items-center text-center w-full absolute">
+        <h1 className="text-[2.5rem] sm:text-8xl font-bold text-gradient ">
           Introducing <span className="block">iknowspots</span>
         </h1>
-        <p className="my-5 text-xl">
+        <p className="m-5 text-lg sm:text-xl">
           Seamless granular events hosting with NFT tickets.
         </p>
         <Link className="" target="_blank" href="https://youtu.be/dQw4w9WgXcQ?si=EZJTnscJMGKz1Bvd">
-        <button className="cta-button px-8 py-1">Demo Video</button>
+        <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
         </Link>
       </div>
-      <div id="parent-div" className="relative w-full p-6 flex justify-center items-center">
+      <div id="parent-div" className="relative hidden sm:flex w-full p-6 flex justify-center items-center">
         <Image
           src="/circles.png"
           width="1500"

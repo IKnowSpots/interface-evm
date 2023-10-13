@@ -16,8 +16,8 @@ const FooterSection = () => {
     }
 
     return (
-        <div className="flex justify-between pt-6 mt-12 mx-8 border-white footer-gradient z-10 overflow-hidden footerDiv">
-            <div className="flex flex-col">
+        <div className="relative flex flex-col sm:flex-row justify-between p-4 sm:p-8 my-12 mx-4 sm:mx-8 border-white footer-gradient z-10 overflow-hidden footerDiv">
+            <div className="flex flex-col relative z-10">
                 <div className="">
                     <img
                         src="./iks-logo.png"
@@ -26,12 +26,12 @@ const FooterSection = () => {
                         className=""
                         alt="I know spots logo"
                     />
-                    <p className="text-[#ffffffbf] text-m">
+                    <p className="text-[#ffffffbf] text-[0.75rem] sm:text-base">
                         Seamless granular events hosting with NFT tickets.
                     </p>
                 </div>
                 
-                <div className="flex gap-6  my-8">
+                <div className="flex flex-col sm:flex-row justify-center sm:justify-normal items-center sm:items-initial w-full gap-6 my-8">
                     <input
                         className="email-input px-5"
                         placeholder="Email"
@@ -41,7 +41,7 @@ const FooterSection = () => {
                     </button>
                 </div>
                 
-                <div className="flex gap-5">
+                <div className="flex justify-center sm:justify-normal gap-5">
                     <a href="https://twitter.com/iknowspots">
                     <img src="./twitter.png" alt="twitter"/>
 
@@ -55,9 +55,9 @@ const FooterSection = () => {
                     {/* <img src="./discord.png" alt="discord" /> */}
                 </div>
 
-                <p className="my-6">@2023 All rights reserved.</p>
+                <p className=" text-[0.75rem] sm:text-base my-6">@2023 All rights reserved.</p>
             </div>
-            <div className="footerGradientDiv flex">
+            <div className="footerGradientDiv flex flex-col sm:flex-row">
                 <Image
                     src="/largerGradient.png"
                     alt="footer gradient"
@@ -73,7 +73,7 @@ const FooterSection = () => {
                     className="footerGradient"
                 />
             </div>
-            <div className="flex  z-[10]">
+            <div className="flex text-[0.75rem] sm:text-base z-[10]">
                 <div className="px-8">
                     <p className="mb-2 font-semibold">Company</p>
                     <ul>
