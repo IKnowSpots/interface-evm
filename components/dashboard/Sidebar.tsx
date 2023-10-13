@@ -4,6 +4,7 @@ import SidebarItems from "./sidebarItems";
 import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 
 const WalletsProvider = dynamic(
     () => import("../../components-integration/wallets"),
@@ -14,16 +15,26 @@ const WalletsProvider = dynamic(
 
 const Sidebar = () => {
     const { publicKey, wallets, sendTransaction } = useWallet();
+    const [shortPublicKey, setPublicKey] = useState<String>();
 
-    function shortenString(input: any, maxLength: any) {
+    function shortenString(input: String, maxLength: any) {
+        // if (input === null) return
         if (input.length <= maxLength) {
             return input; // No need to shorten if it's already shorter than maxLength.
         } else {
             const firstPart = input.slice(0, maxLength / 2);
             const lastPart = input.slice(-maxLength / 2);
-            return firstPart + "..." + lastPart;
+            let finalString = firstPart + "..." + lastPart;
+            setPublicKey(finalString);
+            // return firstPart + "..." + lastPart;
         }
     }
+
+    useEffect(() => {
+        console.log("Public Key is ", publicKey);
+        if (publicKey == null) return
+        shortenString(publicKey?.toBase58(), 10);
+    }, [publicKey]);
 
     return (
         <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[25%] py-8">
@@ -112,7 +123,8 @@ const Sidebar = () => {
                                 alt="wallet logo"
                             />
                             <p className="px-4 text-white">
-                                {publicKey?.toBase58()}
+                                {shortPublicKey}
+                                {/* <WalletsProvider /> */}
                             </p>
                         </div>
                     </button>

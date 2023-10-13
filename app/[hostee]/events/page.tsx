@@ -6,6 +6,14 @@ import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
+import dynamic from "next/dynamic";
+
+const WalletsProvider = dynamic(
+    () => import("../../../components-integration/wallets"),
+    {
+        ssr: false,
+    }
+);
 
 const EventsByHost = () => {
 
@@ -17,6 +25,20 @@ const EventsByHost = () => {
     const [activeEvents, setActiveEvents] = useState([]);
     const [hostAddress, setHostAddress] = useState<String | undefined>();
     const [loading, setLoading] = useState(false);
+    const { publicKey, sendTransaction } = useWallet();
+    const [shortPublicKey, setPublicKey] = useState<String>();
+
+    function shortenString(input: String, maxLength: any) {
+        // if (input === null) return
+        if (input.length <= maxLength) {
+            return input; // No need to shorten if it's already shorter than maxLength.
+        } else {
+            const firstPart = input.slice(0, maxLength / 2);
+            const lastPart = input.slice(-maxLength / 2);
+            let finalString = firstPart + "..." + lastPart;
+            setPublicKey(finalString);
+        }
+    }
 
     const { wallets } = useWallet();
 
@@ -38,7 +60,7 @@ const EventsByHost = () => {
 
     async function fetchHosteeAddressCall() {
         let hostee: any = await fetchHosteeAddress()
-        hostee = "88J...4RMV8yw";
+        shortenString(hostee, 10);
         setHostAddress(hostee);
     }
 
