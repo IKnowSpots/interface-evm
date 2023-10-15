@@ -3,25 +3,26 @@ import { uploadToIPFS } from "@/utils";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import CreateNav from "@/components/dashboard/CreateNav";
-
-// import ToggleButton from "react-toggle-button";
 import Link from "next/link";
 
-import { useWallet } from "@solana/wallet-adapter-react";
+// import ToggleButton from "react-toggle-button";
 
-import {
-    Transaction,
-    LAMPORTS_PER_SOL,
-    PublicKey,
-    SystemProgram,
-    Keypair,
-    sendAndConfirmTransaction,
-    Connection,
-    clusterApiUrl,
-} from "@solana/web3.js";
+// import { useWallet } from "@solana/wallet-adapter-react";
+
+// import {
+//     Transaction,
+//     LAMPORTS_PER_SOL,
+//     PublicKey,
+//     SystemProgram,
+//     Keypair,
+//     sendAndConfirmTransaction,
+//     Connection,
+//     clusterApiUrl,
+// } from "@solana/web3.js";
 
 const Create = () => {
-    const { publicKey, wallets, sendTransaction } = useWallet();
+    // const { publicKey, wallets, sendTransaction } = useWallet();
+
     const [formInput, setFormInput] = useState({
         shortlist: false,
         stake: false,
@@ -35,38 +36,38 @@ const Create = () => {
     });
     const [loading, setLoading] = useState(false);
 
-    async function createEvent(amount) {
-        const generateUniqueId = (() => {
-            let id = 0;
+    // async function createEvent(amount) {
+    //     const generateUniqueId = (() => {
+    //         let id = 0;
 
-            return () => {
-                return ++id;
-            };
-        })();
+    //         return () => {
+    //             return ++id;
+    //         };
+    //     })();
         
-        //   const connection = new Connection(clusterApiUrl("devnet"));
-        const connection = new Connection(clusterApiUrl("devnet"));
-        const transaction = new Transaction();
-        const kpid = Keypair.generate();
-        console.log(
-            `Sender is ${publicKey} and the receiver is ${kpid.publicKey}`
-        );
+    //     //   const connection = new Connection(clusterApiUrl("devnet"));
+    //     const connection = new Connection(clusterApiUrl("devnet"));
+    //     const transaction = new Transaction();
+    //     const kpid = Keypair.generate();
+    //     console.log(
+    //         `Sender is ${publicKey} and the receiver is ${kpid.publicKey}`
+    //     );
 
-        if (publicKey == null) return;
-        const sendSolInstruction = SystemProgram.transfer({
-            fromPubkey: publicKey,
-            toPubkey: kpid.publicKey,
-            lamports: LAMPORTS_PER_SOL * amount,
-        });
+    //     if (publicKey == null) return;
+    //     const sendSolInstruction = SystemProgram.transfer({
+    //         fromPubkey: publicKey,
+    //         toPubkey: kpid.publicKey,
+    //         lamports: LAMPORTS_PER_SOL * amount,
+    //     });
 
-        transaction.add(sendSolInstruction);
+    //     transaction.add(sendSolInstruction);
 
-        sendTransaction(transaction, connection).then((sig) => {
-            console.log(sig);
-        });
-        console.log("public key detected", publicKey);
-        console.log("event created");
-    }
+    //     sendTransaction(transaction, connection).then((sig) => {
+    //         console.log(sig);
+    //     });
+    //     console.log("public key detected", publicKey);
+    //     console.log("event created");
+    // }
 
     async function formURI() {
         const { name, description, venue, date } = formInput;
@@ -82,7 +83,7 @@ const Create = () => {
     async function publish() {
         setLoading(true);
         const uri = await formURI();
-        await createEvent(0.1);
+        // await createEvent(0.1);
         setLoading(false);
     }
 
