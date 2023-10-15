@@ -60,8 +60,9 @@ const EventsByHost = () => {
 
     async function fetchHosteeAddressCall() {
         let hostee: any = await fetchHosteeAddress()
-        shortenString(hostee, 10);
+        // shortenString(hostee, 10);
         setHostAddress(hostee);
+        setHostAddress("88Jig...MV8yw");
     }
 
     if (loading == true) return <div className="text-white">Fetching..</div>
