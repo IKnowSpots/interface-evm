@@ -3,7 +3,7 @@ import CardsInventory from "@/components/cardsInventory";
 import Navbar from "@/components/hostee/Navbar";
 import { fetchUsername } from "@/utils";
 import { useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+// import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 
 const EventsByHost = () => {
@@ -11,7 +11,7 @@ const EventsByHost = () => {
     const [hostAddress, setHostAddress] = useState<String | undefined>();
     const [loading, setLoading] = useState(false);
 
-    const { wallets } = useWallet();
+    // const { wallets } = useWallet();
 
     useEffect(() => {
         fetchUsernameCall();

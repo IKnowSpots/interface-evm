@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useWallet } from "@solana/wallet-adapter-react";
+// import { useWallet } from "@solana/wallet-adapter-react";
 
 const WalletsProvider = dynamic(
     () => import("../../components-integration/wallets"),
@@ -12,9 +12,9 @@ const WalletsProvider = dynamic(
 );
 
 const Navbar = () => {
-    const { wallets } = useWallet();
+    // const { wallets } = useWallet();
 
-    console.log("check", wallets);
+    // console.log("check", wallets);
 
     return (
         <nav className=" flex gap-[20rem] justify-center items-center py-8">

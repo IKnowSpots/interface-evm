@@ -319,6 +319,8 @@ const Create = () => {
     });
     const [loading, setLoading] = useState(false);
 
+    async function publish() {}
+
     return (
         <div className="bg-[#25143a] text-white  px-8">
             <CreateNav />

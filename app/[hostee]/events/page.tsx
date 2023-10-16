@@ -3,7 +3,7 @@ import CardsHostee from "@/components/cardsHostee";
 import Navbar from "@/components/hostee/Navbar";
 import { fetchHosteeAddress, fetchUsernameValidity } from "@/utils";
 import { useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+// import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import dynamic from "next/dynamic";
@@ -25,7 +25,7 @@ const EventsByHost = () => {
     const [activeEvents, setActiveEvents] = useState([]);
     const [hostAddress, setHostAddress] = useState<String | undefined>();
     const [loading, setLoading] = useState(false);
-    const { publicKey, sendTransaction } = useWallet();
+    // const { publicKey, sendTransaction } = useWallet();
     const [shortPublicKey, setPublicKey] = useState<String>();
 
     function shortenString(input: String, maxLength: any) {
@@ -40,7 +40,7 @@ const EventsByHost = () => {
         }
     }
 
-    const { wallets } = useWallet();
+    // const { wallets } = useWallet();
 
 
     useEffect(() => {
@@ -85,12 +85,12 @@ const EventsByHost = () => {
                             @{id}
                         </p>
                         <div className="flex gap-2 justify-center text-center">
-                            <Image
-                                src={wallets[0].adapter.icon}
+                            {/* <Image
+                                // src={wallets[0].adapter.icon}
                                 width="30"
                                 height="100"
                                 alt="wallet logo"
-                            />
+                            /> */}
                             <p className="w-full text-white text-[1rem] opacity-75">
                                 {hostAddress}
                             </p>

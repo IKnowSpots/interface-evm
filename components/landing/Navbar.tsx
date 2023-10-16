@@ -3,11 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
-import { WalletConnectButton } from "@solana/wallet-adapter-react-ui";
+// import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
+// import { WalletConnectButton } from "@solana/wallet-adapter-react-ui";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const WalletsProvider = dynamic(
     () => import("../../components-integration/wallets"),
@@ -24,10 +25,12 @@ const Navbar = () => {
       setToggle(!Toggle);
     };
 
-    const { publicKey } = useWallet();
+    // const { publicKey } = useWallet();
+
+    let publicKey = "dfds"
 
     function pushingDashboard() {
-        if (!publicKey?.toBase58()) {
+        if (!publicKey) {
             toast.warn("Connect your wallet to proceed further!", {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -44,7 +47,7 @@ const Navbar = () => {
     }
 
     function pushingInventory() {
-        if (!publicKey?.toBase58()) {
+        // if (!publicKey?.toBase58()) {
             toast.warn("Connect your wallet to proceed further!", {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -55,9 +58,9 @@ const Navbar = () => {
                 progress: undefined,
                 theme: "dark",
             });
-        } else {
-            window.location.replace("/inventory");
-        }
+        // } else {
+            // window.location.replace("/inventory");
+        // }
     }
 
     return (
@@ -139,11 +142,13 @@ const Navbar = () => {
                 </Link>
                 <Link href="/support">
                     <p className="hoverUnderline">Support</p>
+                    
                 </Link>
 
+                        {/* <WalletsProvider /> */}
                 <div className="flex flex-col justify-center items-center gap-8 ">
+                        <ConnectButton />
                     <p className="border border-[#C584F5] px-4 py-2 rounded-xl w-[210px]">
-                        <WalletsProvider />
                     </p>
 
                     <button onClick={pushingInventory}>

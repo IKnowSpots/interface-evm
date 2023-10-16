@@ -2,7 +2,7 @@
 import Image from "next/image";
 import SidebarItems from "./sidebarItems";
 import Link from "next/link";
-import { useWallet } from "@solana/wallet-adapter-react";
+// import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 
@@ -14,7 +14,7 @@ const WalletsProvider = dynamic(
 );
 
 const Sidebar = () => {
-    const { publicKey, wallets, sendTransaction } = useWallet();
+    // const { publicKey, wallets, sendTransaction } = useWallet();
     const [shortPublicKey, setPublicKey] = useState<String>();
 
     function shortenString(input: String, maxLength: any) {
@@ -30,11 +30,13 @@ const Sidebar = () => {
         }
     }
 
-    useEffect(() => {
-        console.log("Public Key is ", publicKey);
-        if (publicKey == null) return
-        shortenString(publicKey?.toBase58(), 10);
-    }, [publicKey]);
+    let publicKey = "adfds"
+
+    // useEffect(() => {
+    //     console.log("Public Key is ", publicKey);
+    //     if (publicKey == null) return
+    //     shortenString(publicKey?.toBase58(), 10);
+    // }, [publicKey]);
 
     return (
         <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[25%] py-8">
@@ -113,15 +115,15 @@ const Sidebar = () => {
                 </Link>
             </div>
             <div>
-                {publicKey?.toBase58() ? (
+                {publicKey ? (
                     <button className="block my-6">
                         <div className="flex border border-white px-3 py-4">
-                            <Image
+                            {/* <Image
                                 src={wallets[0].adapter.icon}
                                 width="30"
                                 height="100"
                                 alt="wallet logo"
-                            />
+                            /> */}
                             <p className="px-4 text-white">
                                 {shortPublicKey}
                                 {/* <WalletsProvider /> */}
