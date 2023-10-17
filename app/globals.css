@@ -10,6 +10,7 @@
 body {
     background-color: #090312;
 }
+
 /* 
 .Toastify__toast-container {
     z-index: 999;
@@ -53,13 +54,13 @@ body {
 }
 
 .sidebar-elements:hover {
-    color:white;
+    color: white;
     opacity: 75%;
     transition: 0.3s;
 }
 
 .sidebar-btn:hover {
-    color:white;
+    color: white;
     opacity: 100%;
     transition: 0.3s;
 }
@@ -134,20 +135,28 @@ body {
 
 .email-input {
     border-radius: 1.875rem;
-    border: 1px solid #B01EE1;
+    border: 1px solid #b01ee185;
     background-color: transparent;
     /* background: linear-gradient(95deg, rgba(255, 255, 255, 0.38) 22.83%, rgba(255, 255, 255, 0.00) 112.69%); */
     /* background-color: #bdcad9;  */
+    transition: 0.3s;
+}
+
+.email-input:focus{
+    border: solid 1px #b01ee1;
 }
 
 
 .subscribe-button {
-    outline: none;
+    /*outline: none;
     border-radius: 1.875rem;
     /* border: 1px solid #FFF; */
     /* background: linear-gradient(109deg, rgba(248, 179, 92, 0.53) 24.14%, rgba(176, 30, 225, 0.13) 54.75%, rgba(253, 0, 71, 0.38) 95.84%); */
-    background-color: #58427c;
-    background-image: linear-gradient(316deg, #58427c 0%, #746cc0 74%);
+    /*background-color: #58427c;
+    background-image: linear-gradient(316deg, #58427c 0%, #746cc0 74%);*/
+    border-radius: 30px;
+    border: 1px solid #FFF;
+    background: linear-gradient(109deg, rgba(248, 178, 92, 0.425) 24.14%, rgba(191, 108, 218, 0.37) 54.75%, rgba(253, 0, 72, 0.31) 95.84%);
 }
 
 
@@ -176,9 +185,10 @@ body {
     padding-left: 40px;
     padding-top: 40px;
     padding-bottom: 15px;
+    filter: blur(1.25rem);
 }
 
-.footerGradient {
+/*.footerGradient {
     position: relative;
     filter: blur(1.5rem);
     right: 0;
@@ -186,7 +196,7 @@ body {
     margin-left: auto;
     opacity: 1;
     overflow: hidden;
-}
+}*/
 
 .hoverUnderline {
     display: inline-block;
@@ -235,6 +245,12 @@ body {
     transform-origin: bottom left;
 }
 
+.hoverFooter{
+    color: #fff;
+    transition: 0.3s;
+}
+
 .hoverFooter:hover {
-    color: rgb(169, 169, 169);
+    color: #fff;
+    opacity: 0.7;
 }
