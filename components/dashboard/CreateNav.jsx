@@ -2,13 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-// import { useWallet } from "@solana/wallet-adapter-react";
 import { fetchUsername } from "@/utils";
+import dynamic from "next/dynamic";
+
+const WalletsProvider = dynamic(
+    () => import("../../components-integration/wallets"),
+    {
+        ssr: false,
+    }
+);
 
 const CreateNav = () => {
     const [username, setUsername] = useState("iamacid");
     const [loading, setLoading] = useState(false);
-    const { publicKey, wallets, sendTransaction } = useWallet();
 
     useEffect(() => {
         fetchUsernameCall();
@@ -44,14 +50,15 @@ const CreateNav = () => {
                     <p>@{username}</p>
                 </button>
                 {/* remaning: fix the basic gradients of this */}
-                <button className="flex items-center py-3 px-3 rounded-lg border border-white">
-                    <Image
+                <div className="flex items-center py-3 px-3 rounded-lg border border-white">
+                    {/* <Image
                         src={wallets[0].adapter.icon}
                         width={"30"}
                         height={"30"}
                         alt="Metamask fox svg"
-                    />
-                </button>
+                    /> */}
+                    <WalletsProvider />
+                </div>
             </div>
         </div>
     );

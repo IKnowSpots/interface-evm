@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { fetchUsernameValidity, setUsername } from "@/utils";
+import { fetchUsername, fetchIfDeployed, deploy } from "@/utils";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,30 +8,39 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 const Dashboard = () => {
+    const [isDeployed, setIsDeployed] = useState<Boolean>();
     const [username, setUsername] = useState<String>("");
     const [loading, setLoading] = useState<Boolean>(false);
 
     useEffect(() => {
-        getUsernameCall();
+        checkDeployment();
     }, []);
 
-    async function getUsernameCall() {
-        setLoading(true);
-        let varUsername: any = await fetchUsernameValidity();
-        setUsername(varUsername);
-        // setUsername("");
+    useEffect(() => {
+        if (isDeployed == true) {
+            fetchUsernameData();
+        }
+    }, [isDeployed]);
+
+    async function checkDeployment() {
+        const data = await fetchIfDeployed();
+        setIsDeployed(data);
         setLoading(false);
     }
 
+    async function fetchUsernameData() {
+        const data = await fetchUsername();
+        setUsername(data);
+    }
+
+
     function pushPage() {
-        // redirect('/',);
         window.location.replace("/dashboard/active");
     }
 
     console.log("hey", username)
 
     if (username != "") {
-        // redirect("/dashboard/active");
         pushPage();
     }
 
@@ -46,8 +55,9 @@ function RenderSetUsername() {
     const [username, setUsernameHook] = useState<String>();
 
     async function setUsernameCall() {
-        await setUsername(username);
-        pushPage();
+        // const data: any = await deploy(username)
+        // setUsernameHook(data)
+        pushPage()
     }
 
     function pushPage() {

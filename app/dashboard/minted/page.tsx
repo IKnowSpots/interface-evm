@@ -1,34 +1,34 @@
 "use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import CardsInactive from "@/components/cardsInactive";
+import CardsMinted from "@/components/cardsMinted";
 import DashNav from "@/components/dashboard/Navbar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { fetchPausedEvents } from "../../../utils";
+import { fetchMintedCollection } from "../../../utils";
 
 
-const InactiveEvents = () => {
-    const [inactiveEvents, setInactiveEvents] = useState<any>();
+const MintedCollections = () => {
+    const [activeEvents, setActiveEvents] = useState<any>();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchInactiveEventsCall;
+        fetchActiveEventsCall;
     }, []);
 
-    async function fetchInactiveEventsCall() {
+    async function fetchActiveEventsCall() {
         setLoading(true);
-        let data: any = await fetchPausedEvents();
-        setInactiveEvents(data);
+        let data: any = await fetchMintedCollection();
+        setActiveEvents(data);
         setLoading(false);
     }
 
     if (loading == true) return <div>Fetching..</div>;
 
-    // if (loading == false && inactiveEvents.length == 0)
+    // if (loading == false && activeEvents.length == 0)
     //     return (
     //         <div>
-    //             INACTIVE EVENTS <br /> No Events
+    //             MINTED COLLECTIONS <br /> No Events
     //         </div>
     //     );
 
@@ -39,15 +39,15 @@ const InactiveEvents = () => {
                 <DashNav />
                 <div className="px-8">
                     <p className="text-white font-semibold pl-4 pt-2">
-                    INACTIVE Events
+                    MINTED COLLECTIONS
                     </p>
                     <div className="flex gap-x-10 gap-y-5 flex-wrap pt-4 px-4">
-                        <CardsInactive image={"3.png"} name="Lorem Ipsum" />
-                        <CardsInactive image={"3.png"} name="Lorem Ipsum" />
-                        <CardsInactive image={"3.png"} name="Lorem Ipsum" />
-                        <CardsInactive image={"3.png"} name="Lorem Ipsum" />
-                        <CardsInactive image={"3.png"} name="Lorem Ipsum" />
-                        <CardsInactive image={"3.png"} name="Lorem Ipsum" />
+                        <CardsMinted image={"3.png"} name="Lorem Ipsum" />
+                        <CardsMinted image={"3.png"} name="Lorem Ipsum" />
+                        <CardsMinted image={"3.png"} name="Lorem Ipsum" />
+                        <CardsMinted image={"3.png"} name="Lorem Ipsum" />
+                        <CardsMinted image={"3.png"} name="Lorem Ipsum" />
+                        <CardsMinted image={"3.png"} name="Lorem Ipsum" />
 
                     {/* <div className="">
                         <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " />
@@ -71,4 +71,4 @@ const InactiveEvents = () => {
     );
 };
 
-export default InactiveEvents;
+export default MintedCollections;

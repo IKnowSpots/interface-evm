@@ -1,15 +1,15 @@
 "use client"
 import Image from "next/image";
 import { useState } from "react";
-import { pauseEvent } from "../utils"
+import { pauseEvent } from "@/utils"
 
 const CardsActive = ({ image, name }: { image: any, name: string }) => {
 
   const [loading, setLoading] = useState(false)
 
-  async function pauseEventCall() {
+  async function pauseEventCall(ticketId: any) {
     setLoading(true)
-    await pauseEvent
+    await pauseEvent(ticketId)
     setLoading(false)
   }
 

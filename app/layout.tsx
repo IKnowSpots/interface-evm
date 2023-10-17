@@ -1,14 +1,16 @@
+"use client"
 import "./globals.css";
-import { Inter } from "next/font/google";
+import "@rainbow-me/rainbowkit/styles.css";
 import { Providers } from "./provider";
+// import { Inter } from "next/font/google";
 // import WalletContext from "@/components/WalletContextProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-    title: "iknowspots",
-    description: "More than ticketing",
-};
+// export const metadata = {
+//     title: "iknowspots",
+//     description: "More than ticketing",
+// };
 
 export default function RootLayout({
     children,
@@ -17,7 +19,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body >
                 <Providers>{children}</Providers>
             </body>
         </html>

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { runEvent } from "../utils";
+import { runEvent } from "../utills";
 
 const CardsFeatured = ({ image, name, price, date }: { image: any; name: string, price: string, date: any }) => {
     const [loading, setLoading] = useState(false);
