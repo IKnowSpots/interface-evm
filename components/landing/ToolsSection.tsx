@@ -15,7 +15,7 @@ const ToolSection = () => {
         <div className="flex justify-between w-full sm:w-3/4 bg-[#56565680] px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Custom Subdomains.</p>
           <Image
-            src="/icons/bubble.png"
+            src="/icons/bubble.svg"
             width="20"
             height="50"
             alt="bubble png"
@@ -24,7 +24,7 @@ const ToolSection = () => {
         <div className="flex justify-between w-full sm:w-3/4 bg-[#56565680] px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Event-specific landing pages.</p>
           <Image
-            src="/icons/table_settings.png"
+            src="/icons/table_settings.svg"
             width="20"
             height="50"
             alt=""
@@ -32,7 +32,7 @@ const ToolSection = () => {
         </div>
         <div className="flex justify-between w-full sm:w-3/4 bg-[#56565680] px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Backend as a service.</p>
-          <Image src="/icons/candlestick.png" width="20" height="50" alt="" />
+          <Image src="/icons/candlestick.svg" width="20" height="50" alt="" />
         </div>
       </div>
       <div>

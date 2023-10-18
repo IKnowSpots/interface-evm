@@ -5,7 +5,8 @@ import { addressFactory, abiFactory, abiEventify, abiFeatured } from "./config";
 import axios from "axios";
 import { Web3Storage } from "web3.storage";
 
-const InfuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
+// const InfuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
+const InfuraKey = "2HvD0iID3OjnCRpKjKpqXYMcdRV"
 
 export async function getFactoryContractWithInfura() {
     const provider = new ethers.providers.JsonRpcProvider(
@@ -140,7 +141,7 @@ export async function fetchUsername() {
     const address = await getUserAddress();
     const check = await fetchIfDeployed();
     if (check == true) {
-        const data = await contract.addressToUsernames(address);
+        const data = await contract.addressToUsernames(address.toString());
         return data;
     }
 }

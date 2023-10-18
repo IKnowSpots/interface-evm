@@ -16,8 +16,8 @@ const FooterSection = () => {
     }
 
     return (
-        <div className="relative flex flex-col sm:flex-row justify-between p-4 sm:p-8 my-12 mx-4 sm:mx-8 border-white footer-gradient z-10 overflow-hidden footerDiv">
-            <div className="flex flex-col relative z-10">
+        <div className="relative flex flex-col sm:flex-row justify-between p-4 sm:p-8 mx-4 sm:mx-8 border-white footer-gradient z-10 overflow-hidden footerDiv">
+            <div className="flex flex-col relative z-10 px-8">
                 <div className="">
                     <img
                         src="./iks-logo.png"
@@ -31,9 +31,9 @@ const FooterSection = () => {
                     </p>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row justify-center sm:justify-normal items-center sm:items-initial w-full gap-6 my-8">
+                <div className="flex flex-col sm:flex-row justify-center sm:justify-normal items-center sm:items-initial w-full gap-3 my-8">
                     <input
-                        className="email-input px-5"
+                        className="email-input px-5 py-1"
                         placeholder="Email"
                     ></input>
                     <button className="subscribe-button px-5 py-1">
@@ -55,11 +55,11 @@ const FooterSection = () => {
                     {/* <img src="./discord.png" alt="discord" /> */}
                 </div>
 
-                <p className=" text-[0.75rem] sm:text-base my-6">@2023 All rights reserved.</p>
+                <p className="text-[0.75rem] sm:text-base my-8">@2023 All rights reserved.</p>
             </div>
-            <div className="footerGradientDiv flex flex-col sm:flex-row">
+            <div className="footerGradientDiv flex flex-col sm:flex-row px-8">
                 <Image
-                    src="/largerGradient.png"
+                    src="/mediumGradient.png"
                     alt="footer gradient"
                     width="300"
                     height="300"
@@ -68,12 +68,12 @@ const FooterSection = () => {
                 <Image
                     src="/largerGradient.png"
                     alt="footer gradient"
-                    width="500"
-                    height="100"
+                    width="300"
+                    height="200"
                     className="footerGradient"
                 />
             </div>
-            <div className="flex text-[0.75rem] sm:text-base z-[10]">
+            <div className="flex text-[0.75rem] sm:text-base z-[10] px-8">
                 <div className="px-8">
                     <p className="mb-2 font-semibold">Company</p>
                     <ul>

@@ -1,5 +1,5 @@
 "use client";
-import { uploadToIPFS } from "@/utils";
+import { uploadToIPFS, mint } from "@/utils";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import CreateNav from "@/components/dashboard/CreateNav";
@@ -16,10 +16,25 @@ const Create = () => {
         supply: "",
         uri: "",
         stakePrice: "",
+        isPrivateEvent: "",
     });
     const [loading, setLoading] = useState(false);
 
-    async function publish() {}
+    async function formURI() {
+        const { name, venue, date, stakePrice, supply } = formInput
+        if (!name || !venue || !date || !stakePrice || !supply) return
+        const data = JSON.stringify({ name, venue, date })
+        const files = [new File([data], 'data.json')]
+        const metaCID = await uploadToIPFS(files)
+        const url = `https://ipfs.io/ipfs/${metaCID}/data.json`
+        console.log(url)
+        return url
+    }
+
+    async function publish() {
+        const NftURI = await formURI()
+        await mint(formInput.stakePrice, formInput.supply, formInput.isPrivateEvent, NftURI)
+    }
 
     return (
         <div className="bg-[#25143a] text-white  px-8">
