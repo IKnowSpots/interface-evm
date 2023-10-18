@@ -7,6 +7,7 @@ import MyCalender from "@/components/inventory/MyCalender";
 import { fetchUsername, fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const EventsByHost = () => {
     const [inventoryData, setInventoryData] = useState<any>();
@@ -23,10 +24,10 @@ const EventsByHost = () => {
         setLoading(false);
     }
     return (
-        <div className="bg-[#25143a] h-[100%] text-white w-full overflow-hidden">
+        <div className="bg-inventory h-[100%] text-white w-full overflow-hidden">
             <Navbar />
             <div className="flex justify-between px-[6rem]">
-                <div className="pb-8 flex flex-col gap-1">
+                <div className="pb-8 flex flex-col gap-1 mx-8">
                     <div>
                         <p className="text-2xl font-semibold">Inventory</p>
                     </div>
@@ -35,7 +36,7 @@ const EventsByHost = () => {
                 <input
                     type="text"
                     placeholder="Search events"
-                    className="text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-4 "
+                    className="text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-4 mx-8"
                 />
             </div>
 
@@ -49,7 +50,7 @@ const EventsByHost = () => {
             <div className="w-full mt-[5rem]">
                 <div className="flex flex-col-reverse lg:flex-row mx-8">
                     <Events />
-                    <MyCalender/>
+                    <MyCalender />
                 </div>
             </div>
         </div>
