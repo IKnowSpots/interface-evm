@@ -6,7 +6,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+let publicKey = "hello"
 const WalletsProvider = dynamic(
     () => import("../../components-integration/wallets"),
     {
@@ -43,20 +43,20 @@ const Navbar = () => {
     }
 
     function pushingInventory() {
-        // if (!publicKey?.toBase58()) {
-        toast.warn("Connect your wallet to proceed further!", {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-        // } else {
-        // window.location.replace("/inventory");
-        // }
+        if (!publicKey) {
+            toast.warn("Connect your wallet to proceed further!", {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }   else {
+                window.location.replace("/inventory");
+        }
     }
 
     return (
