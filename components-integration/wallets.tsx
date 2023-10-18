@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import "react-toastify/dist/ReactToastify.css";
 
 const WalletsProvider = () => {
 
     return(
-        <div><ConnectButton /></div>
+        <div><ConnectButton accountStatus="address" showBalance={false} chainStatus="none"/></div>
     )
     // const { select, wallets, publicKey, disconnect } = useWallet();
 

@@ -2,16 +2,18 @@
 import Image from "next/image";
 import SidebarItems from "./sidebarItems";
 import Link from "next/link";
-// import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-const WalletsProvider = dynamic(
-    () => import("../../components-integration/wallets"),
-    {
-        ssr: false,
-    }
-);
+// const WalletsProvider = dynamic(
+//     () => import("../../components-integration/wallets"),
+//     {
+//         ssr: false,
+//     }
+// );
+
+import WalletsProvider from "@/components-integration/wallets";
 
 const Sidebar = () => {
     // const { publicKey, wallets, sendTransaction } = useWallet();
@@ -30,7 +32,7 @@ const Sidebar = () => {
         }
     }
 
-    let publicKey = "adfds"
+    let publicKey = undefined
 
     // useEffect(() => {
     //     console.log("Public Key is ", publicKey);
@@ -63,6 +65,14 @@ const Sidebar = () => {
                     <SidebarItems
                         icon_name="3d_box_fill"
                         section_name="Inactive Events"
+                    />
+                </Link>
+
+                <Link href="/dashboard/minted" className="opacity-75 sidebar-btn">
+                    <SidebarItems
+                        icon_name="Fire_fill"
+                        section_name="Minted Collections"
+                        
                     />
                 </Link>
 
@@ -114,7 +124,7 @@ const Sidebar = () => {
                     </div>
                 </Link>
             </div>
-            <div>
+            <div className="mt-[20%]">
                 {publicKey ? (
                     <button className="block my-6">
                         <div className="flex border border-white px-3 py-4">
@@ -125,8 +135,8 @@ const Sidebar = () => {
                                 alt="wallet logo"
                             /> */}
                             <p className="px-4 text-white">
-                                {shortPublicKey}
-                                {/* <WalletsProvider /> */}
+                                {/* {shortPublicKey} */}
+                                <WalletsProvider />
                             </p>
                         </div>
                     </button>
@@ -134,7 +144,7 @@ const Sidebar = () => {
                     <WalletsProvider />
                 )}
                 <button className="block  bg-black my-6 ">
-                    <div className="flex px-6 py-4">
+                    {/* <div className="flex px-6 py-4">
                         <Image
                             src="/icons/pulsechain.png"
                             width="30"
@@ -142,7 +152,7 @@ const Sidebar = () => {
                             alt="metamask logo"
                         />
                         <p className="px-2 text-white">Solana Testnet</p>
-                    </div>
+                    </div> */}
                 </button>
             </div>
         </div>

@@ -1,15 +1,15 @@
 "use client"
 import Image from "next/image";
 import { useState } from "react";
-import { runEvent } from "@/utils"
+import { publishTickets } from "@/utils"
 
-const CardsInactive = ({ image, name }: { image: any, name: string }) => {
+const CardsMinted = ({ image, name }: { image: any, name: string }) => {
 
   const [loading, setLoading] = useState(false)
 
-  async function runEventCall(ticketId: any) {
+  async function pauseEventCall(ticketId: any) {
     setLoading(true)
-    await runEvent(ticketId)
+    await publishTickets(ticketId)
     setLoading(false)
   }
 
@@ -25,8 +25,8 @@ const CardsInactive = ({ image, name }: { image: any, name: string }) => {
                 <div className="flex justify-between">
                     <p>{name}</p>
                     {/* <p>1.20 Weth</p> */}
-                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={runEventCall}>
-                        Run
+                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={pauseEventCall}>
+                        Publish
                     </button>
                 </div>
                 {/* <hr />
@@ -40,4 +40,4 @@ const CardsInactive = ({ image, name }: { image: any, name: string }) => {
         </div>
     );
 };
-export default CardsInactive;
+export default CardsMinted;

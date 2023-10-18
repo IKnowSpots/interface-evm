@@ -1,19 +1,10 @@
 "use client";
 import CardsHostee from "@/components/cardsHostee";
 import Navbar from "@/components/hostee/Navbar";
-import { fetchHosteeAddress, fetchUsernameValidity } from "@/utils";
-import { useEffect, useState } from "react";
-// import { useWallet } from "@solana/wallet-adapter-react";
-import Image from "next/image";
+import { fetchUsernameValidity, fetchActiveEventsWithInfura } from "@/utils";
 import { usePathname } from 'next/navigation';
-import dynamic from "next/dynamic";
-
-const WalletsProvider = dynamic(
-    () => import("../../../components-integration/wallets"),
-    {
-        ssr: false,
-    }
-);
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const EventsByHost = () => {
 
@@ -49,20 +40,20 @@ const EventsByHost = () => {
         }
     }, [id]);
 
-    useEffect(() => {
-        fetchHosteeAddressCall();
-    }, []);
+    // useEffect(() => {
+    //     if(isUsernameValid == true) {
+    //         fetchActiveEventsData()
+    //     }
+    // }, [isUsernameValid])
 
     async function checkUsernameValidityData() {
         const data = await fetchUsernameValidity(id)
-        // setIsUsernameValid(data)
+        setIsUsernameValid(data)
     }
 
-    async function fetchHosteeAddressCall() {
-        let hostee: any = await fetchHosteeAddress()
-        // shortenString(hostee, 10);
-        setHostAddress(hostee);
-        setHostAddress("88Jig...MV8yw");
+    async function fetchActiveEventsData() {
+        let data: any = await fetchActiveEventsWithInfura(id)
+        setActiveEvents(data);
     }
 
     if (loading == true) return <div className="text-white">Fetching..</div>
@@ -91,9 +82,9 @@ const EventsByHost = () => {
                                 height="100"
                                 alt="wallet logo"
                             /> */}
-                            <p className="w-full text-white text-[1rem] opacity-75">
+                            {/* <p className="w-full text-white text-[1rem] opacity-75">
                                 {hostAddress}
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                     <input

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fetchActiveEvents } from "../../../utils";
 
+
 const ActiveEvents = () => {
     const [activeEvents, setActiveEvents] = useState<any>();
     const [loading, setLoading] = useState(false);
@@ -17,10 +18,19 @@ const ActiveEvents = () => {
 
     async function fetchActiveEventsCall() {
         setLoading(true);
-        let activeEventsData: any = await fetchActiveEvents();
-        setActiveEvents(activeEventsData);
+        let data: any = await fetchActiveEvents();
+        setActiveEvents(data);
         setLoading(false);
     }
+
+    if (loading == true) return <div>Fetching..</div>;
+
+    // if (loading == false && activeEvents.length == 0)
+    //     return (
+    //         <div>
+    //             ACTIVE EVENTS <br /> No Events
+    //         </div>
+    //     );
 
     return (
         <div className="flex h-[100vh] w-[100vw]">
