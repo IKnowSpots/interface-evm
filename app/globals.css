@@ -258,12 +258,3 @@ body {
 .bg-inventory {
     background: radial-gradient(82.36% 96.27% at 24.72% 50%, #2d004f 0%, #000 100%);
 }
-
-.bg-sidebar {
-    background: linear-gradient(62deg at 40.84% 66.92%, rgba(134, 12, 255, 0.85) 0deg, rgba(118, 10, 255, 0.85) 80.62499821186066deg, rgba(0, 0, 0, 0.85) 230.625deg, rgba(0, 0, 0, 0.85) 347.87845373153687deg),
-        linear-gradient(53deg at 40.84% 66.92%, #9303C6 12.003970295190811deg, #420294 80.62499821186066deg, #000 230.625deg, #000 341.20814323425293deg);
-    mix-blend-mode: overlay;
-    filter: blur(400px);
-    flex-shrink: 0;
-
-}
