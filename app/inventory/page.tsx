@@ -4,37 +4,24 @@ import Navbar from "@/components/hostee/Navbar";
 import Rewards from "@/components/inventory/Rewards";
 import Events from "@/components/inventory/Events";
 import MyCalender from "@/components/inventory/MyCalender";
-import { fetchUsername } from "@/utils";
+import { fetchUsername, fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
-// import { useWallet } from "@solana/wallet-adapter-react";
-import Image from "next/image";
 import Link from "next/link";
 
 const EventsByHost = () => {
-    const [username, setUsername] = useState("iamacid");
-    const [hostAddress, setHostAddress] = useState<String | undefined>();
+    const [inventoryData, setInventoryData] = useState<any>();
     const [loading, setLoading] = useState(false);
 
-    // const { wallets } = useWallet();
+    // useEffect(() => {
+    //     fetchInventoryData();
+    // }, []);
 
-    useEffect(() => {
-        fetchUsernameCall();
-    }, []);
-
-    async function fetchUsernameCall() {
-        setLoading(true);
-        let user = await fetchUsername();
-        // setUsername(user);
-        setUsername("iamacid");
-        await getHosteeAddress();
+    async function fetchInventoryData() {
+        setLoading(true)
+        const data: any = await fetchCommonInventory();
+        setInventoryData(data);
         setLoading(false);
     }
-
-    async function getHosteeAddress() {
-        let hostee = "88J...4RMV8yw";
-        setHostAddress(hostee);
-    }
-
     return (
         <div className="bg-[#25143a] h-[100%] text-white w-full overflow-hidden">
             <Navbar />
