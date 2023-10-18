@@ -60,7 +60,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="z-[10] flex justify-evenly items-center px-8 py-8 w-full absolute">
+        <nav className="z-[10] flex justify-between md:justify-center items-center px-8 py-8 w-full absolute">
             {/* <nav className="z-[10] ml-[-10%] flex gap-[8%] justify-center items-center py-8 w-[110%] absolute"> */}
             <ToastContainer
                 position="bottom-left"
@@ -112,8 +112,8 @@ const Navbar = () => {
                     </p>
                 </Link>
 
-                <div className="flex gap-[10%] text-[0.5rem] lg:text-base">
-                    <p className="border border-[#C584F5] px-4 py-2 rounded-xl w-[210px]">
+                <div className="flex gap-[0.75rem] text-[0.5rem] lg:text-base">
+                    <p className=" lg:w-[140px]">
                         <WalletsProvider />
                     </p>
 
@@ -168,7 +168,7 @@ const Navbar = () => {
 
                 <div className="flex flex-col justify-center items-center gap-8 ">
                     
-                    <p className="border border-[#C584F5] px-4 py-2 rounded-xl w-[210px]">
+                    <p className="">
                 <WalletsProvider />
 
                     </p>

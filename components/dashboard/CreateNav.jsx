@@ -50,7 +50,7 @@ const CreateNav = () => {
                     <p>@{username}</p>
                 </button>
                 {/* remaning: fix the basic gradients of this */}
-                <div className="flex items-center py-3 px-3 rounded-lg border border-white">
+                <div className="flex items-center py-3 px-3 rounded-lg">
                     {/* <Image
                         src={wallets[0].adapter.icon}
                         width={"30"}
