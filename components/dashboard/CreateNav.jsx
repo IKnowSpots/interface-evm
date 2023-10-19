@@ -3,17 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { fetchUsername } from "@/utils";
-import dynamic from "next/dynamic";
-
-const WalletsProvider = dynamic(
-    () => import("../../components-integration/wallets"),
-    {
-        ssr: false,
-    }
-);
+import WalletsProvider from "../wallets";
 
 const CreateNav = () => {
-    const [username, setUsername] = useState("iamacid");
+    const [username, setUsername] = useState();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -23,8 +16,8 @@ const CreateNav = () => {
     async function fetchUsernameCall() {
         setLoading(true);
         let user = await fetchUsername();
-        // setUsername(user);
-        setUsername("iamacid");
+        setUsername(user);
+        // setUsername("@iamacid");
         setLoading(false);
     }
 

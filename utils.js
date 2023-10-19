@@ -563,3 +563,7 @@ export const uploadToIPFS = async (files) => {
 };
 
 // ----
+
+export async function isWallet() {
+    return false
+}

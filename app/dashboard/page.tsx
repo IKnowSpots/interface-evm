@@ -1,15 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { fetchUsername, fetchIfDeployed, deploy } from "@/utils";
+import { fetchIfDeployed, deploy } from "@/utils";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const Dashboard = () => {
     const [isDeployed, setIsDeployed] = useState<Boolean>();
-    const [username, setUsername] = useState<String>("");
     const [loading, setLoading] = useState<Boolean>(false);
 
     useEffect(() => {
@@ -18,31 +15,25 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (isDeployed == true) {
-            fetchUsernameData();
+            pushPage();
         }
     }, [isDeployed]);
 
     async function checkDeployment() {
+        setLoading(true)
         const data = await fetchIfDeployed();
+        console.log("deploy", data);
         setIsDeployed(data);
         setLoading(false);
     }
 
-    async function fetchUsernameData() {
-        const data = await fetchUsername();
-        setUsername(data);
-    }
-
+    // comment line 32-34 to make this page static
 
     function pushPage() {
         window.location.replace("/dashboard/active");
     }
 
-    console.log("hey", username)
-
-    if (username != "") {
-        pushPage();
-    }
+    if (loading == true) return (<div className="text-white">Loading..</div>)
 
     return (
         <div>
@@ -53,11 +44,13 @@ const Dashboard = () => {
 
 function RenderSetUsername() {
     const [username, setUsernameHook] = useState<String>();
+    const [deployed, setIsDeployed] = useState<Boolean>(false);
+
+    // if deployed is true then change button to Move forward
 
     async function setUsernameCall() {
-        // const data: any = await deploy(username)
-        // setUsernameHook(data)
-        pushPage()
+        await deploy(username);
+        setIsDeployed(true);
     }
 
     function pushPage() {
@@ -108,12 +101,21 @@ function RenderSetUsername() {
                             className="px-4 py-2 rounded-xl my-2 text-black"
                             onChange={(e) => setUsernameHook(e.target.value)}
                         />
-                        <button
-                            className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
-                            onClick={setUsernameCall}
-                        >
-                            Get Started
-                        </button>
+                        {deployed ? (
+                            <button
+                                className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
+                                onClick={setUsernameCall}
+                            >
+                                Get Started
+                            </button>
+                        ) : (
+                            <button
+                                className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
+                                onClick={pushPage}
+                            >
+                                Move Forward
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div className="py-4">

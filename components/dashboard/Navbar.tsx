@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { fetchUsername } from "@/utils";
 
 const DashNav = () => {
-    const [username, setUsername] = useState("iamacid");
+    const [username, setUsername] = useState();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -15,8 +15,8 @@ const DashNav = () => {
     async function fetchUsernameCall() {
         setLoading(true);
         let user = await fetchUsername();
-        // setUsername(user);
-        setUsername("iamacid");
+        setUsername(user);
+        // setUsername("iamacid");
         setLoading(false);
     }
 

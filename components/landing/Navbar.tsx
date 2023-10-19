@@ -1,32 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-let publicKey = "hello"
-const WalletsProvider = dynamic(
-    () => import("../../components-integration/wallets"),
-    {
-        ssr: false,
-    }
-);
+import WalletsProvider from "../wallets";
+import { isWallet } from "@/utils"
 
 const Navbar = () => {
     const [Toggle, setToggle] = useState(true);
+
+    useEffect(() => {}, [])
 
     const handleClick = () => {
         setToggle(!Toggle);
     };
 
-    // const { publicKey } = useWallet();
-
-    let publicKey = "dfds";
-
     function pushingDashboard() {
-        if (!publicKey) {
+        if (!isWallet) {
             toast.warn("Connect your wallet to proceed further!", {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -38,12 +30,13 @@ const Navbar = () => {
                 theme: "dark",
             });
         } else {
+            // window.location.replace("/dashboard/active");
             window.location.replace("/dashboard");
         }
     }
 
     function pushingInventory() {
-        if (!publicKey) {
+        if (!isWallet) {
             toast.warn("Connect your wallet to proceed further!", {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -93,7 +86,7 @@ const Navbar = () => {
                     href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit"
                 >
                     <p className="hoverUnderline text-[0.75rem] lg:text-base">
-                        Docs
+                        Whitepapers
                     </p>
                 </Link>
                 <Link href="/support">

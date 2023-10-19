@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 //     }
 // );
 
-import WalletsProvider from "@/components-integration/wallets";
+import WalletsProvider from "@/components/wallets";
 
 const Sidebar = () => {
     // const { publicKey, wallets, sendTransaction } = useWallet();

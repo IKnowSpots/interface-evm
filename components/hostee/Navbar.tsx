@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 // import { useWallet } from "@solana/wallet-adapter-react";
 
 const WalletsProvider = dynamic(
-    () => import("../../components-integration/wallets"),
+    () => import("../wallets"),
     {
         ssr: false,
     }

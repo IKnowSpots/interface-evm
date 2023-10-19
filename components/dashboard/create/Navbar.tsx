@@ -1,15 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-// import { useWallet } from "@solana/wallet-adapter-react";
-
-const WalletsProvider = dynamic(
-    () => import("../../../components-integration/wallets"),
-    {
-        ssr: false,
-    }
-);
+import WalletsProvider from "../../wallets";
 
 const Navbar = () => {
     // const { wallets } = useWallet();

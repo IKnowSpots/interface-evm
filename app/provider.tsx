@@ -17,7 +17,7 @@ import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
     [
-        polygon,
+        // polygon,
         polygonMumbai,
         ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [polygonMumbai] : []),
     ],
