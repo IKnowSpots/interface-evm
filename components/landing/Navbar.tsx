@@ -60,20 +60,10 @@ const Navbar = () => {
     }
 
     return (
+        <div>
         <nav className="z-[10] flex justify-between md:justify-center items-center px-8 py-8 w-full absolute">
             {/* <nav className="z-[10] ml-[-10%] flex gap-[8%] justify-center items-center py-8 w-[110%] absolute"> */}
-            <ToastContainer
-                position="bottom-left"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
+            
             <Link href="/">
                 <Image
                     src="/iks-logo.png"
@@ -113,7 +103,7 @@ const Navbar = () => {
                 </Link>
 
                 <div className="flex gap-[0.75rem] text-[0.5rem] lg:text-base">
-                    <p className=" lg:w-[140px]">
+                    <p className="w-[100px] lg:w-[150px]">
                         <WalletsProvider />
                     </p>
 
@@ -181,6 +171,19 @@ const Navbar = () => {
                 </div>
             </div>
         </nav>
+        <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
+        </div>
     );
 };
 export default Navbar;

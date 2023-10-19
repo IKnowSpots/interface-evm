@@ -67,11 +67,11 @@ function RenderSetUsername() {
 
     return (
         <div className="text-white flex bg-[#25143a] h-[100vh] w-[100vw] gap-4">
-            <div className="bg-[#242424BF] border-white border-opacity-60 rounded-lg">
-                <div className="w-[50vw] h-[100%] flex justify-center items-center">
+            <div className="bg-[#624c9ba6] border-white border-opacity-60 rounded-lg">
+                <div className="w-[50vw] h-[100%] flex rounded-xl justify-center items-center">
                     <img
-                        src="/events/3.png"
-                        className=" flex w-[92%] h-[92%]"
+                        src="/events/3.jpeg"
+                        className=" flex w-[80%] h-[80%] rounded-2xl animate-floating2"
                         alt="welcome image"
                     />
                 </div>
@@ -89,7 +89,10 @@ function RenderSetUsername() {
                     </Link>
                 </div>
                 <div className="flex flex-col">
-                    <h3 className="text-3xl mb-4">Welcome 👋🏻</h3>
+                    <div className="flex flex-row items-center gap-2">
+                        <h3 className="text-3xl mb-4 ">Welcome</h3>
+                        <h3 className="text-4xl mb-4 animate-wave ">👋🏻</h3>
+                    </div>
                     <p className="w-3/4 text-[rgba(255,255,255,0.65)] font-light">
                         Today is a new day. It&apos;s your day. You shape it.
                         Your username, your entry ticket.{" "}

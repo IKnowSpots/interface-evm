@@ -33,9 +33,9 @@ const InactiveEvents = () => {
     //     );
 
     return (
-        <div className="flex h-[100vh] w-[100vw]">
+        <div className="flex h-full w-full">
             <Sidebar />
-            <div className="bg-[#25143a]">
+            <div className="bg-[#25143a] w-[75%]">
                 <DashNav />
                 <div className="px-8">
                     <p className="text-white font-semibold pl-4 pt-2">

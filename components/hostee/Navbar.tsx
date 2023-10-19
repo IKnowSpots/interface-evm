@@ -65,7 +65,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <p className="login-hostee-btn bg-white text-center w-[12%] text-black  px-4 py-2 rounded-[1.5rem] ">
+            <p className=" text-center w-[12%] text-black   rounded-[1.5rem] ">
                 {/* Connect Wallet */}
                 <WalletsProvider />
             </p>

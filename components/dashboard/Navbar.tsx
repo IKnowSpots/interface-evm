@@ -21,25 +21,28 @@ const DashNav = () => {
     }
 
     return (
-        <div id="dash-navbar" className="flex pt-8 pb-4 px-4">
+        <div id="dash-navbar" className="flex justify-around pt-8 pb-4 px-4 w-full">
+            <div className="w-[75%] flex justify-center">
             <input
                 type="text"
                 placeholder="Search events"
-                className="text-white h-[34px] border-white w-1/3 bg-[#1C1C1C] mx-auto rounded-full px-4 "
+                className="text-white h-[2.75rem] w-[38%] border-white bg-[#1C1C1C] rounded-full px-4 "
             />
+            </div>
 
-            <div className="flex gap-2">
-                <div className="text-white h-[90%] text-sm flex items-center gap-1 px-3 border rounded-lg">
-                    <p className="">@{username}</p>
-                </div>
+            <div className="flex gap-2 w-[25%] justify-end">
                 <Link href="/test/events">
-                    <Image
+                    <div className="text-white bg-[#070708] h-[100%] py-2 text-lg font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">
+                        <p className="">Hii, @{username}</p>
+                        <div className="h-[2rem] w-[2rem] grad1 rounded-full"></div>
+                    </div>
+                    {/* <Image
                         src={"/icons/Question.svg"}
                         width={35}
                         height={110}
                         alt="Question svg"
                         className="mt-[-0.1rem]"
-                    />
+                    /> */}
                 </Link>
             </div>
         </div>
