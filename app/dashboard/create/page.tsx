@@ -4,36 +4,88 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import CreateNav from "@/components/dashboard/CreateNav";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Create = () => {
     const [formInput, setFormInput] = useState({
-        shortlist: false,
-        stake: false,
         name: "",
         description: "",
         venue: "",
         date: "",
         supply: "",
+        cover: "",
         uri: "",
-        stakePrice: "",
-        isPrivateEvent: "",
+        isShortlist: false,
+        stake: false,
+        stakePrice: "0",
+        eventPrice: "0",
     });
     const [loading, setLoading] = useState(false);
+    const [imgLoading, setImgLoading] = useState(false);
 
     async function formURI() {
-        const { name, venue, date, stakePrice, supply } = formInput
-        if (!name || !venue || !date || !stakePrice || !supply) return
-        const data = JSON.stringify({ name, venue, date })
-        const files = [new File([data], 'data.json')]
-        const metaCID = await uploadToIPFS(files)
-        const url = `https://ipfs.io/ipfs/${metaCID}/data.json`
-        console.log(url)
-        return url
+        const { name, description, venue, date, supply, cover } = formInput;
+        if (!name || !description || !venue || !date || !supply) return;
+        if (!cover) {
+            formInput.cover = "/bored_ape_image.png";
+        }
+        const data = JSON.stringify({ name, description, venue, date, cover });
+        const files = [new File([data], "data.json")];
+        const metaCID = await uploadToIPFS(files);
+        const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
+        setFormInput({ ...formInput, uri: url });
+        console.log(url);
+        return url;
+    }
+
+    async function changeImage(e: any) {
+        setImgLoading(true);
+        const inputFile = e.target.files[0];
+        const inputFileName = e.target.files[0].name;
+        const files = [new File([inputFile], inputFileName)];
+        const metaCID = await uploadToIPFS(files);
+        const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`;
+        console.log(url);
+        setFormInput({ ...formInput, cover: url });
+        setImgLoading(false);
     }
 
     async function publish() {
-        const NftURI = await formURI()
-        await mint(formInput.stakePrice, formInput.supply, formInput.isPrivateEvent, NftURI)
+        try {
+            setLoading(true);
+            const NftURI = await formURI();
+            const isMinted = await mint(
+                formInput.stakePrice,
+                formInput.supply,
+                formInput.isShortlist,
+                NftURI
+            );
+            if (isMinted == true) {
+                toast.success("Minted!", {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
+            setLoading(false);
+        } catch (error) {
+            toast.warn("Error occurred, try again in a while!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
 
     return (
@@ -88,14 +140,31 @@ const Create = () => {
                                             d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                                         />
                                     </svg>
-                                    <span className="font-medium text-gray ">
-                                        PNG, JPG, GIF, WEBP
-                                    </span>
                                 </span>
+                                {imgLoading ? (
+                                    <div>Uploading to IPFS..</div>
+                                ) : formInput.cover == "" ? (
+                                    <div>
+                                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                            <span className="font-semibold">
+                                                Click to upload
+                                            </span>{" "}
+                                            or drag and drop
+                                        </p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                                            SVG, PNG, JPG or GIF (MAX.
+                                            800x400px)
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div>We got your image</div>
+                                )}
                                 <input
                                     type="file"
                                     name="file_upload"
                                     className="hidden"
+                                    onChange={changeImage}
+                                    disabled={imgLoading}
                                 />
                             </label>
                             <div className="flex justify-around my-8  ">
@@ -156,6 +225,7 @@ const Create = () => {
                                     name: e.target.value,
                                 })
                             }
+                            disabled={imgLoading}
                         />
                     </div>
                     <div className="flex flex-col w-3/4 mx-auto my-4">
@@ -168,6 +238,7 @@ const Create = () => {
                                     description: e.target.value,
                                 })
                             }
+                            disabled={imgLoading}
                             //   change this if scroll bar is appearing
                             rows={2}
                         ></textarea>
@@ -186,6 +257,7 @@ const Create = () => {
                                         supply: e.target.value,
                                     })
                                 }
+                                disabled={imgLoading}
                             />
                         </div>
                         <div className="flex flex-col w-3/4 mx-auto my-4">
@@ -201,6 +273,7 @@ const Create = () => {
                                         venue: e.target.value,
                                     })
                                 }
+                                disabled={imgLoading}
                             />
                         </div>
                     </div>
@@ -216,6 +289,7 @@ const Create = () => {
                                     date: e.target.value,
                                 })
                             }
+                            disabled={imgLoading}
                         />
                     </div>
                     {/*  */}
@@ -253,6 +327,7 @@ const Create = () => {
                                         stakePrice: e.target.value,
                                     })
                                 }
+                                disabled={imgLoading}
                             />
                             <button
                                 className=" border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] "
@@ -273,6 +348,7 @@ const Create = () => {
                                         stake: false,
                                     })
                                 }
+                                disabled={imgLoading}
                             >
                                 Disable
                             </button>
@@ -291,6 +367,18 @@ const Create = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </div>
     );
 };

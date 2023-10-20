@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { runEvent } from "@/utils"
 
-const CardsInactive = ({ image, name }: { image: any, name: string }) => {
+const CardsInactive = ({ image, name, tokenId }: { image: any, name: string, tokenId: any }) => {
 
   const [loading, setLoading] = useState(false)
 
@@ -25,7 +25,7 @@ const CardsInactive = ({ image, name }: { image: any, name: string }) => {
                 <div className="flex justify-between">
                     <p>{name}</p>
                     {/* <p>1.20 Weth</p> */}
-                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={runEventCall}>
+                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => runEventCall(tokenId)}>
                         Run
                     </button>
                 </div>

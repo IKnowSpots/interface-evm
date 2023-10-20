@@ -27,7 +27,7 @@ const Dashboard = () => {
         setLoading(false);
     }
 
-    // comment line 32-34 to make this page static
+    // comment line 12-20, 32-34 to make this page static
 
     // function pushPage() {
     //     window.location.replace("/dashboard/active");

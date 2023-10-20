@@ -308,8 +308,11 @@ export async function deploy(username) {
 }
 
 export async function fetchMintedCollection() {
+    console.log("1")
     const username = await fetchUsername();
+    console.log("2")
     const contract = await getEventifyContract(username, false);
+    console.log("3")
 
     const data = await contract.fetchMintedTickets();
     const items = await Promise.all(
@@ -419,7 +422,7 @@ export async function fetchPausedEvents() {
             return item;
         })
     );
-    console.log("Paused Events", items);
+    console.log("Inactive Events", items);
     return items;
 }
 
@@ -436,6 +439,7 @@ export async function mint(_price, _supply, _privateEvent, NftURI) {
     );
     await tx.wait();
     console.log("minted");
+    return true
 }
 
 export async function updateShortlist(ticketId, shortlistArray) {

@@ -3,13 +3,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { pauseEvent } from "@/utils"
 
-const CardsActive = ({ image, name }: { image: any, name: string }) => {
+const CardsActive = ({ image, name, tokenId }: { image: any, name: string, tokenId: any }) => {
 
   const [loading, setLoading] = useState(false)
 
-  async function pauseEventCall(ticketId: any) {
+  async function pauseEventCall(tokenId: any) {
     setLoading(true)
-    await pauseEvent(ticketId)
+    await pauseEvent(tokenId)
     setLoading(false)
   }
 
@@ -25,7 +25,7 @@ const CardsActive = ({ image, name }: { image: any, name: string }) => {
                 <div className="flex justify-between">
                     <p>{name}</p>
                     {/* <p>1.20 Weth</p> */}
-                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={pauseEventCall}>
+                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => pauseEventCall(tokenId)}>
                         Pause
                     </button>
                 </div>
