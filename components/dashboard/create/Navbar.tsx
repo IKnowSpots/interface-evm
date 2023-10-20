@@ -11,13 +11,13 @@ const Navbar = () => {
             <Link href="/">
                 <Image
                     src={"/iks-logo.png"}
-                    width={300}
-                    height={300}
+                    width={200}
+                    height={200}
                     alt="iks logo"
                 />
             </Link>
             <div className="flex  ">
-                <button className="rounded-full h-[] px-8 mr-8 flex items-center bg-gradient-to-r from-[#9000FF] to-[#1D102700] ">
+                <button className="rounded-full px-8 py-2 mr-8 flex items-center bg-gradient-to-r from-[#9000FF] to-[#1D102700] ">
                     {/* <Image
       src={"/bored_ape_image.png"}
       width={30}
@@ -28,7 +28,7 @@ const Navbar = () => {
                     <p>@{"iamacid"}</p>
                 </button>
                 {/* remaning: fix the basic gradients of this */}
-                <button className="flex items-center py-3 px-3 rounded-lg border border-white">
+                <button className="flex items-center py-3 px-3 rounded-lg">
                     {/* <Image
                         src={"/icons/metamask-icon.svg"}
                         width={"30"}

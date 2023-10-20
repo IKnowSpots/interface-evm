@@ -9,15 +9,15 @@ const Dashboard = () => {
     const [isDeployed, setIsDeployed] = useState<Boolean>();
     const [loading, setLoading] = useState<Boolean>(false);
 
-    useEffect(() => {
-        checkDeployment();
-    }, []);
+    // useEffect(() => {
+    //     checkDeployment();
+    // }, []);
 
-    useEffect(() => {
-        if (isDeployed == true) {
-            pushPage();
-        }
-    }, [isDeployed]);
+    // useEffect(() => {
+    //     if (isDeployed == true) {
+    //         pushPage();
+    //     }
+    // }, [isDeployed]);
 
     async function checkDeployment() {
         setLoading(true)
@@ -29,9 +29,9 @@ const Dashboard = () => {
 
     // comment line 32-34 to make this page static
 
-    function pushPage() {
-        window.location.replace("/dashboard/active");
-    }
+    // function pushPage() {
+    //     window.location.replace("/dashboard/active");
+    // }
 
     if (loading == true) return (<div className="text-white">Loading..</div>)
 
@@ -64,7 +64,7 @@ function RenderSetUsername() {
                 <div className="w-[50vw] h-[100%] flex rounded-xl justify-center items-center">
                     <img
                         src="/events/3.jpeg"
-                        className=" flex w-[80%] h-[80%] rounded-2xl animate-floating2"
+                        className=" flex w-[80%] h-[80%] rounded-2xl"
                         alt="welcome image"
                     />
                 </div>

@@ -18,14 +18,14 @@ const Event = () => {
     async function claim() {}
 
     return (
-        <div className="bg-[#25143a] text-white px-8 ">
+        <div className="bg-[#25143a] text-white px-8 w-full h-full ">
             <Navbar />
-            <div className="md:flex md:flex-row flex flex-col py-4">
+            <div className="md:flex-row flex flex-col py-4">
                 <div>
                     <img
                         src={eventData.cover}
                         alt="event img"
-                        className="md:w-[700px] md:h-[732px] w-[400px] h-[400px] mx-auto "
+                        className="w-[75%] h-auto mx-auto "
                     />
                 </div>
                 <div className="flex flex-col px-24 ">
@@ -58,13 +58,13 @@ const Event = () => {
                             <h3 className="text-xl">{eventData.hostName}</h3>
                         </div>
                     </div>
-                    <div className="bg-[#1E1E1EA6] my-8 py-8 px-12 ">
+                    <div className="bg-[#1E1E1EA6] my-4 py-8 px-12 rounded-2xl shadow-2xl ">
                         <h1 className="text-3xl pb-4">{eventData.venue}</h1>
                         <p className="w-96">
                             {eventData.description}
                         </p>
                     </div>
-                    <button className="bg-white text-black px-4 py-2 w-1/3 mx-auto" onClick={claim}>
+                    <button className="bg-white text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto" onClick={claim}>
                         Claim Now
                     </button>
                 </div>

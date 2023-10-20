@@ -21,14 +21,16 @@ export default function Home() {
                     <div className="grad1 blur-[140px] flex h-[1200px] w-[660px] absolute"></div>
                 </div>
                 <HeroSection />
+                <div className="relative z-[5]">
                 <Partners/>
-                <div>
-                    <div className="grad2 absolute blur-[400px] w-full h-[800px] z-[-1]"></div>
                 </div>
-                <div id="hotevent" className="relative mb-[5rem] sm:mb-[10rem]">
+                {/* <div>
+                    <div className="grad2 absolute blur-[400px] w-full h-[800px] z-[-1]"></div>
+                </div> */}
+                {/* <div id="hotevent" className="relative mb-[5rem] sm:mb-[10rem]">
                     <h1 className="text-[2rem] sm:text-5xl my-10 mx-12 ">HOT EVENT</h1>
                     <FeaturedEvents />
-                </div>
+                </div> */}
                 <div>
                     <div className="grad2 blur-[220px] absolute w-full h-[700px]"></div>
                 </div>
@@ -44,10 +46,10 @@ export default function Home() {
                 <div className="mb-[3rem]">
                     <ExploreSolutions />
                 </div>
-                <div className="mb-[5rem] sm:mb-[10rem]">
+                <div className="mb-[5rem] sm:mb-[10rem] sm:mx-20">
                     <ToolSection />
                 </div>
-                <div className="mb-[5rem] sm:mb-[10rem]">
+                <div className="mb-[5rem] sm:mb-[10rem] mx-8 sm:mx-16">
                     <SdkSection />
                 </div>
                 <FooterSection />
