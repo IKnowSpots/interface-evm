@@ -255,6 +255,19 @@ body {
     opacity: 0.7;
 }
 
+.back-btn{
+    opacity: 0.7;
+    transition: 0.1s;
+}
+
+.back-btn:hover{
+    opacity: 1;
+}
+
 .bg-inventory {
     background: radial-gradient(82.36% 96.27% at 24.72% 50%, #2d004f 0%, #000 100%);
+}
+
+.bg-createEvent{
+    background: linear-gradient(180deg, #29004A 0%, #000 98.24%);
 }

@@ -89,7 +89,7 @@ const Create = () => {
     }
 
     return (
-        <div className="bg-[#25143a] text-white  px-8">
+        <div className="bg-createEvent text-white  px-8">
             <CreateNav />
             <div className="grid grid-cols-2">
                 <div className="">
@@ -97,20 +97,14 @@ const Create = () => {
                         <div className="flex flex-col w-1/2 mx-auto justify-center">
                             <div className="flex items-center ">
                                 <div className="relative mx-4">
-                                    <Image
-                                        src={"/icons/arrow.svg"}
-                                        width={20}
-                                        height={20}
-                                        alt="arrow"
-                                        className="absolute top-2.5 left-1"
-                                    />
+                                    
                                     <Link href="/dashboard/active">
                                         <Image
-                                            src={"/icons/arrow-circle.svg"}
+                                            src={"/icons/back-btn.svg"}
                                             width={30}
                                             height={20}
-                                            alt="arrow-circle"
-                                            className=""
+                                            alt="back-btn"
+                                            className="back-btn"
                                         />
                                     </Link>
                                 </div>
@@ -124,7 +118,7 @@ const Create = () => {
                                     Upload or choose your file to upload
                                 </p>
                             </div>
-                            <label className="flex justify-center py-44 w-96 mx-auto  border-2 bg-[#586091a6] border-white border-opacity-40 border-dashed  rounded-md  cursor-pointer ">
+                            <label className="flex justify-center py-44 w-96 mx-auto  border-2 bg-[#1E1E1E] bg-opacity-75 border-[#E0E0E0] border-opacity-40 border-dashed  rounded-md  cursor-pointer ">
                                 <span className="flex items-center ">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +212,7 @@ const Create = () => {
                             type="text"
                             id="event-name"
                             placeholder="eg. name of the event"
-                            className="bg-[#586091a6] rounded-lg p-2"
+                            className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2"
                             onChange={(e) =>
                                 setFormInput({
                                     ...formInput,
@@ -231,7 +225,8 @@ const Create = () => {
                     <div className="flex flex-col w-3/4 mx-auto my-4">
                         <label className="pb-2">Description</label>
                         <textarea
-                            className="bg-[#586091a6] rounded-lg resize-none "
+                            placeholder="Description here"
+                            className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg resize-none p-2"
                             onChange={(e) =>
                                 setFormInput({
                                     ...formInput,
@@ -245,12 +240,12 @@ const Create = () => {
                     </div>
                     <div className=" flex w-3/4 mx-auto  ">
                         <div className="flex flex-col w-3/4 mx-auto my-4 mr-6 ">
-                            <label>Supply</label>
+                            <label className="pb-2">Supply</label>
                             <input
                                 type="text"
                                 id="event-name"
                                 placeholder="2000"
-                                className="bg-[#586091a6] w-full rounded-lg p-2 "
+                                className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 w-full rounded-lg p-2 "
                                 onChange={(e) =>
                                     setFormInput({
                                         ...formInput,
@@ -261,12 +256,12 @@ const Create = () => {
                             />
                         </div>
                         <div className="flex flex-col w-3/4 mx-auto my-4">
-                            <label>Venue</label>
+                            <label className="pb-2">Venue</label>
                             <input
                                 type="text"
                                 id="event-name"
                                 placeholder="Example Text"
-                                className="bg-[#586091a6] rounded-lg p-2"
+                                className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2"
                                 onChange={(e) =>
                                     setFormInput({
                                         ...formInput,
@@ -278,11 +273,11 @@ const Create = () => {
                         </div>
                     </div>
                     <div className="flex flex-col w-3/4 mx-auto my-4 ">
-                        <label>Date</label>
+                        <label className="pb-2">Date</label>
                         <input
                             type="date"
                             id="event-name"
-                            className="bg-[#586091a6]  rounded-lg p-2"
+                            className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30  rounded-lg p-2"
                             onChange={(e) =>
                                 setFormInput({
                                     ...formInput,
@@ -314,13 +309,13 @@ const Create = () => {
 
                     {/*  */}
                     <div className="flex flex-col w-3/4 mx-auto my-4 ">
-                        <label>Stake the price</label>
+                        <label className="pb-2">Stake the price</label>
                         <div className="relative flex flex-col items-center  w-full ">
                             <input
                                 type="text"
                                 id="event-name"
                                 placeholder="0.01 ETH"
-                                className="bg-[#586091a6] rounded-lg p-2 w-full py-4"
+                                className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
                                 onChange={(e) =>
                                     setFormInput({
                                         ...formInput,
