@@ -271,3 +271,7 @@ body {
 .bg-createEvent{
     background: linear-gradient(180deg, #29004A 0%, #000 98.24%);
 }
+
+.bg-supportPage{
+    background: linear-gradient(180deg, #29004A 0%, #000 98.24%);
+}
