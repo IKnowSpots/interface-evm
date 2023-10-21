@@ -9,6 +9,7 @@ const CardsActive = ({ image, name, tokenId }: { image: any, name: string, token
 
   async function pauseEventCall(tokenId: any) {
     setLoading(true)
+    console.log(tokenId)
     await pauseEvent(tokenId)
     setLoading(false)
   }

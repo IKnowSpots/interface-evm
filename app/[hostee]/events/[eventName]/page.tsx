@@ -2,20 +2,48 @@
 "use client";
 import Navbar from "@/components/dashboard/create/Navbar";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchActiveEventsWithInfura, buyTicket } from "@/utils";
+import { usePathname } from "next/navigation";
 
 const Event = () => {
-    const [eventData, setEventData] = useState({
-        name: "vent",
-        hostName: "host",
-        price: "0.03",
-        venue: "venue",
-        description:
-            "Lorem ipsum dolor sit amet consectetur. Tortor mattis mauris pretium convallis sed ut fermentum nunc. Venenatis at bibendum ullamcorper at. Dictumst vitae enim mattis adipiscing nullam tempus tempor dictum. Amet ut vel dui fermentum massa facilisis ut.",
-            cover: "/events/1.png",
-    });
+    const pathName = usePathname();
+    const eventId = pathName?.split("/")[3];
+    const username = pathName?.split("/")[3];
 
-    async function claim() {}
+    const [eventData, setEventData] = useState({
+        name: "",
+        hostName: "",
+        price: "",
+        venue: "",
+        description: "",
+        cover: "",
+        tokenId: "",
+    });
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetchActiveEventsData();
+    }, []);
+
+    async function fetchActiveEventsData() {
+        console.log("1");
+        console.log("eventId", eventId);
+        setLoading(true);
+        let data: any = await fetchActiveEventsWithInfura(eventId);
+        const event = data.find((obj) => obj.tokenId === eventId);
+        console.log("2");
+        setEventData(event);
+        console.log("event", event);
+        if (event) {
+        }
+        setLoading(false);
+        console.log("4");
+    }
+
+    async function claim(tokenId: any, price: any) {
+        await buyTicket(username, tokenId, price)
+    }
 
     return (
         <div className="bg-[#25143a] text-white px-8 w-full h-full ">
@@ -39,7 +67,9 @@ const Event = () => {
                         <p className="font-lg pl-2">RSVP Stake</p>
                     </div>
                     <div>
-                        <h1 className="text-2xl font-bold py-2">{eventData.name}</h1>
+                        <h1 className="text-2xl font-bold py-2">
+                            {eventData.name}
+                        </h1>
                     </div>
                     <div>
                         <p>{eventData.price} SOL</p>
@@ -60,11 +90,12 @@ const Event = () => {
                     </div>
                     <div className="bg-[#1E1E1EA6] my-4 py-8 px-12 rounded-2xl shadow-2xl ">
                         <h1 className="text-3xl pb-4">{eventData.venue}</h1>
-                        <p className="w-96">
-                            {eventData.description}
-                        </p>
+                        <p className="w-96">{eventData.description}</p>
                     </div>
-                    <button className="bg-white text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto" onClick={claim}>
+                    <button
+                        className="bg-white text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
+                        onClick={() => claim(eventData.tokenId, eventData.price)}
+                    >
                         Claim Now
                     </button>
                 </div>

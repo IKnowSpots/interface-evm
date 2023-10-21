@@ -10,17 +10,17 @@ const CardsHostee = ({
     price,
     date,
     username,
-    eventId
+    tokenId
 }: {
     image: any;
     name: string;
     price: any;
     date: any;
     username: string;
-    eventId: any
+    tokenId: any
 }) => {
     function pushPage() {
-        redirect(`/${username}/events/${eventId}`);
+        redirect(`/${username}/events/${tokenId}`);
     }
 
     return (
@@ -41,7 +41,7 @@ const CardsHostee = ({
                 <div className="flex justify-between">
                     <p>{date}</p>
                     <Link
-                        href={`/${username}/events/${eventId}`}
+                        href={`/${username}/events/${tokenId}`}
                         className="view-btn px-4 py-1 outline rounded-lg"
                         onClick={pushPage}
                     >

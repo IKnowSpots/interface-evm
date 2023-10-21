@@ -6,7 +6,7 @@ import axios from "axios";
 import { Web3Storage } from "web3.storage";
 
 // const InfuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
-const InfuraKey = "2HvD0iID3OjnCRpKjKpqXYMcdRV"
+const InfuraKey = "eec39d04a1064883bf94ec917264ce9a"
 
 export async function getFactoryContractWithInfura() {
     const provider = new ethers.providers.JsonRpcProvider(
@@ -173,7 +173,7 @@ export async function fetchFeaturedEventsWithInfura() {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                ticketId: i.ticketId.toString(),
+                tokenId: i.ticketId.toString(),
                 host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
@@ -202,7 +202,7 @@ export async function fetchActiveEventsWithInfura(username) {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                ticketId: i.ticketId.toString(),
+                tokenId: i.ticketId.toString(),
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -231,7 +231,7 @@ export async function fetchInventory(username) {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                ticketId: i.ticketId.toString(),
+                tokenId: i.ticketId.toString(),
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -265,7 +265,7 @@ export async function fetchCommonInventory() {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i[0].price);
             let item = {
-                ticketId: i[0]?.ticketId.toString(),
+                tokenId: i[0]?.ticketId.toString(),
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -351,7 +351,7 @@ export async function fetchShortlistEvents() {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                ticketId: i.ticketId.toString(),
+                tokenId: i.ticketId.toString(),
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -380,7 +380,7 @@ export async function fetchActiveEvents() {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                ticketId: i.ticketId.toString(),
+                tokenId: i.ticketId.toString(),
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -529,7 +529,7 @@ export async function fetchFeaturedRequest() {
         data.map(async (i) => {
             let item = {
                 host: i.host.toString(),
-                ticketId: i.ticketId.toString(),
+                tokenId: i.ticketId.toString(),
                 isApproved: i.isApproved.toString(),
             };
             return item;
