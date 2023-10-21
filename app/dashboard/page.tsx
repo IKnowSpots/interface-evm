@@ -9,9 +9,9 @@ const Dashboard = () => {
     const [isDeployed, setIsDeployed] = useState<Boolean>();
     const [loading, setLoading] = useState<Boolean>(false);
 
-    // useEffect(() => {
-    //     checkDeployment();
-    // }, []);
+    useEffect(() => {
+        checkDeployment();
+    }, []);
 
     // useEffect(() => {
     //     if (isDeployed == true) {
@@ -103,18 +103,19 @@ function RenderSetUsername() {
                         />
                         {deployed ? (
                             <button
-                                className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
-                                onClick={setUsernameCall}
-                            >
-                                Get Started
-                            </button>
+                            className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
+                            onClick={pushPage}
+                        >
+                            Move Forward
+                        </button>
                         ) : (
+                            
                             <button
-                                className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
-                                onClick={pushPage}
-                            >
-                                Move Forward
-                            </button>
+                            className="get-started-btn py-3 rounded-xl bg-[#162D3A] my-2"
+                            onClick={setUsernameCall}
+                        >
+                            Set Username
+                        </button>
                         )}
                     </div>
                 </div>
