@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import Image from "next/image";
 import { useState } from "react";
@@ -27,7 +28,7 @@ const CardsInventory = ({
           <p className="text-3xl font-semibold">{name}</p>
           <p>{description}</p>
         </div>
-        <Image
+        <img
           src={image}
           width="219"
           height="136"

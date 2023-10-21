@@ -44,9 +44,9 @@ const ActiveEvents = () => {
                     return (
                         <CardsActive
                             key={i}
-                            tokenId={nft.tokenId}
-                            image={nft.cover}
-                            name={nft.name}
+                            tokenId={nft?.tokenId}
+                            image={nft?.cover}
+                            name={nft?.name}
                         />
                     );
                 })}

@@ -1,24 +1,23 @@
 "use client";
-import CardsInventory from "@/components/cardsInventory";
 import Navbar from "@/components/hostee/Navbar";
 import Rewards from "@/components/inventory/Rewards";
-import Events from "@/components/inventory/Events";
 import MyCalender from "@/components/inventory/MyCalender";
+import Link from "next/link";
+import CardsInventory from "@/components/cardsInventory";
 import { fetchUsername, fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 const EventsByHost = () => {
-    const [inventoryData, setInventoryData] = useState<any>();
+    const [inventoryData, setInventoryData] = useState<any>([]);
     const [loading, setLoading] = useState(false);
 
-    // useEffect(() => {
-    //     fetchInventoryData();
-    // }, []);
+    useEffect(() => {
+        fetchInventoryData();
+    }, []);
 
     async function fetchInventoryData() {
-        setLoading(true)
+        setLoading(true);
         const data: any = await fetchCommonInventory();
         setInventoryData(data);
         setLoading(false);
@@ -31,7 +30,9 @@ const EventsByHost = () => {
                     <div>
                         <p className="text-2xl font-semibold">Inventory</p>
                     </div>
-                    <p className="opacity-75">Explore the events you&apos;e marked as yours.</p>
+                    <p className="opacity-75">
+                        Explore the events you&apos;e marked as yours.
+                    </p>
                 </div>
                 <input
                     type="text"
@@ -46,10 +47,59 @@ const EventsByHost = () => {
                 </Link>
             </div>
 
-
             <div className="w-full mt-[5rem]">
                 <div className="flex flex-col-reverse lg:flex-row mx-8">
-                    <Events />
+                    <div className="flex items-center justify-center ">
+                        <div className="w-full flex relative z-5">
+                            <div className="w-full flex flex-col items-center">
+                                <div className="flex justify-center w-[80%] gap-8">
+                                    <button className="bg-white w-[20%] p-3 rounded-[30px] text-[#090312] font-semibold">
+                                        All Events
+                                    </button>
+                                    <button className="bg-white/50 w-[20%] p-3 rounded-[30px] text-[#090312] font-semibold">
+                                        Upcoming
+                                    </button>
+                                    <button className="bg-white/50 w-[20%] p-3 rounded-[30px] text-[#090312] font-semibold">
+                                        Attended
+                                    </button>
+                                </div>
+                                {inventoryData.map((nft: any, i: any) => {
+                                    return (
+                                        <CardsInventory
+                                            key={i}
+                                            image={nft?.cover}
+                                            name={nft?.name}
+                                            description={nft?.description}
+                                            username={""}
+                                            date={""}
+                                        />
+                                    );
+                                })}
+                                {/* <CardsInventory
+                        image="/solidity.jpeg"
+                        name="Solidity Bootcamp"
+                        description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
+                        username=""
+                        date=""
+                    />
+                    <CardsInventory
+                        image="/hacker.jpeg"
+                        name="Hacker Hostel"
+                        description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
+                        username=""
+                        date=""
+                    />
+                    <CardsInventory
+                        image="/tpg.jpeg"
+                        name="TPG Meetup"
+                        description="Gathering for tech enthusiasts to network,
+                        learn, and share industry insights."
+                        username=""
+                        date=""
+                    /> */}
+                            </div>
+                        </div>
+                    </div>
                     <MyCalender />
                 </div>
             </div>
