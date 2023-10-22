@@ -34,7 +34,7 @@ const Event = () => {
         console.log("username", username);
         setLoading(true);
         let data: any = await fetchActiveEventsWithInfura(username);
-        const event = data.find((obj) => obj.tokenId == (eventId));
+        const event = data.find((obj: any) => obj.tokenId == (eventId));
         // console.log("2");
         setEventData(event);
         console.log("event", event);
