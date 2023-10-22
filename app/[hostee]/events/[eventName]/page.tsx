@@ -49,14 +49,16 @@ const Event = () => {
     }
 
     return (
-        <div className="bg-[#25143a] text-white px-8 w-full h-full ">
+        
+        <div className="bg-[#25143a] text-white px-8 h-[100vh]">
             <Navbar />
-            <div className="md:flex-row flex flex-col py-4">
-                <div>
+            <div className="w-full">
+            <div className="md:flex-row flex flex-col py-4 justify-center w-full">
+                <div className="w-[30%] flex justify-center items-center border border-dashed rounded-2xl border-red">
                     <img
                         src={eventData?.cover}
                         alt="event img"
-                        className="w-[75%] h-auto mx-auto "
+                        className="w-[80%] rounded-xl flex justify-center items-center h-auto mx-auto "
                     />
                 </div>
                 <div className="flex flex-col px-24 ">
@@ -102,6 +104,7 @@ const Event = () => {
                         Claim Now
                     </button>
                 </div>
+            </div>
             </div>
         </div>
     );
