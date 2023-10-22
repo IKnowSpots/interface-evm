@@ -19,6 +19,7 @@ const Support = () => {
             loading="lazy"
             width="100%"
             height="381"
+            className="text-white"
             title="We'd love to help"
           ></iframe>
         </div>

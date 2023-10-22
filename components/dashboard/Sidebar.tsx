@@ -97,7 +97,7 @@ const Sidebar = () => {
                     <p className="py-1 opacity-40 sidebar-elements">Support</p>
                 </Link>
                 <Link target="_blank" href="/">
-                    <p className="py-1 opacity-40 sidebar-elements">Documents</p>
+                    <p className="py-1 opacity-40 sidebar-elements">Documentation</p>
                 </Link>
                 <Link target="_blank" href="https://github.com/IKnowSpots">
                     <div className="flex py-1 sidebar-elements">
