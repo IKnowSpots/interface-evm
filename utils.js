@@ -239,7 +239,7 @@ export async function fetchInventory(username) {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })
@@ -256,27 +256,29 @@ export async function fetchCommonInventory() {
     const items = await Promise.all(
         data.map(async (i) => {
             console.log("i", i);
-            // console.log("i", i[0].ticketId.toString())
+            i.map(async (j) => {
+            // let j=1;
             const tokenUri = await contract.uriCall(
-                i[0]?.owner,
-                i[0]?.ticketId.toNumber()
+                i[j]?.owner,
+                i[j]?.ticketId.toNumber()
             );
             console.log(tokenUri);
             const meta = await axios.get(tokenUri);
-            let price = ethers.utils.formatEther(i[0].price);
+            let price = ethers.utils.formatEther(i[j].price);
             let item = {
-                tokenId: i[0]?.ticketId.toString(),
+                tokenId: i[j]?.ticketId.toString(),
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
-                supply: i[0]?.supply.toNumber(),
-                remaining: i[0]?.remaining.toNumber(),
+                supply: i[j]?.supply.toNumber(),
+                remaining: i[j]?.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 cover: meta.data.cover,
             };
             return item;
         })
+    })
     );
     console.log("Common Inventory", data);
     return items;

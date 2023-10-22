@@ -9,8 +9,8 @@ import { usePathname } from "next/navigation";
 
 const Event = () => {
     const pathName = usePathname();
-    const eventId = pathName?.split("/")[3];
-    const username = pathName?.split("/")[3];
+    const username = pathName?.split("/")[1];
+    let eventId = pathName?.split("/")[3];
 
     const [eventData, setEventData] = useState({
         name: "",
@@ -28,18 +28,20 @@ const Event = () => {
     }, []);
 
     async function fetchActiveEventsData() {
-        console.log("1");
-        console.log("eventId", eventId);
+        // console.log("1");
+        let compareId = Number(eventId) ;
+        console.log("compareId", compareId);
+        console.log("username", username);
         setLoading(true);
-        let data: any = await fetchActiveEventsWithInfura(eventId);
-        const event = data.find((obj) => obj.tokenId === eventId);
-        console.log("2");
+        let data: any = await fetchActiveEventsWithInfura(username);
+        const event = data.find((obj) => obj.tokenId == (eventId));
+        // console.log("2");
         setEventData(event);
         console.log("event", event);
         if (event) {
         }
         setLoading(false);
-        console.log("4");
+        // console.log("4");
     }
 
     async function claim(tokenId: any, price: any) {

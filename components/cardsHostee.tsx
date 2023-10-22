@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import Image from "next/image";
 import { useState } from "react";
@@ -23,11 +24,13 @@ const CardsHostee = ({
         redirect(`/${username}/events/${tokenId}`);
     }
 
+    // console.log("tok", tokenId)
+
     return (
         <div className="text-white px-4 bg-[#0F0F0FD9] pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-4">
-                <Image
-                    src={`/events/${image}`}
+                <img
+                    src={image}
                     width="190"
                     height="200"
                     alt="Event's Image"

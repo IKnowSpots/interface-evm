@@ -90,7 +90,7 @@ const EventsByHost = () => {
                             <CardsHostee
                                 key={i}
                                 tokenId={nft.tokenId}
-                                image={nft.cover}
+                                image={nft.NFTURI}
                                 name={nft.name}
                                 price={nft.price}
                                 date={nft.date}
