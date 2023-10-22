@@ -58,7 +58,7 @@ const Event = () => {
                     <img
                         src={eventData?.cover}
                         alt="event img"
-                        className="w-[80%] rounded-xl flex justify-center items-center h-auto mx-auto "
+                        className="w-[80%] h-[80%] rounded-xl flex justify-center items-center mx-auto "
                     />
                 </div>
                 <div className="flex flex-col px-24 ">
@@ -88,7 +88,7 @@ const Event = () => {
                         />
                         <div className="pl-4">
                             <p className="text-[rgba(255,255,255,0.65)]">
-                                Host
+                                {username}
                             </p>
                             <h3 className="text-xl">{eventData?.hostName}</h3>
                         </div>

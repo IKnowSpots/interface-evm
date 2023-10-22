@@ -390,7 +390,7 @@ export async function fetchActiveEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })
