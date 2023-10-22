@@ -182,7 +182,7 @@ export async function fetchFeaturedEventsWithInfura() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })
@@ -210,7 +210,7 @@ export async function fetchActiveEventsWithInfura(username) {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })

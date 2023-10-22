@@ -6,14 +6,14 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 
 const CardsHostee = ({
-    image,
+    NftURI,
     name,
     price,
     date,
     username,
     tokenId
 }: {
-    image: any;
+    NftURI: any;
     name: string;
     price: any;
     date: any;
@@ -30,7 +30,7 @@ const CardsHostee = ({
         <div className="text-white px-4 bg-[#0F0F0FD9] pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-4">
                 <img
-                    src={image}
+                    src={NftURI}
                     width="190"
                     height="200"
                     alt="Event's Image"
