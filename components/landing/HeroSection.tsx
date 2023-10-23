@@ -31,7 +31,7 @@ const HeroSection = () => {
           alt="Circle" />
       </div>
       <div>
-        <img src="/tpg.jpeg" alt="" className="absolute top-[95%] left-[10%] h-auto w-[30%] rotate-[25deg] skew-y-6 rounded-2xl"/>
+        {/* <img src="/tpg.jpeg" alt="" className="absolute top-[95%] left-[10%] h-auto w-[30%] rotate-[25deg] skew-y-6 rounded-2xl"/> */}
       </div>
     </div>
   )

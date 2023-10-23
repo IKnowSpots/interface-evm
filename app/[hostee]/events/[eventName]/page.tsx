@@ -69,7 +69,7 @@ const Event = () => {
                             height={30}
                             alt="dollar svg"
                         />
-                        <p className="font-lg pl-2">RSVP Stake</p>
+                        <p className="font-lg pl-2">RSVP Escrow</p>
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold py-2">

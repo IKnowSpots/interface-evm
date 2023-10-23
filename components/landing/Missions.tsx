@@ -25,11 +25,11 @@ const Missions = () => {
             <div className="flex flex-col items-start w-3/4">
                 <h1 className="text-4xl sm:text-5xl mt-12 ">Our Mission</h1>
                 <div className="flex justify-around gap-4 pt-6">
-                    <button className="hoverUnderline cursor-pointer" onClick={()=>setPara("With NFTs, ticket authenticity can be easily verified,preventing counterfeiting and ensuring that only valid tickets are bought and sold.")}>Lorum</button>
+                    <button className="hoverUnderline cursor-pointer" onClick={()=>setPara("With NFTs, ticket authenticity can be easily verified,preventing counterfeiting and ensuring that only valid tickets are bought and sold.")}>Ticketing</button>
 
-                    <button className="hoverUnderline cursor-pointer" onClick={()=>setPara("lorem ipsum skhvqjbd vdcsmvcmhv gvjwv vghqedvvnm  bqvdjvi gvhjdejs shjdbqcubc huqhdj gqufygu ghyevv hgfuyegjbbv ygiev guygeggduwu bhyugfuebjhjhai hjbehx")}>Lorum</button>
+                    <button className="hoverUnderline cursor-pointer" onClick={()=>setPara("Put crypto in an escrow account to register for events.")}>RSVP Escrow</button>
 
-                    <button className="hoverUnderline cursor-pointer" onClick={()=>setPara("hello guys how are you get started with coding journey with ansh and have a great journey ahead. work freely and effectively. Hardwork is the key to success")}>Lorum</button>
+                    <button className="hoverUnderline cursor-pointer" onClick={()=>setPara("Attendee data to analyze engagement & improve events")}>Data Analysis</button>
                 </div>
                 <RenderLorem1 />
             </div>
