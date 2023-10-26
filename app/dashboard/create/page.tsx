@@ -23,6 +23,19 @@ const Create = () => {
     });
     const [loading, setLoading] = useState(false);
     const [imgLoading, setImgLoading] = useState(false);
+    const [isFieldDisabled, setIsFieldDisabled] = useState(false);
+    const [isButtonClicked, setIsButtonClicked] = useState(false);
+
+    const handleButtonColor = () => {
+      setIsButtonClicked(!isButtonClicked);
+    };
+    const handleButtonClick = () => {
+      setIsFieldDisabled(!isFieldDisabled); // Toggle the disabled state
+    };
+    const handleBothClicks = () => {
+        handleButtonClick(); 
+        handleButtonColor(); 
+      };
 
     async function formURI() {
         const { name, description, venue, date, supply, cover } = formInput;
@@ -315,35 +328,46 @@ const Create = () => {
                                 type="text"
                                 id="event-name"
                                 placeholder="0.01 ETH"
-                                className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
+                                className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4 ${isFieldDisabled ? 'bg-gray-300 text-gray-600' : ' text-black'}`}
+
+                                // className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
+                                disabled={isFieldDisabled && imgLoading}
                                 onChange={(e) =>
                                     setFormInput({
                                         ...formInput,
                                         stakePrice: e.target.value,
                                     })
                                 }
-                                disabled={imgLoading}
+                                // disabled={imgLoading}
+                                // disabled = "true"
                             />
                             <button
-                                className=" border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] "
-                                onClick={() =>
-                                    setFormInput({
-                                        ...formInput,
-                                        stake: true,
-                                    })
-                                }
+                                    className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${isButtonClicked ? 'bg-[#252542] text-white' : 'bg-white text-black'}`}
+
+                                // className=" border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] "
+                                // onClick={() =>
+                                //     setFormInput({
+                                //         ...formInput,
+                                //         stake: true,
+                                //     })
+                                // }
+                                onClick={handleBothClicks}
                             >
                                 Enable
                             </button>
                             <button
-                                className="border w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg bg-white text-black "
-                                onClick={() =>
-                                    setFormInput({
-                                        ...formInput,
-                                        stake: false,
-                                    })
-                                }
-                                disabled={imgLoading}
+                                    className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${isButtonClicked ? 'bg-white text-black' : 'bg-[#252542] text-white'}`}
+
+                                // className=" w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] bg-[#252542] text-white "
+                                // onClick={() =>
+                                //     setFormInput({
+                                //         ...formInput,
+                                //         stake: false,
+                                //     })
+                                // }
+                                // disabled={imgLoading}
+                                onClick={handleBothClicks}
+
                             >
                                 Disable
                             </button>

@@ -7,6 +7,7 @@ import CardsInventory from "@/components/cardsInventory";
 import { fetchUsername, fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import FooterSection from "@/components/landing/FooterSection";
 
 const EventsByHost = () => {
     const [inventoryData, setInventoryData] = useState<any>([]);
@@ -107,6 +108,7 @@ const EventsByHost = () => {
                     </div>
                 </div>
             </div>
+            <FooterSection/>
         </div>
     );
 };

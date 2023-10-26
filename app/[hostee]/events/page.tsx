@@ -5,6 +5,7 @@ import { fetchUsernameValidity, fetchActiveEventsWithInfura } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import FooterSection from "@/components/landing/FooterSection";
 
 const EventsByHost = () => {
     // comment 88-100 and uncomment 102-166
@@ -67,15 +68,15 @@ const EventsByHost = () => {
         );
 
     return (
-        <div className="bg-[#25143a] h-[100%] text-white w-full overflow-hidden">
+        <div className="bg-[#25143a] text-white w-full overflow-hidden w-100vh h-[100vh]">
             <Navbar />
-            <div>
-                <div className="flex justify-between px-[6rem]">
-                    <div className="pb-8">
+            <div className="w-100vh h-[100vh] " >
+                <div className="flex justify-between px-[6rem]  ">
+                    <div className="pb-8 ">
                         <p className="w-full text-white text-[2rem] ml-[0rem]">
                             @{id}
                         </p>
-                        <div className="flex gap-2 justify-center text-center"></div>
+                        <div className="flex gap-2 justify-center text-center "></div>
                     </div>
                     <input
                         type="text"
@@ -84,7 +85,7 @@ const EventsByHost = () => {
                     />
                 </div>
 
-                <div className=" flex gap-x-[2rem] gap-y-[3rem] flex-wrap pt-4 px-[7rem] pb-[5rem]">
+                <div className=" flex gap-x-[2rem] gap-y-[3rem] flex-wrap pt-4 px-[7rem] pb-[5rem] ">
                     {activeEvents.map((nft: any, i: any) => {
                         return (
                             <CardsHostee
@@ -167,6 +168,7 @@ const EventsByHost = () => {
 
                 </div>
             </div>
+            {/* <FooterSection/> */}
         </div>
     );
 };

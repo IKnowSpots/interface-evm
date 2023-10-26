@@ -1,8 +1,8 @@
 "use client"
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
-
-const ZIP_FILE_URL = "http://localhost:3001/brandingkit.zip";
+import Link from "next/link";
+const ZIP_FILE_URL = "https://www.iknowspots.com/brandingkit.zip";
 const FooterSection = () => {
     const downloadFileAtURL = (url:any) => {
         const fileName = url.split("/").pop();  
@@ -20,7 +20,7 @@ const FooterSection = () => {
             <div className="flex flex-col relative z-10 px-8">
                 <div className="">
                     <img
-                        src="./iks-logo.png"
+                        src="/iks-logo.png"
                         width="252"
                         height="300"
                         className=""
@@ -43,16 +43,21 @@ const FooterSection = () => {
                 
                 <div className="flex justify-center sm:justify-normal gap-5">
                     <a href="https://twitter.com/iknowspots">
-                    <img src="./twitter.png" alt="twitter"/>
+                    <img src="/twitter.png" alt="twitter"/>
 
                     </a>
                     <a href="https://www.linkedin.com/company/iknowspots">
-                    <img src="./linkedin.png" alt="linkedin" />
-
+                    <img src="/linkedin.png" alt="linkedin" />
                     </a>
-                    {/* <img src="./facebook.png" alt="facebook" /> */}
-                    {/* <img src="./instagram.png" alt="instagram" /> */}
-                    {/* <img src="./discord.png" alt="discord" /> */}
+
+                    <a href="https://github.com/orgs/IKnowSpots/repositories">
+                    <img src="/github.svg" alt="linkedin" />
+                    </a>
+
+                    <a href="https://medium.com/@iknowspots">
+                    <img className="mt-1" src="/medium.png" alt="linkedin" />
+                    </a>
+
                 </div>
 
                 <p className="text-[0.75rem] sm:text-base my-8">@2023 All rights reserved.</p>
@@ -92,9 +97,10 @@ const FooterSection = () => {
                 <div>
                     <p className="mb-2 font-semibold">Support</p>
                     <ul>
-                        <li className="hoverFooter">Contact Us</li>
                         <li className="hoverFooter">
-                            <a href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit">Docs</a></li>
+                            <a href="mailto:info@iknowspots.com">Contact Us</a></li>
+                        <li className="hoverFooter">
+                            <Link href="https://drive.google.com/file/d/1AksnU1BU4UNidCx0Pw0ts2m76i2gqDDR/view?usp=sharing" target="_blank">Docs</Link></li>
                         {/* <li className="">Text 1</li>
             <li className="">Text 1</li> */}
                     </ul>

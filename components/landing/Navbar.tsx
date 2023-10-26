@@ -83,7 +83,7 @@ const Navbar = () => {
                 </Link> */}
                 <Link
                     target="_blank"
-                    href="https://docs.google.com/document/d/1Ayzu2fjTUuCTS3TXmCySz6xfIWffbJshLgd0Uh47wS0/edit"
+                    href="https://drive.google.com/file/d/1AksnU1BU4UNidCx0Pw0ts2m76i2gqDDR/view?usp=sharing"
                 >
                     <p className="hoverUnderline text-[0.75rem] lg:text-base">
                         Whitepapers
