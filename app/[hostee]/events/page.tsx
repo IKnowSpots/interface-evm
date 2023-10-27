@@ -68,21 +68,23 @@ const EventsByHost = () => {
         );
 
     return (
-        <div className="bg-[#25143a] text-white w-full overflow-hidden w-100vh h-[100vh]">
+        <div className="bg-[#25143a] text-white w-full overflow-hidden h-[110vh]">
             <Navbar />
             <div className="w-100vh h-[100vh] " >
                 <div className="flex justify-between px-[6rem]  ">
                     <div className="pb-8 ">
-                        <p className="w-full text-white text-[2rem] ml-[0rem]">
+                        <p className="w-full text-white text-[1.5rem]">
                             @{id}
                         </p>
-                        <div className="flex gap-2 justify-center text-center "></div>
                     </div>
+                    <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-2 py-1 ">
+                        <img src="/search.png" className="w-[10%]" alt="" />
                     <input
                         type="text"
                         placeholder="Search events"
-                        className="text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-4 "
+                        className="text-white h-[40px] border-white w-[18rem] bg-[#1C1C1C] rounded-full px-4"
                     />
+                    </div>
                 </div>
 
                 <div className=" flex gap-x-[2rem] gap-y-[3rem] flex-wrap pt-4 px-[7rem] pb-[5rem] ">

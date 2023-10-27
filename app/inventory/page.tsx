@@ -35,11 +35,14 @@ const EventsByHost = () => {
                         Explore the events you&apos;e marked as yours.
                     </p>
                 </div>
-                <input
-                    type="text"
-                    placeholder="Search events"
-                    className="text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-4 mx-8"
-                />
+                <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-2 py-1 ">
+                    <img src="/search.png" className="w-[10%]" alt="" />
+                    <input
+                        type="text"
+                        placeholder="Search events"
+                        className="text-white h-[40px] border-white w-[18rem] bg-[#1C1C1C] rounded-full px-4"
+                    />
+                </div>
             </div>
 
             <div>
@@ -48,9 +51,9 @@ const EventsByHost = () => {
                 </Link>
             </div>
 
-            <div className="w-full mt-[5rem]">
-                <div className="flex flex-col md:flex-row mx-8">
-                    <div className="flex items-center justify-center ">
+            <div className="w-full mt-[5rem] flex ">
+                <div className="flex flex-col md:flex-row gap-6 w-full mx-6">
+                    <div className="flex items-center justify-center w-[60%] ">
                         <div className="w-full flex relative z-5">
                             <div className="w-full flex flex-col items-center">
                                 <div className="flex justify-center w-[80%] gap-8">
@@ -64,7 +67,7 @@ const EventsByHost = () => {
                                         Attended
                                     </button>
                                 </div>
-                                {/* {inventoryData.map((nft: any, i: any) => {
+                                {inventoryData.map((nft: any, i: any) => {
                                     return (
                                         <CardsInventory
                                             key={i}
@@ -75,8 +78,8 @@ const EventsByHost = () => {
                                             date={""}
                                         />
                                     );
-                                })} */}
-                                <CardsInventory
+                                })}
+                                {/* <CardsInventory
                         image="/solidity.jpeg"
                         name="Solidity Bootcamp"
                         description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
@@ -97,14 +100,14 @@ const EventsByHost = () => {
                         learn, and share industry insights."
                         username=""
                         date=""
-                    />
+                    /> */}
                             </div>
                         </div>
                     </div>
                     <div className="flex justify-center items-center md:w-[40%]">
                         <div className="">
-                    <MyCalender />
-                    </div>
+                            <MyCalender />
+                        </div>
                     </div>
                 </div>
             </div>
