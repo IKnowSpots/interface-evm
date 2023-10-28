@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { fetchActiveEventsWithInfura, buyTicket } from "@/utils";
 import { usePathname } from "next/navigation";
+import { currency } from "@/config";
 
 const Event = () => {
     const pathName = usePathname();
@@ -20,6 +21,8 @@ const Event = () => {
         description: "",
         cover: "",
         tokenId: "",
+        supply: "",
+        remaining: ""
     });
     const [loading, setLoading] = useState(false);
 
@@ -77,7 +80,8 @@ const Event = () => {
                         </h1>
                     </div>
                     <div>
-                        <p>{eventData?.price} SOL</p>
+                    <p>{eventData.remaining} / {eventData.supply}</p>
+                        <p>{eventData?.price} {currency}</p>
                     </div>
                     <div className="flex py-4">
                         <Image

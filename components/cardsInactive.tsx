@@ -16,8 +16,8 @@ const CardsInactive = ({ image, name, tokenId }: { image: any, name: string, tok
     return (
         <div className="text-white px-4 bg-[#0F0F0FD9] pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-4">
-                <Image
-                    src={`/events/${image}`}
+                <img
+                    src={image}
                     width="195"
                     height="200"
                     alt="Event&apos;s Image"

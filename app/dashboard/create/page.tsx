@@ -28,6 +28,8 @@ const Create = () => {
         stakePrice: "0",
         eventPrice: "0",
     });
+
+    // console.log(formInput)
     const [loading, setLoading] = useState(false);
     const [imgLoading, setImgLoading] = useState(false);
     const [isFieldDisabled, setIsFieldDisabled] = useState(false);

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import FooterSection from "@/components/landing/FooterSection";
 
-const EventsByHost = () => {
+const Inventory = () => {
     const [inventoryData, setInventoryData] = useState<any>([]);
     const [loading, setLoading] = useState(false);
 
@@ -80,27 +80,27 @@ const EventsByHost = () => {
                                     );
                                 })}
                                 {/* <CardsInventory
-                        image="/solidity.jpeg"
-                        name="Solidity Bootcamp"
-                        description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
-                        username=""
-                        date=""
-                    />
-                    <CardsInventory
-                        image="/hacker.jpeg"
-                        name="Hacker Hostel"
-                        description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
-                        username=""
-                        date=""
-                    />
-                    <CardsInventory
-                        image="/tpg.jpeg"
-                        name="TPG Meetup"
-                        description="Gathering for tech enthusiasts to network,
+                                    image="/solidity.jpeg"
+                                    name="Solidity Bootcamp"
+                                    description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
+                                    username=""
+                                    date=""
+                                />
+                                <CardsInventory
+                                    image="/hacker.jpeg"
+                                    name="Hacker Hostel"
+                                    description="Intensive Solidity Bootcamp: Develop smart contracts, DApps, and excel in blockchain."
+                                    username=""
+                                    date=""
+                                />
+                                <CardsInventory
+                                    image="/tpg.jpeg"
+                                    name="TPG Meetup"
+                                    description="Gathering for tech enthusiasts to network,
                         learn, and share industry insights."
-                        username=""
-                        date=""
-                    /> */}
+                                    username=""
+                                    date=""
+                                /> */}
                             </div>
                         </div>
                     </div>
@@ -111,9 +111,9 @@ const EventsByHost = () => {
                     </div>
                 </div>
             </div>
-            <FooterSection/>
+            <FooterSection />
         </div>
     );
 };
 
-export default EventsByHost;
+export default Inventory;

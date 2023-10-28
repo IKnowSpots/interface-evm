@@ -31,7 +31,15 @@ const MintedCollections = () => {
     if (loading == false && mintedCollection.length == 0)
         return (
             <Layout>
+<<<<<<< Updated upstream
                 <div className="text-white px-16">No Events</div>
+=======
+                <div className="text-white">No Events</div>
+                <div>
+                    {" "}
+                    <CreateButton />
+                </div>
+>>>>>>> Stashed changes
             </Layout>
         );
 
@@ -42,9 +50,9 @@ const MintedCollections = () => {
                     return (
                         <CardsMinted
                             key={i}
-                            tokenId={nft.tokenId}
                             image={nft.cover}
                             name={nft.name}
+                            tokenId={nft.tokenId}
                         />
                     );
                 })}
@@ -65,8 +73,43 @@ const MintedCollections = () => {
             </div>
         </Layout>
     );
+
+    function CreateButton() {
+        return (
+            <a href="/dashboard/create">
+                <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+                    <Image
+                        src={"/icons/qr.svg"}
+                        width={20}
+                        height={20}
+                        alt="qr code svg"
+                        className=""
+                    />
+                    <p className=" text-white">Create an Event</p>
+                </div>
+            </a>
+        );
+    }
+
+    function Layout({ children }: { children: React.ReactNode }) {
+        return (
+            <div className="flex h-full w-full">
+                <Sidebar />
+                <div className="bg-[#25143a] w-[75%]">
+                    <DashNav />
+                    <div className="px-8 ">
+                        <p className="text-white font-semibold pl-4 pt-2">
+                            MINTED COLLECTIONS
+                        </p>
+                    </div>
+                    {children}
+                </div>
+            </div>
+        );
+    }
 };
 
+<<<<<<< Updated upstream
 function CreateButton() {
     return (
         <a href="/dashboard/create">
@@ -103,3 +146,6 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default MintedCollections;
+=======
+export default MintedCollections;
+>>>>>>> Stashed changes

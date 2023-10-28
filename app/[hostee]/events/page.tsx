@@ -62,47 +62,32 @@ const EventsByHost = () => {
 
     if (loading == false && isUsernameValid == true && activeEvents.length == 0)
         return (
-            <div>
-                ACTIVE EVENTS <br /> No events
-            </div>
+            <Layout>
+                <div className="text-white">
+                    ACTIVE EVENTS <br /> No events
+                </div>
+            </Layout>
         );
 
     return (
-        <div className="bg-[#25143a] text-white w-full overflow-hidden h-[110vh]">
-            <Navbar />
-            <div className="w-100vh h-[100vh] " >
-                <div className="flex justify-between px-[6rem]  ">
-                    <div className="pb-8 ">
-                        <p className="w-full text-white text-[1.5rem]">
-                            @{id}
-                        </p>
-                    </div>
-                    <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-2 py-1 ">
-                        <img src="/search.png" className="w-[10%]" alt="" />
-                    <input
-                        type="text"
-                        placeholder="Search events"
-                        className="text-white h-[40px] border-white w-[18rem] bg-[#1C1C1C] rounded-full px-4"
+        <Layout>
+            {activeEvents.map((nft: any, i: any) => {
+                return (
+                    <CardsHostee
+                        key={i}
+                        tokenId={nft.tokenId}
+                        image={nft.cover}
+                        name={nft.name}
+                        price={nft.price}
+                        date={nft.date}
+                        username={id}
+                        supply={nft.supply}
+                        remaining={nft.remaining}
                     />
-                    </div>
-                </div>
-
-                <div className=" flex gap-x-[2rem] gap-y-[3rem] flex-wrap pt-4 px-[7rem] pb-[5rem] ">
-                    {activeEvents.map((nft: any, i: any) => {
-                        return (
-                            <CardsHostee
-                                key={i}
-                                tokenId={nft.tokenId}
-                                NftURI={nft.cover}
-                                name={nft.name}
-                                price={nft.price}
-                                date={nft.date}
-                                username={id}
-                            />
-                        );
-                    })}
-
-                    {/* <CardsHostee
+                    
+                );
+            })}
+             {/* <CardsHostee
                         image={"1.png"}
                         name="Lorem Ipsum"
                         price="1.20"
@@ -166,13 +151,39 @@ const EventsByHost = () => {
                         date="01.34.45"
                         username={id}
                         tokenId="01"
-                    /> */}
-
-                </div>
-            </div>
-            {/* <FooterSection/> */}
-        </div>
+                    />  */}
+        </Layout>
     );
+
+    function Layout({ children }: { children: React.ReactNode }) {
+        return (
+            <div className="bg-[#25143a] text-white w-full overflow-hidden h-[110vh]">
+                <Navbar />
+                <div className="w-100vh h-[100vh] ">
+                    <div className="flex justify-between px-[6rem]  ">
+                        <div className="pb-8 ">
+                            <p className="w-full text-white text-[1.5rem]">
+                                @{id}
+                            </p>
+                        </div>
+                        <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-2 py-1 ">
+                            <img src="/search.png" className="w-[10%]" alt="" />
+                            <input
+                                type="text"
+                                placeholder="Search events"
+                                className="text-white h-[40px] border-white w-[18rem] bg-[#1C1C1C] rounded-full px-4"
+                            />
+                        </div>
+                    </div>
+
+                    <div className=" flex gap-x-[2rem] gap-y-[3rem] flex-wrap pt-4 px-[7rem] pb-[5rem] ">
+                        {children}
+                    </div>
+                </div>
+                {/* <FooterSection/> */}
+            </div>
+        );
+    }
 };
 
 export default EventsByHost;

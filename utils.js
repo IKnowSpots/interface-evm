@@ -1,7 +1,7 @@
 "use client";
 import web3modal from "web3modal";
 import { ethers } from "ethers";
-import { addressFactory, abiFactory, abiEventify, abiFeatured } from "./config";
+import { addressFactory, abiFactory, abiIKS, abiFeatured } from "./config";
 import axios from "axios";
 import { Web3Storage } from "web3.storage";
 
@@ -30,13 +30,14 @@ export async function getEventifyContractWithInfura(username) {
     //     provider
     // );
     const factoryContract = await getFactoryContractWithInfura();
+    const hostAddress = await factoryContract.usernameToAddress(username)
 
-    const id = await factoryContract.usernamesToContractId(username);
+    const id = await factoryContract.hostAddressToContractId(hostAddress);
     const addressEventify = await factoryContract.contracts(id);
 
     const eventifyContract = new ethers.Contract(
         addressEventify,
-        abiEventify,
+        abiIKS,
         provider
     );
     return eventifyContract;
@@ -60,20 +61,20 @@ export async function getFactoryContract(providerOrSigner) {
 }
 
 export async function getEventifyContract(username, providerOrSigner) {
-    const contractAddress = await getEventifyContractAddress(username);
+    const contractAddress = await getIKSContractAddress(username);
     const modal = new web3modal();
     const connection = await modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const contract = new ethers.Contract(
         contractAddress,
-        abiEventify,
+        abiIKS,
         provider
     );
     if (providerOrSigner == true) {
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
             contractAddress,
-            abiEventify,
+            abiIKS,
             signer
         );
         return contract;
@@ -103,11 +104,12 @@ export async function getFeaturedContract(providerOrSigner) {
     return contract;
 }
 
-export async function getEventifyContractAddress(username) {
+export async function getIKSContractAddress(username) {
     const contract = await getFactoryContract();
-    const id = await contract.usernamesToContractId(username);
-    const address = await contract.contracts(id);
-    return address;
+    const address = await fetchAddressFromUsername(username.toString());
+    const id = await contract.hostAddressToContractId(address.toString());
+    const contractAddress = await contract.contracts(id);
+    return contractAddress;
 }
 
 export async function getFeaturedContractAddress() {
@@ -141,7 +143,7 @@ export async function fetchUsername() {
     const address = await getUserAddress();
     const check = await fetchIfDeployed();
     if (check == true) {
-        const data = await contract.addressToUsernames(address.toString());
+        const data = await contract.addressToUsername(address.toString());
         return data;
     }
 }
@@ -149,6 +151,12 @@ export async function fetchUsername() {
 export async function fetchUsernameFromAddress(address) {
     const contract = await getFactoryContract();
     const data = await contract.addressToUsernames(address.toString());
+    return data;
+}
+
+export async function fetchAddressFromUsername(username) {
+    const contract = await getFactoryContract();
+    const data = await contract.usernameToAddress(username.toString());
     return data;
 }
 
@@ -250,34 +258,36 @@ export async function fetchInventory(username) {
 
 export async function fetchCommonInventory() {
     const contract = await getFactoryContract(true);
+    const address = await getUserAddress();
 
-    const data = await contract.fetchAllPurchasedTickets();
-    // console.log("data", data)
+    const data = await contract.userToHostPurchasedArray(address);
+    console.log("data", data)
     const items = await Promise.all(
         data.map(async (i) => {
-            console.log("i", i);
-            i.map(async (j) => {
-            // let j=1;
-            const tokenUri = await contract.uriCall(
-                i[j]?.owner,
-                i[j]?.ticketId.toNumber()
-            );
-            console.log(tokenUri);
-            const meta = await axios.get(tokenUri);
-            let price = ethers.utils.formatEther(i[j].price);
-            let item = {
-                tokenId: i[j]?.ticketId.toString(),
-                name: meta.data.name,
-                venue: meta.data.venue,
-                date: meta.data.name,
-                supply: i[j]?.supply.toNumber(),
-                remaining: i[j]?.remaining.toNumber(),
-                price,
-                NftURI: tokenUri,
-                cover: meta.data.cover,
-            };
-            return item;
-        })
+            // console.log("i", i);
+            // i.map(async (j) => {
+            // // let j=0;
+            // console.log("t22", i.length)
+            // const tokenUri = await contract.uriCall(
+            //     i[j]?.owner,
+            //     i[j]?.ticketId.toNumber()
+            // );
+            // console.log(tokenUri);
+            // const meta = await axios.get(tokenUri);
+            // let price = ethers.utils.formatEther(i[j].price);
+            // let item = {
+            //     tokenId: i[j]?.ticketId.toString(),
+            //     name: meta.data.name,
+            //     venue: meta.data.venue,
+            //     date: meta.data.name,
+            //     supply: i[j]?.supply.toNumber(),
+            //     remaining: i[j]?.remaining.toNumber(),
+            //     price,
+            //     NftURI: tokenUri,
+            //     cover: meta.data.cover,
+            // };?
+            // return item;
+        // })
     })
     );
     console.log("Common Inventory", data);
@@ -304,17 +314,14 @@ export async function deploy(username) {
     }
     const contract = await getFactoryContract(true);
     console.log(username.toString());
-    const tx = await contract.deployEventify(username.toString());
+    const tx = await contract.deployIKS(username.toString());
     await tx.wait();
     console.log("Deployed");
 }
 
 export async function fetchMintedCollection() {
-    console.log("1")
     const username = await fetchUsername();
-    console.log("2")
     const contract = await getEventifyContract(username, false);
-    console.log("3")
 
     const data = await contract.fetchMintedTickets();
     const items = await Promise.all(
@@ -332,7 +339,7 @@ export async function fetchMintedCollection() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })
@@ -399,7 +406,7 @@ export async function fetchActiveEvents() {
     return items;
 }
 
-export async function fetchPausedEvents() {
+export async function fetchInactiveEvents() {
     const username = await fetchUsername();
     const contract = await getEventifyContract(username);
 

@@ -4,21 +4,26 @@ import Image from "next/image";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { currency } from "@/config"
 
 const CardsHostee = ({
-    NftURI,
+    image,
     name,
     price,
     date,
     username,
-    tokenId
+    tokenId,
+    supply,
+    remaining
 }: {
-    NftURI: any;
+    image: any;
     name: string;
     price: any;
     date: any;
     username: string;
-    tokenId: any
+    tokenId: any,
+    supply: any,
+    remaining: any
 }) => {
     function pushPage() {
         redirect(`/${username}/events/${tokenId}`);
@@ -30,7 +35,7 @@ const CardsHostee = ({
         <div className="text-white px-4 bg-[#0F0F0FD9] pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-4">
                 <img
-                    src={NftURI}
+                    src={image}
                     width="190"
                     height="200"
                     alt="Event's Image"
@@ -38,7 +43,8 @@ const CardsHostee = ({
 
                 <div className="flex justify-between">
                     <p>{name}</p>
-                    <p>{price} Sol</p>
+                    <p>{remaining} / {supply}</p>
+                    <p>{price} {currency}</p>
                 </div>
                 <hr />
                 <div className="flex justify-between">
