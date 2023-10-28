@@ -51,6 +51,8 @@ const ActiveEvents = () => {
                             tokenId={nft?.tokenId}
                             image={nft?.cover}
                             name={nft?.name}
+                            remaining={nft?.remaining}
+                            supply={nft?.supply}
                         />
                     );
                 })}
@@ -75,7 +77,7 @@ const ActiveEvents = () => {
     function CreateButton() {
         return (
             <a href="/dashboard/create">
-                <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+                <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border z-[10]">
                     <Image
                         src={"/icons/qr.svg"}
                         width={20}
@@ -83,7 +85,7 @@ const ActiveEvents = () => {
                         alt="qr code svg"
                         className=""
                     />
-                    <p className=" text-white">Create an Event</p>
+                    <p className="z-[10] text-white">Create an Event</p>
                 </div>
             </a>
         );
@@ -93,9 +95,11 @@ const ActiveEvents = () => {
         return (
             <div className="flex h-full w-full">
                 <Sidebar />
-                <div className="bg-[#25143a] w-[75%]">
+                <div className="bg-[#25143a] w-[80%]">
                     <DashNav />
-                    <div className="px-8 ">
+                    <div className="px-12 ">
+                        <div className="bg-createEvent blur-[220px] absolute w-full h-[700px] z-[-1]" />
+
                         <p className="text-white font-semibold pl-4 pt-2">
                             ACTIVE EVENTS
                         </p>
@@ -107,43 +111,4 @@ const ActiveEvents = () => {
     }
 };
 
-<<<<<<< Updated upstream
-function CreateButton() {
-    return (
-        <a href="/dashboard/create">
-            <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border z-[10]">
-                <Image
-                    src={"/icons/qr.svg"}
-                    width={20}
-                    height={20}
-                    alt="qr code svg"
-                    className=""
-                />
-                <p className="z-[10] text-white">Create an Event</p>
-            </div>
-        </a>
-    );
-}
-
-function Layout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className="flex h-full w-full">
-            <Sidebar />
-            <div className="bg-[#25143a] w-[80%]">
-                <DashNav />
-                <div className="px-12 ">
-                <div className="bg-createEvent blur-[220px] absolute w-full h-[700px] z-[-1]"/>
-
-                    <p className="text-white font-semibold pl-4 pt-2">
-                        ACTIVE EVENTS
-                    </p>
-                </div>
-                {children}
-            </div>
-        </div>
-    );
-}
-
-=======
->>>>>>> Stashed changes
 export default ActiveEvents;

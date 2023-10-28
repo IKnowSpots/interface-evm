@@ -99,7 +99,7 @@ const Event = () => {
                     </div>
                     <div className="bg-[#1E1E1EA6] my-4 py-8 px-12 rounded-2xl shadow-2xl ">
                         <h1 className="text-3xl pb-4">{eventData?.venue}</h1>
-                        <p className="w-96">{eventData?.description}</p>
+                        <p className="w-96 text-white">{eventData?.description}</p>
                     </div>
                     <button
                         className="bg-white text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"

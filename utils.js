@@ -214,6 +214,7 @@ export async function fetchActiveEventsWithInfura(username) {
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
+                description: meta.data.description,
                 supply: i.supply.toNumber(),
                 remaining: i.remaining.toNumber(),
                 price,
@@ -260,7 +261,7 @@ export async function fetchCommonInventory() {
     const contract = await getFactoryContract(true);
     const address = await getUserAddress();
 
-    const data = await contract.userToHostPurchasedArray(address);
+    const data = await contract.userToHostPurchased(address, 0);
     console.log("data", data)
     const items = await Promise.all(
         data.map(async (i) => {
