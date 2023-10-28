@@ -39,7 +39,7 @@ const ActiveEvents = () => {
 
     return (
         <Layout>
-            <div className="flex gap-x-10 gap-y-5 flex-wrap pt-4 px-4">
+            <div className="flex gap-x-10 gap-y-5 flex-wrap pt-4 px-16 ">
                 {activeEvents.map((nft: any, i: any) => {
                     return (
                         <CardsActive
@@ -72,7 +72,7 @@ const ActiveEvents = () => {
 function CreateButton() {
     return (
         <a href="/dashboard/create">
-            <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+            <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border z-[10]">
                 <Image
                     src={"/icons/qr.svg"}
                     width={20}
@@ -80,7 +80,7 @@ function CreateButton() {
                     alt="qr code svg"
                     className=""
                 />
-                <p className=" text-white">Create an Event</p>
+                <p className="z-[10] text-white">Create an Event</p>
             </div>
         </a>
     );
@@ -90,9 +90,11 @@ function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex h-full w-full">
             <Sidebar />
-            <div className="bg-[#25143a] w-[75%]">
+            <div className="bg-[#25143a] w-[80%]">
                 <DashNav />
-                <div className="px-8 ">
+                <div className="px-12 ">
+                <div className="bg-createEvent blur-[220px] absolute w-full h-[700px] z-[-1]"/>
+
                     <p className="text-white font-semibold pl-4 pt-2">
                         ACTIVE EVENTS
                     </p>

@@ -73,6 +73,7 @@ function CreateButton() {
     return (
         <a href="/dashboard/create">
             <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+                
                 <Image
                     src={"/icons/qr.svg"}
                     width={20}
@@ -90,9 +91,12 @@ function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex h-full w-full">
             <Sidebar />
-            <div className="bg-[#25143a] w-[75%]">
+            <div className="bg-[#25143a] w-[80%]">
+
                 <DashNav />
-                <div className="px-8 ">
+                <div className="px-12 ">
+                <div className="bg-createEvent blur-[220px] absolute w-full h-[700px] z-[-1]"/>
+
                     <p className="text-white font-semibold pl-4 pt-2">
                         INACTIVE EVENTS
                     </p>

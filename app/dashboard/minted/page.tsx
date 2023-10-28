@@ -31,7 +31,7 @@ const MintedCollections = () => {
     if (loading == false && mintedCollection.length == 0)
         return (
             <Layout>
-                <div className="text-white">No Events</div>
+                <div className="text-white px-16">No Events</div>
             </Layout>
         );
 
@@ -88,10 +88,11 @@ function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex h-full w-full">
             <Sidebar />
-            <div className="bg-[#25143a] w-[75%]">
+            <div className="bg-[#25143a] w-[80%]">
                 <DashNav />
-                <div className="px-8 ">
-                    <p className="text-white font-semibold pl-4 pt-2">
+                <div className="px-12 ">
+                <div className="bg-createEvent blur-[220px] absolute w-full h-[700px] z-[-1]"/>
+                                    <p className="text-white font-semibold pl-4 pt-2">
                         MINTED COLLECTIONS
                     </p>
                 </div>
