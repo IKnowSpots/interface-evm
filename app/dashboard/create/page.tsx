@@ -8,6 +8,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Create = () => {
+
+    const [isChecked, setIsChecked] = useState(false);
+
+    const toggleSwitch = () => {
+        setIsChecked(!isChecked); // Perform your toggle event or function here based on the value of isChecked
+    };
+
     const [formInput, setFormInput] = useState({
         name: "",
         description: "",
@@ -210,12 +217,19 @@ const Create = () => {
                 <div className="py-16">
                     <div className="flex flex-col w-3/4 mx-auto  ">
                         <div className="py-4 flex justify-between">
-                            <div className=" ">
-                                <h3 className="text-xl">Shortlist events</h3>
-                                <p className="opacity-40">
-                                    Display this on feature section of landing
-                                    page.
-                                </p>
+                            <div className="w-full flex justify-between">
+                                <div>
+                                    <h3 className="text-xl">Shortlist events</h3>
+                                    <p className="opacity-40">
+                                        Display this on feature section of landing page.
+                                    </p>
+                                </div>
+                                <div className={`flex items-center cursor-pointer`}>
+                                    <div className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${isChecked ? 'bg-green-500' : 'bg-[#1E1E1E]'}`} onClick={toggleSwitch}>
+                                        <div className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${isChecked ? 'translate-x-6' : ''}`}></div>
+                                    </div>
+                                    {/* <span className="ml-2 text-sm">{isChecked ? 'ON' : 'OFF'}</span> */}
+                                </div>
                             </div>
                             {/* https://gdowens.github.io/react-toggle-button/ to use toggle in the actual code */}
                             {/* <ToggleButton value={false} /> */}
