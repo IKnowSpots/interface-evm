@@ -3,7 +3,8 @@ import Image from "next/image"
 const HowItWorksSingleComponent = ({icons, title, desc}: {icons: any, title: any, desc: any}) =>{
     return(
         
-            <div className="bg-[#141118] flex flex-col w-[80%] md:w-1/4 rounded-lg px-4 sm:px-12 py-8 mx-4 items-center text-center">
+            <div className="box-background flex flex-col w-[80%] md:w-1/4 rounded-lg px-4 sm:px-12 py-8 mx-4">
+              <div className="flex flex-col justify-center items-center text-center">
               <Image
                 src={`/icons/${icons}`}
                 width="50"
@@ -14,6 +15,7 @@ const HowItWorksSingleComponent = ({icons, title, desc}: {icons: any, title: any
               <p className="opacity-75 text-[0.8rem] sm:text-[1rem]">
                 {desc}
               </p>
+              </div>
             </div>
     )
 }
