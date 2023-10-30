@@ -32,7 +32,7 @@ const InactiveEvents = () => {
     if (loading == false && inactiveEvents.length == 0)
         return (
             <Layout>
-                <div className="text-white">No Events</div>
+                <div className="text-white p-4">No Events</div>
                 <div>
                     {" "}
                     <CreateButton />
@@ -95,7 +95,7 @@ const InactiveEvents = () => {
                 <div className="bg-[#25143a] w-[80%]">
                     <DashNav />
                     <div className="px-12 ">
-                        <div className="bg-createEvent blur-[220px] absolute w-full h-[700px] z-[-1]" />
+                        <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[700px] z-[-1]" />
 
                         <p className="text-white font-semibold pl-4 pt-2">
                             INACTIVE EVENTS
