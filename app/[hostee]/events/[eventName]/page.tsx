@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { fetchActiveEventsWithInfura, buyTicket } from "@/utils";
 import { usePathname } from "next/navigation";
 import { currency } from "@/config";
+import Link from "next/link";
 
 const Event = () => {
     const pathName = usePathname();
@@ -53,18 +54,21 @@ const Event = () => {
 
     return (
         
-        <div className="bg-[#25143a] text-white px-8 h-[100vh]">
+        <div className="bg-[#25143a] text-white px-8 h-full">
+            <div>
+                <div className="grad1 blur-[220px] w-[80%] h-full absolute z-[1]"></div>
+            </div>
             <Navbar />
             <div className="w-full">
             <div className="md:flex-row flex flex-col py-4 justify-center w-full">
-                <div className="w-[30%] flex justify-center items-center border border-dashed rounded-2xl border-red">
+                <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
                     <img
                         src={eventData?.cover}
                         alt="event img"
-                        className="w-[80%] h-[80%] rounded-xl flex justify-center items-center mx-auto "
+                        className="w-[90%] h-fit rounded-xl flex justify-center items-center mx-auto "
                     />
                 </div>
-                <div className="flex flex-col px-24 ">
+                <div className="flex flex-col px-24 w-[60%] ">
                     <div className="flex items-center py-2  ">
                         <Image
                             src={"/icons/dollar.svg"}
@@ -91,18 +95,26 @@ const Event = () => {
                             alt="person avatar"
                         />
                         <div className="pl-4">
-                            <p className="text-[rgba(255,255,255,0.65)]">
+                            <p className="text-[rgba(255,255,255,0.65)] text-lg">Host</p>
+                            <p className="text-white text-lg font-semibold">
                                 {username}
                             </p>
                             <h3 className="text-xl">{eventData?.hostName}</h3>
                         </div>
                     </div>
-                    <div className="bg-[#1E1E1EA6] my-4 py-8 px-12 rounded-2xl shadow-2xl ">
-                        <h1 className="text-3xl pb-4">{eventData?.venue}</h1>
-                        <p className="w-96 text-white">{eventData?.description}</p>
+                    <div className="bg-[#1E1E1EA6] my-4 py-4 px-6 rounded-2xl shadow-2xl ">
+                        <div className="flex items-center pb-4 gap-2">
+                            <img src="/map-pin.png" className="w-[5%]" alt="" />
+                            <h1 className="text-xl font-semibold">{eventData?.venue}</h1>
+                        </div>
+                        <p className=" text-white mb-4">{eventData?.description}</p>
+                        <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
+                            Know More
+                            <img src="/external-link.svg" alt="" />
+                        </Link>
                     </div>
                     <button
-                        className="bg-white text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
+                        className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
                         onClick={() => claim(eventData.tokenId, eventData.price)}
                     >
                         Claim Now
