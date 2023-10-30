@@ -275,3 +275,13 @@ body {
 .bg-supportPage{
     background: linear-gradient(180deg, #29004A 0%, #000 98.24%);
 }
+
+.bg-dashboard{
+    background: conic-gradient(
+  from 53deg at 40.84% 66.92%, 
+  #9303C6 12.003970295190811deg, 
+  #420294 80.62499821186066deg, 
+  #000 230.625deg, 
+  #000 341.20814323425293deg
+);
+}

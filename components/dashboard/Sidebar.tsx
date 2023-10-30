@@ -42,7 +42,7 @@ const Sidebar = () => {
 
     return (
         <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[20%] py-8">
-                                <div className="grad2 blur-[220px] absolute w-[60%] h-[700px] z-[-1]"></div>
+                                <div className="bg-dashboard blur-[220px] absolute w-[60%] h-[700px] z-[-1]"></div>
 
             <Link href="/">
                 <Image
