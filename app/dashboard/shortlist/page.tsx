@@ -6,12 +6,12 @@ const Shortlist = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="bg-[#25143a] p-4 w-[80%]">
+            <div className="bg-[#25143a] w-[80%]">
                 <DashNav />
                 <div>
                 <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[700px] z-[-1]"/>
 
-                    <p className="text-white">Not available yet</p>
+                    <p className="text-white p-4">Not available yet</p>
                 </div>
             </div>
         </div>

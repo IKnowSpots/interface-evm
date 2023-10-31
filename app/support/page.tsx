@@ -1,9 +1,9 @@
-import Navbar from "@/components/dashboard/create/Navbar";
+import Navbar from "@/components/landing/Navbar";
 import Script from "next/script";
 
 const Support = () => {
   return (
-    <div className="bg-supportPage pb-24 px-8 text-white overflow-y-hidden">
+    <div className="bg-supportPage pb-24 text-white overflow-y-hidden">
       <Navbar />
       <hr className="mx-4" />
       <div className="relative z-10">
