@@ -16,21 +16,33 @@ const CardsActive = ({ image, name, tokenId, remaining, supply }: { image: any, 
   }
 
     return (
-        <div className="text-white px-4 bg-[#0F0F0FD9] pt-4 pb-5 rounded-xl">
-            <div className="flex flex-col gap-4">
+        <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
+            <div className="flex flex-col gap-6">
                 <img
                     src={image}
-                    width="195"
-                    height="200"
+                    className="h-[250px] rounded-xl"
+                    // width="195"
+                    // height="200"
                     alt="Event&apos;s Image"
                 />
-                <div className="flex justify-between">
-                    <p>{name}</p>
-                    <p>{remaining} / {supply}</p>
+                <div className="flex gap-2 text-[0.85rem] flex-col">
+                    <div className="flex justify-between items-center">
+                        <p>{name}</p>
+                        <p>Value</p>
+                    </div>
+                    <div className="h-[2px] rounded-full bg-white"></div>
+                    <div className="flex justify-between items-center">
+                        <p>Venue</p>
+                        <p>Date</p>
+                    </div>
+                    {/* <p>{remaining}/{supply}</p> */}
                     {/* <p>1.20 Weth</p> */}
-                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => pauseEventCall(tokenId)}>
-                        Pause
-                    </button>
+                    <div className="flex justify-center items-center">
+                        <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => pauseEventCall(tokenId)}>
+                            Pause
+                        </button>
+                    </div>
+                    
                 </div>
                 {/* <hr />
                 <div className="flex justify-between my-6">

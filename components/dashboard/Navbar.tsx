@@ -26,7 +26,7 @@ const DashNav = () => {
             <input
                 type="text"
                 placeholder="Search events"
-                className="text-white h-[2.5rem] w-[35%] border-white bg-[#1C1C1C] rounded-full px-4 "
+                className="text-white h-[2.5rem] w-[35%] border-white bg-black rounded-full px-4 "
             />
             </div>
 

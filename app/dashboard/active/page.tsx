@@ -43,7 +43,7 @@ const ActiveEvents = () => {
 
     return (
         <Layout>
-            <div className="flex gap-x-10 gap-y-5 flex-wrap pt-4 px-16 ">
+            <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6 ">
                 {activeEvents.map((nft: any, i: any) => {
                     return (
                         <CardsActive

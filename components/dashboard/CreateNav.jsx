@@ -31,17 +31,13 @@ const CreateNav = () => {
                     alt="iks logo"
                 />
             </Link>
-            <div className="flex  ">
-                <button className="rounded-full h-[] px-8 mr-8 flex items-center bg-gradient-to-r from-[#9000FF] to-[#1D102700] ">
-                    <Image
-                        src={"/bored_ape_image.png"}
-                        width={30}
-                        height={50}
-                        alt="bored ape nft image"
-                        className="rounded-xl"
-                    />
-                    <p>@{username}</p>
-                </button>
+            <div className="flex items-center ">
+                <Link href={`/${username}/events`}>
+                    <div className="text-white bg-[#070708] py-2 text-base font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">
+                        <p className="">Hii, @{username}</p>
+                        <div className="h-[1.5rem] w-[1.5rem] grad1 rounded-full"></div>
+                    </div>
+                </Link>
                 {/* remaning: fix the basic gradients of this */}
                 <div className="flex items-center py-3 px-3 rounded-lg">
                     {/* <Image
