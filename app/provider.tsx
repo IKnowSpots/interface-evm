@@ -12,13 +12,14 @@ import {
     ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import {  polygon, polygonMumbai} from "wagmi/chains";
+import {  polygon, polygonMumbai, sepolia} from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
     [
         // polygon,
         polygonMumbai,
+        sepolia,
         ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [polygonMumbai] : []),
     ],
     [publicProvider()]

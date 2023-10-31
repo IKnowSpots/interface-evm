@@ -1,16 +1,13 @@
 "use client";
 import web3modal from "web3modal";
 import { ethers } from "ethers";
-import { addressFactory, abiFactory, abiIKS, abiFeatured } from "./config";
+import { addressFactory, abiFactory, abiIKS, abiFeatured, RPCUrl } from "./config";
 import axios from "axios";
 import { Web3Storage } from "web3.storage";
 
-// const InfuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
-const InfuraKey = "eec39d04a1064883bf94ec917264ce9a"
-
 export async function getFactoryContractWithInfura() {
     const provider = new ethers.providers.JsonRpcProvider(
-        `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
+        `${RPCUrl}`
     );
     const factoryContract = new ethers.Contract(
         addressFactory,
@@ -20,15 +17,10 @@ export async function getFactoryContractWithInfura() {
     return factoryContract;
 }
 
-export async function getEventifyContractWithInfura(username) {
+export async function getIKSContractWithInfura(username) {
     const provider = new ethers.providers.JsonRpcProvider(
-        `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
+        `${RPCUrl}`
     );
-    // const factoryContract = new ethers.Contract(
-    //     addressFactory,
-    //     abiFactory,
-    //     provider
-    // );
     const factoryContract = await getFactoryContractWithInfura();
     const hostAddress = await factoryContract.usernameToAddress(username)
 
@@ -200,7 +192,7 @@ export async function fetchFeaturedEventsWithInfura() {
 }
 
 export async function fetchActiveEventsWithInfura(username) {
-    const contract = await getEventifyContractWithInfura(username);
+    const contract = await getIKSContractWithInfura(username);
 
     const data = await contract.fetchActiveEvents();
     const items = await Promise.all(

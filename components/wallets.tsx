@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 const WalletsProvider = () => {
 
     return(
-        <div><ConnectButton accountStatus="address" showBalance={false} chainStatus="none"/></div>
+        <div><ConnectButton accountStatus="address" showBalance={false} chainStatus="icon"/></div>
     )
 };
 

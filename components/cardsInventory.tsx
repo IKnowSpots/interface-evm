@@ -2,6 +2,8 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const CardsInventory = ({
     image,
@@ -16,6 +18,9 @@ const CardsInventory = ({
     date: any;
     username: string;
 }) => {
+    function pushPage() {
+        redirect(`/${username}/events/${name}`);
+    }
 
     return (
         <div className="flex flex-col md:flex-row w-[90%] gap-4 justify-between items-center bg-[#56565680] p-8 my-6 sm:my-8 rounded-xl gap-12">

@@ -1,8 +1,17 @@
+// export const InfuraRPCKey = process.env.NEXT_PUBLIC_INFURA_KEY;
+export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`
+
 const PolygonAddressFactory = `0x9e9f054F7E3dccf07D86757Fb7079120a714A788`
 const PolygonCurrency = `Matic`
+const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`
 
-export const addressFactory = PolygonAddressFactory
-export const currency = PolygonCurrency
+const SepoliaAddressFactory = `0x18aE94089aee4e396c4Eb26B8807e1026b44471d`
+const SepoliaCurrency = `Eth`
+const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`
+
+export let addressFactory = SepoliaAddressFactory
+export let currency = SepoliaCurrency
+export let RPCUrl = `${SepoliaInfuraUrl}${InfuraRPCKey}`
 
 
 export const abiFactory = `[
