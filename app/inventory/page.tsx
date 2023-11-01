@@ -51,9 +51,9 @@ const Inventory = () => {
                 </Link>
             </div>
 
-            <div className="w-full mt-[5rem] flex ">
+            <div className="w-full my-[5rem] flex ">
                 <div className="flex flex-col md:flex-row gap-6 w-full mx-6">
-                    <div className="flex items-center justify-center w-[60%] ">
+                    <div className="flex w-[60%] ">
                         <div className="w-full flex relative z-5">
                             <div className="w-full flex flex-col items-center">
                                 <div className="flex justify-center w-[80%] gap-8">
