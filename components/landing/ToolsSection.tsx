@@ -12,7 +12,7 @@ const ToolSection = () => {
           iknowspots desires to lead the ticketing industry, both
           operationally and in digital ticketing.
         </p>
-        <div className="flex justify-between w-full sm:w-3/4 bg-[#56565680] px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
+        <div className="flex justify-between w-full sm:w-3/4 box-background px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Custom Subdomains.</p>
           <Image
             src="/icons/bubble.svg"
@@ -21,7 +21,7 @@ const ToolSection = () => {
             alt="bubble png"
           />
         </div>
-        <div className="flex justify-between w-full sm:w-3/4 bg-[#56565680] px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
+        <div className="flex justify-between w-full sm:w-3/4 box-background px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Event-specific landing pages.</p>
           <Image
             src="/icons/table_settings.svg"
@@ -30,16 +30,16 @@ const ToolSection = () => {
             alt=""
           />
         </div>
-        <div className="flex justify-between w-full sm:w-3/4 bg-[#56565680] px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
+        <div className="flex justify-between w-full sm:w-3/4 box-background px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Backend as a service.</p>
           <Image src="/icons/candlestick.svg" width="20" height="50" alt="" />
         </div>
       </div>
-      <div>
+      <div className="">
         <div className="w-full hidden md:flex justify-end">
           <div className="grad1 blur-[100px] z-[-1] flex h-[639px] w-[40%] absolute"></div>
         </div>
-        <Image src="/collage.png" width="600" height="100" alt="" />
+        <Image src="/collage.png" className="rounded-2xl" width="450" height="100" alt="" />
       </div>
     </div>
   );

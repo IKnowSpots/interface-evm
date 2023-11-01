@@ -46,7 +46,7 @@ export default function Home() {
                 <div className="mb-[3rem]">
                     <ExploreSolutions />
                 </div>
-                <div className="mb-[5rem] sm:mb-[10rem] sm:mx-20">
+                <div className="mb-[5rem] sm:mb-[10rem] sm:mx-[7rem]">
                     <ToolSection />
                 </div>
                 <div className="mb-[5rem] sm:mb-[10rem] mx-8 sm:mx-16">

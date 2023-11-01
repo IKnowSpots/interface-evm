@@ -21,7 +21,7 @@ const Missions = () => {
     }
 
     return (
-        <div className="bg-[#3C3C3C] relative flex justify-between p-8 w-[80%] rounded-xl bg-opacity-40 bg-blur-md">
+        <div className="box-background relative flex justify-between p-8 w-[80%] rounded-xl bg-opacity-40 bg-blur-md">
             <div className="flex flex-col items-start sm:w-3/4">
                 <h1 className="text-4xl sm:text-5xl mt-4 ">Our Mission</h1>
                 <div className="flex flex-col sm:flex-row justify-around gap-4 pt-6">

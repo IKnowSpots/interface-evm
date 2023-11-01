@@ -96,7 +96,7 @@ const Navbar = () => {
                 </Link>
 
                 <div className="flex gap-[0.75rem] text-[0.5rem] lg:text-base">
-                    <p className="w-[100px] lg:w-[150px]">
+                    <p className="w-[150px] lg:w-[205px]">
                         <WalletsProvider />
                     </p>
 
