@@ -123,7 +123,7 @@ body {
 .box-background {
     border-radius: 1.25rem;
     border: 1px solid #3C3C3C;
-    background: rgba(68, 68, 68, 0.30);
+    background: rgba(68, 68, 68, 0.302);
     box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(20px);
 }
@@ -148,15 +148,15 @@ body {
 
 
 .subscribe-button {
-    /*outline: none;
-    border-radius: 1.875rem;
-    /* border: 1px solid #FFF; */
-    /* background: linear-gradient(109deg, rgba(248, 179, 92, 0.53) 24.14%, rgba(176, 30, 225, 0.13) 54.75%, rgba(253, 0, 71, 0.38) 95.84%); */
-    /*background-color: #58427c;
-    background-image: linear-gradient(316deg, #58427c 0%, #746cc0 74%);*/
-    border-radius: 30px;
-    border: 1px solid #FFF;
-    background: linear-gradient(109deg, rgba(248, 178, 92, 0.425) 24.14%, rgba(191, 108, 218, 0.37) 54.75%, rgba(253, 0, 72, 0.31) 95.84%);
+    border-radius: 1.25rem;
+    border: 1px solid #b01ee185;
+    background: rgba(68, 68, 68, 0.302);
+    box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(20px);
+}
+
+.subscribe-button:hover{
+    border: solid 1px #b01ee1;
 }
 
 

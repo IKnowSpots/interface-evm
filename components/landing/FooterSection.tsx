@@ -36,7 +36,7 @@ const FooterSection = () => {
                         className="email-input px-5 py-1"
                         placeholder="Email"
                     ></input>
-                    <button className="subscribe-button px-5 py-1">
+                    <button className="subscribe-button hover:bg-[#44444400] px-5 py-1">
                         Subscribe
                     </button>
                 </div>
