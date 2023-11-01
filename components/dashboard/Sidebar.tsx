@@ -102,26 +102,26 @@ const Sidebar = () => {
                     <p className="py-1 opacity-40 sidebar-elements">Docs</p>
                 </Link>
                 <Link target="_blank" href="https://github.com/IKnowSpots">
-                    <div className="flex py-1 sidebar-elements">
-                        <p className="pr-4 opacity-40 sidebar-elements">GitHub </p>
+                    <div className="flex items-center py-1 sidebar-elements">
+                        <p className=" pr-2 opacity-40 sidebar-elements">GitHub </p>
                         <Image
                             src="/icons/arrow.svg"
-                            width="13"
+                            width="17"
                             height="100"
                             alt="arrow icon"
-                            className="rotate-180 opacity-40"
+                            className="rotate-[145deg] opacity-50"
                         />
                     </div>
                 </Link>
                 <Link target="_blank" href="https://twitter.com/iknowspots">
-                    <div className="flex py-1 sidebar-elements">
-                        <p className="pr-4 opacity-40 sidebar-elements sidebar-elements">Twitter</p>
+                    <div className="flex items-center py-1 sidebar-elements">
+                        <p className="pr-2 opacity-40 sidebar-elements sidebar-elements">Twitter</p>
                         <Image
                             src="/icons/arrow.svg"
-                            width="13"
+                            width="17"
                             height="100"
                             alt="arrow icon"
-                            className="rotate-180 opacity-40"
+                            className="rotate-[145deg] opacity-50"
                         />
                     </div>
                 </Link>

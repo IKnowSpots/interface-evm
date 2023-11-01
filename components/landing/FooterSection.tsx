@@ -51,12 +51,12 @@ const FooterSection = () => {
                     </a>
 
                     <a href="https://github.com/orgs/IKnowSpots/repositories">
-                    <img src="/github.svg" alt="linkedin" />
+                    <img src="/github.svg" alt="github" />
                     </a>
 
-                    <a href="https://medium.com/@iknowspots">
-                    <img className="mt-1" src="/medium.png" alt="linkedin" />
-                    </a>
+                    {/* <a href="https://medium.com/@iknowspots">
+                    <img className="mt-1" src="/medium.png" alt="medium" />
+                    </a> */}
 
                 </div>
 

@@ -54,12 +54,12 @@ const Event = () => {
 
     return (
         
-        <div className="bg-[#25143a] text-white px-8 h-full">
+        <div className="bg-[#25143a] text-white pb-8 px-8 w-full h-full">
             <div>
-                <div className="grad1 blur-[220px] w-[80%] h-full absolute z-[1]"></div>
+                <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
             </div>
             <Navbar />
-            <div className="w-full">
+            <div className="w-full h-full">
             <div className="md:flex-row flex flex-col py-4 justify-center w-full">
                 <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
                     <img
@@ -108,10 +108,10 @@ const Event = () => {
                             <h1 className="text-xl font-semibold">{eventData?.venue}</h1>
                         </div>
                         <p className=" text-white mb-4">{eventData?.description}</p>
-                        <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
+                        {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
                             Know More
                             <img src="/external-link.svg" alt="" />
-                        </Link>
+                        </Link> */}
                     </div>
                     <button
                         className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
