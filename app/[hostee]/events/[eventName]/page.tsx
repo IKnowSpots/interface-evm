@@ -32,23 +32,18 @@ const Event = () => {
     }, []);
 
     async function fetchActiveEventsData() {
-        // console.log("1");
-        let compareId = Number(eventId) ;
-        console.log("compareId", compareId);
-        console.log("username", username);
         setLoading(true);
         let data: any = await fetchActiveEventsWithInfura(username);
         const event = data.find((obj: any) => obj.tokenId == (eventId));
-        // console.log("2");
         setEventData(event);
         console.log("event", event);
         if (event) {
         }
         setLoading(false);
-        // console.log("4");
     }
 
     async function claim(tokenId: any, price: any) {
+        
         await buyTicket(username, tokenId, price)
     }
 
