@@ -33,7 +33,7 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: {
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
                     <div className="flex justify-between items-center">
-                        <p>{ supply - remaining }</p>
+                        <p>Bought: { supply - remaining }</p>
                         <p>{date}</p>
                     </div>
                     {/* <p>{remaining}/{supply}</p> */}

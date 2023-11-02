@@ -49,7 +49,7 @@ const CardsHostee = ({
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
                     <div className="flex justify-between items-center">
-                        <p>{remaining} / {supply}</p>
+                        <p>Bought: { supply - remaining }</p>
                         <p>{date}</p>
                     </div>
                     <div className="flex justify-center items-center">

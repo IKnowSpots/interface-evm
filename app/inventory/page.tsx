@@ -35,12 +35,12 @@ const Inventory = () => {
                         Explore the events you&apos;e marked as yours.
                     </p>
                 </div>
-                <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-2 py-1 ">
+                <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#070708]  rounded-full px-2 py-1 ">
                     <img src="/search.png" className="w-[10%]" alt="" />
                     <input
                         type="text"
                         placeholder="Search events"
-                        className="text-white h-[40px] border-white w-[18rem] bg-[#1C1C1C] rounded-full px-4"
+                        className="text-white h-[40px] border-white w-[18rem] bg-[#070708] rounded-full px-4"
                     />
                 </div>
             </div>
