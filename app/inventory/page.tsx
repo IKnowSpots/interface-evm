@@ -104,7 +104,7 @@ const Inventory = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-center items-center md:w-[40%]">
+                    <div className="flex justify-center mt-20 md:w-[40%]">
                         <div className="">
                             <MyCalender />
                         </div>

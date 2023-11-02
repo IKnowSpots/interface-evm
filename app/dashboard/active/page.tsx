@@ -51,6 +51,8 @@ const ActiveEvents = () => {
                             tokenId={nft?.tokenId}
                             image={nft?.cover}
                             name={nft?.name}
+                            price={nft?.price}
+                            date={nft?.date}
                             remaining={nft?.remaining}
                             supply={nft?.supply}
                         />

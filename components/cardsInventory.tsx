@@ -30,10 +30,10 @@ const CardsInventory = ({
           </div>
           <img
             src={image}
-            width="219"
-            height="136"
+            // width="219"
+            // height="136"
             alt="bubble png"
-            className="rounded-xl"
+            className="h-[150px] rounded-xl"
           />
         </div>
     );
