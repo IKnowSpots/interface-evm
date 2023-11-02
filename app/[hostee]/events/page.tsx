@@ -162,7 +162,7 @@ const EventsByHost = () => {
                     <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
                 </div>
                 <Navbar />
-                <div className="w-100vh h-full ">
+                <div className="w-100vh h-[100vh] ">
                     <div className="flex justify-between px-[6rem]  ">
                         <div className="pb-8 ">
                             <p className="w-full text-white text-[1.5rem]">
@@ -183,7 +183,7 @@ const EventsByHost = () => {
                         {children}
                     </div>
                 </div>
-                {/* <FooterSection/> */}
+                <FooterSection/>
             </div>
         );
     }

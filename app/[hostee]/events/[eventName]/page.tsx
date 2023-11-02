@@ -8,6 +8,7 @@ import { fetchActiveEventsWithInfura, buyTicket } from "@/utils";
 import { usePathname } from "next/navigation";
 import { currency } from "@/config";
 import Link from "next/link";
+import FooterSection from "@/components/landing/FooterSection";
 
 const Event = () => {
     const pathName = usePathname();
@@ -117,6 +118,7 @@ const Event = () => {
                 </div>
             </div>
             </div>
+            <FooterSection/>
         </div>
     );
 };

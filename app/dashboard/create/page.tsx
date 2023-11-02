@@ -7,10 +7,27 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
-
+import FooterSection from "@/components/landing/FooterSection";
 const Create = () => {
 
     const [isShortlist, setisShortlist] = useState(false);
+    const [val,setVal]=useState('')
+    const [word,setWord]=useState(0)
+
+    const handleChange =(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+        const data = e.target.value.split(' ')
+        console.log(data)
+
+        if(data.length<=5){
+            setVal(e.target.value)
+            setWord(data.length)
+            if(e.target.value == ''){
+                setWord(0)
+            }
+        }else{
+            alert("you can type only 5 words")
+        }
+    }
 
     const toggleSwitch = () => {
         setisShortlist(!isShortlist); // Perform your toggle event or function here based on the value of isShortlist
@@ -112,7 +129,7 @@ const Create = () => {
             });
         }
     }
-
+   
     return (
         <div className="bg-createEvent text-white  px-8">
             <CreateNav />
@@ -245,11 +262,13 @@ const Create = () => {
                             id="event-name"
                             placeholder="eg. name of the event"
                             className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2"
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 setFormInput({
                                     ...formInput,
                                     name: e.target.value,
                                 })
+                            }
+                             
                             }
                             disabled={imgLoading}
                         />
@@ -259,17 +278,23 @@ const Create = () => {
                         <textarea
                             placeholder="Description here"
                             className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg resize-none p-2"
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 setFormInput({
                                     ...formInput,
                                     description: e.target.value,
                                 })
+                                handleChange(e)
+
+                            }  
                             }
                             disabled={imgLoading}
                             //   change this if scroll bar is appearing
-                            rows={2}
+                            rows={4}
+                               
                         ></textarea>
+                       <p className="right-0 text-gray-400"> {val.length}/2000</p>
                     </div>
+
                     <div className=" flex w-3/4 mx-auto  ">
                         <div className="flex flex-col w-3/4 mx-auto my-4 mr-6 ">
                             <label className="pb-2">Supply</label>
@@ -417,6 +442,7 @@ const Create = () => {
                 pauseOnHover
                 theme="dark"
             />
+            <FooterSection/>
         </div>
     );
 };
