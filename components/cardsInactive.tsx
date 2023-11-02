@@ -23,7 +23,7 @@ const CardsInactive = ({ image, name, tokenId }: { image: any, name: string, tok
                     // height="200"
                     alt="Event&apos;s Image"
                 />
-                <div className="flex justify-between">
+                <div className="flex text-[0.85rem] justify-between items-center gap-2">
                     <p>{name}</p>
                     {/* <p>1.20 Weth</p> */}
                     <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => runEventCall(tokenId)}>

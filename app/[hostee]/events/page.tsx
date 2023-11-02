@@ -162,24 +162,25 @@ const EventsByHost = () => {
                     <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
                 </div>
                 <Navbar />
-                <div className="w-100vh h-[100vh] ">
+                <div className="w-full h-full ">
                     <div className="flex justify-between px-[6rem]  ">
                         <div className="pb-8 ">
-                            <p className="w-full text-white text-[1.5rem]">
-                                @{id}
-                            </p>
+                            <div className="cursor-pointer text-white bg-[#070708] py-2 text-base font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">
+                                <p className="">@{username}</p>
+                            <div className="h-[1.5rem] w-[1.5rem] grad1 rounded-full"></div>
+                    </div>
                         </div>
-                        <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#1C1C1C]  rounded-full px-2 py-1 ">
+                        <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#070708]  rounded-full px-2 py-1 ">
                             <img src="/search.png" className="w-[10%]" alt="" />
                             <input
                                 type="text"
                                 placeholder="Search events"
-                                className="text-white h-[40px] border-white w-[18rem] bg-[#1C1C1C] rounded-full px-4"
+                                className="text-white h-[40px] border-white w-[18rem] bg-[#070708] rounded-full px-4"
                             />
                         </div>
                     </div>
 
-                    <div className=" flex gap-x-[2rem] gap-y-[3rem] flex-wrap pt-4 px-[7rem] pb-[5rem] ">
+                    <div className=" flex gap-x-[1.5rem] gap-y-[2rem] flex-wrap pt-4 px-[7rem] pb-[5rem] ">
                         {children}
                     </div>
                 </div>

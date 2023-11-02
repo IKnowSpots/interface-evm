@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 import { pauseEvent } from "@/utils"
+import { currency } from "@/config"
 
-const CardsActive = ({ image, name, tokenId, remaining, supply }: { image: any, name: string, tokenId: any, remaining: string, supply: string }) => {
+const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any }) => {
 
   const [loading, setLoading] = useState(false)
 
@@ -28,12 +29,12 @@ const CardsActive = ({ image, name, tokenId, remaining, supply }: { image: any, 
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        <p>Value</p>
+                        <p>{price} {currency}</p>
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
                     <div className="flex justify-between items-center">
-                        <p>Venue</p>
-                        <p>Date</p>
+                        <p>{ supply - remaining }</p>
+                        <p>{date}</p>
                     </div>
                     {/* <p>{remaining}/{supply}</p> */}
                     {/* <p>1.20 Weth</p> */}

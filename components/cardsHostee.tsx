@@ -32,31 +32,37 @@ const CardsHostee = ({
     // console.log("tok", tokenId)
 
     return (
-        <div className="text-white px-4 bg-[#0F0F0FD9] pt-4 pb-5 rounded-xl">
+        <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-4">
                 <img
                     src={image}
-                    width="190"
-                    height="200"
+                    className="h-[250px] rounded-xl"
+                    // width="190"
+                    // height="200"
                     alt="Event's Image"
                 />
 
-                <div className="flex justify-between">
-                    <p>{name}</p>
-                    <p>{remaining} / {supply}</p>
-                    <p>{price} {currency}</p>
-                </div>
-                <hr />
-                <div className="flex justify-between">
-                    <p>{date}</p>
-                    <Link
+                <div className="flex gap-2 text-[0.85rem] flex-col">
+                    <div className="flex justify-between items-center">
+                        <p>{name}</p>
+                        <p>{price} {currency}</p>
+                    </div>
+                    <div className="h-[2px] rounded-full bg-white"></div>
+                    <div className="flex justify-between items-center">
+                        <p>{remaining} / {supply}</p>
+                        <p>{date}</p>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <Link
                         href={`/${username}/events/${tokenId}`}
                         className="view-btn px-4 py-1 outline rounded-lg"
                         onClick={pushPage}
-                    >
-                        View
-                    </Link>
+                        >
+                            View
+                        </Link>
+                    </div>
                 </div>
+
             </div>
         </div>
     );
