@@ -18,14 +18,14 @@ const Create = () => {
         const data = e.target.value.split(' ')
         console.log(data)
 
-        if(data.length<=5){
+        if(data.length<=100){
             setVal(e.target.value)
             setWord(data.length)
             if(e.target.value == ''){
                 setWord(0)
             }
         }else{
-            alert("you can type only 5 words")
+            alert("you can type only 400 words")
         }
     }
 
@@ -292,7 +292,7 @@ const Create = () => {
                             rows={4}
                                
                         ></textarea>
-                       <p className="right-0 text-gray-400"> {val.length}/400</p>
+                       <p className="right-0 text-gray-400"> {val.length}/1000</p>
                     </div>
 
                     <div className=" flex w-3/4 mx-auto  ">
