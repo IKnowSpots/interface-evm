@@ -42,7 +42,7 @@ const InactiveEvents = () => {
 
     return (
         <Layout>
-            <div className="flex gap-x-10 gap-y-5 flex-wrap pt-4 px-4">
+            <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6">
                 {inactiveEvents.map((nft: any, i: any) => {
                     return (
                         <CardsInactive

@@ -41,7 +41,7 @@ const MintedCollections = () => {
 
     return (
         <Layout>
-            <div className="flex gap-x-10 gap-y-5 flex-wrap pt-4 px-4">
+            <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6">
                 {mintedCollection.map((nft: any, i: any) => {
                     return (
                         <CardsMinted
