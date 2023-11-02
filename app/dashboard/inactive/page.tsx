@@ -74,7 +74,7 @@ const InactiveEvents = () => {
     function CreateButton() {
         return (
             <a href="/dashboard/create">
-                <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-2 py-2 border">
+                <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-4 py-2 rounded-xl border">
                     <Image
                         src={"/icons/qr.svg"}
                         width={20}
