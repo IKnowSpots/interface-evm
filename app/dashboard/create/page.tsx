@@ -137,10 +137,10 @@ const Create = () => {
                 <div className="">
                     <div>
                         <div className="flex flex-col w-1/2 mx-auto justify-center">
-                            <div className="flex items-center ">
-                                <div className="relative mx-4">
+                            <div className="flex items-center w-full">
+                                <div className="relative w-[20%] flex justify-center">
                                     
-                                    <Link href="/dashboard/active">
+                                    <Link href="/dashboard/active" className="w-full p-4">
                                         <Image
                                             src={"/icons/back-btn.svg"}
                                             width={30}
@@ -292,7 +292,7 @@ const Create = () => {
                             rows={4}
                                
                         ></textarea>
-                       <p className="right-0 text-gray-400"> {val.length}/2000</p>
+                       <p className="right-0 text-gray-400"> {val.length}/400</p>
                     </div>
 
                     <div className=" flex w-3/4 mx-auto  ">
@@ -334,7 +334,7 @@ const Create = () => {
                         <input
                             type="date"
                             id="event-name"
-                            className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30  rounded-lg p-2"
+                            className="bg-[#E1E1E1] text-black invert bg-opacity-75 border border-[#676767] border-opacity-30  rounded-lg p-2"
                             onChange={(e) =>
                                 setFormInput({
                                     ...formInput,
