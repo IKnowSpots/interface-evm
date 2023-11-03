@@ -436,7 +436,7 @@ export async function deploy(username) {
     console.log("Deployed");
 }
 
-export async function mint(_price, _supply, _privateEvent, NftURI) {
+export async function mint(_price, _supply, _isShortlist, _isStaking, NftURI) {
     const username = await fetchUsername();
     const contract = await getEventifyContract(username, true);
 
@@ -444,7 +444,8 @@ export async function mint(_price, _supply, _privateEvent, NftURI) {
     const tx = await contract.mintTickets(
         price,
         _supply,
-        _privateEvent,
+        _isShortlist,
+        _isStaking,
         NftURI
     );
     await tx.wait();

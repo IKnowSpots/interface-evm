@@ -8,31 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
+
 const Create = () => {
-
-    const [isShortlist, setisShortlist] = useState(false);
-    const [val,setVal]=useState('')
-    const [word,setWord]=useState(0)
-
-    const handleChange =(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-        const data = e.target.value.split(' ')
-        console.log(data)
-
-        if(data.length<=100){
-            setVal(e.target.value)
-            setWord(data.length)
-            if(e.target.value == ''){
-                setWord(0)
-            }
-        }else{
-            alert("you can type only 400 words")
-        }
-    }
-
-    const toggleSwitch = () => {
-        setisShortlist(!isShortlist); // Perform your toggle event or function here based on the value of isShortlist
-    };
-
     const [formInput, setFormInput] = useState({
         name: "",
         description: "",
@@ -41,29 +18,59 @@ const Create = () => {
         supply: "",
         cover: "",
         uri: "",
-        isShortlist: false,
-        isStaking: false,
+        isShortlistEnabled: false,
+        isStakingEnabled: false,
         stakePrice: "0",
         eventPrice: "0",
     });
 
-    // console.log(formInput)
+    const toggleSwitch = () => {
+        if (formInput.isShortlistEnabled == true) {
+            setFormInput({ ...formInput, isShortlistEnabled: false });
+        } else {
+            setFormInput({ ...formInput, isShortlistEnabled: true });
+        }
+    };
+
+    console.log(formInput);
 
     const [loading, setLoading] = useState(false);
     const [imgLoading, setImgLoading] = useState(false);
     const [isFieldDisabled, setIsFieldDisabled] = useState(false);
     const [isButtonClicked, setIsButtonClicked] = useState(false);
 
-    const handleButtonColor = () => {
-      setIsButtonClicked(!isButtonClicked);
-    };
-    const handleButtonClick = () => {
-      setIsFieldDisabled(!isFieldDisabled); // Toggle the disabled state
-    };
     const handleBothClicks = () => {
-        handleButtonClick(); 
-        handleButtonColor(); 
-      };
+        setIsButtonClicked(!isButtonClicked);
+        setIsFieldDisabled(!isFieldDisabled);
+    };
+
+    const enableButton = () => {
+        handleBothClicks();
+        setFormInput({ ...formInput, isStakingEnabled: true });
+    };
+
+    const disableButton = () => {
+        handleBothClicks();
+        setFormInput({ ...formInput, isStakingEnabled: false, stakePrice: "0" });
+    };
+
+    const [val, setVal] = useState("");
+    const [word, setWord] = useState(0);
+
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const data = e.target.value.split(" ");
+        console.log(data);
+
+        if (data.length <= 100) {
+            setVal(e.target.value);
+            setWord(data.length);
+            if (e.target.value == "") {
+                setWord(0);
+            }
+        } else {
+            alert("you can type only 400 words");
+        }
+    };
 
     async function formURI() {
         const { name, description, venue, date, supply, cover } = formInput;
@@ -99,7 +106,8 @@ const Create = () => {
             const isMinted = await mint(
                 formInput.stakePrice,
                 formInput.supply,
-                formInput.isShortlist,
+                formInput.isShortlistEnabled,
+                formInput.isStakingEnabled,
                 NftURI
             );
             if (isMinted == true) {
@@ -113,7 +121,6 @@ const Create = () => {
                     progress: undefined,
                     theme: "dark",
                 });
-                
             }
             setLoading(false);
         } catch (error) {
@@ -129,7 +136,7 @@ const Create = () => {
             });
         }
     }
-   
+
     return (
         <div className="bg-createEvent text-white  px-8">
             <CreateNav />
@@ -139,8 +146,10 @@ const Create = () => {
                         <div className="flex flex-col w-1/2 mx-auto justify-center">
                             <div className="flex items-center w-full">
                                 <div className="relative w-[20%] flex justify-center">
-                                    
-                                    <Link href="/dashboard/active" className="w-full p-4">
+                                    <Link
+                                        href="/dashboard/active"
+                                        className="w-full p-4"
+                                    >
                                         <Image
                                             src={"/icons/back-btn.svg"}
                                             width={30}
@@ -241,16 +250,34 @@ const Create = () => {
                         <div className="py-4 flex justify-between">
                             <div className="w-full flex justify-between">
                                 <div>
-                                    <h3 className="text-xl">Shortlist events</h3>
+                                    <h3 className="text-xl">
+                                        Shortlist events
+                                    </h3>
                                     <p className="opacity-40">
-                                        Display this on feature section of landing page.
+                                        Display this on feature section of
+                                        landing page.
                                     </p>
                                 </div>
-                                <div className={`flex items-center cursor-pointer`}>
-                                    <div className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${isShortlist ? 'bg-green-500' : 'bg-[#1E1E1E]'}`} onClick={toggleSwitch}>
-                                        <div className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${isShortlist ? 'translate-x-6' : ''}`}></div>
+                                <div
+                                    className={`flex items-center cursor-pointer`}
+                                >
+                                    <div
+                                        className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${
+                                            formInput.isShortlistEnabled
+                                                ? "bg-green-500"
+                                                : "bg-[#1E1E1E]"
+                                        }`}
+                                        onClick={toggleSwitch}
+                                    >
+                                        <div
+                                            className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${
+                                                formInput.isShortlistEnabled
+                                                    ? "translate-x-6"
+                                                    : ""
+                                            }`}
+                                        ></div>
                                     </div>
-                                    {/* <span className="ml-2 text-sm">{isShortlist ? 'ON' : 'OFF'}</span> */}
+                                    {/* <span className="ml-2 text-sm">{isShortlistEnabled ? 'ON' : 'OFF'}</span> */}
                                 </div>
                             </div>
                             {/* https://gdowens.github.io/react-toggle-button/ to use toggle in the actual code */}
@@ -266,10 +293,8 @@ const Create = () => {
                                 setFormInput({
                                     ...formInput,
                                     name: e.target.value,
-                                })
-                            }
-                             
-                            }
+                                });
+                            }}
                             disabled={imgLoading}
                         />
                     </div>
@@ -282,17 +307,17 @@ const Create = () => {
                                 setFormInput({
                                     ...formInput,
                                     description: e.target.value,
-                                })
-                                handleChange(e)
-
-                            }  
-                            }
+                                });
+                                handleChange(e);
+                            }}
                             disabled={imgLoading}
                             //   change this if scroll bar is appearing
                             rows={4}
-                               
                         ></textarea>
-                       <p className="right-0 text-gray-400"> {val.length}/1000</p>
+                        <p className="right-0 text-gray-400">
+                            {" "}
+                            {val.length}/1000
+                        </p>
                     </div>
 
                     <div className=" flex w-3/4 mx-auto  ">
@@ -366,14 +391,17 @@ const Create = () => {
 
                     {/*  */}
                     <div className="flex flex-col w-3/4 mx-auto my-4 ">
-                        <label className="pb-2">Stake the price</label>
+                        <label className="pb-2">Stake price</label>
                         <div className="relative flex flex-col items-center  w-full ">
                             <input
                                 type="text"
                                 id="event-name"
                                 placeholder="0.01 ETH"
-                                className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4 ${isFieldDisabled ? 'bg-gray-300 text-gray-600' : ' text-black'}`}
-
+                                className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4 ${
+                                    isFieldDisabled
+                                        ? "bg-gray-300 text-gray-600"
+                                        : " text-black"
+                                }`}
                                 // className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
                                 disabled={isFieldDisabled && imgLoading}
                                 onChange={(e) =>
@@ -386,32 +414,22 @@ const Create = () => {
                                 // disabled = "true"
                             />
                             <button
-                                    className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${isButtonClicked ? 'bg-[#252542] text-white' : 'bg-white text-black'}`}
-
-                                // className=" border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] "
-                                // onClick={() =>
-                                //     setFormInput({
-                                //         ...formInput,
-                                //         stake: true,
-                                //     })
-                                // }
-                                onClick={handleBothClicks}
+                                className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${
+                                    isButtonClicked
+                                        ? "bg-[#252542] text-white"
+                                        : "bg-white text-black"
+                                }`}
+                                onClick={enableButton}
                             >
                                 Enable
                             </button>
                             <button
-                                    className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${isButtonClicked ? 'bg-white text-black' : 'bg-[#252542] text-white'}`}
-
-                                // className=" w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] bg-[#252542] text-white "
-                                // onClick={() =>
-                                //     setFormInput({
-                                //         ...formInput,
-                                //         stake: false,
-                                //     })
-                                // }
-                                // disabled={imgLoading}
-                                onClick={handleBothClicks}
-
+                                className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${
+                                    isButtonClicked
+                                        ? "bg-white text-black"
+                                        : "bg-[#252542] text-white"
+                                }`}
+                                onClick={disableButton}
                             >
                                 Disable
                             </button>
@@ -442,7 +460,7 @@ const Create = () => {
                 pauseOnHover
                 theme="dark"
             />
-            <FooterSection/>
+            <FooterSection />
         </div>
     );
 };
