@@ -4,8 +4,6 @@ import { ethers } from "ethers";
 import {
     addressFactory,
     abiFactory,
-    queryContract,
-    queryABI,
     abiIKS,
     abiFeatured,
     RPCUrl,
@@ -13,30 +11,31 @@ import {
 import axios from "axios";
 import { Web3Storage } from "web3.storage";
 
-export async function getFactoryContractWithInfura() {
-    const provider = new ethers.providers.JsonRpcProvider(`${RPCUrl}`);
-    const factoryContract = new ethers.Contract(
-        addressFactory,
-        abiFactory,
-        provider
-    );
-    return factoryContract;
+let allEvents = [];
+let allEventsInfura = [];
+let purchasesEvents = [];
+
+// --contract-instance functions
+
+export async function getIKSContractAddress(username) {
+    const contract = await getFactoryContract();
+    const address = await fetchAddressFromUsername(username.toString());
+    const id = await contract.hostAddressToContractId(address.toString());
+    const contractAddress = await contract.contracts(id);
+    return contractAddress;
 }
 
-export async function getIKSContractWithInfura(username) {
-    const provider = new ethers.providers.JsonRpcProvider(`${RPCUrl}`);
-    const factoryContract = await getFactoryContractWithInfura();
-    const hostAddress = await factoryContract.usernameToAddress(username);
+export async function getFeaturedContractAddress() {
+    const contract = await getFactoryContract();
+    const address = await contract.featuredEventsInstanceAddress();
+    return address;
+}
 
-    const id = await factoryContract.hostAddressToContractId(hostAddress);
-    const addressEventify = await factoryContract.contracts(id);
-
-    const eventifyContract = new ethers.Contract(
-        addressEventify,
-        abiIKS,
-        provider
-    );
-    return eventifyContract;
+export async function getUserAddress() {
+    const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+    });
+    return accounts[0];
 }
 
 export async function getFactoryContract(providerOrSigner) {
@@ -55,24 +54,6 @@ export async function getFactoryContract(providerOrSigner) {
     }
     return contract;
 }
-
-// export async function getQueryContract(providerOrSigner) {
-//     const modal = new web3modal();
-//     const connection = await modal.connect();
-//     const provider = new ethers.providers.Web3Provider(connection);
-//     const contract = new ethers.Contract(queryContract, queryABI, provider);
-//     if (providerOrSigner == true) {
-//         const signer = provider.getSigner();
-//         const contract = new ethers.Contract(
-//             queryContract,
-//             queryABI,
-//             signer
-//         );
-//         return contract;
-//     }
-//     return contract;
-// }
-
 
 export async function getEventifyContract(username, providerOrSigner) {
     const contractAddress = await getIKSContractAddress(username);
@@ -110,32 +91,33 @@ export async function getFeaturedContract(providerOrSigner) {
     return contract;
 }
 
-export async function getIKSContractAddress(username) {
-    const contract = await getFactoryContract();
-    const address = await fetchAddressFromUsername(username.toString());
-    const id = await contract.hostAddressToContractId(address.toString());
-    const contractAddress = await contract.contracts(id);
-    return contractAddress;
+export async function getFactoryContractWithInfura() {
+    const provider = new ethers.providers.JsonRpcProvider(`${RPCUrl}`);
+    const factoryContract = new ethers.Contract(
+        addressFactory,
+        abiFactory,
+        provider
+    );
+    return factoryContract;
 }
 
-export async function getFeaturedContractAddress() {
-    const contract = await getFactoryContract();
-    const address = await contract.featuredEventsInstanceAddress();
-    return address;
+export async function getIKSContractWithInfura(username) {
+    const provider = new ethers.providers.JsonRpcProvider(`${RPCUrl}`);
+    const factoryContract = await getFactoryContractWithInfura();
+    const hostAddress = await factoryContract.usernameToAddress(username);
+
+    const id = await factoryContract.hostAddressToContractId(hostAddress);
+    const addressEventify = await factoryContract.contracts(id);
+
+    const eventifyContract = new ethers.Contract(
+        addressEventify,
+        abiIKS,
+        provider
+    );
+    return eventifyContract;
 }
 
-// --one-time-execute functions
-// --one-time-execute functions
-// --one-time-execute functions
-// --one-time-execute functions
-// --one-time-execute functions
-
-export async function getUserAddress() {
-    const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-    });
-    return accounts[0];
-}
+// --contract-fetching-variables functions
 
 export async function fetchIfDeployed() {
     const contract = await getFactoryContract();
@@ -166,11 +148,189 @@ export async function fetchAddressFromUsername(username) {
     return data;
 }
 
-// --user-specific functions
-// --user-specific functions
-// --user-specific functions
-// --user-specific functions
-// --user-specific functions
+export async function fetchUsernameValidity(username) {
+    const contract = await getFactoryContract();
+    const data = await contract.usernameExist(username);
+    return data;
+}
+
+// --contract-fetching-tickets functions
+
+export async function fetchAllEvents() {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username);
+
+    const data = await contract.fetchAllEvents();
+    // console.log("data", data)
+    const items = await Promise.all(
+        data.map(async (i) => {
+            const tokenUri = await contract.uri(i.ticketId.toString());
+            // console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i.price);
+            let item = {
+                name: meta.data.name,
+                venue: meta.data.venue,
+                date: meta.data.date,
+                cover: meta.data.cover,
+                NftURI: tokenUri,
+                host: i.host.toString(),
+                supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
+                price,
+                owner: i.owner.toString(),
+                tokenId: i.ticketId.toString(),
+                isActive: i.isActive,
+                isPublished: i.isPublished,
+                isShortlist: i.isShortlist,
+                isExistingTicket: i.isExistingTicket,
+            };
+            return item;
+        })
+    );
+    allEvents = items;
+    console.log("Active Events", items);
+    return items;
+}
+
+export async function fetchMintedCollection() {
+    if (allEvents.length > 0) {
+        const filteredArray = allEvents.filter(
+            (subarray) =>
+                subarray.isPublished == false &&
+                subarray.isExistingTicket == false
+        );
+        return filteredArray;
+    } else {
+        const data = await fetchAllEvents();
+        const filteredArray = data.filter(
+            (subarray) =>
+                subarray.isPublished == false &&
+                subarray.isExistingTicket == false
+        );
+        return filteredArray;
+    }
+}
+
+export async function fetchActiveEvents() {
+    if (allEvents.length > 0) {
+        const filteredArray = allEvents.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true
+        );
+        return filteredArray;
+    } else {
+        const data = await fetchAllEvents();
+        const filteredArray = data.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true
+        );
+        return filteredArray;
+    }
+}
+
+export async function fetchInactiveEvents() {
+    if (allEvents.length > 0) {
+        const filteredArray = allEvents.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == false &&
+                subarray.isPublished == true
+        );
+        return filteredArray;
+    } else {
+        const data = await fetchAllEvents();
+        const filteredArray = data.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == false &&
+                subarray.isPublished == true
+        );
+        return filteredArray;
+    }
+}
+
+export async function fetchShortlistEvents() {
+    if (allEvents.length > 0) {
+        const filteredArray = allEvents.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true &&
+                subarray.isExistingTicket == false &&
+                subarray.isShortlist == true
+        );
+        return filteredArray;
+    } else {
+        const data = await fetchAllEvents();
+        const filteredArray = data.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true &&
+                subarray.isExistingTicket == false &&
+                subarray.isShortlist == true
+        );
+        return filteredArray;
+    }
+}
+
+export async function fetchCommonInventory() {
+    if (purchasesEvents.length > 0) return;
+
+    const factoryContract = await getFactoryContract(true);
+
+    const address = await getUserAddress();
+    const username = await factoryContract.addressToUsername(
+        address.toString()
+    );
+    const hosteeAddresses = await factoryContract.userToHostPurchasedArray(
+        address
+    );
+    console.log("host address", address);
+
+    const eventifyContract = await getEventifyContract(username, true);
+
+    const filteredHosteeAddresses = hosteeAddresses.filter(
+        (item, index, array) => array.indexOf(item) === index
+    );
+
+    await Promise.all(
+        filteredHosteeAddresses.map(async (i) => {
+            const inventory = await eventifyContract.fetchPurchasedTickets();
+            const subItems = await Promise.all(
+                inventory.map(async (i) => {
+                    const tokenUri = await eventifyContract.uri(
+                        i.ticketId.toString()
+                    );
+                    // console.log(tokenUri);
+                    const meta = await axios.get(tokenUri);
+                    let price = ethers.utils.formatEther(i.price);
+                    let item = {
+                        tokenId: i.ticketId.toString(),
+                        name: meta.data.name,
+                        venue: meta.data.venue,
+                        date: meta.data.date,
+                        description: meta.data.description,
+                        supply: i.supply.toNumber(),
+                        remaining: i.remaining.toNumber(),
+                        price,
+                        NftURI: tokenUri,
+                        cover: meta.data.cover,
+                    };
+                    return item;
+                })
+            );
+            purchasesEvents.push(...subItems);
+        })
+    );
+    console.log("Purchased Events", purchasesEvents);
+    return purchasesEvents;
+}
 
 export async function fetchFeaturedEventsWithInfura() {
     const contract = await getFactoryContractWithInfura();
@@ -178,7 +338,6 @@ export async function fetchFeaturedEventsWithInfura() {
     const data = await contract.fetchFeaturedEvents();
     const items = await Promise.all(
         data.map(async (i) => {
-            // console.log(i)
             const tokenUri = await contract.uriCall(
                 i.owner,
                 i.ticketId.toString()
@@ -205,7 +364,7 @@ export async function fetchFeaturedEventsWithInfura() {
     return items;
 }
 
-export async function fetchActiveEventsWithInfura(username) {
+export async function fetchAllEventsWithInfura(username) {
     const contract = await getIKSContractWithInfura(username);
 
     const data = await contract.fetchAllEvents();
@@ -216,7 +375,7 @@ export async function fetchActiveEventsWithInfura(username) {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                name: meta.data.name,   
+                name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.date,
                 cover: meta.data.cover,
@@ -230,128 +389,39 @@ export async function fetchActiveEventsWithInfura(username) {
                 isActive: i.isActive,
                 isPublished: i.isPublished,
                 isShortlist: i.isShortlist,
-                isExistingTicket: i.isExistingTicket
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
     );
-    const filteredArray = items.filter(subarray => subarray.remaining > 0 && subarray.isActive == true && subarray.isPublished == true);
-    console.log("Active Events", filteredArray);
-    return filteredArray;
+    allEventsInfura = items;
+    return items;
 }
 
-// export async function fetchInventory(username) {
-//     const contract = await getEventifyContract(username, true);
-
-//     const data = await contract.fetchPurchasedTickets();
-//     console.log("data", data);
-//     const items = await Promise.all(
-//         data.map(async (i) => {
-//             const tokenUri = await contract.uri(i.ticketId.toString());
-//             // console.log(tokenUri);
-//             const meta = await axios.get(tokenUri);
-//             let price = ethers.utils.formatEther(i.price);
-//             let item = {
-//                 tokenId: i.ticketId.toString(),
-//                 name: meta.data.name,
-//                 venue: meta.data.venue,
-//                 date: meta.data.name,
-//                 supply: i.supply.toNumber(),
-//                 remaining: i.remaining.toNumber(),
-//                 price,
-//                 NftURI: tokenUri,
-//                 cover: meta.data.cover,
-//             };
-//             return item;
-//         })
-//     );
-//     console.log("Inventory", items);
-//     return items;
-// }
-
-export async function fetchCommonInventory() {
-    const factoryContract = await getFactoryContract(true);
-    const address = await getUserAddress();
-    const username = await factoryContract.addressToUsername(address.toString())
-
-    const eventifyContract = await getEventifyContract(username, true);
-
-    const hosteeAddresses = await factoryContract.userToHostPurchasedArray(
-        address
-    );
-
-    const filteredHosteeAddresses = hosteeAddresses.filter((item, index, array) => array.indexOf(item) === index);
-
-    console.log("data", hosteeAddresses);
-
-    let inventoryData = [];
-
-    await Promise.all(
-        filteredHosteeAddresses.map(async (i) => {
-            const inventory = await eventifyContract.fetchPurchasedTickets();
-            const subItems = await Promise.all(
-                inventory.map(async (i) => {
-                    const tokenUri = await eventifyContract.uri(i.ticketId.toString());
-                    // console.log(tokenUri);
-                    const meta = await axios.get(tokenUri);
-                    let price = ethers.utils.formatEther(i.price);
-                    let item = {
-                        tokenId: i.ticketId.toString(),
-                        name: meta.data.name,
-                        venue: meta.data.venue,
-                        date: meta.data.date,
-                        description: meta.data.description,
-                        supply: i.supply.toNumber(),
-                        remaining: i.remaining.toNumber(),
-                        price,
-                        NftURI: tokenUri,
-                        cover: meta.data.cover,
-                    };
-                    return item;
-                })
-            );
-            inventoryData.push( ...subItems);
-        })
-    );
-    console.log("Common Inventory", inventoryData);
-    return inventoryData;
+export async function fetchActiveEventsWithInfura(username) {
+    if (allEventsInfura.length > 0) {
+        const filteredArray = allEventsInfura.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true
+        );
+        console.log("Active Events", filteredArray);
+        return filteredArray;
+    } else {
+        const fetchedAllEvents = await fetchAllEventsWithInfura(username);
+        const filteredArray = fetchedAllEvents.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true
+        );
+        console.log("Active Events", filteredArray);
+        return filteredArray;
+    }
 }
-// console.log("i", i);
-// i.map(async (j) => {
-// // let j=0;
-// console.log("t22", i.length)
-// const tokenUri = await contract.uriCall(
-//     i[j]?.owner,
-//     i[j]?.ticketId.toNumber()
-// );
-// console.log(tokenUri);
-// const meta = await axios.get(tokenUri);
-// let price = ethers.utils.formatEther(i[j].price);
-// let item = {
-//     tokenId: i[j]?.ticketId.toString(),
-//     name: meta.data.name,
-//     venue: meta.data.venue,
-//     date: meta.data.date,
-//     supply: i[j]?.supply.toNumber(),
-//     remaining: i[j]?.remaining.toNumber(),
-//     price,
-//     NftURI: tokenUri,
-//     cover: meta.data.cover,
-// };?
-// return item;
-// })
 
-// --dashboard-specific functions
-// --dashboard-specific functions
-// --dashboard-specific functions
-// --dashboard-specific functions
-// --dashboard-specific functions
-
-export async function fetchUsernameValidity(username) {
-    const contract = await getFactoryContract();
-    const data = await contract.usernameExist(username);
-    return data;
-}
+// --contract-update functions
 
 export async function deploy(username) {
     const usernameValidity = await fetchUsernameValidity(username);
@@ -366,150 +436,172 @@ export async function deploy(username) {
     console.log("Deployed");
 }
 
-// export async function fetchMintedCollection() {
-//     const username = await fetchUsername();
-//     const contract = await getEventifyContract(username, false);
-
-//     const data = await contract.fetchMintedTickets();
-//     const items = await Promise.all(
-//         data.map(async (i) => {
-//             const tokenUri = await contract.uri(i.ticketId.toString());
-//             // console.log(tokenUri);
-//             const meta = await axios.get(tokenUri);
-//             let price = ethers.utils.formatEther(i.price);
-//             let item = {
-//                 tokenId: i.ticketId.toString(),
-//                 name: meta.data.name,
-//                 venue: meta.data.venue,
-//                 date: meta.data.name,
-//                 supply: i.supply.toNumber(),
-//                 remaining: i.remaining.toNumber(),
-//                 price,
-//                 NftURI: tokenUri,
-//                 cover: meta.data.cover,
-//             };
-//             return item;
-//         })
-//     );
-//     console.log("Minted Collections", items);
-//     return items;
-// }
-
-// export async function fetchShortlistEvents() {
-//     const username = await fetchUsername();
-//     const contract = await getEventifyContract(username);
-
-//     const data = await contract.fetchShortlistEvents();
-//     const items = await Promise.all(
-//         data.map(async (i) => {
-//             const tokenUri = await contract.uri(i.ticketId.toString());
-//             // console.log(tokenUri);
-//             const meta = await axios.get(tokenUri);
-//             let price = ethers.utils.formatEther(i.price);
-//             let item = {
-//                 tokenId: i.ticketId.toString(),
-//                 name: meta.data.name,
-//                 venue: meta.data.venue,
-//                 date: meta.data.name,
-//                 supply: i.supply.toNumber(),
-//                 remaining: i.remaining.toNumber(),
-//                 price,
-//                 NftURI: tokenUri,
-//                 // cover: meta.data.cover
-//             };
-//             return item;
-//         })
-//     );
-//     console.log("Active Events", items);
-//     return items;
-// }
-
-let fetchedData = []
-
-export async function fetchAllEvents() {
+export async function mint(_price, _supply, _privateEvent, NftURI) {
     const username = await fetchUsername();
-    const contract = await getEventifyContract(username);
+    const contract = await getEventifyContract(username, true);
 
-    const data = await contract.fetchAllEvents();
-    // console.log("data", data)
+    const price = ethers.utils.parseEther(_price);
+    const tx = await contract.mintTickets(
+        price,
+        _supply,
+        _privateEvent,
+        NftURI
+    );
+    await tx.wait();
+    console.log("minted");
+    return true;
+}
+
+export async function updateShortlist(ticketId, shortlistArray) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.updateShortlist(ticketId, shortlistArray);
+    await tx.wait();
+    console.log("Shortlist uploaded");
+}
+
+export async function publishTickets(ticketId) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.publishTickets(ticketId);
+    await tx.wait();
+    console.log("Published");
+}
+
+export async function pauseEvent(ticketId) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.pauseActiveEvent(ticketId);
+    await tx.wait();
+    console.log("Paused");
+}
+
+export async function runEvent(ticketId) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.runPausedEvent(ticketId);
+    await tx.wait();
+    console.log("Event Running");
+}
+
+export async function raiseFeaturedEvents(ticketId) {
+    const contract = await getFactoryContract(true);
+
+    const tx = await contract.raiseFeaturedEvents(ticketId);
+    await tx.wait();
+    console.log("Featured Request Sent");
+}
+
+export async function buyTicket(username, ticketId, price) {
+    const contract = await getFactoryContract(true);
+
+    const weiPrice = ethers.utils.parseUnits(price.toString(), "ether");
+    const tx = await contract.buy(username, ticketId, {
+        value: weiPrice,
+        gasLimit: 1000000,
+    });
+    await tx.wait();
+    console.log("Purchased successfully");
+}
+
+export async function fetchIfWhitelist(address) {
+    const contract = await getFactoryContract();
+
+    const data = await contract.isWhitelisted(address);
+    return data;
+}
+
+export async function whitelistUser(address) {
+    const contract = await getFactoryContract(true);
+
+    const check = await fetchIfWhitelist(address);
+    if (check == true) return;
+    const tx = await contract.whitelistUser(address);
+    await tx.wait();
+    console.log("Whitelisted");
+}
+
+export async function fetchFeaturedRequest() {
+    const contract = await getFactoryContract();
+
+    const data = await contract.fetchAllFeaturedRequest();
     const items = await Promise.all(
         data.map(async (i) => {
-            const tokenUri = await contract.uri(i.ticketId.toString());
-            // console.log(tokenUri);
-            const meta = await axios.get(tokenUri);
-            let price = ethers.utils.formatEther(i.price);
             let item = {
-                name: meta.data.name,   
-                venue: meta.data.venue,
-                date: meta.data.date,
-                cover: meta.data.cover,
-                NftURI: tokenUri,
                 host: i.host.toString(),
-                supply: i.supply.toNumber(),
-                remaining: i.remaining.toNumber(),
-                price,
-                owner: i.owner.toString(),
                 tokenId: i.ticketId.toString(),
-                isActive: i.isActive,
-                isPublished: i.isPublished,
-                isShortlist: i.isShortlist,
-                isExistingTicket: i.isExistingTicket
+                isApproved: i.isApproved.toString(),
             };
             return item;
         })
     );
-    fetchedData = items
-    console.log("Active Events", items);
+    console.log("Featured Request", items);
     return items;
 }
 
-export async function fetchMintedCollection() {
-    if (fetchedData.length > 0) {
-        const filteredArray = fetchedData.filter(subarray => subarray.isPublished == false && subarray.isExistingTicket == false);
-        return filteredArray
-    }
-    else {
-        const data = await fetchAllEvents()
-        const filteredArray = data.filter(subarray => subarray.isPublished == false && subarray.isExistingTicket == false);
-        return filteredArray
-    }
+export async function approveFeaturedRequest(host, ticketId) {
+    const contract = await getFactoryContract(true);
+
+    const data = await contract.approveFeaturedEvents(host, ticketId);
+    await data.wait();
+    console.log("Approved");
 }
 
-export async function fetchActiveEvents() {
-    if (fetchedData.length > 0) {
-        const filteredArray = fetchedData.filter(subarray => subarray.remaining > 0 && subarray.isActive == true && subarray.isPublished == true);
-        return filteredArray
-    }
-    else {
-        const data = await fetchAllEvents()
-        const filteredArray = data.filter(subarray => subarray.remaining > 0 && subarray.isActive == true && subarray.isPublished == true);
-        return filteredArray
-    }
+export async function isWallet() {
+    return false;
 }
 
-export async function fetchInactiveEvents() {
-    if (fetchedData.length > 0) {
-        const filteredArray = fetchedData.filter(subarray => subarray.remaining > 0 && subarray.isActive == false && subarray.isPublished == true);
-        return filteredArray
-    }
-    else {
-        const data = await fetchAllEvents()
-        const filteredArray = data.filter(subarray => subarray.remaining > 0 && subarray.isActive == false && subarray.isPublished == true);
-        return filteredArray
-    }
+// --web3-storage-token functions
+
+function getAccessToken() {
+    // return process.env.NEXT_PUBLIC_Web3StorageID
+    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyMjkyQjQ5YzFjN2ExMzhERWQxQzQ3NGNlNmEyNmM1NURFNWQ0REQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUyMzg2MDc1NDEsIm5hbWUiOiJNZXRhRmkifQ.cwyjEIx8vXtTnn8Y3vctroo_rooHV4ww_2xKY-MT0rs";
 }
 
-export async function fetchShortlistEvents() {
-    if (fetchedData.length > 0) {
-        const filteredArray = fetchedData.filter(subarray => subarray.remaining > 0 && subarray.isActive == true && subarray.isPublished == true && subarray.isExistingTicket == false && subarray.isShortlist == true);
-        return filteredArray
-    }
-    else {
-        const data = await fetchAllEvents()
-        const filteredArray = data.filter(subarray => subarray.remaining > 0 && subarray.isActive == true && subarray.isPublished == true && subarray.isExistingTicket == false && subarray.isShortlist == true);
-        return filteredArray
-    }
+function makeStorageClient() {
+    return new Web3Storage({ token: getAccessToken() });
 }
+
+export const uploadToIPFS = async (files) => {
+    const client = makeStorageClient();
+    const cid = await client.put(files);
+    return cid;
+};
+
+// ----
+
+// export async function getQueryContract(providerOrSigner) {
+//     const modal = new web3modal();
+//     const connection = await modal.connect();
+//     const provider = new ethers.providers.Web3Provider(connection);
+//     const contract = new ethers.Contract(queryContract, queryABI, provider);
+//     if (providerOrSigner == true) {
+//         const signer = provider.getSigner();
+//         const contract = new ethers.Contract(
+//             queryContract,
+//             queryABI,
+//             signer
+//         );
+//         return contract;
+//     }
+//     return contract;
+// }
+
+// export async function buyTicket(username, ticketId, price) {
+//     const contract = await getEventifyContract(username, true);
+
+//     const weiPrice = ethers.utils.parseUnits(price.toString(), "ether");
+//     const tx = await contract.buyTicket(ticketId, {
+//         value: weiPrice,
+//         gasLimit: 1000000,
+//     });
+//     await tx.wait();
+//     console.log("Purchased successfully");
+// }
 
 // export async function fetchActiveEvents() {
 //     const username = await fetchUsername();
@@ -605,160 +697,114 @@ export async function fetchShortlistEvents() {
 //     return items;
 // }
 
-export async function mint(_price, _supply, _privateEvent, NftURI) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+// export async function fetchMintedCollection() {
+//     const username = await fetchUsername();
+//     const contract = await getEventifyContract(username, false);
 
-    const price = ethers.utils.parseEther(_price);
-    const tx = await contract.mintTickets(
-        price,
-        _supply,
-        _privateEvent,
-        NftURI
-    );
-    await tx.wait();
-    console.log("minted");
-    return true;
-}
-
-export async function updateShortlist(ticketId, shortlistArray) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
-
-    const tx = await contract.updateShortlist(ticketId, shortlistArray);
-    await tx.wait();
-    console.log("Shortlist uploaded");
-}
-
-export async function publishTickets(ticketId) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
-
-    const tx = await contract.publishTickets(ticketId);
-    await tx.wait();
-    console.log("Published");
-}
-
-export async function pauseEvent(ticketId) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
-
-    const tx = await contract.pauseActiveEvent(ticketId);
-    await tx.wait();
-    console.log("Paused");
-}
-
-export async function runEvent(ticketId) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
-
-    const tx = await contract.runPausedEvent(ticketId);
-    await tx.wait();
-    console.log("Event Running");
-}
-
-export async function raiseFeaturedEvents(ticketId) {
-    const contract = await getFactoryContract(true);
-
-    const tx = await contract.raiseFeaturedEvents(ticketId);
-    await tx.wait();
-    console.log("Featured Request Sent");
-}
-
-// export async function buyTicket(username, ticketId, price) {
-//     const contract = await getEventifyContract(username, true);
-
-//     const weiPrice = ethers.utils.parseUnits(price.toString(), "ether");
-//     const tx = await contract.buyTicket(ticketId, {
-//         value: weiPrice,
-//         gasLimit: 1000000,
-//     });
-//     await tx.wait();
-//     console.log("Purchased successfully");
+//     const data = await contract.fetchMintedTickets();
+//     const items = await Promise.all(
+//         data.map(async (i) => {
+//             const tokenUri = await contract.uri(i.ticketId.toString());
+//             // console.log(tokenUri);
+//             const meta = await axios.get(tokenUri);
+//             let price = ethers.utils.formatEther(i.price);
+//             let item = {
+//                 tokenId: i.ticketId.toString(),
+//                 name: meta.data.name,
+//                 venue: meta.data.venue,
+//                 date: meta.data.name,
+//                 supply: i.supply.toNumber(),
+//                 remaining: i.remaining.toNumber(),
+//                 price,
+//                 NftURI: tokenUri,
+//                 cover: meta.data.cover,
+//             };
+//             return item;
+//         })
+//     );
+//     console.log("Minted Collections", items);
+//     return items;
 // }
 
-export async function buyTicket(username, ticketId, price) {
-    const contract = await getFactoryContract(true);
+// export async function fetchShortlistEvents() {
+//     const username = await fetchUsername();
+//     const contract = await getEventifyContract(username);
 
-    const weiPrice = ethers.utils.parseUnits(price.toString(), "ether");
-    const tx = await contract.buy(username, ticketId, {
-        value: weiPrice,
-        gasLimit: 1000000,
-    });
-    await tx.wait();
-    console.log("Purchased successfully");
-}
+//     const data = await contract.fetchShortlistEvents();
+//     const items = await Promise.all(
+//         data.map(async (i) => {
+//             const tokenUri = await contract.uri(i.ticketId.toString());
+//             // console.log(tokenUri);
+//             const meta = await axios.get(tokenUri);
+//             let price = ethers.utils.formatEther(i.price);
+//             let item = {
+//                 tokenId: i.ticketId.toString(),
+//                 name: meta.data.name,
+//                 venue: meta.data.venue,
+//                 date: meta.data.name,
+//                 supply: i.supply.toNumber(),
+//                 remaining: i.remaining.toNumber(),
+//                 price,
+//                 NftURI: tokenUri,
+//                 // cover: meta.data.cover
+//             };
+//             return item;
+//         })
+//     );
+//     console.log("Active Events", items);
+//     return items;
+// }
 
-// --owner-specific functions
-// --owner-specific functions
-// --owner-specific functions
-// --owner-specific functions
-// --owner-specific functions
+// console.log("i", i);
+// i.map(async (j) => {
+// // let j=0;
+// console.log("t22", i.length)
+// const tokenUri = await contract.uriCall(
+//     i[j]?.owner,
+//     i[j]?.ticketId.toNumber()
+// );
+// console.log(tokenUri);
+// const meta = await axios.get(tokenUri);
+// let price = ethers.utils.formatEther(i[j].price);
+// let item = {
+//     tokenId: i[j]?.ticketId.toString(),
+//     name: meta.data.name,
+//     venue: meta.data.venue,
+//     date: meta.data.date,
+//     supply: i[j]?.supply.toNumber(),
+//     remaining: i[j]?.remaining.toNumber(),
+//     price,
+//     NftURI: tokenUri,
+//     cover: meta.data.cover,
+// };?
+// return item;
+// })
 
-export async function fetchIfWhitelist(address) {
-    const contract = await getFactoryContract();
+// export async function fetchInventory(username) {
+//     const contract = await getEventifyContract(username, true);
 
-    const data = await contract.isWhitelisted(address);
-    return data;
-}
-
-export async function whitelistUser(address) {
-    const contract = await getFactoryContract(true);
-
-    const check = await fetchIfWhitelist(address);
-    if (check == true) return;
-    const tx = await contract.whitelistUser(address);
-    await tx.wait();
-    console.log("Whitelisted");
-}
-
-export async function fetchFeaturedRequest() {
-    const contract = await getFactoryContract();
-
-    const data = await contract.fetchAllFeaturedRequest();
-    const items = await Promise.all(
-        data.map(async (i) => {
-            let item = {
-                host: i.host.toString(),
-                tokenId: i.ticketId.toString(),
-                isApproved: i.isApproved.toString(),
-            };
-            return item;
-        })
-    );
-    console.log("Featured Request", items);
-    return items;
-}
-
-export async function approveFeaturedRequest(host, ticketId) {
-    // const username = await fetchUsernameFromAddress(host)
-    // console.log(username)
-    const contract = await getFactoryContract(true);
-
-    const data = await contract.approveFeaturedEvents(host, ticketId);
-    await data.wait();
-    console.log("Approved");
-}
-
-// --web3-storage-token functions
-
-function getAccessToken() {
-    // return process.env.NEXT_PUBLIC_Web3StorageID
-    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyMjkyQjQ5YzFjN2ExMzhERWQxQzQ3NGNlNmEyNmM1NURFNWQ0REQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUyMzg2MDc1NDEsIm5hbWUiOiJNZXRhRmkifQ.cwyjEIx8vXtTnn8Y3vctroo_rooHV4ww_2xKY-MT0rs";
-}
-
-function makeStorageClient() {
-    return new Web3Storage({ token: getAccessToken() });
-}
-
-export const uploadToIPFS = async (files) => {
-    const client = makeStorageClient();
-    const cid = await client.put(files);
-    return cid;
-};
-
-// ----
-
-export async function isWallet() {
-    return false;
-}
+//     const data = await contract.fetchPurchasedTickets();
+//     console.log("data", data);
+//     const items = await Promise.all(
+//         data.map(async (i) => {
+//             const tokenUri = await contract.uri(i.ticketId.toString());
+//             // console.log(tokenUri);
+//             const meta = await axios.get(tokenUri);
+//             let price = ethers.utils.formatEther(i.price);
+//             let item = {
+//                 tokenId: i.ticketId.toString(),
+//                 name: meta.data.name,
+//                 venue: meta.data.venue,
+//                 date: meta.data.name,
+//                 supply: i.supply.toNumber(),
+//                 remaining: i.remaining.toNumber(),
+//                 price,
+//                 NftURI: tokenUri,
+//                 cover: meta.data.cover,
+//             };
+//             return item;
+//         })
+//     );
+//     console.log("Inventory", items);
+//     return items;
+// }
