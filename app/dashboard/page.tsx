@@ -13,7 +13,7 @@ const Dashboard = () => {
         checkDeployment();
     }, []);
 
-    // comment line 18-28 to make this page static
+    // comment line 18-26 to make this page static
 
     // useEffect(() => {
     //     if (isDeployed == true) {

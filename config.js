@@ -1,18 +1,37 @@
+import { polygon } from "viem/chains";
+
 // export const InfuraRPCKey = process.env.NEXT_PUBLIC_INFURA_KEY;
-export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`
+export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`;
 
-const PolygonAddressFactory = `0x9e9f054F7E3dccf07D86757Fb7079120a714A788`
-const PolygonCurrency = `Matic`
-const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`
+const PolygonAddressFactory = `0x25289d92deD42a30a6D9dAe9E49d64C82CEaf91E`;
+const PolygonQueryContract = ``;
+const PolygonCurrency = `Matic`;
+const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
-const SepoliaAddressFactory = `0x18aE94089aee4e396c4Eb26B8807e1026b44471d`
-const SepoliaCurrency = `Eth`
-const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`
+// const SepoliaAddressFactory = `0x18aE94089aee4e396c4Eb26B8807e1026b44471d`;
+const SepoliaAddressFactory = `0x62072230ABF2B901e67192c8824dACbf3aEA76C8`;
+const SepoliaQueryContract = `0xAc943bC26521e297A0A6193738693f4Ee9Dc33FA`;
+const SepoliaCurrency = `Eth`;
+const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`;
 
-export let addressFactory = SepoliaAddressFactory
-export let currency = SepoliaCurrency
-export let RPCUrl = `${SepoliaInfuraUrl}${InfuraRPCKey}`
+export let addressFactory = PolygonAddressFactory;
+export let queryContract = PolygonQueryContract;
+export let currency = PolygonCurrency;
+export let RPCUrl = `${PolygonInfuraUrl}${InfuraRPCKey}`;
 
+// export let addressFactory = SepoliaAddressFactory;
+// export let queryContract = SepoliaQueryContract;
+// export let currency = SepoliaCurrency;
+// export let RPCUrl = `${SepoliaInfuraUrl}${InfuraRPCKey}`;
+
+
+// let chain = `polygon`;
+
+// if (chain == `polygon`) {
+
+// } else if (chain == `Sepolia`) {
+
+// }
 
 export const abiFactory = `[
 	{
@@ -455,7 +474,7 @@ export const abiFactory = `[
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]`
+]`;
 
 export const abiIKS = `[
 	{
@@ -492,25 +511,6 @@ export const abiIKS = `[
 			}
 		],
 		"name": "ApprovalForAll",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
 		"type": "event"
 	},
 	{
@@ -626,6 +626,32 @@ export const abiIKS = `[
 		"type": "event"
 	},
 	{
+		"inputs": [],
+		"name": "_rewardId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "_tokenId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -684,6 +710,19 @@ export const abiIKS = `[
 		"name": "buyTicket",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_rewardToken",
+				"type": "uint256"
+			}
+		],
+		"name": "claimReward",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1198,6 +1237,40 @@ export const abiIKS = `[
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"name": "idToReward",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "rewardId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "supply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isClaimed",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -1313,6 +1386,24 @@ export const abiIKS = `[
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_supply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_tokenURI",
+				"type": "string"
+			}
+		],
+		"name": "mintReward",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_price",
 				"type": "uint256"
 			},
@@ -1416,19 +1507,6 @@ export const abiIKS = `[
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -1514,13 +1592,6 @@ export const abiIKS = `[
 			}
 		],
 		"name": "pushFeaturedEvent",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1663,19 +1734,6 @@ export const abiIKS = `[
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_ticketId",
 				"type": "uint256"
@@ -1710,7 +1768,7 @@ export const abiIKS = `[
 		"stateMutability": "view",
 		"type": "function"
 	}
-]`
+]`;
 
 export const abiFeatured = `[
 	{
@@ -2066,6 +2124,131 @@ export const abiFeatured = `[
 		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]`;
+
+export const queryABI = `[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "updateIKSInstance",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "check",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchActiveEvents",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlist",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
+						"type": "bool"
+					},
+					{
+						"internalType": "enum ticket.NftType",
+						"name": "nftType",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct ticket.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "iksFactory",
+		"outputs": [
+			{
+				"internalType": "contract IIKSFactory",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]`
