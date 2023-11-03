@@ -285,22 +285,22 @@ export async function fetchCommonInventory() {
     const factoryContract = await getFactoryContract(true);
 
     const address = await getUserAddress();
-    const username = await factoryContract.addressToUsername(
-        address.toString()
-    );
-    const hosteeAddresses = await factoryContract.userToHostPurchasedArray(
+
+    const hostsAddresses = await factoryContract.userToHostPurchasedArray(
         address
     );
-    console.log("hosts addresses", username);
+    console.log("hosts addresses", hostsAddresses);
 
-    const eventifyContract = await getEventifyContract(username, true);
-
-    const filteredHosteeAddresses = hosteeAddresses.filter(
+    const filteredHostsAddresses = hostsAddresses.filter(
         (item, index, array) => array.indexOf(item) === index
     );
 
     await Promise.all(
-        filteredHosteeAddresses.map(async (i) => {
+        filteredHostsAddresses.map(async (j) => {
+            const username = await factoryContract.addressToUsername(
+                j.toString()
+            );
+            const eventifyContract = await getEventifyContract(username, true);
             const inventory = await eventifyContract.fetchPurchasedTickets();
             const subItems = await Promise.all(
                 inventory.map(async (i) => {

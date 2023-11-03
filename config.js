@@ -1,7 +1,7 @@
 // export const InfuraRPCKey = process.env.NEXT_PUBLIC_INFURA_KEY;
 export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`;
 
-const PolygonAddressFactory = `0x4Ab7f2A141132A79B57eCc6FCf06d7e080c442CB`;
+const PolygonAddressFactory = `0x84D4B4Fd63DF1266b60CF69643B7aBc4f812EE43`;
 const PolygonCurrency = `Matic`;
 const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
@@ -57,25 +57,6 @@ export const abiFactory = `[
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
 				"name": "user",
 				"type": "address"
 			},
@@ -111,6 +92,43 @@ export const abiFactory = `[
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "addresses",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "approveFeaturedEvents",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "_username",
 				"type": "string"
@@ -137,7 +155,7 @@ export const abiFactory = `[
 		"name": "contracts",
 		"outputs": [
 			{
-				"internalType": "contract IIKS",
+				"internalType": "contract IKS",
 				"name": "",
 				"type": "address"
 			}
@@ -198,6 +216,111 @@ export const abiFactory = `[
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchAllFeaturedRequest",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isApproved",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct FactoryIKS.FeaturedRequest[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchFeaturedEvents",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPrivateEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "featuredId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOver",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct featured.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -328,26 +451,6 @@ export const abiFactory = `[
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -356,19 +459,6 @@ export const abiFactory = `[
 			}
 		],
 		"name": "setWhitelistOperator",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
