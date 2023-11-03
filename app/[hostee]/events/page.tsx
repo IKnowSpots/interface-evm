@@ -162,7 +162,7 @@ const EventsByHost = () => {
                     <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
                 </div>
                 <Navbar />
-                <div className="w-full h-full ">
+                <div className="w-full h-full min-h-screen ">
                     <div className="flex justify-between px-[6rem]  ">
                         <div className="pb-8 ">
                             <div className="cursor-pointer text-white bg-[#070708] py-2 text-base font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">

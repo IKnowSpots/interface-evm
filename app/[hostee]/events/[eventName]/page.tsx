@@ -55,7 +55,7 @@ const Event = () => {
                 <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
             </div>
             <Navbar />
-            <div className="w-full h-full">
+            <div className="w-full h-full min-h-screen">
             <div className="md:flex-row flex flex-col py-4 justify-center w-full">
                 <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
                     <img
