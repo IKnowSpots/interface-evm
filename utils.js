@@ -291,7 +291,7 @@ export async function fetchCommonInventory() {
     const hosteeAddresses = await factoryContract.userToHostPurchasedArray(
         address
     );
-    console.log("host address", address);
+    console.log("hosts addresses", username);
 
     const eventifyContract = await getEventifyContract(username, true);
 
