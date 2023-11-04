@@ -34,10 +34,6 @@ const ActiveEvents = () => {
         return (
             <Layout>
                 <div className="text-white p-4">No Events</div>
-                <div>
-                    {" "}
-                    <CreateButton />
-                </div>
             </Layout>
         );
 
@@ -69,29 +65,8 @@ const ActiveEvents = () => {
                         <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " />
                     </div> */}
             </div>
-            <div>
-                {" "}
-                <CreateButton />
-            </div>
         </Layout>
     );
-
-    function CreateButton() {
-        return (
-            <a href="/dashboard/create">
-                <div className="create-event-btn flex w-[10.5rem] justify-between mx-auto mt-4 px-4 py-2 border rounded-xl z-[10]">
-                    <Image
-                        src={"/icons/qr.svg"}
-                        width={20}
-                        height={20}
-                        alt="qr code svg"
-                        className=""
-                    />
-                    <p className="z-[10] text-white">Create an Event</p>
-                </div>
-            </a>
-        );
-    }
 
     function Layout({ children }: { children: React.ReactNode }) {
         return (
