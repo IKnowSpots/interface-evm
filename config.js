@@ -738,6 +738,19 @@ export const abiIKS = `[
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "addValidator",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "account",
 				"type": "address"
 			},
@@ -799,6 +812,25 @@ export const abiIKS = `[
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "checkIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_rewardToken",
 				"type": "uint256"
 			}
@@ -806,76 +838,6 @@ export const abiIKS = `[
 		"name": "claimReward",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "fetchActiveEvents",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "host",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ticketId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "isActive",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isPublished",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isShortlist",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isExistingTicket",
-						"type": "bool"
-					},
-					{
-						"internalType": "enum ticket.NftType",
-						"name": "nftType",
-						"type": "uint8"
-					}
-				],
-				"internalType": "struct ticket.Ticket[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -935,143 +897,8 @@ export const abiIKS = `[
 						"type": "bool"
 					},
 					{
-						"internalType": "enum ticket.NftType",
-						"name": "nftType",
-						"type": "uint8"
-					}
-				],
-				"internalType": "struct ticket.Ticket[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "fetchMintedTickets",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "host",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ticketId",
-						"type": "uint256"
-					},
-					{
 						"internalType": "bool",
-						"name": "isActive",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isPublished",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isShortlist",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isExistingTicket",
-						"type": "bool"
-					},
-					{
-						"internalType": "enum ticket.NftType",
-						"name": "nftType",
-						"type": "uint8"
-					}
-				],
-				"internalType": "struct ticket.Ticket[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "fetchPausedEvents",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "host",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ticketId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "isActive",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isPublished",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isShortlist",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isExistingTicket",
+						"name": "isStaking",
 						"type": "bool"
 					},
 					{
@@ -1145,6 +972,11 @@ export const abiIKS = `[
 						"type": "bool"
 					},
 					{
+						"internalType": "bool",
+						"name": "isStaking",
+						"type": "bool"
+					},
+					{
 						"internalType": "enum ticket.NftType",
 						"name": "nftType",
 						"type": "uint8"
@@ -1160,72 +992,15 @@ export const abiIKS = `[
 	},
 	{
 		"inputs": [],
-		"name": "fetchShortlistEvents",
+		"name": "generateOTP",
 		"outputs": [
 			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "host",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ticketId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "isActive",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isPublished",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isShortlist",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isExistingTicket",
-						"type": "bool"
-					},
-					{
-						"internalType": "enum ticket.NftType",
-						"name": "nftType",
-						"type": "uint8"
-					}
-				],
-				"internalType": "struct ticket.Ticket[]",
+				"internalType": "uint256",
 				"name": "",
-				"type": "tuple[]"
+				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
@@ -1433,6 +1208,11 @@ export const abiIKS = `[
 				"type": "bool"
 			},
 			{
+				"internalType": "bool",
+				"name": "isStaking",
+				"type": "bool"
+			},
+			{
 				"internalType": "enum ticket.NftType",
 				"name": "nftType",
 				"type": "uint8"
@@ -1455,6 +1235,25 @@ export const abiIKS = `[
 			}
 		],
 		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isValidator",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -1498,6 +1297,11 @@ export const abiIKS = `[
 			{
 				"internalType": "bool",
 				"name": "_isShortlist",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "_isStaking",
 				"type": "bool"
 			},
 			{
@@ -1620,6 +1424,11 @@ export const abiIKS = `[
 				"type": "uint256"
 			},
 			{
+				"internalType": "bool",
+				"name": "isStaking",
+				"type": "bool"
+			},
+			{
 				"internalType": "string",
 				"name": "_tokenURI",
 				"type": "string"
@@ -1641,6 +1450,11 @@ export const abiIKS = `[
 				"internalType": "address",
 				"name": "_contract",
 				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isStaking",
+				"type": "bool"
 			},
 			{
 				"internalType": "string",
@@ -1675,6 +1489,19 @@ export const abiIKS = `[
 			}
 		],
 		"name": "pushFeaturedEvent",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "removeValidator",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1849,6 +1676,26 @@ export const abiIKS = `[
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "validateOTP",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]`;

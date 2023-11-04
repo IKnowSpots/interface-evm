@@ -172,6 +172,7 @@ export async function fetchAllEvents() {
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.date,
+                description: meta.data.description,
                 cover: meta.data.cover,
                 NftURI: tokenUri,
                 host: i.host.toString(),
@@ -378,6 +379,7 @@ export async function fetchAllEventsWithInfura(username) {
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.date,
+                description: meta.data.description,
                 cover: meta.data.cover,
                 NftURI: tokenUri,
                 host: i.host.toString(),
@@ -468,6 +470,7 @@ export async function publishTickets(ticketId) {
 
     const tx = await contract.publishTickets(ticketId);
     await tx.wait();
+    await fetchAllEvents();
     console.log("Published");
 }
 
@@ -477,6 +480,7 @@ export async function pauseEvent(ticketId) {
 
     const tx = await contract.pauseActiveEvent(ticketId);
     await tx.wait();
+    await fetchAllEvents();
     console.log("Paused");
 }
 
@@ -486,6 +490,7 @@ export async function runEvent(ticketId) {
 
     const tx = await contract.runPausedEvent(ticketId);
     await tx.wait();
+    await fetchAllEvents();
     console.log("Event Running");
 }
 

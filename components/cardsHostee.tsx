@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { currency } from "@/config"
+import { currency } from "@/config";
 
 const CardsHostee = ({
     image,
@@ -14,16 +14,16 @@ const CardsHostee = ({
     username,
     tokenId,
     supply,
-    remaining
+    remaining,
 }: {
     image: any;
     name: string;
     price: any;
     date: any;
     username: string;
-    tokenId: any,
-    supply: any,
-    remaining: any
+    tokenId: any;
+    supply: any;
+    remaining: any;
 }) => {
     function pushPage() {
         redirect(`/${username}/events/${tokenId}`);
@@ -45,24 +45,27 @@ const CardsHostee = ({
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        <p>{price} {currency}</p>
+                        <p>
+                            {price} {currency}
+                        </p>
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
                     <div className="flex justify-between items-center">
-                        <p>Bought: { supply - remaining }</p>
+                        <p>
+                            Supply: {remaining} / {supply}
+                        </p>
                         <p>{date}</p>
                     </div>
                     <div className="flex justify-center items-center">
                         <Link
-                        href={`/${username}/events/${tokenId}`}
-                        className="view-btn px-4 py-1 outline rounded-lg"
-                        onClick={pushPage}
+                            href={`/${username}/events/${tokenId}`}
+                            className="view-btn px-4 py-1 outline rounded-lg"
+                            onClick={pushPage}
                         >
                             View
                         </Link>
                     </div>
                 </div>
-
             </div>
         </div>
     );

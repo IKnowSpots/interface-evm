@@ -32,7 +32,7 @@ const Sidebar = () => {
         }
     }
 
-    let publicKey = undefined
+    let publicKey = undefined;
 
     // useEffect(() => {
     //     console.log("Public Key is ", publicKey);
@@ -42,7 +42,7 @@ const Sidebar = () => {
 
     return (
         <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[20%] py-8">
-                                <div className="bg-dashboard blur-[220px] absolute w-[60%] h-[700px] z-[-1]"></div>
+            <div className="bg-dashboard blur-[220px] absolute w-[60%] h-[700px] z-[-1]"></div>
 
             <Link href="/">
                 <Image
@@ -55,26 +55,33 @@ const Sidebar = () => {
             <div className="py-16 text-white">
                 {/* <SidebarItems icon_name="Home_fill" section_name="Dashboard" /> */}
 
-                <Link href="/dashboard/active" className="opacity-75 sidebar-btn">
+                <Link
+                    href="/dashboard/active"
+                    className="opacity-75 sidebar-btn"
+                >
                     <SidebarItems
                         icon_name="Fire_fill"
                         section_name="Active Events"
-                        
                     />
                 </Link>
 
-                <Link href="/dashboard/inactive" className="opacity-75 sidebar-btn">
+                <Link
+                    href="/dashboard/inactive"
+                    className="opacity-75 sidebar-btn"
+                >
                     <SidebarItems
                         icon_name="3d_box_fill"
                         section_name="Inactive Events"
                     />
                 </Link>
 
-                <Link href="/dashboard/minted" className="opacity-75 sidebar-btn">
+                <Link
+                    href="/dashboard/minted"
+                    className="opacity-75 sidebar-btn"
+                >
                     <SidebarItems
                         icon_name="Fire_fill"
                         section_name="Minted Collections"
-                        
                     />
                 </Link>
 
@@ -83,14 +90,20 @@ const Sidebar = () => {
                     section_name="Minted Collection"
                 /> */}
 
-                <Link href="/dashboard/shortlist" className="opacity-75 sidebar-btn">
+                <Link
+                    href="/dashboard/shortlist"
+                    className="opacity-75 sidebar-btn"
+                >
                     <SidebarItems icon_name="CPU" section_name="Shortlist" />
                 </Link>
 
-                <Link href="/dashboard/feature" className="opacity-75 sidebar-btn">
+                <Link
+                    href="/dashboard/rewards"
+                    className="opacity-75 sidebar-btn"
+                >
                     <SidebarItems
                         icon_name="lightning_fill"
-                        section_name="Feature"
+                        section_name="Rewards"
                     />
                 </Link>
             </div>
@@ -103,7 +116,9 @@ const Sidebar = () => {
                 </Link>
                 <Link target="_blank" href="https://github.com/IKnowSpots">
                     <div className="flex items-center py-1 sidebar-elements">
-                        <p className=" pr-2 opacity-40 sidebar-elements">GitHub </p>
+                        <p className=" pr-2 opacity-40 sidebar-elements">
+                            GitHub{" "}
+                        </p>
                         <Image
                             src="/icons/arrow.svg"
                             width="17"
@@ -115,7 +130,9 @@ const Sidebar = () => {
                 </Link>
                 <Link target="_blank" href="https://twitter.com/iknowspots">
                     <div className="flex items-center py-1 sidebar-elements">
-                        <p className="pr-2 opacity-40 sidebar-elements sidebar-elements">Twitter</p>
+                        <p className="pr-2 opacity-40 sidebar-elements sidebar-elements">
+                            Twitter
+                        </p>
                         <Image
                             src="/icons/arrow.svg"
                             width="17"

@@ -20,7 +20,7 @@ const Create = () => {
         uri: "",
         isShortlistEnabled: false,
         isStakingEnabled: false,
-        stakePrice: "0",
+        stakePrice: 0,
         eventPrice: "0",
     });
 
@@ -51,7 +51,7 @@ const Create = () => {
 
     const disableButton = () => {
         handleBothClicks();
-        setFormInput({ ...formInput, isStakingEnabled: false, stakePrice: "0" });
+        setFormInput({ ...formInput, isStakingEnabled: false, stakePrice: 0 });
     };
 
     const [val, setVal] = useState("");
@@ -100,11 +100,11 @@ const Create = () => {
     }
 
     async function publish() {
-        try {
+        // try {
             setLoading(true);
             const NftURI = await formURI();
             const isMinted = await mint(
-                formInput.stakePrice,
+                formInput.stakePrice.toString(),
                 formInput.supply,
                 formInput.isShortlistEnabled,
                 formInput.isStakingEnabled,
@@ -123,18 +123,18 @@ const Create = () => {
                 });
             }
             setLoading(false);
-        } catch (error) {
-            toast.warn("Error occurred, try again in a while!", {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-        }
+        // } catch (error) {
+        //     toast.warn("Error occurred, try again in a while!", {
+        //         position: "top-center",
+        //         autoClose: 5000,
+        //         hideProgressBar: true,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "dark",
+        //     });
+        // }
     }
 
     return (
