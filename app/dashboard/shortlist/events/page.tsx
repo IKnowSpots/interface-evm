@@ -17,32 +17,19 @@ const Support = () => {
             </div>
         </div>
 
-        <div className="flex justify-center items-center">
-        <div className="box-background w-[60%] my-20 relative z-20">
-          <div className="leading-[2rem]">
-            <div className="text-center text-white text-opacity-60 text-base font-normal">Get in touch</div>
-            <div className="bg-gradient-to-r from-[#fff] via-[#fff]/80 to-[#9d9ea1]/50 bg-clip-text text-transparent md:text-6xl text-center font-bold pb-1">We’d love to help</div>
-          </div>
-          <iframe
-            data-tally-src="https://tally.so/embed/3xDyqG?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy"
-            width="100%"
-            height="381"
-            className="text-white"
-            title="We'd love to help"
-          ></iframe>
-        </div>
+        <div className="flex justify-center my-24 items-center">
+            <div className="box-background w-[50%] px-6 py-12 relative z-20">
+                <div className=" flex flex-col justify-center items-center gap-4">
+                    <div className="w-[80%] flex justify-around items-center p-2 gap-4 border border-[#A0A0A038] rounded-lg">
+                        <button className="bg-[#1F1A23]">Manual</button>
+                        <button>Bulk</button>
+                    </div>
+                    <div className="bg-gradient-to-r from-[#fff] via-[#fff]/80 to-[#9d9ea1]/50 bg-clip-text text-transparent md:text-6xl text-center font-bold pb-1">We’d love to help</div>
+                </div>
+            </div>
         </div>
       </div>
 
-
-      <Script
-        id="tally-js"
-        src="https://tally.so/widgets/embed.js"
-      // onLoad={() => {
-      //     Tally.loadEmbeds();
-      // }}
-      />
       <FooterSection/>
     </div>
   );
