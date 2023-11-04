@@ -17,10 +17,14 @@ const ActiveEvents = () => {
     }, []);
 
     async function fetchActiveEventsData() {
-        setLoading(true);
-        let data: any = await fetchActiveEvents();
-        setActiveEvents(data);
-        setLoading(false);
+        try {
+            setLoading(true);
+            let data: any = await fetchActiveEvents();
+            setActiveEvents(data);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     if (loading == true)

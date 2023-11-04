@@ -4,24 +4,28 @@ import Image from "next/image";
 import CardsActive from "@/components/cardsShortlist";
 import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
-import { fetchActiveEvents } from "../../../utils";
+import { fetchShortlistEvents } from "../../../utils";
 import CardsShortlist from "@/components/cardsShortlist";
+import { usePathname } from "next/navigation";
 
 const Shortlist = () => {
-    // to run this page static comment 42-51 and uncomment 52-57
 
     const [activeEvents, setActiveEvents] = useState<any>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchActiveEventsData();
+        fetchShortlistEventsData();
     }, []);
 
-    async function fetchActiveEventsData() {
-        setLoading(true);
-        let data: any = await fetchActiveEvents();
-        setActiveEvents(data);
-        setLoading(false);
+    async function fetchShortlistEventsData() {
+        try {
+            setLoading(true);
+            let data: any = await fetchShortlistEvents();
+            setActiveEvents(data);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     if (loading == true)

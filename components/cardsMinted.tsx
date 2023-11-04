@@ -1,17 +1,26 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { useState } from "react";
-import { publishTickets } from "@/utils"
+import { publishTickets } from "@/utils";
 
-const CardsMinted = ({ image, name, tokenId }: { image: any, name: string, tokenId: any }) => {
+const CardsMinted = ({
+    image,
+    name,
+    tokenId,
+    supply,
+}: {
+    image: any;
+    name: string;
+    tokenId: any;
+    supply: any;
+}) => {
+    const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(false)
-
-  async function publishTicketsCall(tokenId: any) {
-    setLoading(true)
-    await publishTickets(tokenId)
-    setLoading(false)
-  }
+    async function publishTicketsCall(tokenId: any) {
+        setLoading(true);
+        await publishTickets(tokenId);
+        setLoading(false);
+    }
 
     return (
         <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
@@ -21,12 +30,18 @@ const CardsMinted = ({ image, name, tokenId }: { image: any, name: string, token
                     className="h-[250px] rounded-xl"
                     // width="195"
                     // height="200"
-                    alt="Event&apos;s Image"
+                    alt="Event's Image"
                 />
                 <div className="flex text-base flex-col justify-center items-center gap-2">
-                    <p>{name}</p>
+                    <div className="flex justify-between">
+                        <p>{name}</p>
+                        <p>supply: {supply}</p>
+                    </div>
                     {/* <p>1.20 Weth</p> */}
-                    <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => publishTicketsCall(tokenId)}>
+                    <button
+                        className="view-btn px-4 py-0.5 outline rounded-lg"
+                        onClick={() => publishTicketsCall(tokenId)}
+                    >
                         Publish
                     </button>
                 </div>

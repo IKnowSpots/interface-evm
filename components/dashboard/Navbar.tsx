@@ -55,7 +55,7 @@ const DashNav = () => {
             </div>
 
             <div>
-                <button className="create-event-btn text-base flex justify-around w-[7.5rem] mx-auto px-2 py-2 rounded-lg z-[10] ml-6 text-white font-semibold bg-[#070708]">Contracts</button>
+                <button className="create-event-btn text-base flex justify-around w-[7.5rem] mx-auto px-2 py-2 rounded-lg z-[10] ml-6 text-white font-semibold bg-[#070708]">Contract</button>
             </div>
 
             <div className="flex gap-2 w-[22%] justify-end items-center">

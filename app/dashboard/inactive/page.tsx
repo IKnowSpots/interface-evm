@@ -16,10 +16,14 @@ const InactiveEvents = () => {
     }, []);
 
     async function fetchInactiveEventsData() {
-        setLoading(true);
-        let data: any = await fetchInactiveEvents();
-        setInactiveEvents(data);
-        setLoading(false);
+        try {
+            setLoading(true);
+            let data: any = await fetchInactiveEvents();
+            setInactiveEvents(data);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     if (loading == true)

@@ -32,7 +32,7 @@ const Create = () => {
         }
     };
 
-    console.log(formInput);
+    // console.log(formInput);
 
     const [loading, setLoading] = useState(false);
     const [imgLoading, setImgLoading] = useState(false);
@@ -59,7 +59,7 @@ const Create = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const data = e.target.value.split(" ");
-        console.log(data);
+        // console.log(data);
 
         if (data.length <= 100) {
             setVal(e.target.value);
@@ -73,10 +73,11 @@ const Create = () => {
     };
 
     async function formURI() {
-        const { name, description, venue, date, supply, cover } = formInput;
+        let { name, description, venue, date, supply, cover } = formInput;
         if (!name || !description || !venue || !date || !supply) return;
-        if (!cover) {
-            formInput.cover = "/bored_ape_image.png";
+        console.log(cover)
+        if (cover == "") {
+            cover = "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg";
         }
         const data = JSON.stringify({ name, description, venue, date, cover });
         const files = [new File([data], "data.json")];
@@ -100,7 +101,7 @@ const Create = () => {
     }
 
     async function publish() {
-        // try {
+        try {
             setLoading(true);
             const NftURI = await formURI();
             const isMinted = await mint(
@@ -123,18 +124,18 @@ const Create = () => {
                 });
             }
             setLoading(false);
-        // } catch (error) {
-        //     toast.warn("Error occurred, try again in a while!", {
-        //         position: "top-center",
-        //         autoClose: 5000,
-        //         hideProgressBar: true,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "dark",
-        //     });
-        // }
+        } catch (error) {
+            toast.warn("Error occurred, try again in a while!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
 
     return (

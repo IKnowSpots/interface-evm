@@ -6,7 +6,9 @@ import Script from "next/script";
 import Manual from "@/components/Manual"
 import Bulk from "@/components/Bulk"
 
-const Support = () => {
+const ManageShortlist = () => {
+
+    let tokenId = 1;
 
     const [choose, setChoose ] = useState(false)
 
@@ -36,7 +38,7 @@ const Support = () => {
                         </div>
 
                         <div className="w-[85%]">
-                            {choose?<Bulk/>:<Manual/>}
+                            {choose?<Bulk tokenId={tokenId} />:<Manual tokenId={tokenId} />}
                         </div>
                     </div>
                 </div>
@@ -48,4 +50,4 @@ const Support = () => {
   );
 };
 
-export default Support;
+export default ManageShortlist;

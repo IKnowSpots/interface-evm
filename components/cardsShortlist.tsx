@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { pauseEvent } from "@/utils"
 import { currency } from "@/config"
+import Link from "next/link";
 
 const CardsShortlist = ({ image, name, price, date, tokenId, remaining, supply }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any }) => {
 
@@ -38,9 +39,11 @@ const CardsShortlist = ({ image, name, price, date, tokenId, remaining, supply }
                       {/* <p>{remaining}/{supply}</p> */}
                       {/* <p>1.20 Weth</p> */}
                       <div className="flex justify-center items-center">
-                          <button className="view-btn px-4 py-0.5 outline rounded-lg">
-                              Shortlist
-                          </button>
+                        <Link href={`/dashboard/shortlist/manage`}>
+                          <p className="view-btn px-4 py-0.5 outline rounded-lg">
+                              Add Shortlist
+                          </p>
+                        </Link>
                       </div>
                       
                   </div>

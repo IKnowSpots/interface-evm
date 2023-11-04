@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Manual() {
+export default function Bulk(tokenId: any) {
   return (
     <div className='flex flex-col justify-center items-center gap-20'>
         <div className="w-full flex flex-col">

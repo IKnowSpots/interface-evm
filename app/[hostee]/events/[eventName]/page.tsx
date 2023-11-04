@@ -113,7 +113,7 @@ const Event = () => {
                         className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
                         onClick={() => claim(eventData.tokenId, eventData.price)}
                     >
-                        Claim Now
+                        Stake Now
                     </button>
                 </div>
             </div>

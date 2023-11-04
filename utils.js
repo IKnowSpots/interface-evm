@@ -372,7 +372,7 @@ export async function fetchAllEventsWithInfura(username) {
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
+            // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
@@ -397,10 +397,12 @@ export async function fetchAllEventsWithInfura(username) {
         })
     );
     allEventsInfura = items;
+    console.log("all infura", allEventsInfura)
     return items;
 }
 
 export async function fetchActiveEventsWithInfura(username) {
+    console.log("length", allEventsInfura.length)
     if (allEventsInfura.length > 0) {
         const filteredArray = allEventsInfura.filter(
             (subarray) =>
