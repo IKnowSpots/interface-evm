@@ -43,7 +43,7 @@ const DashNav = () => {
         <div id="dash-navbar" className="flex justify-around items-center gap-4 pt-8 pb-4 px-4 w-full">
             <div className="w-[60%] flex justify-center">
             <div className="flex justify-center items-center text-white border-white w-[50%] bg-black  rounded-full px-2">
-            <img src="/search.png" className="w-[10%]" alt="" />
+            <img src="/search.svg" className="w-[10%]" alt="" />
             <input
                 type="text"
                 placeholder="Search events"
