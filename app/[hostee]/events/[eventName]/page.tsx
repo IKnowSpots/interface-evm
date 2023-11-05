@@ -34,6 +34,13 @@ const Event = () => {
         fetchActiveEventsData();
     }, []);
 
+    const [toggle,setToggle]=useState(false)
+    const [more,setMore]=useState(eventData?.description.slice(0,350))
+    function handleClick() {
+        toggle?setMore(eventData?.description.slice(0,350)):setMore(eventData?.description)
+        setToggle(!toggle)
+    }
+
     async function fetchActiveEventsData() {
         setLoading(true);
         let fetchedEvents: any = await fetchActiveEventsWithInfura(username);
@@ -55,7 +62,7 @@ const Event = () => {
                 <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
             </div>
             <Navbar />
-            <div className="w-full h-full min-h-screen">
+            <div className="w-full h-full min-h-screen mb-16">
                 <div className="md:flex-row flex flex-col py-4 justify-center w-full">
                     <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
                         <img
@@ -79,7 +86,7 @@ const Event = () => {
                                 {eventData?.name} #{eventData?.tokenId}
                             </h1>
                         </div>
-                        <div>
+                        <div className="gap-2 flex flex-col">
                             <p>
                                 {eventData.remaining} / {eventData.supply}
                             </p>
@@ -88,7 +95,7 @@ const Event = () => {
                             </p>
                         </div>
                         <div className="flex flex-col py-4">
-                            <div className="flex">
+                            <div className="flex mb-6">
                                 <Image
                                     src={"/icons/person_avatar.png"}
                                     width={50}
@@ -107,13 +114,15 @@ const Event = () => {
                                     </h3>
                                 </div>
                             </div>
+                            <div className="flex text-lg font-semibold gap-2 text-white/60"> Event Type:
                             {eventData?.isShortlist ? (
-                                <p>Public Event</p>
+                                <p className="text-white text-xl font-bold">Public Event</p>
                             ) : (
-                                <p> Private Event</p>
+                                <p className="text-white text-xl font-bold"> Private Event</p>
                             )}
+                            </div>
                         </div>
-                        <div className="bg-[#1E1E1EA6] my-4 py-4 px-6 rounded-2xl shadow-2xl ">
+                        <div className="bg-[#1E1E1EA6] min-h-[15rem] my-4 py-4 px-6 rounded-2xl shadow-2xl ">
                             <div className="flex items-center pb-4 gap-2">
                                 <img
                                     src="/map-pin.png"
@@ -125,7 +134,10 @@ const Event = () => {
                                 </h1>
                             </div>
                             <p className=" text-white mb-4">
-                                {eventData?.description}
+                                {/* {eventData?.description} */}
+                                {more}
+                                <br />
+                                <button className='text-[#3E8BFF] font-bold' onClick={()=>handleClick()}>{toggle?"Read Less":"Read More"}</button>
                             </p>
                             {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
                             Know More
