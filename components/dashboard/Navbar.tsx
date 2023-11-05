@@ -47,7 +47,7 @@ const DashNav = () => {
     }
 
     return (
-        <div id="dash-navbar" className="flex justify-around items-center gap-4 pt-8 pb-4 px-4 w-full">
+        <div id="dash-navbar" className="flex justify-around items-center gap-4 pt-8 pb-10 px-4 w-full">
             <div className="w-[60%] flex justify-center">
             <div className="flex justify-center items-center text-white border-white w-[50%] bg-black  rounded-full px-2">
             <img src="/search.svg" className="w-[10%]" alt="" />
@@ -71,7 +71,7 @@ const DashNav = () => {
                 </button>
 
                 {isDropdownOpen && (
-                    <div className="absolute z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg">
+                    <div className="fixed text-[0.8rem] left-[70%] mr-8 z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg ">
                         {/* Dropdown content goes here */}
                         <a href="#" className="block px-4 py-2">{contractAddr}</a>
                     </div>
