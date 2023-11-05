@@ -24,7 +24,9 @@ const Event = () => {
         cover: "",
         tokenId: "",
         supply: "",
-        remaining: ""
+        remaining: "",
+        isShortlist: "",
+        isStaking: "",
     });
     const [loading, setLoading] = useState(false);
 
@@ -35,7 +37,7 @@ const Event = () => {
     async function fetchActiveEventsData() {
         setLoading(true);
         let fetchedEvents: any = await fetchActiveEventsWithInfura(username);
-        const event = fetchedEvents.find((obj: any) => obj.tokenId == (eventId));
+        const event = fetchedEvents.find((obj: any) => obj.tokenId == eventId);
         setEventData(event);
         console.log("event", event);
         if (event) {
@@ -44,81 +46,115 @@ const Event = () => {
     }
 
     async function claim(tokenId: any, price: any) {
-        
-        await buyTicket(username, tokenId, price)
+        await buyTicket(username, tokenId, price);
     }
 
     return (
-        
         <div className="bg-[#25143a] text-white pb-8 px-8 w-full h-full">
             <div>
                 <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
             </div>
             <Navbar />
             <div className="w-full h-full min-h-screen">
-            <div className="md:flex-row flex flex-col py-4 justify-center w-full">
-                <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
-                    <img
-                        src={eventData?.cover}
-                        alt="event img"
-                        className="w-[90%] h-fit rounded-xl flex justify-center items-center mx-auto "
-                    />
-                </div>
-                <div className="flex flex-col px-24 w-[60%] ">
-                    <div className="flex items-center py-2  ">
-                        <Image
-                            src={"/icons/dollar.svg"}
-                            width={20}
-                            height={30}
-                            alt="dollar svg"
+                <div className="md:flex-row flex flex-col py-4 justify-center w-full">
+                    <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
+                        <img
+                            src={eventData?.cover}
+                            alt="event img"
+                            className="w-[90%] h-fit rounded-xl flex justify-center items-center mx-auto "
                         />
-                        <p className="font-lg pl-2">RSVP Escrow</p>
                     </div>
-                    <div>
-                        <h1 className="text-2xl font-bold py-2">
-                            {eventData?.name}
-                        </h1>
-                    </div>
-                    <div>
-                    <p>{eventData.remaining} / {eventData.supply}</p>
-                        <p>{eventData?.price} {currency}</p>
-                    </div>
-                    <div className="flex py-4">
-                        <Image
-                            src={"/icons/person_avatar.png"}
-                            width={50}
-                            height={30}
-                            alt="person avatar"
-                        />
-                        <div className="pl-4">
-                            <p className="text-[rgba(255,255,255,0.65)] text-lg">Host</p>
-                            <p className="text-white text-lg font-semibold">
-                                {username}
+                    <div className="flex flex-col px-24 w-[60%] ">
+                        <div className="flex items-center py-2  ">
+                            <Image
+                                src={"/icons/dollar.svg"}
+                                width={20}
+                                height={30}
+                                alt="dollar svg"
+                            />
+                            <p className="font-lg pl-2">RSVP Escrow</p>
+                        </div>
+                        <div>
+                            <h1 className="text-2xl font-bold py-2">
+                                {eventData?.name} #{eventData?.tokenId}
+                            </h1>
+                        </div>
+                        <div>
+                            <p>
+                                {eventData.remaining} / {eventData.supply}
                             </p>
-                            <h3 className="text-xl">{eventData?.hostName}</h3>
+                            <p>
+                                {eventData?.price} {currency}
+                            </p>
                         </div>
-                    </div>
-                    <div className="bg-[#1E1E1EA6] my-4 py-4 px-6 rounded-2xl shadow-2xl ">
-                        <div className="flex items-center pb-4 gap-2">
-                            <img src="/map-pin.png" className="w-[5%]" alt="" />
-                            <h1 className="text-xl font-semibold">{eventData?.venue}</h1>
+                        <div className="flex flex-col py-4">
+                            <div className="flex">
+                                <Image
+                                    src={"/icons/person_avatar.png"}
+                                    width={50}
+                                    height={30}
+                                    alt="person avatar"
+                                />
+                                <div className="pl-4">
+                                    <p className="text-[rgba(255,255,255,0.65)] text-lg">
+                                        Host
+                                    </p>
+                                    <p className="text-white text-lg font-semibold">
+                                        {username}
+                                    </p>
+                                    <h3 className="text-xl">
+                                        {eventData?.hostName}
+                                    </h3>
+                                </div>
+                            </div>
+                            {eventData?.isShortlist ? (
+                                <p>Public Event</p>
+                            ) : (
+                                <p> Private Event</p>
+                            )}
                         </div>
-                        <p className=" text-white mb-4">{eventData?.description}</p>
-                        {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
+                        <div className="bg-[#1E1E1EA6] my-4 py-4 px-6 rounded-2xl shadow-2xl ">
+                            <div className="flex items-center pb-4 gap-2">
+                                <img
+                                    src="/map-pin.png"
+                                    className="w-[5%]"
+                                    alt=""
+                                />
+                                <h1 className="text-xl font-semibold">
+                                    {eventData?.venue}
+                                </h1>
+                            </div>
+                            <p className=" text-white mb-4">
+                                {eventData?.description}
+                            </p>
+                            {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
                             Know More
                             <img src="/external-link.svg" alt="" />
                         </Link> */}
+                        </div>
+                        {eventData?.isStaking ? (
+                            <button
+                                className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
+                                onClick={() =>
+                                    claim(eventData.tokenId, eventData.price)
+                                }
+                            >
+                                Stake Now
+                            </button>
+                        ) : (
+                            <button
+                                className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
+                                onClick={() =>
+                                    claim(eventData.tokenId, eventData.price)
+                                }
+                            >
+                                Get Now
+                            </button>
+                        )}
                     </div>
-                    <button
-                        className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
-                        onClick={() => claim(eventData.tokenId, eventData.price)}
-                    >
-                        Stake Now
-                    </button>
                 </div>
             </div>
-            </div>
-            <FooterSection/>
+            <FooterSection />
         </div>
     );
 };

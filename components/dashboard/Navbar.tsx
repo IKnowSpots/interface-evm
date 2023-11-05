@@ -2,22 +2,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { fetchUsername } from "@/utils";
+import { fetchUsername, getIKSContractAddress } from "@/utils";
 
 const DashNav = () => {
     const [username, setUsername] = useState();
     const [loading, setLoading] = useState(false);
+    const [contractAddr, setContractAddr] = useState("")
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
-        fetchUsernameCall();
+        fetchUsernameCall()
     }, []);
+
+    async function getIKSContractAddressCall(user: any) {
+        const addr = await getIKSContractAddress(user)
+        setContractAddr(addr)
+    }
 
     async function fetchUsernameCall() {
         setLoading(true);
         let user = await fetchUsername();
         setUsername(user);
+        await getIKSContractAddressCall(user)
         // setUsername("iamacid");
         setLoading(false);
     }
@@ -66,7 +73,7 @@ const DashNav = () => {
                 {isDropdownOpen && (
                     <div className="absolute z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg">
                         {/* Dropdown content goes here */}
-                        <a href="#" className="block px-4 py-2">Wallet contract comes here check it.</a>
+                        <a href="#" className="block px-4 py-2">{contractAddr}</a>
                     </div>
                 )}
             </div>

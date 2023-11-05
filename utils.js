@@ -11,6 +11,28 @@ import {
 import axios from "axios";
 import { Web3Storage } from "web3.storage";
 
+// import {
+//     PolygonAddressFactory,
+//     PolygonCurrency,
+//     PolygonInfuraUrl,
+//     SepoliaAddressFactory,
+//     SepoliaCurrency,
+//     SepoliaInfuraUrl
+// } from "./config";
+
+// export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`;
+// let addressFactory = PolygonAddressFactory;
+// let currency = PolygonCurrency;
+// let RPCUrl = `${PolygonInfuraUrl}${InfuraRPCKey}`;
+
+// let chain = `polygon`;
+
+// if (chain == `polygon`) {
+
+// } else if (chain == `Sepolia`) {
+
+// }
+
 let allEvents = [];
 let allEventsInfura = [];
 let purchasesEvents = [];
@@ -185,6 +207,7 @@ export async function fetchAllEvents() {
                 isPublished: i.isPublished,
                 isShortlist: i.isShortlist,
                 isExistingTicket: i.isExistingTicket,
+                isStaking: i.isStaking,
             };
             return item;
         })
@@ -398,6 +421,7 @@ export async function fetchAllEventsWithInfura(username) {
                 isPublished: i.isPublished,
                 isShortlist: i.isShortlist,
                 isExistingTicket: i.isExistingTicket,
+                isStaking: i.isStaking,
             };
             return item;
         })

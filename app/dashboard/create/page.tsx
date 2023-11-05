@@ -20,7 +20,7 @@ const Create = () => {
         uri: "",
         isShortlistEnabled: false,
         isStakingEnabled: false,
-        stakePrice: 0,
+        stakePrice: "0",
         eventPrice: "0",
     });
 
@@ -51,7 +51,7 @@ const Create = () => {
 
     const disableButton = () => {
         handleBothClicks();
-        setFormInput({ ...formInput, isStakingEnabled: false, stakePrice: 0 });
+        setFormInput({ ...formInput, isStakingEnabled: false, stakePrice: "0" });
     };
 
     const [val, setVal] = useState("");
@@ -101,11 +101,12 @@ const Create = () => {
     }
 
     async function publish() {
-        try {
+        // try {
             setLoading(true);
             const NftURI = await formURI();
+            let floatNumber = parseFloat(formInput.stakePrice);
             const isMinted = await mint(
-                formInput.stakePrice.toString(),
+                floatNumber.toString(),
                 formInput.supply,
                 formInput.isShortlistEnabled,
                 formInput.isStakingEnabled,
@@ -124,18 +125,18 @@ const Create = () => {
                 });
             }
             setLoading(false);
-        } catch (error) {
-            toast.warn("Error occurred, try again in a while!", {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-        }
+        // } catch (error) {
+        //     toast.warn("Error occurred, try again in a while!", {
+        //         position: "top-center",
+        //         autoClose: 5000,
+        //         hideProgressBar: true,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "dark",
+        //     });
+        // }
     }
 
     return (
@@ -213,36 +214,46 @@ const Create = () => {
                                     disabled={imgLoading}
                                 />
                             </label>
-                            <div className="flex justify-around my-8  ">
-                                <Image
-                                    src={"/bored_ape_image.png"}
+                            <div className="flex justify-center mt-4 gap-4 items-center">
+                            <Image
+                                    src={"/cattt.jpeg"}
                                     width={60}
                                     height={60}
-                                    alt="bored ape nft"
+                                    alt="cat"
                                     className="rounded-lg"
                                 />
-                                <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
-                                />
-                                <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
-                                />
-                                <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
-                                />
+                                <p className="text-white opacity-40">default cover image</p>
                             </div>
+                            {/* <div className="flex justify-around my-8  ">
+                                <Image
+                                    src={"/bored_ape_image.png"}
+                                    width={60}
+                                    height={60}
+                                    alt="bored ape nft"
+                                    className="rounded-lg"
+                                />
+                                <Image
+                                    src={"/bored_ape_image.png"}
+                                    width={60}
+                                    height={60}
+                                    alt="bored ape nft"
+                                    className="rounded-lg"
+                                />
+                                <Image
+                                    src={"/bored_ape_image.png"}
+                                    width={60}
+                                    height={60}
+                                    alt="bored ape nft"
+                                    className="rounded-lg"
+                                />
+                                <Image
+                                    src={"/bored_ape_image.png"}
+                                    width={60}
+                                    height={60}
+                                    alt="bored ape nft"
+                                    className="rounded-lg"
+                                />
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -252,7 +263,7 @@ const Create = () => {
                             <div className="w-full flex justify-between">
                                 <div>
                                     <h3 className="text-xl">
-                                        Shortlist events
+                                        Private Event
                                     </h3>
                                     <p className="opacity-40">
                                         Display this on feature section of
@@ -432,7 +443,7 @@ const Create = () => {
                                 }`}
                                 onClick={disableButton}
                             >
-                                Disable
+                                Free
                             </button>
                         </div>
                     </div>
