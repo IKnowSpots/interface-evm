@@ -61,14 +61,14 @@ const Create = () => {
         const data = e.target.value.split(" ");
         // console.log(data);
 
-        if (data.length <= 100) {
+        if (data.length <= 160) {
             setVal(e.target.value);
             setWord(data.length);
             if (e.target.value == "") {
                 setWord(0);
             }
         } else {
-            alert("you can type only 400 words");
+            alert("you can type only 1000 characters");
         }
     };
 
