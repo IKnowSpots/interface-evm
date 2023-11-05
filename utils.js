@@ -221,7 +221,8 @@ export async function fetchMintedCollection() {
     if (allEvents.length > 0) {
         const filteredArray = allEvents.filter(
             (subarray) =>
-                subarray.isPublished == false &&
+                subarray.isPublished == false
+                 &&
                 subarray.isExistingTicket == false
         );
         return filteredArray;
