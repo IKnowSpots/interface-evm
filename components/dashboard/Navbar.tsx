@@ -9,8 +9,6 @@ const DashNav = () => {
     const [loading, setLoading] = useState(false);
     const [contractAddr, setContractAddr] = useState("")
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
     useEffect(() => {
         fetchUsernameCall()
     }, []);
@@ -28,6 +26,12 @@ const DashNav = () => {
         // setUsername("iamacid");
         setLoading(false);
     }
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleToggle = () => {
+        setIsOpen(!isOpen);
+      };
 
     function CreateButton() {
         return (
@@ -66,14 +70,15 @@ const DashNav = () => {
             <div>
                 <button
                     className="text-sm flex justify-around w-[7.5rem] mx-auto px-2 py-3 rounded-lg z-[10] ml-3 text-white font-semibold bg-[#070708] hover:bg-[#18181d] hover:border hover:border-black/50 focus:outline-none"
-                    onMouseEnter={() => setIsDropdownOpen(true)}
-                    onMouseLeave={() => setIsDropdownOpen(false)}>Contract <span className="rotate-180">^</span> 
+                    onMouseEnter={handleToggle}
+                    // onClick={handleToggle}
+                >
+                    Contract <span className="rotate-180">^</span> 
                 </button>
 
-                {isDropdownOpen && (
+                {isOpen && (
                     <div className="fixed text-[0.8rem] left-[70%] mr-8 z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg ">
-                        {/* Dropdown content goes here */}
-                        <a href="#" className="block px-4 py-2">{contractAddr}</a>
+                        <p className="block px-4 py-2">{contractAddr}</p>
                     </div>
                 )}
             </div>
