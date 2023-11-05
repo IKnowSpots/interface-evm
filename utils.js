@@ -136,12 +136,6 @@ export async function fetchUsername() {
     }
 }
 
-export async function fetchUsernameFromAddress(address) {
-    const contract = await getFactoryContract();
-    const data = await contract.addressToUsernames(address.toString());
-    return data;
-}
-
 export async function fetchAddressFromUsername(username) {
     const contract = await getFactoryContract();
     const data = await contract.usernameToAddress(username.toString());
@@ -150,6 +144,12 @@ export async function fetchAddressFromUsername(username) {
 
 export async function fetchUsernameValidity(username) {
     const contract = await getFactoryContract();
+    const data = await contract.usernameExist(username);
+    return data;
+}
+
+export async function fetchUsernameValidityInfura(username) {
+    const contract = await getFactoryContractWithInfura();
     const data = await contract.usernameExist(username);
     return data;
 }
@@ -312,16 +312,22 @@ export async function fetchCommonInventory() {
                     const meta = await axios.get(tokenUri);
                     let price = ethers.utils.formatEther(i.price);
                     let item = {
-                        tokenId: i.ticketId.toString(),
                         name: meta.data.name,
                         venue: meta.data.venue,
                         date: meta.data.date,
                         description: meta.data.description,
+                        cover: meta.data.cover,
+                        NftURI: tokenUri,
+                        host: i.host.toString(),
                         supply: i.supply.toNumber(),
                         remaining: i.remaining.toNumber(),
                         price,
-                        NftURI: tokenUri,
-                        cover: meta.data.cover,
+                        owner: i.owner.toString(),
+                        tokenId: i.ticketId.toString(),
+                        isActive: i.isActive,
+                        isPublished: i.isPublished,
+                        isShortlist: i.isShortlist,
+                        isExistingTicket: i.isExistingTicket,
                     };
                     return item;
                 })
@@ -397,14 +403,14 @@ export async function fetchAllEventsWithInfura(username) {
         })
     );
     allEventsInfura = items;
-    console.log("all infura", allEventsInfura)
+    console.log("all infura", items)
     return items;
 }
 
 export async function fetchActiveEventsWithInfura(username) {
-    console.log("length", allEventsInfura.length)
+    // console.log("length", activeEventsInfura.length)
     if (allEventsInfura.length > 0) {
-        const filteredArray = allEventsInfura.filter(
+        const filteredArray = fetchAllEvents.filter(
             (subarray) =>
                 subarray.remaining > 0 &&
                 subarray.isActive == true &&
@@ -420,6 +426,7 @@ export async function fetchActiveEventsWithInfura(username) {
                 subarray.isActive == true &&
                 subarray.isPublished == true
         );
+        allEventsInfura = filteredArray
         console.log("Active Events", filteredArray);
         return filteredArray;
     }
@@ -815,4 +822,10 @@ export const uploadToIPFS = async (files) => {
 //     );
 //     console.log("Inventory", items);
 //     return items;
+// }
+
+// export async function fetchUsernameFromAddress(address) {
+//     const contract = await getFactoryContract();
+//     const data = await contract.addressToUsernames(address.toString());
+//     return data;
 // }

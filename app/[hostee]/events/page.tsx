@@ -1,7 +1,10 @@
 "use client";
 import CardsHostee from "@/components/cardsHostee";
 import Navbar from "@/components/hostee/Navbar";
-import { fetchUsernameValidity, fetchActiveEventsWithInfura } from "@/utils";
+import {
+    fetchUsernameValidityInfura,
+    fetchActiveEventsWithInfura,
+} from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -33,32 +36,34 @@ const EventsByHost = () => {
 
     useEffect(() => {
         if (id) {
-            checkUsernameValidityData();
+            fetch();
         }
     }, [id]);
 
-    useEffect(() => {
-        if (isUsernameValid == true) {
-            fetchActiveEventsData();
-        }
-    }, [isUsernameValid]);
-
-    async function checkUsernameValidityData() {
-        const data = await fetchUsernameValidity(id);
-        setIsUsernameValid(data);
-    }
-
-    async function fetchActiveEventsData() {
+    async function fetch() {
         setLoading(true);
-        let data: any = await fetchActiveEventsWithInfura(id);
-        setActiveEvents(data);
+        const data = await fetchUsernameValidityInfura(id);
+        if (data == true) {
+            let data: any = await fetchActiveEventsWithInfura(id);
+            setActiveEvents(data);
+        }
+        setIsUsernameValid(data)
         setLoading(false);
     }
 
-    if (loading == true) return <div className="text-white">Fetching..</div>;
+    if (loading == true)
+        return (
+            <div className="text-white">
+                <Layout>Fetching..</Layout>
+            </div>
+        );
 
     if (loading == false && isUsernameValid == false)
-        return <div className="text-white">User do not exist</div>;
+        return (
+            <div className="text-white">
+                <Layout>User do not exist</Layout>
+            </div>
+        );
 
     if (loading == false && isUsernameValid == true && activeEvents.length == 0)
         return (
@@ -84,10 +89,9 @@ const EventsByHost = () => {
                         supply={nft.supply}
                         remaining={nft.remaining}
                     />
-                    
                 );
             })}
-             {/* <CardsHostee
+            {/* <CardsHostee
                         image={"1.png"}
                         name="Lorem Ipsum"
                         price="1.20"
@@ -167,8 +171,8 @@ const EventsByHost = () => {
                         <div className="pb-8 ">
                             <div className="cursor-pointer text-white bg-[#070708] py-2 text-base font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">
                                 <p className="">@{username}</p>
-                            <div className="h-[1.5rem] w-[1.5rem] grad1 rounded-full"></div>
-                    </div>
+                                <div className="h-[1.5rem] w-[1.5rem] grad1 rounded-full"></div>
+                            </div>
                         </div>
                         <div className="flex justify-center items-center text-white h-[40px] border-white w-[20rem] bg-[#070708]  rounded-full px-2 py-1 ">
                             <img src="/search.png" className="w-[10%]" alt="" />
@@ -184,7 +188,7 @@ const EventsByHost = () => {
                         {children}
                     </div>
                 </div>
-                <FooterSection/>
+                <FooterSection />
             </div>
         );
     }
