@@ -32,8 +32,8 @@ const CardsMinted = ({
                     // height="200"
                     alt="Event's Image"
                 />
-                <div className="flex text-base flex-col justify-center items-center gap-2">
-                    <div className="flex justify-between">
+                <div className="flex text-base flex-col justify-center items-center w-full gap-2">
+                    <div className="flex justify-between w-full">
                         <p>{name}</p>
                         <p>supply: {supply}</p>
                     </div>

@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
-import PopUp from "@/components/Popup.jsx"
+import PopUp from "@/components/Popup"
 
 const Create = () => {
     const [formInput, setFormInput] = useState({
@@ -114,19 +114,22 @@ const Create = () => {
                 formInput.isStakingEnabled,
                 NftURI
             );
+            // if (isMinted == true) {
+            //     toast.success("Minted!", {
+            //         position: "bottom-left",
+            //         autoClose: 5000,
+            //         hideProgressBar: true,
+            //         closeOnClick: true,
+            //         pauseOnHover: true,
+            //         draggable: true,
+            //         progress: undefined,
+            //         theme: "dark",
+            //     });
+            // }
             if (isMinted == true) {
-                toast.success("Minted!", {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-                <PopUp/>
+                return <PopUp/>
             }
+            
             setLoading(false);
         // } catch (error) {
         //     toast.warn("Error occurred, try again in a while!", {
