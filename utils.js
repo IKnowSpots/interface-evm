@@ -410,7 +410,7 @@ export async function fetchAllEventsWithInfura(username) {
 export async function fetchActiveEventsWithInfura(username) {
     // console.log("length", activeEventsInfura.length)
     if (allEventsInfura.length > 0) {
-        const filteredArray = fetchAllEvents.filter(
+        const filteredArray = allEventsInfura.filter(
             (subarray) =>
                 subarray.remaining > 0 &&
                 subarray.isActive == true &&
