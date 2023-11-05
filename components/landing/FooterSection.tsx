@@ -16,7 +16,7 @@ const FooterSection = () => {
     }
 
     return (
-        <div className="relative flex flex-col sm:flex-row justify-between p-4 sm:p-8 mx-4 sm:mx-8 border-white footer-gradient z-10 overflow-hidden footerDiv">
+        <div className="relative flex flex-col sm:flex-row justify-between p-4 sm:p-8 mx-4 sm:mx-8 border-white footer-gradient overflow-hidden footerDiv">
             <div className="flex flex-col relative z-10 px-8">
                 <div className="">
                     <img

@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
+import { text } from "stream/consumers";
+import PopUp from "@/components/Popup.jsx"
 
 const Create = () => {
     const [formInput, setFormInput] = useState({
@@ -123,6 +125,7 @@ const Create = () => {
                     progress: undefined,
                     theme: "dark",
                 });
+                <PopUp/>
             }
             setLoading(false);
         // } catch (error) {
@@ -411,7 +414,7 @@ const Create = () => {
                                 placeholder="0.01 ETH"
                                 className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4 ${
                                     isFieldDisabled
-                                        ? "bg-gray-300 text-gray-600"
+                                        ? "bg-red-800 text-gray-600"
                                         : " text-black"
                                 }`}
                                 // className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
@@ -455,8 +458,9 @@ const Create = () => {
                             className="px-4 py-2 border rounded-lg"
                             onClick={publish}
                         >
-                            Publish
+                            Mint
                         </button>
+                        {/* <PopUp/> */}
                     </div>
                 </div>
             </div>
