@@ -40,19 +40,26 @@ const Create = () => {
     const [imgLoading, setImgLoading] = useState(false);
     const [isFieldDisabled, setIsFieldDisabled] = useState(false);
     const [isButtonClicked, setIsButtonClicked] = useState(false);
-
+    const [enableInput, setEnableInput] = useState(true);
+    const [popUpVisible,setPopUpVisible] = useState(false);
+    const toggleInput = () => {
+      setEnableInput(!enableInput);
+    };
     const handleBothClicks = () => {
         setIsButtonClicked(!isButtonClicked);
-        setIsFieldDisabled(!isFieldDisabled);
-    };
+        setIsFieldDisabled((prev)=>!prev);
+
+      };
+
+      
 
     const enableButton = () => {
-        handleBothClicks();
+        setEnableInput(true);
         setFormInput({ ...formInput, isStakingEnabled: true });
     };
 
     const disableButton = () => {
-        handleBothClicks();
+        setEnableInput(false);
         setFormInput({ ...formInput, isStakingEnabled: false, stakePrice: "0" });
     };
 
@@ -127,7 +134,7 @@ const Create = () => {
             //     });
             // }
             if (isMinted == true) {
-                return <PopUp/>
+                setPopUpVisible(true);
             }
             
             setLoading(false);
@@ -411,7 +418,7 @@ const Create = () => {
                     <div className="flex flex-col w-3/4 mx-auto my-4 ">
                         <label className="pb-2">Stake price</label>
                         <div className="relative flex flex-col items-center  w-full ">
-                            <input
+                            {/* <input
                                 type="text"
                                 id="event-name"
                                 placeholder="0.01 ETH"
@@ -422,6 +429,7 @@ const Create = () => {
                                 }`}
                                 // className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
                                 disabled={isFieldDisabled && imgLoading}
+                                // disabled
                                 onChange={(e) =>
                                     setFormInput({
                                         ...formInput,
@@ -430,23 +438,44 @@ const Create = () => {
                                 }
                                 // disabled={imgLoading}
                                 // disabled = "true"
-                            />
+                            /> */}
+                            <input type="text" 
+                            className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] 
+                            border-opacity-30 rounded-lg p-2 w-full py-4 ${enableInput ? 'bg-[#1E1E1E]' :
+                        'bg-gray-600'  }`} 
+                           id="myInput"
+                                placeholder="0.01 ETH"
+                                disabled={!enableInput}
+                                onChange={(e) =>
+                                    setFormInput({
+                                        ...formInput,
+                                        stakePrice: e.target.value,
+                                    })
+                                }
+                                />
+
                             <button
                                 className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${
-                                    isButtonClicked
-                                        ? "bg-[#252542] text-white"
-                                        : "bg-white text-black"
+                                    enableInput
+                                        ? "bg-white text-black"
+                                        : "bg-[#252542] text-white"
                                 }`}
+                                // onClick={enableButton}
+                                // onClick={toggleInput}
+                                // onClick={()=> setEnableInput(true)}
                                 onClick={enableButton}
                             >
                                 Enable
                             </button>
                             <button
                                 className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${
-                                    isButtonClicked
-                                        ? "bg-white text-black"
-                                        : "bg-[#252542] text-white"
+                                    enableInput
+                                        ? "bg-[#252542] text-white"
+                                        : "bg-white text-black"
                                 }`}
+                                // onClick={disableButton}
+                                // onClick={toggleInput}
+                                // onClick={()=> setEnableInput(false)}
                                 onClick={disableButton}
                             >
                                 Free
@@ -467,6 +496,7 @@ const Create = () => {
                     </div>
                 </div>
             </div>
+            
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
@@ -479,6 +509,8 @@ const Create = () => {
                 pauseOnHover
                 theme="dark"
             />
+            {popUpVisible ? <PopUp/> : <></> }
+
             <FooterSection />
         </div>
     );
