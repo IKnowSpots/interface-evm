@@ -8,6 +8,8 @@ const DashNav = () => {
     const [username, setUsername] = useState();
     const [loading, setLoading] = useState(false);
 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     useEffect(() => {
         fetchUsernameCall();
     }, []);
@@ -55,7 +57,18 @@ const DashNav = () => {
             </div>
 
             <div>
-                <button className="create-event-btn text-base flex justify-around w-[7.5rem] mx-auto px-2 py-2 rounded-lg z-[10] ml-6 text-white font-semibold bg-[#070708]">Contract</button>
+                <button
+                    className="text-base flex justify-around w-[7.5rem] mx-auto px-2 py-2 rounded-lg z-[10] ml-6 text-white font-semibold bg-[#070708] hover:bg-[#18181d] hover:border hover:border-black/50 focus:outline-none"
+                    onMouseEnter={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}>Contract <span className="rotate-180">^</span> 
+                </button>
+
+                {isDropdownOpen && (
+                    <div className="absolute z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg">
+                        {/* Dropdown content goes here */}
+                        <a href="#" className="block px-4 py-2">Wallet contract comes here check it.</a>
+                    </div>
+                )}
             </div>
 
             <div className="flex gap-2 w-[22%] justify-end items-center">
