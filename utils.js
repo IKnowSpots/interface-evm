@@ -457,6 +457,14 @@ export async function fetchActiveEventsWithInfura(username) {
     }
 }
 
+export async function fetchAllActiveEvents() {}
+
+export async function fetchAllRewards() {}
+
+export async function fetchClaimedRewards() {}
+
+export async function fetchUnclaimedEvents() {}
+
 // --contract-update functions
 
 export async function deploy(username) {
@@ -589,6 +597,33 @@ export async function approveFeaturedRequest(host, ticketId) {
     const data = await contract.approveFeaturedEvents(host, ticketId);
     await data.wait();
     console.log("Approved");
+}
+
+export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.mintReward(_supply, _tokenURI, _isCryptoBound, _price);
+    await tx.wait();
+    console.log("Reward minted");
+}
+
+export async function updateWhitelist(rewardId, user) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.updateWhitelist(rewardId, user);
+    await tx.wait();
+    console.log("Whitelist updated");
+}
+
+export async function claimReward(rewardId) {
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username, true);
+
+    const tx = await contract.claimReward(rewardId);
+    await tx.wait();
+    console.log("Reward claimed");
 }
 
 export async function isWallet() {

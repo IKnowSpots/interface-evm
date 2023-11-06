@@ -214,11 +214,11 @@ const Create = () => {
                         <div className="pt-4 flex justify-between">
                             <div className="w-full flex justify-between items-baseline">
                                 <div className={`w-full flex flex-col min-h-[4rem]`}>
-                                    <label className="pb-2 text-lg font-semibold">Money Bound</label>
+                                    <label className="pb-2 text-lg font-semibold">Crypto Bound</label>
                                     <input
                                         type="text"
                                         className={`bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 mb-6 ${!isInputEnabled ? "hidden" : ""}`}
-                                        placeholder="Enter the Amount"
+                                        placeholder="Dropping some tokens along makes it more engaging :)"
                                         disabled={!isInputEnabled}
                                     />
                                 </div>
@@ -249,7 +249,7 @@ const Create = () => {
                         <input
                             type="text"
                             id="event-name"
-                            placeholder="eg. name of the reward"
+                            placeholder="eg. Discord Trivia 23rd Oct"
                             className="bg-[#1E1E1E] w-[90%] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 mb-6"
                             onChange={(e) => {
                                 setFormInput({
@@ -280,7 +280,7 @@ const Create = () => {
                         <input
                             type="text"
                             id="event-name"
-                            placeholder="2000"
+                            placeholder="5"
                             className="bg-[#1E1E1E] w-[90%] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 mb-6"
                             onChange={(e) =>
                                 setFormInput({
