@@ -7,7 +7,7 @@ export default function Manual(tokenId: any) {
 
     async function updateShortlistCall() {
         setLoading(true);
-        await updateShortlist(tokenId, address);
+        await updateShortlist(tokenId.tokenId, [address]);
         setLoading(false);
     }
 
@@ -25,7 +25,7 @@ export default function Manual(tokenId: any) {
                     onChange={(e) => setAddress(e.target.value)}
                 />
                 <p className="text-white/50 mt-1">
-                    Enter the wallet address to will be shortlisted
+                    Enter wallet address to be added to shortlist
                 </p>
             </div>
 

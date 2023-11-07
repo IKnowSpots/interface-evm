@@ -5,10 +5,14 @@ import DashNav from "@/components/dashboard/Navbar";
 import Script from "next/script";
 import Manual from "@/components/Manual"
 import Bulk from "@/components/Bulk"
+import { usePathname } from "next/navigation";
 
 const ManageShortlist = () => {
 
-    let tokenId = 1;
+    const pathName = usePathname();
+    const tokenId = pathName?.split("/")[3];
+
+    // console.log("tokenId", tokenId)
 
     const [choose, setChoose ] = useState(false)
 

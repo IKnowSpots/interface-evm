@@ -36,7 +36,7 @@ import { Web3Storage } from "web3.storage";
 let allEvents = [];
 let allEventsInfura = [];
 let purchasesEvents = [];
-let allRewards = []
+let allRewards = [];
 
 // --contract-instance functions
 
@@ -222,8 +222,7 @@ export async function fetchMintedCollection() {
     if (allEvents.length > 0) {
         const filteredArray = allEvents.filter(
             (subarray) =>
-                subarray.isPublished == false
-                 &&
+                subarray.isPublished == false &&
                 subarray.isExistingTicket == false
         );
         return filteredArray;
@@ -429,7 +428,7 @@ export async function fetchAllEventsWithInfura(username) {
         })
     );
     allEventsInfura = items;
-    console.log("all infura", items)
+    console.log("all infura", items);
     return items;
 }
 
@@ -452,7 +451,7 @@ export async function fetchActiveEventsWithInfura(username) {
                 subarray.isActive == true &&
                 subarray.isPublished == true
         );
-        allEventsInfura = filteredArray
+        allEventsInfura = filteredArray;
         console.log("Active Events", filteredArray);
         return filteredArray;
     }
@@ -460,7 +459,7 @@ export async function fetchActiveEventsWithInfura(username) {
 
 export async function fetchAllActiveEvents() {}
 
-export async function fetchAllRewards() {    
+export async function fetchAllRewards() {
     const username = await fetchUsername();
     const contract = await getEventifyContract(username);
 
@@ -489,20 +488,19 @@ export async function fetchAllRewards() {
     );
     allRewards = items;
     console.log("All Rewards", items);
-    return items;}
+    return items;
+}
 
 export async function fetchClaimedRewards() {
     if (allRewards.length > 0) {
         const filteredArray = allRewards.filter(
-            (subarray) =>
-                subarray.isClaimed == true
+            (subarray) => subarray.isClaimed == true
         );
         return filteredArray;
     } else {
         const data = await fetchAllRewards();
         const filteredArray = data.filter(
-            (subarray) =>
-                subarray.isClaimed == true
+            (subarray) => subarray.isClaimed == true
         );
         return filteredArray;
     }
@@ -511,15 +509,13 @@ export async function fetchClaimedRewards() {
 export async function fetchUnclaimedEvents() {
     if (allRewards.length > 0) {
         const filteredArray = allRewards.filter(
-            (subarray) =>
-                subarray.isClaimed == false
+            (subarray) => subarray.isClaimed == false
         );
         return filteredArray;
     } else {
         const data = await fetchAllRewards();
         const filteredArray = data.filter(
-            (subarray) =>
-                subarray.isClaimed == false
+            (subarray) => subarray.isClaimed == false
         );
         return filteredArray;
     }
@@ -663,10 +659,32 @@ export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
     const username = await fetchUsername();
     const contract = await getEventifyContract(username, true);
 
-    const tx = await contract.mintReward(_supply, _tokenURI, _isCryptoBound, _price);
-    await tx.wait();
-    console.log("Reward minted");
-    return true;
+    if (_isCryptoBound == false) {
+        const tx = await contract.mintReward(
+            _supply,
+            _tokenURI,
+            _isCryptoBound,
+            _price
+        );
+        await tx.wait();
+        console.log("Reward minted");
+        return true;
+    } else {
+        const weiPrice = ethers.utils.parseUnits(_price.toString(), "ether");
+        const tx = await contract.mintReward(
+            _supply,
+            _tokenURI,
+            _isCryptoBound,
+            _price,
+            {
+                value: weiPrice,
+                gasLimit: 1000000,
+            }
+        );
+        await tx.wait();
+        console.log("Reward minted");
+        return true;
+    }
 }
 
 export async function updateWhitelist(rewardId, user) {

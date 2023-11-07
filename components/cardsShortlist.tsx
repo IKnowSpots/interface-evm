@@ -39,7 +39,7 @@ const CardsShortlist = ({ image, name, price, date, tokenId, remaining, supply }
                       {/* <p>{remaining}/{supply}</p> */}
                       {/* <p>1.20 Weth</p> */}
                       <div className="flex justify-center items-center">
-                        <Link href={`/dashboard/shortlist/manage`}>
+                        <Link href={`/dashboard/shortlist/${tokenId}/manage`}>
                           <p className="view-btn px-4 py-0.5 outline rounded-lg">
                               Add Shortlist
                           </p>
