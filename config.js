@@ -1,7 +1,7 @@
 // export const InfuraRPCKey = process.env.NEXT_PUBLIC_INFURA_KEY;
 export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`;
 
-export const PolygonAddressFactory = `0xC0B7cAd3cdb27172Cf5758E6e5d9796BC07B38B7`;
+export const PolygonAddressFactory = `0x26eedCff5636EdE795Bdfd49230428cE391B0C9f`;
 export const PolygonCurrency = `Matic`;
 export const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
@@ -935,6 +935,51 @@ export const abiIKS = `[
 	},
 	{
 		"inputs": [],
+		"name": "fetchAllRewards",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "rewardId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isClaimed",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCryptoBound",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ticket.Reward[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "fetchPurchasedTickets",
 		"outputs": [
 			{
@@ -1136,6 +1181,16 @@ export const abiIKS = `[
 				"internalType": "bool",
 				"name": "isClaimed",
 				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isCryptoBound",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1286,6 +1341,30 @@ export const abiIKS = `[
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isWhitelist",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_supply",
 				"type": "uint256"
 			},
@@ -1293,11 +1372,21 @@ export const abiIKS = `[
 				"internalType": "string",
 				"name": "_tokenURI",
 				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_isCryptoBound",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_price",
+				"type": "uint256"
 			}
 		],
 		"name": "mintReward",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -1654,6 +1743,24 @@ export const abiIKS = `[
 			}
 		],
 		"name": "updateShortlist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_rewardToken",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "updateWhitelist",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

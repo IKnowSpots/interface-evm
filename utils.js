@@ -36,6 +36,7 @@ import { Web3Storage } from "web3.storage";
 let allEvents = [];
 let allEventsInfura = [];
 let purchasesEvents = [];
+let allRewards = []
 
 // --contract-instance functions
 
@@ -213,7 +214,7 @@ export async function fetchAllEvents() {
         })
     );
     allEvents = items;
-    console.log("Active Events", items);
+    console.log("All Events", items);
     return items;
 }
 
@@ -459,11 +460,70 @@ export async function fetchActiveEventsWithInfura(username) {
 
 export async function fetchAllActiveEvents() {}
 
-export async function fetchAllRewards() {}
+export async function fetchAllRewards() {    
+    const username = await fetchUsername();
+    const contract = await getEventifyContract(username);
 
-export async function fetchClaimedRewards() {}
+    const data = await contract.fetchAllRewards();
+    // console.log("data", data)
+    const items = await Promise.all(
+        data.map(async (i) => {
+            const tokenUri = await contract.uri(i.rewardId.toString());
+            // console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i.price);
+            let item = {
+                name: meta.data.name,
+                description: meta.data.description,
+                cover: meta.data.cover,
+                NftURI: tokenUri,
+                rewardId: i.rewardId.toString(),
+                host: i.host.toString(),
+                supply: i.supply.toNumber(),
+                isClaimed: i.isClaimed,
+                isCryptoBound: i.isCryptoBound,
+                price,
+            };
+            return item;
+        })
+    );
+    allRewards = items;
+    console.log("All Rewards", items);
+    return items;}
 
-export async function fetchUnclaimedEvents() {}
+export async function fetchClaimedRewards() {
+    if (allRewards.length > 0) {
+        const filteredArray = allRewards.filter(
+            (subarray) =>
+                subarray.isClaimed == true
+        );
+        return filteredArray;
+    } else {
+        const data = await fetchAllRewards();
+        const filteredArray = data.filter(
+            (subarray) =>
+                subarray.isClaimed == true
+        );
+        return filteredArray;
+    }
+}
+
+export async function fetchUnclaimedEvents() {
+    if (allRewards.length > 0) {
+        const filteredArray = allRewards.filter(
+            (subarray) =>
+                subarray.isClaimed == false
+        );
+        return filteredArray;
+    } else {
+        const data = await fetchAllRewards();
+        const filteredArray = data.filter(
+            (subarray) =>
+                subarray.isClaimed == false
+        );
+        return filteredArray;
+    }
+}
 
 // --contract-update functions
 
@@ -606,6 +666,7 @@ export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
     const tx = await contract.mintReward(_supply, _tokenURI, _isCryptoBound, _price);
     await tx.wait();
     console.log("Reward minted");
+    return true;
 }
 
 export async function updateWhitelist(rewardId, user) {

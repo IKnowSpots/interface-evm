@@ -1,5 +1,5 @@
 "use client";
-import { uploadToIPFS, mint } from "@/utils";
+import { uploadToIPFS, mintReward } from "@/utils";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import CreateNav from "@/components/dashboard/CreateNav";
@@ -13,23 +13,27 @@ import PopUp from "@/components/Popup"
 
 const Create = () => {
     const [formInput, setFormInput] = useState({
+        supply: "",
         name: "",
         description: "",
-        venue: "",
-        date: "",
-        supply: "",
+        isCryptoBound: false,
+        price: "0",
         cover: "",
-        uri: "",
-        isShortlistEnabled: false,
-        isStakingEnabled: false,
-        stakePrice: "0",
-        eventPrice: "0",
+        // uri: "",
     });
 
     const [isInputEnabled, setIsInputEnabled] = useState(false);
 
+    // const handleToggle = () => {
+    //     setIsInputEnabled(!isInputEnabled);
+    // };
+
     const handleToggle = () => {
-        setIsInputEnabled(!isInputEnabled);
+        if (formInput.isCryptoBound == true) {
+            setFormInput({ ...formInput, isCryptoBound: false });
+        } else {
+            setFormInput({ ...formInput, isCryptoBound: true });
+        }
     };
 
     // console.log(formInput);
@@ -61,17 +65,17 @@ const Create = () => {
     };
 
     async function formURI() {
-        let { name, description, venue, date, supply, cover } = formInput;
-        if (!name || !description || !venue || !date || !supply) return;
+        let { supply, name, description, isCryptoBound, price, cover} = formInput;
+        if ( !supply || !name || !description ) return;
         console.log(cover)
         if (cover == "") {
             cover = "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg";
         }
-        const data = JSON.stringify({ name, description, venue, date, cover });
+        const data = JSON.stringify({ supply, name, description, isCryptoBound, cover });
         const files = [new File([data], "data.json")];
         const metaCID = await uploadToIPFS(files);
         const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
-        setFormInput({ ...formInput, uri: url });
+        // setFormInput({ ...formInput, uri: url });
         console.log(url);
         return url;
     }
@@ -92,18 +96,26 @@ const Create = () => {
         // try {
             setLoading(true);
             const NftURI = await formURI();
-            let floatNumber = parseFloat(formInput.stakePrice);
-            const isMinted = await mint(
-                floatNumber.toString(),
+            let floatNumber =  parseFloat(formInput.price);
+            const isMinted = await mintReward(
                 formInput.supply,
-                formInput.isShortlistEnabled,
-                formInput.isStakingEnabled,
-                NftURI
+                NftURI,
+                formInput.isCryptoBound,
+                floatNumber.toString(),
             );
             
-            // if (isMinted == true) {
-            //     setPopUpVisible(true);
-            // }
+            if (isMinted == true) {
+                    toast.success("Minted!", {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
             
             setLoading(false);
         // } catch (error) {
@@ -292,7 +304,7 @@ const Create = () => {
                         />
 
                         <div className="flex justify-center items-center w-[90%] mt-4">
-                            <button className="px-4 py-2 w-[6rem] border rounded-lg flex justify-center items-center">
+                            <button className="px-4 py-2 w-[6rem] border rounded-lg flex justify-center items-center" onClick={publish}>
                                 Publish
                             </button>
                         </div>

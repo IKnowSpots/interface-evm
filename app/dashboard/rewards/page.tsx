@@ -4,26 +4,27 @@ import Image from "next/image";
 import DashNav from "@/components/dashboard/Navbar";
 import CardsReward from "@/components/cardsRewards"
 import { useEffect, useState } from "react";
+import { fetchAllRewards } from "@/utils"
 
 const Rewards = () => {
 
-    const [activeEvents, setActiveEvents] = useState<any>([]);
+    const [allRewards, setAllRewards] = useState<any>([]);
     const [loading, setLoading] = useState(false);
 
-    // useEffect(() => {
-    //     fetchActiveEventsData();
-    // }, []);
+    useEffect(() => {
+        fetchAllRewardsData();
+    }, []);
 
-    // async function fetchActiveEventsData() {
-    //     try {
-    //         setLoading(true);
-    //         let data: any = await fetchActiveEvents();
-    //         setActiveEvents(data);
-    //         setLoading(false);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    async function fetchAllRewardsData() {
+        try {
+            setLoading(true);
+            let data: any = await fetchAllRewards();
+            setAllRewards(data);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     function CreateReward() {
         return (
@@ -49,7 +50,7 @@ const Rewards = () => {
             </Layout>
         );
 
-    if (loading == false && activeEvents.length == 0)
+    if (loading == false && allRewards.length == 0)
         return (
             <Layout>
                 <div className="flex justify-center items-center mt-10 mb-10">
@@ -64,7 +65,7 @@ const Rewards = () => {
     return (
         <Layout>
             <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6 ">
-                {activeEvents.map((nft: any, i: any) => {
+                {allRewards.map((nft: any, i: any) => {
                     return (
                         <CardsReward
                             key={i}
