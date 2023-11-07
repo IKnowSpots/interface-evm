@@ -1,20 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client";
 import Image from "next/image";
 import { useState } from "react";
-import { pauseEvent } from "@/utils"
-import { currency } from "@/config"
+import { pauseEvent } from "@/utils";
+import { currency } from "@/config";
+import Link from "next/link";
 
-const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any }) => {
+const CardsReward = ({
+    image,
+    name,
+    price,
+    rewardId,
+}: {
+    image: any;
+    name: string;
+    price: any;
+    rewardId: any;
+}) => {
+    const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(false)
-
-  async function pauseEventCall(tokenId: any) {
-    setLoading(true)
-    console.log(tokenId)
-    await pauseEvent(tokenId)
-    setLoading(false)
-  }
+    console.log("fds",rewardId)
 
     return (
         <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
@@ -24,26 +29,31 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: {
                     className="h-[250px] rounded-xl"
                     // width="195"
                     // height="200"
-                    alt="Event&apos;s Image"
+                    alt="Event's Image"
                 />
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        <p>{price} {currency}</p>
+                        <Link href={`/dashboard/rewards/${rewardId}`}><p>Link</p></Link>
+                        <p>
+                            {price} {currency}
+                        </p>
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
                     <div className="flex justify-between items-center">
-                        <p>Bought: { supply - remaining }</p>
-                        <p>{date}</p>
+                        
                     </div>
                     {/* <p>{remaining}/{supply}</p> */}
                     {/* <p>1.20 Weth</p> */}
                     <div className="flex justify-center items-center">
-                        <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => pauseEventCall(tokenId)}>
-                            Pause
-                        </button>
+                        <Link href={`/dashboard/rewards/${rewardId}/manage`}>
+                            <p
+                                className="view-btn px-4 py-0.5 outline rounded-lg"
+                            >
+                                Add Whitelist
+                            </p>
+                        </Link>
                     </div>
-                    
                 </div>
                 {/* <hr />
                 <div className="flex justify-between my-6">
@@ -56,4 +66,4 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: {
         </div>
     );
 };
-export default CardsActive;
+export default CardsReward;

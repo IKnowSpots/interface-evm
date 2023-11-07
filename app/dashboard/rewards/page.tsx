@@ -69,13 +69,10 @@ const Rewards = () => {
                     return (
                         <CardsReward
                             key={i}
-                            tokenId={nft?.tokenId}
+                            rewardId={nft?.rewardId}
                             image={nft?.cover}
                             name={nft?.name}
                             price={nft?.price}
-                            date={nft?.date}
-                            remaining={nft?.remaining}
-                            supply={nft?.supply}
                         />
                     );
                 })}
