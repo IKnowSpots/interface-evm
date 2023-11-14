@@ -45,6 +45,7 @@ const MintedCollections = () => {
                 {mintedCollection.map((nft: any, i: any) => {
                     return (
                         <CardsMinted
+                            setMintedCollection={setMintedCollection}
                             key={i}
                             image={nft.cover}
                             name={nft.name}

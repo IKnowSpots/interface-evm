@@ -8,17 +8,20 @@ const CardsMinted = ({
     name,
     tokenId,
     supply,
+    setMintedCollection
 }: {
     image: any;
     name: string;
     tokenId: any;
     supply: any;
+    setMintedCollection:any
 }) => {
     const [loading, setLoading] = useState(false);
 
     async function publishTicketsCall(tokenId: any) {
         setLoading(true);
         await publishTickets(tokenId);
+        setMintedCollection((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
         setLoading(false);
     }
 
