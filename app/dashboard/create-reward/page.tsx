@@ -10,8 +10,54 @@ import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
 import PopUp from "@/components/Popup"
+import Select, { ValueType } from "react-select";
+
+interface Option {
+    value: string;
+    imageUrl: string;
+}
 
 const Create = () => {
+
+    const options: Option[] = [
+        { value: "Matic", imageUrl: "/matic.png" },
+        { value: "Ethereum", imageUrl: "/ethereum.png" },
+        // { value: "Option 3", imageUrl: "/rewardmockup.png" },
+    ];
+
+    const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
+
+    const customStyles = {
+        control: (provided: any, state: any) => ({
+            ...provided,
+            background: "#1E1E1E",
+            border: "1px solid rgba(152, 152, 152, 0.3) ",
+            borderRadius: "8px",
+            boxShadow: state.isFocused ? "0 0 0 1px #1E1E1E" : "none",
+            cursor: "pointer",
+          }),
+          option: (provided: any, state: any) => ({
+            ...provided,
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "#f0f0f0",
+            color: "black",
+            cursor: "pointer",
+          }),
+          singleValue: (provided: any) => ({
+            ...provided,
+            display: "flex",
+            alignItems: "center",
+            color: "white", // Set the text color
+          }),
+      };
+
+      const handleOp = (option: ValueType<Option, false>) => {
+        if (option && !Array.isArray(option)) {
+          setSelectedOption(option);
+        }
+      };
+
     const [formInput, setFormInput] = useState({
         supply: "",
         name: "",
@@ -303,6 +349,47 @@ const Create = () => {
                             disabled={imgLoading}
                         />
 
+                        <div className=" flex justify-between w-[90%]">
+                            <div className="flex flex-col w-[60%] my-4">
+                                <label className="pb-2 text-lg font-semibold">Price</label>
+                                <input
+                                    type="text"
+                                    id="event-name"
+                                    placeholder="0.01"
+                                    className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 w-full rounded-lg p-2 "
+                                    onChange={(e) =>
+                                        setFormInput({
+                                            ...formInput,
+                                            supply: e.target.value,
+                                        })
+                                    }
+                                    disabled={imgLoading}
+                                />
+                            </div>
+                            <div className="flex flex-col w-[35%] my-4 cursor-pointer">
+                                <label className="text-center pb-2 text-lg font-semibold">Token</label>
+                                <Select
+                                    options={options}
+                                    value={selectedOption}
+                                    onChange={handleOp}
+                                    getOptionLabel={(option: Option) => (
+                                        <div>
+                                            {option.imageUrl && (
+                                                <img
+                                                    src={option.imageUrl}
+                                                    alt={option.value}
+                                                    className="inline-block h-6 w-6 mr-2"
+                                                />
+                                            )}
+                                            {option.value}
+                                        </div>
+                                    )}
+                                    getOptionValue={(option: Option) => option.value}
+                                    styles={customStyles}
+                                />
+                            </div>
+                        </div>
+
                         <div className="flex justify-center items-center w-[90%] mt-4">
                             <button className="px-4 py-2 w-[6rem] border rounded-lg flex justify-center items-center" onClick={publish}>
                                 Publish
@@ -326,7 +413,6 @@ const Create = () => {
                 theme="dark"
             />
             {/* {popUpVisible ? <PopUp/> : <></> } */}
-            
             <FooterSection />
         </div>
     );

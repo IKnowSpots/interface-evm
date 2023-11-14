@@ -35,7 +35,7 @@ const DashNav = () => {
 
     function CreateButton() {
         return (
-            <a href="/dashboard/create">
+            <a href="/dashboard/create-reward">
                 <div className="create-event-btn text-[0.8rem] flex justify-around w-[10rem] mx-auto px-4 py-2 border rounded-xl z-[10]">
                     <Image
                         src={"/icons/qr.svg"}
@@ -44,7 +44,7 @@ const DashNav = () => {
                         alt="qr code svg"
                         className=""
                     />
-                    <p className="z-[10] text-white">Create an Event</p>
+                    <p className="z-[10] text-white">Create a Reward</p>
                 </div>
             </a>
         );

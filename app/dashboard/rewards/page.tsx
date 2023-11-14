@@ -1,7 +1,7 @@
 "use client"
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import DashNav from "@/components/dashboard/Navbar";
+import DashNav from "@/components/dashboard/rewardsnav";
 import CardsReward from "@/components/cardsRewards"
 import { useEffect, useState } from "react";
 import { fetchAllRewards } from "@/utils"
