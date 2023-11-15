@@ -29,7 +29,7 @@ const Rewards = () => {
     function CreateReward() {
         return (
             <a href="/dashboard/create-reward">
-                <div className="create-event-btn bg-[#682694] flex justify-around w-[11rem] mx-auto px-4 py-2 border border-[#FFFFFF73] rounded-lg z-[10]">
+                <div className="create-event-btn createEvent flex justify-around w-[11rem] mx-auto px-4 py-2 border border-[#FFFFFF73] rounded-lg z-[10]">
                     <Image
                         src={"/icons/qr.svg"}
                         width={20}
