@@ -67,11 +67,11 @@ const Navbar = () => {
                 />
             </Link>
             <div className="md:flex gap-[2rem] lg:gap-[3.5rem] justify-center items-center hidden">
-                <button onClick={pushingDashboard}>
+                {/* <button onClick={pushingDashboard}>
                     <p className="hoverUnderline text-[0.75rem] lg:text-base">
                         Dashboard
                     </p>
-                </button>
+                </button> */}
 
                 <Link href="#howitworks">
                     <p className="hoverUnderline text-[0.75rem] lg:text-base">

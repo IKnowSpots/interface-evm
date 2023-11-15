@@ -74,7 +74,7 @@ const Dashboard = () => {
                     <div className="flex justify-start items-start overflow-hidden">
                         <div className="grad1 blur-[100px] h-screen w-[20%] flex absolute"></div>
                     </div>
-                    <div className="mt-8">
+                    <div className="my-6">
                         <Link href="/">
                             <Image
                                 src={"/iks-logo.png"}
@@ -85,16 +85,17 @@ const Dashboard = () => {
                             />
                         </Link>
                     </div>
-                    <div className="flex flex-col">
-                        <div className="flex flex-row items-center gap-2">
+                    <div className="flex items-center justify-center">
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="flex flex-row items-center w-3/4 gap-2">
                             <h3 className="text-3xl mb-4 ">Welcome</h3>
-                            <h3 className="text-4xl mb-4 animate-wave ">👋🏻</h3>
+                            <h1 className="text-4xl mb-4 animate-wave ">👋🏻</h1>
                         </div>
                         <p className="w-3/4 text-[rgba(255,255,255,0.65)] font-light">
                             Today is a new day. It&apos;s your day. You shape
                             it. Your username, your entry ticket.{" "}
                         </p>
-                        <div className="flex flex-col w-3/4 py-8">
+                        <div className="flex flex-col w-3/4 pb-8">
                             <label htmlFor="username" className="font-lg py-2">
                                 Username
                             </label>
@@ -123,6 +124,7 @@ const Dashboard = () => {
                                 </button>
                             )}
                         </div>
+                    </div>
                     </div>
                     <div className="mb-4">
                         <p className="text-[rgba(255,255,255,0.65)] text-sm">
