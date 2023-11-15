@@ -5,7 +5,7 @@ import { useState } from "react";
 import { pauseEvent } from "@/utils"
 import { currency } from "@/config"
 
-const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any }) => {
+const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, setActiveEvents }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any,setActiveEvents: any }) => {
 
   const [loading, setLoading] = useState(false)
 
@@ -13,6 +13,7 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply }: {
     setLoading(true)
     console.log(tokenId)
     await pauseEvent(tokenId)
+    setActiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
     setLoading(false)
   }
 

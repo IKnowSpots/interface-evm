@@ -46,6 +46,7 @@ const InactiveEvents = () => {
                 {inactiveEvents.map((nft: any, i: any) => {
                     return (
                         <CardsInactive
+                            setInactiveEvents={setInactiveEvents}
                             key={i}
                             tokenId={nft.tokenId}
                             image={nft.cover}

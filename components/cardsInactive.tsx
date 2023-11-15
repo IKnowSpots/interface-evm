@@ -3,13 +3,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { runEvent } from "@/utils"
 
-const CardsInactive = ({ image, name, tokenId }: { image: any, name: string, tokenId: any }) => {
+const CardsInactive = ({ image, name, tokenId,setInactiveEvents }: { image: any, name: string, tokenId: any,setInactiveEvents:any }) => {
 
   const [loading, setLoading] = useState(false)
 
   async function runEventCall(ticketId: any) {
     setLoading(true)
     await runEvent(ticketId)
+    setInactiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
     setLoading(false)
   }
 

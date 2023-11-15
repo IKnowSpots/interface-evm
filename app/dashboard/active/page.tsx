@@ -47,6 +47,7 @@ const ActiveEvents = () => {
                 {activeEvents.map((nft: any, i: any) => {
                     return (
                         <CardsActive
+                            setActiveEvents={setActiveEvents}
                             key={i}
                             tokenId={nft?.tokenId}
                             image={nft?.cover}
