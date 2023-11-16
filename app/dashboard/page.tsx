@@ -56,11 +56,11 @@ const Dashboard = () => {
         }
 
         return (
-            <div className="text-white flex bg-[#25143a] h-[105vh] gap-4">
+            <div className="text-white flex bg-[#25143a] h-screen gap-4">
                 <div className="bg-[#624c9ba6] border-white border-opacity-60 rounded-lg">
                     <div className="w-[45vw] h-[100%] flex rounded-xl justify-center items-center">
                         {/* <div className="grad2 blur-[220px] absolute w-full h-[700px]"></div> */}
-                        <div className="bg-createEvent blur-[150px] absolute w-full h-screen" />
+                        <div className="bg-createEvent blur-[150px] absolute w-full h-[80vh]" />
 
                         <img
                             src="/events/3.jpeg"
@@ -72,7 +72,7 @@ const Dashboard = () => {
 
                 <div className="flex flex-col m-6 justify-between items-center w-[100%]">
                     <div className="flex justify-start items-start overflow-hidden">
-                        <div className="grad1 blur-[100px] h-screen w-[20%] flex absolute"></div>
+                        <div className="grad1 blur-[100px] h-[80vh] w-[20%] flex absolute"></div>
                     </div>
                     <div className="my-6">
                         <Link href="/">

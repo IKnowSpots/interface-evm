@@ -7,8 +7,8 @@ const SdkSection = () => {
         <div className="grad2 blur-[300px] absolute w-full h-[700px]"></div>
       </div>
       <div className="flex flex-col md:flex-row gap-8 justify-evenly">
-        {/* <img src="/snippet.png" alt="snippet-image" /> */}
-        <Spline scene="https://prod.spline.design/AYHgIgDYGdwYyrFj/scene.splinecode"/>
+        <img src="/sdk1.gif" className="md:w-[50%]" alt="snippet-image" />
+        {/* <Spline scene="https://prod.spline.design/AYHgIgDYGdwYyrFj/scene.splinecode"/> */}
         <div className="flex flex-col justify-center items-center md:items-start">
           <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter">
             SDK

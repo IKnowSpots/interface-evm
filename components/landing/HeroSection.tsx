@@ -15,7 +15,7 @@ const HeroSection = () => {
           <Link className="" target="_blank" href="https://www.loom.com/share/5cee5fd7ee6d477e976f246fbda9ac21?sid=666d8812-f4a4-4d07-ab34-4310cdd08c4b">
             <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
           </Link>
-          <Link className="" target="_blank" href="/dashboard">
+          <Link className="" href="/dashboard">
             <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Launch dApp</button>
           </Link>
         </div>

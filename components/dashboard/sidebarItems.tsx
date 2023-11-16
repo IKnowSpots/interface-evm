@@ -3,7 +3,7 @@ import Image from "next/image";
 const SidebarItems = ({ section_name, icon_name } : {section_name: string, icon_name: string}) => {
   // console.log(section_name, icon_name);
   return (
-    <div className="items-center py-2 flex  text-lg">
+    <div className="items-center mb-4 p-2 flex  text-lg">
       <Image
         src={`/icons/${icon_name}.png`}
         width="30"

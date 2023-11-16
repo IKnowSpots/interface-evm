@@ -78,7 +78,12 @@ const DashNav = () => {
 
                 {isOpen && (
                     <div className="fixed text-[0.8rem] left-[70%] mr-8 z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg ">
-                        <p className="block px-4 py-2">{contractAddr}</p>
+                        <div className="flex justify-center items-center px-4 gap-2">
+                            <p className="block py-2">{contractAddr}</p>
+                            <Link href="/">
+                                <img src="/external-link.svg" alt="" />
+                            </Link>    
+                        </div>
                     </div>
                 )}
             </div>
