@@ -4,7 +4,12 @@
 import Navbar from "@/components/hostee/Navbar";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { fetchActiveEventsWithInfura, buyTicket, fetchAllRewards } from "@/utils";
+import {
+    buyTicket,
+    fetchAllRewards,
+    fetchIfWhitelistedRewards,
+    claimReward,
+} from "@/utils";
 import { usePathname } from "next/navigation";
 import { currency } from "@/config";
 import Link from "next/link";
@@ -15,8 +20,6 @@ const Reward = () => {
     const username = pathName?.split("/")[1];
     let host_Id = pathName?.split("/")[2];
     let reward_Id = pathName?.split("/")[3];
-    console.log("rewardId", reward_Id)
-    console.log("hostId", host_Id)
 
     const [rewardData, setRewardData] = useState({
         name: "",
@@ -27,23 +30,41 @@ const Reward = () => {
         rewardId: "",
     });
     const [loading, setLoading] = useState(false);
+    const [isWhitelisted, setIsWhitelisted] = useState(false);
+
+    const [toggle, setToggle] = useState(false);
+    const [more, setMore] = useState(rewardData?.description.slice(0, 350));
+    function handleClick() {
+        toggle
+            ? setMore(rewardData?.description.slice(0, 350))
+            : setMore(rewardData?.description);
+        setToggle(!toggle);
+    }
 
     useEffect(() => {
         fetchAllRewardsData();
+        fetchIsWhitelistedData();
     }, []);
 
-    const [toggle,setToggle]=useState(false)
-    const [more,setMore]=useState(rewardData?.description.slice(0,350))
-    function handleClick() {
-        toggle?setMore(rewardData?.description.slice(0,350)):setMore(rewardData?.description)
-        setToggle(!toggle)
+    async function fetchIsWhitelistedData() {
+        console.log(1)
+        const data = await fetchIfWhitelistedRewards(host_Id);
+        console.log(5)
+        console.log("d", data)
+        setIsWhitelisted(data);
+    }
+
+    async function claimRewardFunc() {
+        await claimReward();
     }
 
     async function fetchAllRewardsData() {
         setLoading(true);
 
         let fetchedRewards: any = await fetchAllRewards(host_Id);
-        const event = fetchedRewards.find((obj: any) => obj.rewardId == reward_Id);
+        const event = fetchedRewards.find(
+            (obj: any) => obj.rewardId == reward_Id
+        );
         setRewardData(event);
         console.log("event", event);
         if (event) {
@@ -86,7 +107,6 @@ const Reward = () => {
                             </h1>
                         </div>
                         <div className="gap-2 flex flex-col">
-
                             <p>
                                 {rewardData?.price} {currency}
                             </p>
@@ -111,7 +131,9 @@ const Reward = () => {
                                     </h3>
                                 </div>
                             </div>
-                            <div className="flex text-lg font-semibold gap-2 text-white/60"> Event Type:
+                            <div className="flex text-lg font-semibold gap-2 text-white/60">
+                                {" "}
+                                Event Type:
                             </div>
                         </div>
                         <div className="bg-[#1E1E1EA6] min-h-[15rem] my-4 py-4 px-6 rounded-2xl shadow-2xl ">
@@ -121,15 +143,18 @@ const Reward = () => {
                                     className="w-[5%]"
                                     alt=""
                                 />
-                                <h1 className="text-xl font-semibold">
-                                   
-                                </h1>
+                                <h1 className="text-xl font-semibold"></h1>
                             </div>
                             <p className=" text-white mb-4">
                                 {/* {rewardData?.description} */}
                                 {more}
                                 <br />
-                                <button className='text-[#3E8BFF] font-bold' onClick={()=>handleClick()}>{toggle?"Read Less":"Read More"}</button>
+                                <button
+                                    className="text-[#3E8BFF] font-bold"
+                                    onClick={() => handleClick()}
+                                >
+                                    {toggle ? "Read Less" : "Read More"}
+                                </button>
                             </p>
                             {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
                             Know More
@@ -155,9 +180,18 @@ const Reward = () => {
                                 Get Now
                             </button>
                         )} */}
-                        <button className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto">
-                            Claim
-                        </button>
+                        {isWhitelisted ? (
+                            <button
+                                className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
+                                onClick={claimReward}
+                            >
+                                Claim
+                            </button>
+                        ) : (
+                            <button className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto">
+                                You are not Whitelisted
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

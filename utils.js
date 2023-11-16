@@ -460,8 +460,8 @@ export async function fetchActiveEventsWithInfura(username) {
 export async function fetchAllActiveEvents() {}
 
 export async function fetchAllRewards(username) {
-    // const username = await fetchUsername();
     const contract = await getEventifyContract(username);
+    // const contract = await getIKSContractWithInfura(username);
 
     const data = await contract.fetchAllRewards();
     // console.log("data", data)
@@ -519,6 +519,18 @@ export async function fetchUnclaimedEvents() {
         );
         return filteredArray;
     }
+}
+
+export async function fetchIfShortlistedEvents() {}
+
+export async function fetchIfWhitelistedRewards(user) {
+    console.log(2)
+    console.log(user)
+    const contract = await getEventifyContract(user.toString());
+    console.log(3)
+    const data = await contract.checkIfWhitelistedReward(user);
+    console.log(4)
+    return data
 }
 
 // --contract-update functions
