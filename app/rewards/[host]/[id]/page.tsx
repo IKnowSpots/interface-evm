@@ -13,9 +13,12 @@ import FooterSection from "@/components/landing/FooterSection";
 const Reward = () => {
     const pathName = usePathname();
     const username = pathName?.split("/")[1];
-    let pageId = pathName?.split("/")[3];
+    let host_Id = pathName?.split("/")[2];
+    let reward_Id = pathName?.split("/")[3];
+    console.log("rewardId", reward_Id)
+    console.log("hostId", host_Id)
 
-    const [eventData, setEventData] = useState({
+    const [rewardData, setRewardData] = useState({
         name: "",
         hostName: "",
         price: "",
@@ -30,17 +33,18 @@ const Reward = () => {
     }, []);
 
     const [toggle,setToggle]=useState(false)
-    const [more,setMore]=useState(eventData?.description.slice(0,350))
+    const [more,setMore]=useState(rewardData?.description.slice(0,350))
     function handleClick() {
-        toggle?setMore(eventData?.description.slice(0,350)):setMore(eventData?.description)
+        toggle?setMore(rewardData?.description.slice(0,350)):setMore(rewardData?.description)
         setToggle(!toggle)
     }
 
     async function fetchAllRewardsData() {
         setLoading(true);
-        let fetchedRewards: any = await fetchAllRewards();
-        const event = fetchedRewards.find((obj: any) => obj.rewardId == pageId);
-        setEventData(event);
+
+        let fetchedRewards: any = await fetchAllRewards(host_Id);
+        const event = fetchedRewards.find((obj: any) => obj.rewardId == reward_Id);
+        setRewardData(event);
         console.log("event", event);
         if (event) {
         }
@@ -61,7 +65,7 @@ const Reward = () => {
                 <div className="md:flex-row flex flex-col py-4 justify-center w-full">
                     <div className="w-[40%] h-fit flex justify-center items-center rounded-2xl border-red">
                         <img
-                            src={eventData?.cover}
+                            src={rewardData?.cover}
                             alt="event img"
                             className="w-[90%] h-fit rounded-xl flex justify-center items-center mx-auto "
                         />
@@ -78,13 +82,13 @@ const Reward = () => {
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold py-2">
-                                {eventData?.name} #{eventData?.rewardId}
+                                {rewardData?.name} #{rewardData?.rewardId}
                             </h1>
                         </div>
                         <div className="gap-2 flex flex-col">
 
                             <p>
-                                {eventData?.price} {currency}
+                                {rewardData?.price} {currency}
                             </p>
                         </div>
                         <div className="flex flex-col py-4">
@@ -103,7 +107,7 @@ const Reward = () => {
                                         {username}
                                     </p>
                                     <h3 className="text-xl">
-                                        {eventData?.hostName}
+                                        {rewardData?.hostName}
                                     </h3>
                                 </div>
                             </div>
@@ -122,7 +126,7 @@ const Reward = () => {
                                 </h1>
                             </div>
                             <p className=" text-white mb-4">
-                                {/* {eventData?.description} */}
+                                {/* {rewardData?.description} */}
                                 {more}
                                 <br />
                                 <button className='text-[#3E8BFF] font-bold' onClick={()=>handleClick()}>{toggle?"Read Less":"Read More"}</button>
@@ -132,11 +136,11 @@ const Reward = () => {
                             <img src="/external-link.svg" alt="" />
                         </Link> */}
                         </div>
-                        {/* {eventData?.isStaking ? (
+                        {/* {rewardData?.isStaking ? (
                             <button
                                 className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
                                 onClick={() =>
-                                    claim(eventData.tokenId, eventData.price)
+                                    claim(rewardData.tokenId, rewardData.price)
                                 }
                             >
                                 Stake Now
@@ -145,7 +149,7 @@ const Reward = () => {
                             <button
                                 className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
                                 onClick={() =>
-                                    claim(eventData.tokenId, eventData.price)
+                                    claim(rewardData.tokenId, rewardData.price)
                                 }
                             >
                                 Get Now

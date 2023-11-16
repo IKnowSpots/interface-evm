@@ -459,8 +459,8 @@ export async function fetchActiveEventsWithInfura(username) {
 
 export async function fetchAllActiveEvents() {}
 
-export async function fetchAllRewards() {
-    const username = await fetchUsername();
+export async function fetchAllRewards(username) {
+    // const username = await fetchUsername();
     const contract = await getEventifyContract(username);
 
     const data = await contract.fetchAllRewards();

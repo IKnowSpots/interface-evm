@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { pauseEvent } from "@/utils";
 import { currency } from "@/config";
 import Link from "next/link";
+import { fetchUsername } from "@/utils"
 
 const CardsReward = ({
     image,
@@ -18,6 +19,16 @@ const CardsReward = ({
     rewardId: any;
 }) => {
     const [loading, setLoading] = useState(false);
+    const [username, setUsername] = useState("")
+
+    useEffect(() => {
+        fetchUsernameData()
+    }, [])
+
+    async function fetchUsernameData() {
+        const data = await fetchUsername()
+        setUsername(data)
+    }
 
     console.log("fds",rewardId)
 
@@ -34,7 +45,7 @@ const CardsReward = ({
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        <Link href={`/dashboard/rewards/${rewardId}`}><p>Link</p></Link>
+                        <Link href={`/rewards/${username}/${rewardId}`}><p>Link</p></Link>
                         <p>
                             {price} {currency}
                         </p>

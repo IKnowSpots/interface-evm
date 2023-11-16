@@ -4,7 +4,7 @@ import Image from "next/image";
 import DashNav from "@/components/dashboard/rewardsnav";
 import CardsReward from "@/components/cardsRewards"
 import { useEffect, useState } from "react";
-import { fetchAllRewards } from "@/utils"
+import { fetchAllRewards, fetchUsername } from "@/utils"
 
 const Rewards = () => {
 
@@ -15,10 +15,21 @@ const Rewards = () => {
         fetchAllRewardsData();
     }, []);
 
+    const [username, setUsername] = useState("")
+
+    useEffect(() => {
+        fetchUsernameData()
+    }, [])
+
+    async function fetchUsernameData() {
+        const data = await fetchUsername()
+        setUsername(data)
+    }
+
     async function fetchAllRewardsData() {
         try {
             setLoading(true);
-            let data: any = await fetchAllRewards();
+            let data: any = await fetchAllRewards(username);
             setAllRewards(data);
             setLoading(false);
         } catch (error) {
