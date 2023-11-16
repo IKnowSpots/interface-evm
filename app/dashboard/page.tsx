@@ -96,14 +96,14 @@ const Dashboard = () => {
                             it. Your username, your entry ticket.{" "}
                         </p>
                         <div className="flex flex-col w-3/4 pb-8">
-                            <label htmlFor="username" className="font-lg py-2">
+                            <label htmlFor="username" className={`font-lg py-2 ${isDeployed ? "hidden" : ""}`}>
                                 Username
                             </label>
                             <input
                                 type="text"
                                 id="username"
                                 placeholder="iknowspots"
-                                className="px-4 py-2 rounded-xl my-2 text-black"
+                                className={`px-4 py-2 rounded-xl my-2 text-black ${isDeployed ? "hidden" : ""}`}
                                 onChange={(e) =>
                                     setUsernameHook(e.target.value)
                                 }

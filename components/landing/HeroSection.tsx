@@ -1,7 +1,36 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
+import { useState, useEffect } from "react";
+import { fetchIfDeployed, deploy } from "@/utils";
 
 const HeroSection = () => {
+  const [isDeployed, setIsDeployed] = useState<Boolean>();
+    const [loading, setLoading] = useState<Boolean>(false);
+
+    // comment line 18-26 to make this page static
+
+    // useEffect(() => {
+    //     if (isDeployed == true) {
+    //         pushPage();
+    //     }
+    // }, [isDeployed]);
+
+    // function pushPage() {
+    //     window.location.replace("/dashboard/active");
+    // }
+    useEffect(() => {
+          checkDeployment();
+      }, []);
+
+    async function checkDeployment() {
+        setLoading(true);
+        const data = await fetchIfDeployed();
+        console.log("deploy", data);
+        setIsDeployed(data);
+        setLoading(false);
+    }
+
   return (
     <div className="w-full h-[550px] md:h-[650px] lg:h-[800px] xl:h-auto">
       <div className="top-[17%] lg:top-[35%] flex flex-col justify-center items-center text-center w-full absolute z-[5]">
@@ -15,7 +44,7 @@ const HeroSection = () => {
           <Link className="" target="_blank" href="https://www.loom.com/share/5cee5fd7ee6d477e976f246fbda9ac21?sid=666d8812-f4a4-4d07-ab34-4310cdd08c4b">
             <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
           </Link>
-          <Link className="" href="/dashboard">
+          <Link className="" href={isDeployed ? "/dashboard/active" : "/dashboard"}>
             <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Launch dApp</button>
           </Link>
         </div>
