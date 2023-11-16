@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { uploadToIPFS, mintReward } from "@/utils";
 import Image from "next/image";
@@ -10,7 +11,8 @@ import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
 import PopUp from "@/components/Popup"
-import Select, { ValueType } from "react-select";
+import Select from "react-select";
+import ValueType from "react-select"
 
 interface Option {
     value: string;
@@ -52,7 +54,7 @@ const Create = () => {
           }),
       };
 
-      const handleOp = (option: ValueType<Option, false>) => {
+      const handleOp = (option: any) => {
         if (option && !Array.isArray(option)) {
           setSelectedOption(option);
         }
@@ -372,7 +374,7 @@ const Create = () => {
                                     options={options}
                                     value={selectedOption}
                                     onChange={handleOp}
-                                    getOptionLabel={(option: Option) => (
+                                    getOptionLabel={(option) => (
                                         <div>
                                             {option.imageUrl && (
                                                 <img
@@ -383,8 +385,9 @@ const Create = () => {
                                             )}
                                             {option.value}
                                         </div>
-                                    )}
-                                    getOptionValue={(option: Option) => option.value}
+                                    ) as unknown as string
+                                }
+                                    getOptionValue={(option) => option.value}
                                     styles={customStyles}
                                 />
                             </div>
