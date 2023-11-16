@@ -297,3 +297,11 @@ body {
     background: linear-gradient(94deg, rgba(64, 104, 205, 0.44) -45.99%, rgba(191, 30, 245, 0.65) 110.78%);
     backdrop-filter: blur(20px);
 }
+
+.sidebar-bg{
+    border-radius: 0.75rem;
+    border: 1px solid #3C3C3C;
+    background: rgba(68, 68, 68, 0.302);
+    box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(20px);
+}

@@ -52,7 +52,7 @@ const Sidebar = () => {
                     alt="I know spots logo"
                 />
             </Link>
-            <div className="py-16 text-white">
+            <div className="py-16 text-white pr-4">
                 {/* <SidebarItems icon_name="Home_fill" section_name="Dashboard" /> */}
 
                 <Link
@@ -62,6 +62,7 @@ const Sidebar = () => {
                     <SidebarItems
                         icon_name="Fire_fill"
                         section_name="Active Events"
+                        page_name="active"
                     />
                 </Link>
 
@@ -72,6 +73,7 @@ const Sidebar = () => {
                     <SidebarItems
                         icon_name="3d_box_fill"
                         section_name="Inactive Events"
+                        page_name="inactive"
                     />
                 </Link>
 
@@ -82,6 +84,7 @@ const Sidebar = () => {
                     <SidebarItems
                         icon_name="Fire_fill"
                         section_name="Minted Collections"
+                        page_name="minted"
                     />
                 </Link>
 
@@ -94,7 +97,7 @@ const Sidebar = () => {
                     href="/dashboard/shortlist"
                     className="opacity-75 sidebar-btn"
                 >
-                    <SidebarItems icon_name="CPU" section_name="Shortlist" />
+                    <SidebarItems icon_name="CPU" section_name="Shortlist" page_name="shortlist" />
                 </Link>
 
                 <Link
@@ -104,6 +107,7 @@ const Sidebar = () => {
                     <SidebarItems
                         icon_name="lightning_fill"
                         section_name="Rewards"
+                        page_name="rewards"
                     />
                 </Link>
             </div>
