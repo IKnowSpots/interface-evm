@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { fetchShortlistEvents } from "../../../utils";
 import CardsShortlist from "@/components/cardsShortlist";
 import { usePathname } from "next/navigation";
+import LoadingModal from "@/components/LoadingModal";
 
 const Shortlist = () => {
 
@@ -30,9 +31,10 @@ const Shortlist = () => {
 
     if (loading == true)
         return (
-            <Layout>
-                <div className="text-white">Fetching..</div>
-            </Layout>
+            // <Layout>
+            //     <div className="text-white">Fetching..</div>
+            // </Layout>
+            <LoadingModal visible={true}/>
         );
 
     if (loading == false && activeEvents.length == 0)

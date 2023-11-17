@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { currency } from "@/config";
 import Link from "next/link";
 import FooterSection from "@/components/landing/FooterSection";
+import LoadingModal from "@/components/LoadingModal";
 
 const Event = () => {
     const pathName = usePathname();
@@ -58,6 +59,7 @@ const Event = () => {
 
     return (
         <div className="bg-[#25143a] text-white pb-8 px-8 w-full h-full">
+            <LoadingModal visible={loading}/>
             <div>
                 <div className="grad1 blur-[220px] w-[80%] h-[100vh] absolute z-[1]"></div>
             </div>

@@ -5,6 +5,7 @@ import DashNav from "@/components/dashboard/rewardsnav";
 import CardsReward from "@/components/cardsRewards"
 import { useEffect, useState } from "react";
 import { fetchAllRewards, fetchUsername } from "@/utils"
+import LoadingModal from "@/components/LoadingModal";
 
 const Rewards = () => {
 
@@ -56,9 +57,10 @@ const Rewards = () => {
 
     if (loading == true)
         return (
-            <Layout>
-                <div className="text-white">Fetching..</div>
-            </Layout>
+            // <Layout>
+            //     <div className="text-white">Fetching..</div>
+            // </Layout>
+            <LoadingModal visible={true}/>
         );
 
     if (loading == false && allRewards.length == 0)

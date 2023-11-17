@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { publishTickets } from "@/utils";
+import LoadingModal from "./LoadingModal";
 
 const CardsMinted = ({
     image,
@@ -26,6 +27,8 @@ const CardsMinted = ({
     }
 
     return (
+        <>
+        <LoadingModal visible={loading}/>
         <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-4">
                 <img
@@ -57,6 +60,7 @@ const CardsMinted = ({
                 </div> */}
             </div>
         </div>
+        </>
     );
 };
 export default CardsMinted;

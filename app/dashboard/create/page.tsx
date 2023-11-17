@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
 import PopUp from "@/components/Popup"
+import LoadingModal from "@/components/LoadingModal";
 
 const Create = () => {
     const [formInput, setFormInput] = useState({
@@ -153,6 +154,8 @@ const Create = () => {
     }
 
     return (
+        <>
+        <LoadingModal visible={loading}/>
         <div className="bg-createEvent text-white  px-8">
             <CreateNav />
             <div className="grid grid-cols-2">
@@ -164,7 +167,7 @@ const Create = () => {
                                     <Link
                                         href="/dashboard/active"
                                         className="w-full p-4"
-                                    >
+                                        >
                                         <Image
                                             src={"/icons/back-btn.svg"}
                                             width={30}
@@ -193,18 +196,18 @@ const Create = () => {
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
                                         stroke-width="2"
-                                    >
+                                        >
                                         <path
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
                                             d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                        />
+                                            />
                                     </svg>
                                 </span>
                                 {imgLoading ? (
                                     <div>Uploading to IPFS..</div>
-                                ) : formInput.cover == "" ? (
-                                    <div>
+                                    ) : formInput.cover == "" ? (
+                                        <div>
                                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                             <span className="font-semibold">
                                                 Click to upload
@@ -225,7 +228,7 @@ const Create = () => {
                                     className="hidden"
                                     onChange={changeImage}
                                     disabled={imgLoading}
-                                />
+                                    />
                             </label>
                             <div className="flex justify-center mt-4 gap-4 items-center">
                             <Image
@@ -244,8 +247,8 @@ const Create = () => {
                                     height={60}
                                     alt="bored ape nft"
                                     className="rounded-lg"
-                                />
-                                <Image
+                                    />
+                                    <Image
                                     src={"/bored_ape_image.png"}
                                     width={60}
                                     height={60}
@@ -253,11 +256,11 @@ const Create = () => {
                                     className="rounded-lg"
                                 />
                                 <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
+                                src={"/bored_ape_image.png"}
+                                width={60}
+                                height={60}
+                                alt="bored ape nft"
+                                className="rounded-lg"
                                 />
                                 <Image
                                     src={"/bored_ape_image.png"}
@@ -285,22 +288,22 @@ const Create = () => {
                                 </div>
                                 <div
                                     className={`flex items-center cursor-pointer`}
-                                >
+                                    >
                                     <div
                                         className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${
                                             formInput.isShortlistEnabled
-                                                ? "bg-green-500"
-                                                : "bg-[#1E1E1E]"
+                                            ? "bg-green-500"
+                                            : "bg-[#1E1E1E]"
                                         }`}
                                         onClick={toggleSwitch}
-                                    >
+                                        >
                                         <div
                                             className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${
                                                 formInput.isShortlistEnabled
-                                                    ? "translate-x-6"
-                                                    : ""
+                                                ? "translate-x-6"
+                                                : ""
                                             }`}
-                                        ></div>
+                                            ></div>
                                     </div>
                                     {/* <span className="ml-2 text-sm">{isShortlistEnabled ? 'ON' : 'OFF'}</span> */}
                                 </div>
@@ -321,7 +324,7 @@ const Create = () => {
                                 });
                             }}
                             disabled={imgLoading}
-                        />
+                            />
                     </div>
                     <div className="flex flex-col w-3/4 mx-auto my-4">
                         <label className="pb-2">Description</label>
@@ -338,7 +341,7 @@ const Create = () => {
                             disabled={imgLoading}
                             //   change this if scroll bar is appearing
                             rows={4}
-                        ></textarea>
+                            ></textarea>
                         <p className="right-0 text-gray-400">
                             {" "}
                             {val.length}/1000
@@ -360,7 +363,7 @@ const Create = () => {
                                     })
                                 }
                                 disabled={imgLoading}
-                            />
+                                />
                         </div>
                         <div className="flex flex-col w-3/4 mx-auto my-4">
                             <label className="pb-2">Venue</label>
@@ -376,7 +379,7 @@ const Create = () => {
                                     })
                                 }
                                 disabled={imgLoading}
-                            />
+                                />
                         </div>
                     </div>
                     <div className="flex flex-col w-3/4 mx-auto my-4 ">
@@ -392,23 +395,23 @@ const Create = () => {
                                 })
                             }
                             disabled={imgLoading}
-                        />
+                            />
                     </div>
                     {/*  */}
 
                     {/* <div className="flex flex-col w-3/4 mx-auto my-4 ">
                         <label>Stake price</label>
                         <div className="">
-                            <input
-                                type="text"
-                                id="event-name"
-                                placeholder="0.01ETH"
-                                className="bg-[#1E1e1ea6] rounded-lg  relative p-2"
-                                onChange={(e) =>
-                                    setFormInput({
-                                        ...formInput,
-                                        stakePrice: e.target.value,
-                                    })
+                        <input
+                        type="text"
+                        id="event-name"
+                        placeholder="0.01ETH"
+                        className="bg-[#1E1e1ea6] rounded-lg  relative p-2"
+                        onChange={(e) =>
+                            setFormInput({
+                                ...formInput,
+                                stakePrice: e.target.value,
+                            })
                                 }
                             />
                         </div>
@@ -424,8 +427,8 @@ const Create = () => {
                                 placeholder="0.01 ETH"
                                 className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4 ${
                                     isFieldDisabled
-                                        ? "bg-red-800 text-gray-600"
-                                        : " text-black"
+                                    ? "bg-red-800 text-gray-600"
+                                    : " text-black"
                                 }`}
                                 // className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
                                 disabled={isFieldDisabled && imgLoading}
@@ -442,8 +445,8 @@ const Create = () => {
                             <input type="text" 
                             className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] 
                             border-opacity-30 rounded-lg p-2 w-full py-4 ${enableInput ? 'bg-[#1E1E1E]' :
-                        'bg-gray-600'  }`} 
-                           id="myInput"
+                            'bg-gray-600'  }`} 
+                            id="myInput"
                                 placeholder="0.01 ETH"
                                 disabled={!enableInput}
                                 onChange={(e) =>
@@ -457,27 +460,27 @@ const Create = () => {
                             <button
                                 className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${
                                     enableInput
-                                        ? "bg-white text-black"
-                                        : "bg-[#252542] text-white"
+                                    ? "bg-white text-black"
+                                    : "bg-[#252542] text-white"
                                 }`}
                                 // onClick={enableButton}
                                 // onClick={toggleInput}
                                 // onClick={()=> setEnableInput(true)}
                                 onClick={enableButton}
-                            >
+                                >
                                 Enable
                             </button>
                             <button
                                 className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${
                                     enableInput
-                                        ? "bg-[#252542] text-white"
-                                        : "bg-white text-black"
+                                    ? "bg-[#252542] text-white"
+                                    : "bg-white text-black"
                                 }`}
                                 // onClick={disableButton}
                                 // onClick={toggleInput}
                                 // onClick={()=> setEnableInput(false)}
                                 onClick={disableButton}
-                            >
+                                >
                                 Free
                             </button>
                         </div>
@@ -489,7 +492,7 @@ const Create = () => {
                         <button
                             className="px-4 py-2 border rounded-lg"
                             onClick={publish}
-                        >
+                            >
                             Mint
                         </button>
                         {/* <PopUp/> */}
@@ -508,11 +511,12 @@ const Create = () => {
                 draggable
                 pauseOnHover
                 theme="dark"
-            />
+                />
             {popUpVisible ? <PopUp/> : <></> }
 
             <FooterSection />
         </div>
+        </>
     );
 };
 

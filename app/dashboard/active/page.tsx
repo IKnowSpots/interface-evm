@@ -5,6 +5,7 @@ import CardsActive from "@/components/cardsActive";
 import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
 import { fetchActiveEvents } from "../../../utils";
+import LoadingModal from "@/components/LoadingModal";
 
 const ActiveEvents = () => {
     // to run this page static comment 42-51 and uncomment 52-57
@@ -29,9 +30,10 @@ const ActiveEvents = () => {
 
     if (loading == true)
         return (
-            <Layout>
-                <div className="text-white">Fetching..</div>
-            </Layout>
+            // <Layout>
+            //     <div className="text-white">Fetching..</div>
+            // </Layout>
+            <LoadingModal visible={true}/>
         );
 
     if (loading == false && activeEvents.length == 0)

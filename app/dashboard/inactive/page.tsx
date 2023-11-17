@@ -6,6 +6,7 @@ import DashNav from "@/components/dashboard/Navbar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fetchInactiveEvents } from "../../../utils";
+import LoadingModal from "@/components/LoadingModal";
 
 const InactiveEvents = () => {
     const [inactiveEvents, setInactiveEvents] = useState<any>([]);
@@ -26,12 +27,14 @@ const InactiveEvents = () => {
         }
     }
 
-    if (loading == true)
+    if (loading == true){
         return (
-            <Layout>
-                <div className="text-white">Fetching..</div>
-            </Layout>
-        );
+            // <Layout>
+            //     <div className="text-white">Fetching..</div>
+            // </Layout>
+            <LoadingModal visible={true}/>
+            );
+        }
 
     if (loading == false && inactiveEvents.length == 0)
         return (

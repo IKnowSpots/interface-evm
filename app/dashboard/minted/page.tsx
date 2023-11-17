@@ -5,6 +5,7 @@ import CardsMinted from "@/components/cardsMinted";
 import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
 import { fetchMintedCollection } from "../../../utils";
+import LoadingModal from "@/components/LoadingModal";
 
 const MintedCollections = () => {
     const [mintedCollection, setMintedCollection] = useState<any>([]);
@@ -27,9 +28,10 @@ const MintedCollections = () => {
 
     if (loading == true)
         return (
-            <Layout>
-                <div className="text-white">Fetching..</div>
-            </Layout>
+            // <Layout>
+            //     <div className="text-white">Fetching..</div>
+            // </Layout>
+            <LoadingModal visible={true}/>
         );
 
     if (loading == false && mintedCollection.length == 0)

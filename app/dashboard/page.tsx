@@ -4,6 +4,7 @@ import { fetchIfDeployed, deploy } from "@/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import LoadingModal from "@/components/LoadingModal";
 
 const Dashboard = () => {
     const [isDeployed, setIsDeployed] = useState<Boolean>();
@@ -33,10 +34,11 @@ const Dashboard = () => {
         setLoading(false);
     }
 
-    if (loading == true) return <div className="text-white">Loading..</div>;
+    // if (loading == true) return <LoadingModal visible={true}/>;
 
     return (
         <div>
+            <LoadingModal visible={loading?true:false}/>
             <RenderSetUsername />
         </div>
     );
@@ -47,8 +49,10 @@ const Dashboard = () => {
         // if deployed is true then change button to Move forward
 
         async function setUsernameCall() {
+            setLoading(true)
             await deploy(username);
             setIsDeployed(true);
+            setLoading(false);
         }
 
         function pushPage() {

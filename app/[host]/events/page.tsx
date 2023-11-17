@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import FooterSection from "@/components/landing/FooterSection";
+import LoadingModal from "@/components/LoadingModal";
 
 const EventsByHost = () => {
     // comment 88-100 and uncomment 102-166
@@ -53,9 +54,7 @@ const EventsByHost = () => {
 
     if (loading == true)
         return (
-            <div className="text-white">
-                <Layout>Fetching..</Layout>
-            </div>
+            <LoadingModal visible={true}/>
         );
 
     if (loading == false && isUsernameValid == false)

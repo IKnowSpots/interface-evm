@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { pauseEvent } from "@/utils"
 import { currency } from "@/config"
+import LoadingModal from "./LoadingModal";
 
 const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, setActiveEvents }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any,setActiveEvents: any }) => {
 
@@ -18,6 +19,8 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
   }
 
     return (
+        <>
+        <LoadingModal visible={loading}/>
         <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-6">
                 <img
@@ -48,13 +51,14 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                 </div>
                 {/* <hr />
                 <div className="flex justify-between my-6">
-                    <p>End&apos;s In 01.34.45</p>
-                    <button className="px-4 py-1 outline rounded-lg">
+                <p>End&apos;s In 01.34.45</p>
+                <button className="px-4 py-1 outline rounded-lg">
                         Run
                     </button>
                 </div> */}
             </div>
         </div>
+        </>
     );
 };
 export default CardsActive;
