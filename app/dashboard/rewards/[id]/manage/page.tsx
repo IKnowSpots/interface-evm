@@ -4,7 +4,7 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import DashNav from "@/components/dashboard/Navbar";
 import Script from "next/script";
 import Manual from "@/components/ManualReward"
-// import Bulk from "@/components/BulkReward"
+import Bulk from "@/components/BulkReward"
 import { usePathname } from "next/navigation";
 
 const ManageShortlist = () => {

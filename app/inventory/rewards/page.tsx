@@ -7,7 +7,7 @@ import FooterSection from '@/components/landing/FooterSection';
 import Claimed from "@/components/inventory/Claimed"
 import Unclaimed from "@/components/inventory/Unclaimed"
 
-export default function page() {
+export default function Page() {
 
   const [choose, setChoose ] = useState(false)
 

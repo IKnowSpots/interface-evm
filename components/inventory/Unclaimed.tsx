@@ -32,7 +32,7 @@ export default function Unclaimed(tokenId: any) {
                 navigation={{
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
-                    clickable: true,
+                    // clickable: true,
                   }}
                 modules={[EffectCoverflow, Pagination, Navigation]}
             >
