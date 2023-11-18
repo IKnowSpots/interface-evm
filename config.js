@@ -1,7 +1,7 @@
 // export const InfuraRPCKey = process.env.NEXT_PUBLIC_INFURA_KEY;
 export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`;
 
-export const PolygonAddressFactory = `0x5d4073102c5b728Eb69e21BFEf58B98A21369DCE`;
+export const PolygonAddressFactory = `0xdECc088f9135b7b071Aa2535b24627e4Dc4c506A`;
 export const PolygonCurrency = `Matic`;
 export const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
