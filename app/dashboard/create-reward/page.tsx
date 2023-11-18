@@ -273,7 +273,7 @@ const Create = () => {
                     <div className="flex flex-col w-3/4 mx-auto  ">
                         <div className="pt-4 flex justify-between">
                             <div className="w-full flex justify-between items-baseline">
-                                <div className={`w-full flex flex-col min-h-[4rem]`}>
+                                <div className={`w-full flex flex-col min-h-[6rem]`}>
                                     <label className="pb-2 text-lg font-semibold">Crypto Bound</label>
                                     <input
                                         type="text"
@@ -320,7 +320,7 @@ const Create = () => {
                             disabled={imgLoading}
                         />
 
-                        <label className="pb-2 w-[90%] text-lg font-semibold">Description</label>
+                        {/* <label className="pb-2 w-[90%] text-lg font-semibold">Description</label>
                         <textarea
                             placeholder="Description here"
                             className="bg-[#1E1E1E] w-[90%] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg resize-none p-2 mb-6"
@@ -334,7 +334,7 @@ const Create = () => {
                             disabled={imgLoading}
                             //   change this if scroll bar is appearing
                             rows={4}
-                        ></textarea>
+                        ></textarea> */}
 
                         <label className="pb-2 w-[90%] text-lg font-semibold">Supply</label>
                         <input
@@ -351,6 +351,8 @@ const Create = () => {
                             disabled={imgLoading}
                         />
 
+                        {/* comment out this section when price functionality is toh be used and integrated */}
+                        
                         <div className=" flex justify-between w-[90%]">
                             <div className="flex flex-col w-[60%] my-4">
                                 <label className="pb-2 text-lg font-semibold">Price</label>
