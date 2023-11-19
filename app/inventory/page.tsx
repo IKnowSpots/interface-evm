@@ -46,9 +46,7 @@ const Inventory = () => {
             </div>
 
             <div>
-                <Link href="/inventory/rewards">
-                    <Rewards />
-                </Link>
+                <Rewards />
             </div>
 
             <div className="w-full my-[5rem] flex ">

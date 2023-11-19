@@ -1,5 +1,6 @@
 import { updateWhitelist } from "@/utils";
 import React, { useState } from "react";
+import Image from "next/image";
 import Claimedcard from "@/components/cardsClaimedRewards"
 import { Swiper,SwiperSlide } from "swiper/react";
 
@@ -13,7 +14,7 @@ import { EffectCoverflow,Pagination,Navigation } from 'swiper/modules';
 export default function Claimed(tokenId: any) {
 
     return (
-        <div className="container flex justify-center items-center pb-10">
+        <div className="flex justify-center items-center pb-10 mx-20">
             <Swiper
                 effect={'coverflow'}
                 grabCursor={ true }
@@ -57,10 +58,23 @@ export default function Claimed(tokenId: any) {
 
                 <div className="slider-controler">
                     <div className="swiper-button-prev slider-arrow">
+                        <Image
+                            src={"/icons/back-btn.svg"}
+                            width={45}
+                            height={40}
+                            alt="back-btn"
+                            className="back-btn"
+                        />
                         {/* <ion-icon name="arrow-back-outline"></ion-icon> */}
                     </div>
                     <div className="swiper-button-next slider-arrow">
-                        
+                        <Image
+                            src={"/icons/back-btn.svg"}
+                            width={45}
+                            height={20}
+                            alt="back-btn"
+                            className="back-btn rotate-180"
+                        />
                         {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                     </div>
                     <div className="swiper-pagination"></div>

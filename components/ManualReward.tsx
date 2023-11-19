@@ -12,7 +12,7 @@ export default function Manual(tokenId: any) {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center mt-14 gap-[10rem]">
+        <div className="flex flex-col justify-center items-center mt-8 gap-10">
             <div className="w-full flex flex-col">
                 <label className="pb-3 text-[1.5rem] font-semibold">
                     Wallet Address
