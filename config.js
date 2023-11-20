@@ -5,17 +5,17 @@ export const PolygonAddressFactory = `0xdECc088f9135b7b071Aa2535b24627e4Dc4c506A
 export const PolygonCurrency = `Matic`;
 export const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
-export const SepoliaAddressFactory = `0x5dF2a1ab57301CEa495e0FAA9A58316752fB990E`;
+export const SepoliaAddressFactory = `0x6099E3f2A3b50347408d8a3550BC06fbca67AA12`;
 export const SepoliaCurrency = `Eth`;
 export const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`;
 
-export let addressFactory = PolygonAddressFactory;
-export let currency = PolygonCurrency;
-export let RPCUrl = `${PolygonInfuraUrl}${InfuraRPCKey}`;
+// export let addressFactory = PolygonAddressFactory;
+// export let currency = PolygonCurrency;
+// export let RPCUrl = `${PolygonInfuraUrl}${InfuraRPCKey}`;
 
-// export let addressFactory = SepoliaAddressFactory;
-// export let currency = SepoliaCurrency;
-// export let RPCUrl = `${SepoliaInfuraUrl}${InfuraRPCKey}`;
+export let addressFactory = SepoliaAddressFactory;
+export let currency = SepoliaCurrency;
+export let RPCUrl = `${SepoliaInfuraUrl}${InfuraRPCKey}`;
 
 // let chain = `polygon`;
 
