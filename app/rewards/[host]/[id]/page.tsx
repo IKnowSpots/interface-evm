@@ -9,18 +9,21 @@ import {
     fetchAllRewards,
     fetchIfWhitelistedRewards,
     claimReward,
+    fetchIndividualReward,
 } from "@/utils";
 import { usePathname } from "next/navigation";
 import { currency } from "@/config";
 import Link from "next/link";
 import FooterSection from "@/components/landing/FooterSection";
+import { useAccount } from "wagmi";
 
 const Reward = () => {
+    const {address,isConnected}=useAccount();
     const pathName = usePathname();
     const username = pathName?.split("/")[1];
     let host_Id = pathName?.split("/")[2];
     let reward_Id = pathName?.split("/")[3];
-
+    console.log(host_Id,"host id")
     const [rewardData, setRewardData] = useState({
         name: "",
         hostName: "",
@@ -33,13 +36,13 @@ const Reward = () => {
     const [isWhitelisted, setIsWhitelisted] = useState(false);
 
     const [toggle, setToggle] = useState(false);
-    const [more, setMore] = useState(rewardData?.description.slice(0, 350));
-    function handleClick() {
-        toggle
-            ? setMore(rewardData?.description.slice(0, 350))
-            : setMore(rewardData?.description);
-        setToggle(!toggle);
-    }
+    //const [more, setMore] = useState(rewardData?.description.slice(0, 350));
+    // function handleClick() {
+    //     toggle
+    //         ? setMore(rewardData?.description.slice(0, 350))
+    //         : setMore(rewardData?.description);
+    //     setToggle(!toggle);
+    // }
 
     useEffect(() => {
         fetchAllRewardsData();
@@ -48,7 +51,7 @@ const Reward = () => {
 
     async function fetchIsWhitelistedData() {
         console.log(1)
-        const data = await fetchIfWhitelistedRewards(host_Id);
+        const data = await fetchIfWhitelistedRewards(reward_Id,address);
         console.log(5)
         console.log("d", data)
         setIsWhitelisted(data);
@@ -61,7 +64,7 @@ const Reward = () => {
     async function fetchAllRewardsData() {
         setLoading(true);
 
-        let fetchedRewards: any = await fetchAllRewards(host_Id);
+        let fetchedRewards: any = await fetchIndividualReward(host_Id);
         const event = fetchedRewards.find(
             (obj: any) => obj.rewardId == reward_Id
         );
@@ -94,24 +97,24 @@ const Reward = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    {!isConnected?<div>
                         <button className="bg-white font-semibold text-black mt-4 px-4 py-2 rounded-full hover:text-white hover:bg-black mx-auto">Connect Your Wallet</button>
-                    </div>
+                    </div>:<></>}
                     
-                    {/* <div className="flex flex-col px-24 w-[60%] ">
+                    <div className="flex flex-col px-24 w-[60%] ">
                         {isWhitelisted ? (
                             <button
                                 className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto"
-                                onClick={claimReward}
+                                onClick={()=>claimReward(reward_Id)}
                             >
                                 Claim
                             </button>
-                        ) : (
+                        ) : isConnected ? (
                             <button className="bg-white font-semibold text-black px-4 py-2 w-1/3 rounded-xl hover:text-white hover:bg-black mx-auto">
                                 You are not Whitelisted
                             </button>
-                        )}
-                    </div> */}
+                        ) : <></>}
+                    </div>
                 </div>
             </div>
         </div>
