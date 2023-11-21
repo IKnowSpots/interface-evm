@@ -32,7 +32,7 @@ const HeroSection = () => {
     }
 
   return (
-    <div className="w-full h-[550px] md:h-[650px] lg:h-[800px] xl:h-auto">
+    <div className="w-full h-[625px] md:h-[650px] lg:h-[800px] xl:h-auto">
       <div className="top-[17%] lg:top-[35%] flex flex-col justify-center items-center text-center w-full absolute z-[5]">
         <h1 className="text-[2.5rem] sm:text-8xl font-bold text-gradient ">
           Introducing <span className="block">iknowspots</span>
@@ -48,9 +48,19 @@ const HeroSection = () => {
             <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Launch dApp</button>
           </Link>
         </div>
+
+        <div className="w-full flex justify-center md:justify-normal items-end my-10">
+          <Image
+            src="/sample.svg"
+            width="200"
+            height="100"
+            className="md:ml-20 relative -rotate-[30deg] md:-rotate-[25deg] w-[30%] md:w-[18%] flex justify-center"
+            alt="Card"
+          />
+        </div>
       </div>
       
-      <div id="parent-div" className="relative hidden sm:flex w-full p-6 flex justify-center items-center">
+      <div id="parent-div" className="relative hidden sm:flex w-full p-6 justify-center items-center">
         <Image
           src="/circles.png"
           width="1500"
