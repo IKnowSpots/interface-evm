@@ -459,7 +459,8 @@ export async function fetchActiveEventsWithInfura(username) {
 
 export async function fetchAllActiveEvents() {}
 
-export async function fetchAllRewards(username) {
+export async function fetchAllRewards() {
+    const username = await fetchUsername();
     const contract = await getEventifyContract(username);
     // const contract = await getIKSContractWithInfura(username);
 
@@ -473,7 +474,7 @@ export async function fetchAllRewards(username) {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 name: meta.data.name,
-                description: meta.data.description,
+                //description: meta.data.description,
                 cover: meta.data.cover,
                 NftURI: tokenUri,
                 rewardId: i.rewardId.toString(),
@@ -490,6 +491,40 @@ export async function fetchAllRewards(username) {
     console.log("All Rewards", items);
     return items;
 }
+
+export async function fetchIndividualReward(username) {
+    // const username = await fetchUsername();
+    const contract = await getEventifyContract(username);
+    // const contract = await getIKSContractWithInfura(username);
+
+    const data = await contract.fetchAllRewards();
+    // console.log("data", data)
+    const items = await Promise.all(
+        data.map(async (i) => {
+            const tokenUri = await contract.uri(i.rewardId.toString());
+            // console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i.price);
+            let item = {
+                name: meta.data.name,
+                //description: meta.data.description,
+                cover: meta.data.cover,
+                NftURI: tokenUri,
+                rewardId: i.rewardId.toString(),
+                host: i.host.toString(),
+                supply: i.supply.toNumber(),
+                isClaimed: i.isClaimed,
+                isCryptoBound: i.isCryptoBound,
+                price,
+            };
+            return item;
+        })
+    );
+    allRewards = items;
+    console.log("All Rewards", items);
+    return items;
+}
+
 
 export async function fetchClaimedRewards() {
     if (allRewards.length > 0) {
@@ -523,12 +558,12 @@ export async function fetchUnclaimedEvents() {
 
 export async function fetchIfShortlistedEvents() {}
 
-export async function fetchIfWhitelistedRewards(user) {
+export async function fetchIfWhitelistedRewards(rewardId,user) {
     console.log(2)
-    console.log(user)
+    console.log(user,"user here")
     const contract = await getEventifyContract(user.toString());
     console.log(3)
-    const data = await contract.checkIfWhitelistedReward(user);
+    const data = await contract.checkIfWhitelistedReward(rewardId,user);
     console.log(4)
     return data
 }
@@ -668,6 +703,7 @@ export async function approveFeaturedRequest(host, ticketId) {
 }
 
 export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
+    console.log(_supply,_tokenURI,_isCryptoBound,_price);
     const username = await fetchUsername();
     const contract = await getEventifyContract(username, true);
 

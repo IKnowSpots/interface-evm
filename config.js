@@ -5,7 +5,7 @@ export const PolygonAddressFactory = `0xdECc088f9135b7b071Aa2535b24627e4Dc4c506A
 export const PolygonCurrency = `Matic`;
 export const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
-export const SepoliaAddressFactory = `0x6099E3f2A3b50347408d8a3550BC06fbca67AA12`;
+export const SepoliaAddressFactory = `0x61c5BaB1c13e7b6a7F28153E0301BdD1e240D532`;
 export const SepoliaCurrency = `Eth`;
 export const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`;
 
@@ -509,7 +509,7 @@ export const abiFactory = `[
 	}
 ]`;
 
-export const abiIKS = `[
+export const abiIKS =`[
 	{
 		"inputs": [
 			{
@@ -784,6 +784,11 @@ export const abiIKS = `[
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "rewardId",
+				"type": "uint256"
+			},
 			{
 				"internalType": "address",
 				"name": "_user",
@@ -1726,7 +1731,7 @@ export const abiIKS = `[
 			},
 			{
 				"internalType": "address[]",
-				"name": "_shortlist",
+				"name": "_users",
 				"type": "address[]"
 			}
 		],
@@ -1792,7 +1797,7 @@ export const abiIKS = `[
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]`;
+]`
 
 export const abiFeatured = `[
 	{
