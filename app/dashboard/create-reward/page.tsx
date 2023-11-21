@@ -113,18 +113,28 @@ const Create = () => {
     };
 
     async function formURI() {
+        console.log("1")
         let { supply, name, description, isCryptoBound, price, cover} = formInput;
-        if ( !supply || !name || !description ) return;
-        console.log(cover)
+        console.log("2")
+        if ( !supply || !name ) return;
+        console.log("3")
         if (cover == "") {
+            console.log("4")
             cover = "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg";
         }
+        console.log("5")
         const data = JSON.stringify({ supply, name, description, isCryptoBound, cover });
+        console.log("6")
         const files = [new File([data], "data.json")];
+        console.log("7")
+        console.log("files",files)
         const metaCID = await uploadToIPFS(files);
+        console.log("8")
+        console.log(metaCID,"cid")
         const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
+        console.log("inside here")
         // setFormInput({ ...formInput, uri: url });
-        console.log(url);
+        console.log(url,"here is URL");
         return url;
     }
 
@@ -144,6 +154,7 @@ const Create = () => {
         // try {
             setLoading(true);
             const NftURI = await formURI();
+            console.log(NftURI,"here is URI")
             let floatNumber =  parseFloat(formInput.price);
             const isMinted = await mintReward(
                 formInput.supply,
