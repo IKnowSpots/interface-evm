@@ -2,12 +2,12 @@
 import Navbar from "@/components/hostee/Navbar";
 import Rewards from "@/components/inventory/Rewards";
 import MyCalender from "@/components/inventory/MyCalender";
-import Link from "next/link";
 import CardsInventory from "@/components/cardsInventory";
 import { fetchUsername, fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import FooterSection from "@/components/landing/FooterSection";
+import Link from "next/link";
+import Image from "next/image";
 
 const Inventory = () => {
     const [inventoryData, setInventoryData] = useState<any>([]);
@@ -23,6 +23,7 @@ const Inventory = () => {
         setInventoryData(data);
         setLoading(false);
     }
+
     return (
         <div className="bg-inventory h-[100%] text-white w-full overflow-hidden">
             <Navbar />

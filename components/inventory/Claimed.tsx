@@ -1,43 +1,69 @@
-import { updateWhitelist } from "@/utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Claimedcard from "@/components/cardsClaimedRewards"
-import { Swiper,SwiperSlide } from "swiper/react";
+import ClaimedRewards from "@/components/cardsClaimedRewards";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { fetchClaimedRewards } from "@/utils";
 
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import { EffectCoverflow,Pagination,Navigation } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
-export default function Claimed(tokenId: any) {
+export default function Claimed() {
+    const [claimedRewardsData, setClaimedRewardsData] = useState<any>([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetchInventoryData();
+    }, []);
+
+    async function fetchInventoryData() {
+        setLoading(true);
+        const data: any = await fetchClaimedRewards();
+        setClaimedRewardsData(data);
+        setLoading(false);
+    }
 
     return (
         <div className="flex justify-center items-center pb-10 mx-20">
             <Swiper
-                effect={'coverflow'}
-                grabCursor={ true }
-                centeredSlides={ true }
-                loop={ true }
-                slidesPerView={ 3 } 
-                coverflowEffect={
-                    {
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 2.5,
-                    }
-                }
-                pagination={{el:'.swiper-pagination',clickable:true}}
+                effect={"coverflow"}
+                grabCursor={true}
+                centeredSlides={true}
+                loop={true}
+                slidesPerView={3}
+                coverflowEffect={{
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 2.5,
+                }}
+                pagination={{ el: ".swiper-pagination", clickable: true }}
                 navigation={{
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
                     // clickable: true,
-                  }}
+                }}
                 modules={[EffectCoverflow, Pagination, Navigation]}
             >
                 <SwiperSlide>
+                    {claimedRewardsData.map((nft: any, i: any) => {
+                        <ClaimedRewards 
+                            image={nft.cover}
+                            name={nft.name}                        
+                        />
+                    })}
+                </SwiperSlide>
+                ;
+                {/* <SwiperSlide>
+                    <Claimedcard image="fdf" name="fdsf"/>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <Claimedcard/>
+                </SwiperSlide> */}
+                {/* <SwiperSlide>
                     <Claimedcard/>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -48,14 +74,7 @@ export default function Claimed(tokenId: any) {
                 </SwiperSlide>
                 <SwiperSlide>
                     <Claimedcard/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Claimedcard/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Claimedcard/>
-                </SwiperSlide>
-
+                </SwiperSlide> */}
                 <div className="slider-controler">
                     <div className="swiper-button-prev slider-arrow">
                         <Image

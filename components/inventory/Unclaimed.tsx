@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Unclaimedcard from "@/components/cardsUnclaimedRewards"
 import { Swiper,SwiperSlide } from "swiper/react";
+import { fetchClaimedRewards } from "@/utils"
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -11,7 +12,7 @@ import 'swiper/css/navigation';
 
 import { EffectCoverflow,Pagination,Navigation } from 'swiper/modules';
 
-export default function Unclaimed(tokenId: any) {
+export default function Unclaimed() {
 
     return (
         <div className="flex justify-center items-center pb-10 mx-20">

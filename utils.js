@@ -461,6 +461,7 @@ export async function fetchAllActiveEvents() {}
 
 export async function fetchAllRewards() {
     const username = await fetchUsername();
+    if (!username) return;
     const contract = await getEventifyContract(username);
     // const contract = await getIKSContractWithInfura(username);
 
@@ -492,7 +493,7 @@ export async function fetchAllRewards() {
     return items;
 }
 
-export async function fetchIndividualReward(username) {
+export async function fetchAllRewardsThroughUsername(username) {
     // const username = await fetchUsername();
     const contract = await getEventifyContract(username);
     // const contract = await getIKSContractWithInfura(username);
@@ -524,7 +525,6 @@ export async function fetchIndividualReward(username) {
     console.log("All Rewards", items);
     return items;
 }
-
 
 export async function fetchClaimedRewards() {
     if (allRewards.length > 0) {
@@ -558,14 +558,14 @@ export async function fetchUnclaimedEvents() {
 
 export async function fetchIfShortlistedEvents() {}
 
-export async function fetchIfWhitelistedRewards(rewardId,user) {
-    console.log(2)
-    console.log(user,"user here")
-    const contract = await getEventifyContract(user.toString());
-    console.log(3)
-    const data = await contract.checkIfWhitelistedReward(rewardId,user);
-    console.log(4)
-    return data
+export async function fetchIfWhitelistedRewards(rewardId, user) {
+    // console.log(2)
+    console.log(user, "user here");
+    const contract = await getEventifyContract(user);
+    // console.log(3)
+    const data = await contract.checkIfWhitelistedReward(rewardId, user);
+    // console.log(4)
+    return data;
 }
 
 // --contract-update functions
@@ -703,7 +703,7 @@ export async function approveFeaturedRequest(host, ticketId) {
 }
 
 export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
-    console.log(_supply,_tokenURI,_isCryptoBound,_price);
+    console.log(_supply, _tokenURI, _isCryptoBound, _price);
     const username = await fetchUsername();
     const contract = await getEventifyContract(username, true);
 
@@ -744,8 +744,8 @@ export async function updateWhitelist(rewardId, user) {
     console.log("Whitelist updated");
 }
 
-export async function claimReward(rewardId) {
-    const username = await fetchUsername();
+export async function claimReward(rewardId, username) {
+    // const username = await fetchUsername();
     const contract = await getEventifyContract(username, true);
 
     const tx = await contract.claimReward(rewardId);
