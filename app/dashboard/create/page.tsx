@@ -122,21 +122,22 @@ const Create = () => {
                 formInput.isStakingEnabled,
                 NftURI
             );
-            // if (isMinted == true) {
-            //     toast.success("Minted!", {
-            //         position: "bottom-left",
-            //         autoClose: 5000,
-            //         hideProgressBar: true,
-            //         closeOnClick: true,
-            //         pauseOnHover: true,
-            //         draggable: true,
-            //         progress: undefined,
-            //         theme: "dark",
-            //     });
-            // }
             if (isMinted == true) {
+                toast.success("Minted!", {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
                 setPopUpVisible(true);
             }
+            // if (isMinted == true) {
+            //     setPopUpVisible(true);
+            // }
             
             setLoading(false);
         // } catch (error) {

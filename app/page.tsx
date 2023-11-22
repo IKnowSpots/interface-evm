@@ -15,6 +15,9 @@ import Partners from "@/components/landing/Partners";
 export default function Home() {
     return (
         <>
+            <head>
+                <link rel="icon" href="/favicon.ico" />
+            </head>
             <div className=" text-white w-full overflow-hidden">
                 <Navbar />
                 <div className="w-full flex justify-end">

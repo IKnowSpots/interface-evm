@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
 import PopUp from "@/components/Popup"
+import CreateRewardPopup from "@/components/CreateRewardPopup"
 import Select from "react-select";
 import ValueType from "react-select"
 
@@ -164,7 +165,7 @@ const Create = () => {
             );
             
             if (isMinted == true) {
-                    toast.success("Minted!", {
+                    toast.success("Reward Created!", {
                     position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: true,
@@ -429,7 +430,7 @@ const Create = () => {
                 pauseOnHover
                 theme="dark"
             />
-            {popUpVisible ? <PopUp/> : <></> }
+            {popUpVisible ? <CreateRewardPopup/> : <></> }
             <FooterSection />
         </div>
     );

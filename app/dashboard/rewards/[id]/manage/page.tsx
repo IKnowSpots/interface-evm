@@ -6,6 +6,8 @@ import Script from "next/script";
 import Manual from "@/components/ManualReward"
 import Bulk from "@/components/BulkReward"
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 
 const ManageShortlist = () => {
 
@@ -24,8 +26,22 @@ const ManageShortlist = () => {
             <DashNav />
         </div>
         {/* <hr className="mx-4" /> */}
-        <div className="relative z-10 mt-6">
+        <div className="relative z-10">
         <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[700px] z-[-1]" />
+        <div className="flex">
+            <Link
+                href="/dashboard/rewards"
+                className="px-4"
+            >
+                <Image
+                    src={"/icons/back-btn.svg"}
+                    width={45}
+                    height={20}
+                    alt="back-btn"
+                    className="back-btn"
+                />
+            </Link>
+            </div>
             <div className="flex justify-center items-center">
                 <div className="box-background w-[70%] min-h-[73vh] px-6 py-12 relative z-20">
                     <div className=" flex flex-col justify-center items-center gap-10">

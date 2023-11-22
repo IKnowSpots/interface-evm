@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-// import Navbar from "@/components/dashboard/create/Navbar";
 import Navbar from "@/components/dashboard/claim-rewards/ClaimNavbar";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -17,6 +16,8 @@ import FooterSection from "@/components/landing/FooterSection";
 import { useAccount } from "wagmi";
 
 const Reward = () => {
+    const [allRewards, setAllRewards] = useState<any>([]);
+
     const { address, isConnected } = useAccount();
 
     const pathName = usePathname();
@@ -82,13 +83,12 @@ const Reward = () => {
                     <div className="flex justify-center items-center w-full">
                         <div className="flex flex-col gap-2 w-[26%] bg-white rounded-lg">
                             <img
-                                src="/rewardimg.png"
+                                src={rewardData?.cover}
                                 className="w-full rounded-lg"
                                 alt=""
                             />
-                            <div className="flex justify-between p-2 text-black items-center font-semibold">
-                                <p>Reward Name</p>
-                                {/* <p>Text</p> */}
+                            <div className="flex justify-center p-2 text-black items-center font-semibold">
+                                <p>{rewardData?.name}</p>
                             </div>
                         </div>
                     </div>
