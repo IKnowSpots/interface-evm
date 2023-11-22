@@ -56,7 +56,6 @@ export default function Claimed() {
                         />
                     })}
                 </SwiperSlide>
-                ;
                 {/* <SwiperSlide>
                     <Claimedcard image="fdf" name="fdsf"/>
                 </SwiperSlide>

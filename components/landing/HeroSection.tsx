@@ -45,16 +45,25 @@ const HeroSection = () => {
             <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
           </Link>
           <Link className="" href={isDeployed ? "/dashboard/active" : "/dashboard"}>
-            <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Launch dApp</button>
+            <button className="box-background w-full flex justify-center items-center gap-2 px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">
+              Launch dApp
+              <Image
+                src={"/icons/arrow.svg"}
+                width={17}
+                height={20}
+                alt="back-btn"
+                className="back-btn rotate-180"
+              />
+            </button>
           </Link>
         </div>
 
-        <div className="w-full flex justify-center md:justify-normal items-end my-10">
+        <div className="w-full flex justify-normal items-end my-5">
           <Image
-            src="/sample.svg"
+            src="/icon.svg"
             width="200"
             height="100"
-            className="md:ml-20 relative -rotate-[30deg] md:-rotate-[25deg] w-[30%] md:w-[18%] flex justify-center"
+            className="relative w-[60%] md:w-[25%] flex justify-center"
             alt="Card"
           />
         </div>

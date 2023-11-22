@@ -174,6 +174,7 @@ const Create = () => {
                     progress: undefined,
                     theme: "dark",
                 });
+                setPopUpVisible(true);
             }
             
             setLoading(false);
@@ -428,7 +429,7 @@ const Create = () => {
                 pauseOnHover
                 theme="dark"
             />
-            {/* {popUpVisible ? <PopUp/> : <></> } */}
+            {popUpVisible ? <PopUp/> : <></> }
             <FooterSection />
         </div>
     );

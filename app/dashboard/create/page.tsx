@@ -240,36 +240,6 @@ const Create = () => {
                                 />
                                 <p className="text-white opacity-40">default cover image</p>
                             </div>
-                            {/* <div className="flex justify-around my-8  ">
-                                <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
-                                    />
-                                    <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
-                                />
-                                <Image
-                                src={"/bored_ape_image.png"}
-                                width={60}
-                                height={60}
-                                alt="bored ape nft"
-                                className="rounded-lg"
-                                />
-                                <Image
-                                    src={"/bored_ape_image.png"}
-                                    width={60}
-                                    height={60}
-                                    alt="bored ape nft"
-                                    className="rounded-lg"
-                                />
-                            </div> */}
                         </div>
                     </div>
                 </div>
