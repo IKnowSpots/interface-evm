@@ -4,7 +4,7 @@ import Image from "next/image";
 import DashNav from "@/components/dashboard/rewardsnav";
 import CardsReward from "@/components/cardsRewards"
 import { useEffect, useState } from "react";
-import { fetchAllRewards, fetchUsername } from "@/utils"
+import { fetchAllRewardsThroughUsername, fetchUsername } from "@/utils"
 import LoadingModal from "@/components/LoadingModal";
 
 const Rewards = () => {
@@ -30,7 +30,7 @@ const Rewards = () => {
     async function fetchAllRewardsData() {
         try {
             setLoading(true);
-            let data: any = await fetchAllRewards(username);
+            let data: any = await fetchAllRewardsThroughUsername(username);
             setAllRewards(data);
             setLoading(false);
         } catch (error) {
