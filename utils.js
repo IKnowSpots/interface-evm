@@ -627,6 +627,7 @@ export async function pauseEvent(ticketId) {
     await tx.wait();
     await fetchAllEvents();
     console.log("Paused");
+    return true;
 }
 
 export async function runEvent(ticketId) {

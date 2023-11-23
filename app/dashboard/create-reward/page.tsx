@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
-import PopUp from "@/components/Popup"
 import CreateRewardPopup from "@/components/CreateRewardPopup"
 import Select from "react-select";
 import ValueType from "react-select"

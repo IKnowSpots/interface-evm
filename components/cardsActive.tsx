@@ -5,6 +5,8 @@ import { useState } from "react";
 import { pauseEvent } from "@/utils"
 import { currency } from "@/config"
 import LoadingModal from "./LoadingModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, setActiveEvents }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any,setActiveEvents: any }) => {
 
@@ -13,8 +15,20 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
   async function pauseEventCall(tokenId: any) {
     setLoading(true)
     console.log(tokenId)
-    await pauseEvent(tokenId)
+    const isPaused = await pauseEvent(tokenId)
     setActiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
+    if (isPaused == true) {
+            toast.success("Event Paused!", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
     setLoading(false)
   }
 
@@ -57,6 +71,18 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                     </button>
                 </div> */}
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </div>
         </>
     );
