@@ -41,8 +41,8 @@ const Sidebar = () => {
     // }, [publicKey]);
 
     return (
-        <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[20%] py-8">
-            <div className="bg-dashboard blur-[220px] absolute w-[60%] h-[700px] z-[-1]"></div>
+        <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[20%] pt-8 h-screen sticky top-0">
+            <div className="bg-dashboard blur-[220px] absolute w-[60%] h-[400px]"></div>
 
             <Link href="/">
                 <Image
@@ -52,7 +52,7 @@ const Sidebar = () => {
                     alt="I know spots logo"
                 />
             </Link>
-            <div className="py-16 text-white pr-4">
+            <div className="py-[10%] text-white pr-4 relative">
                 {/* <SidebarItems icon_name="Home_fill" section_name="Dashboard" /> */}
 
                 <Link
@@ -111,12 +111,12 @@ const Sidebar = () => {
                     />
                 </Link>
             </div>
-            <div className="pt-[30%] text-lg text-white">
+            <div className="text-base pl-10 text-white">
                 <Link target="_blank" href="/support">
-                    <p className="py-1 opacity-40 sidebar-elements">Support</p>
+                    <p className="py-1 relative z-10 opacity-40 sidebar-elements">Support</p>
                 </Link>
                 <Link target="_blank" href="/">
-                    <p className="py-1 opacity-40 sidebar-elements">Docs</p>
+                    <p className="py-1 relative z-10 opacity-40 sidebar-elements">Docs</p>
                 </Link>
                 <Link target="_blank" href="https://github.com/IKnowSpots">
                     <div className="flex items-center py-1 sidebar-elements">
@@ -147,9 +147,9 @@ const Sidebar = () => {
                     </div>
                 </Link>
             </div>
-            <div className="mt-[20%]">
+            <div className="mt-[5%]">
                 {publicKey ? (
-                    <button className="block my-6">
+                    <button className="block">
                         <div className="flex border border-white px-3 py-4">
                             {/* <Image
                                 src={wallets[0].adapter.icon}

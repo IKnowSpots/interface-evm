@@ -77,12 +77,12 @@ const ActiveEvents = () => {
 
     function Layout({ children }: { children: React.ReactNode }) {
         return (
-            <div className="flex h-full w-full">
+            <div className="w-full flex">
                 <Sidebar />
-                <div className="bg-[#25143a] w-[80%]">
+                <div className="bg-[#25143a] w-[80%] min-h-screen overflow-y-auto">
                     <DashNav />
-                    <div className="px-12 ">
-                        <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[700px] z-[-1]" />
+                    <div className="px-12">
+                        <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[75vh] z-[-1]" />
 
                         <p className="text-white font-semibold pl-4 pt-2">
                             ACTIVE EVENTS

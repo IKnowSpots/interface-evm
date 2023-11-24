@@ -105,11 +105,11 @@ const Rewards = () => {
 
     function Layout({ children }: { children: React.ReactNode }) {
         return (
-            <div className="flex h-full w-full">
+            <div className="flex w-full">
                 <Sidebar />
-                <div className="bg-[#25143a] w-[80%]">
+                <div className="bg-[#25143a] w-[80%] min-h-screen overflow-y-auto">
                     <DashNav />
-                    <div className="bg-createEvent blur-[220px] absolute w-[80%] h-screen z-[-1]" />
+                    <div className="bg-createEvent blur-[220px] absolute w-[80%] h-[75vh] z-[-1]" />
                     <div className="px-6">
                         <p className="text-white text-xl font-semibold pl-4 pt-2">
                             Rewards

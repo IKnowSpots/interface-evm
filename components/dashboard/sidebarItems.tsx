@@ -7,11 +7,11 @@ const SidebarItems = ({ section_name, icon_name,page_name } : {section_name: str
     <div className={`items-center mb-4 py-2 pl-2 flex text-lg ${window.location.pathname.split("/").at(-1) == page_name ? "sidebar-bg" : " "} `}>
       <Image
         src={`/icons/${icon_name}.png`}
-        width="30"
+        width="25"
         height="100"
         alt="home fill"
       />
-      <p className="px-4">{`${section_name}`}</p>
+      <p className="px-2 text-base">{`${section_name}`}</p>
     </div>
   );
 };
