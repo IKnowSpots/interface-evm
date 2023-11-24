@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { fetchUsername } from "@/utils";
+import { fetchCurrentUsername } from "@/utils";
 import WalletsProvider from "../wallets";
 
 const CreateNav = () => {
@@ -15,7 +15,7 @@ const CreateNav = () => {
 
     async function fetchUsernameCall() {
         setLoading(true);
-        let user = await fetchUsername();
+        let user = await fetchCurrentUsername();
         setUsername(user);
         // setUsername("@iamacid");
         setLoading(false);

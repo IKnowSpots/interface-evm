@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Unclaimedcard from "@/components/cardsUnclaimedRewards"
 import { Swiper,SwiperSlide } from "swiper/react";
-import { fetchClaimedRewards } from "@/utils"
+import { fetchUnclaimedRewardsThroughUsername } from "@/utils"
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';

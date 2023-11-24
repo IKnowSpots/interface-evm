@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { fetchUsername, getIKSContractAddress } from "@/utils";
+import { fetchCurrentUsername, getIKSContractAddress } from "@/utils";
 
 const DashNav = () => {
     const [username, setUsername] = useState();
@@ -20,7 +20,7 @@ const DashNav = () => {
 
     async function fetchUsernameCall() {
         setLoading(true);
-        let user = await fetchUsername();
+        let user = await fetchCurrentUsername();
         setUsername(user);
         await getIKSContractAddressCall(user)
         // setUsername("iamacid");

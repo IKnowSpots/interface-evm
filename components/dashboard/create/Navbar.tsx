@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WalletsProvider from "../../wallets";
 import { useState, useEffect } from "react";
-import { fetchUsername } from "@/utils";
+import { fetchCurrentUsername } from "@/utils";
 
 const Navbar = () => {
     const [username, setUsername] = useState();
@@ -15,7 +15,7 @@ const Navbar = () => {
 
     async function fetchUsernameCall() {
         setLoading(true);
-        let user = await fetchUsername();
+        let user = await fetchCurrentUsername();
         setUsername(user);
         // setUsername("iamacid");
         setLoading(false);

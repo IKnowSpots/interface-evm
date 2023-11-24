@@ -3,7 +3,7 @@ import CardsHostee from "@/components/cardsHostee";
 import Navbar from "@/components/hostee/Navbar";
 import {
     fetchUsernameValidityInfura,
-    fetchActiveEventsWithInfura,
+    fetchActiveEventsWithUsername,
 } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -45,7 +45,7 @@ const EventsByHost = () => {
         setLoading(true);
         const data = await fetchUsernameValidityInfura(id);
         if (data == true) {
-            let data: any = await fetchActiveEventsWithInfura(id);
+            let data: any = await fetchActiveEventsWithUsername(id);
             setActiveEvents(data);
         }
         setIsUsernameValid(data)

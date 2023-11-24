@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
 import DashNav from "@/components/dashboard/rewardsnav";
 import CardsReward from "@/components/cardsRewards"
 import { useEffect, useState } from "react";
-import { fetchAllRewardsThroughUsername, fetchUsername } from "@/utils"
+import { fetchHostedRewards } from "@/utils"
 import LoadingModal from "@/components/LoadingModal";
 
 const Rewards = () => {
@@ -16,21 +17,10 @@ const Rewards = () => {
         fetchAllRewardsData();
     }, []);
 
-    const [username, setUsername] = useState("")
-
-    useEffect(() => {
-        fetchUsernameData()
-    }, [])
-
-    async function fetchUsernameData() {
-        const data = await fetchUsername()
-        setUsername(data)
-    }
-
     async function fetchAllRewardsData() {
         try {
             setLoading(true);
-            let data: any = await fetchAllRewardsThroughUsername(username);
+            let data: any = await fetchHostedRewards();
             setAllRewards(data);
             setLoading(false);
         } catch (error) {
@@ -57,10 +47,10 @@ const Rewards = () => {
 
     if (loading == true)
         return (
-            // <Layout>
-            //     <div className="text-white">Fetching..</div>
-            // </Layout>
-            <LoadingModal visible={true}/>
+            <Layout>
+                {/* <div className="text-white">Fetching..</div> */}
+                <LoadingModal visible={true}/>
+            </Layout>
         );
 
     if (loading == false && allRewards.length == 0)

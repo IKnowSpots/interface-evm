@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { pauseEvent } from "@/utils";
 import { currency } from "@/config";
 import Link from "next/link";
-import { fetchUsername } from "@/utils"
+import { fetchCurrentUsername } from "@/utils"
 
 const CardsReward = ({
     image,
@@ -26,7 +26,7 @@ const CardsReward = ({
     }, [])
 
     async function fetchUsernameData() {
-        const data = await fetchUsername()
+        const data = await fetchCurrentUsername()
         setUsername(data)
     }
 

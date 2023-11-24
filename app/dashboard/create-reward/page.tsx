@@ -7,11 +7,11 @@ import CreateNav from "@/components/dashboard/CreateNav";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
-import { text } from "stream/consumers";
 import CreateRewardPopup from "@/components/CreateRewardPopup"
 import Select from "react-select";
+import { redirect } from "next/navigation";
+import { text } from "stream/consumers";
 import ValueType from "react-select"
 
 interface Option {
@@ -63,12 +63,13 @@ const Create = () => {
     const [formInput, setFormInput] = useState({
         supply: "",
         name: "",
-        description: "",
         isCryptoBound: false,
         price: "0",
         cover: "",
         // uri: "",
     });
+
+    console.log(formInput)
 
     const [isInputEnabled, setIsInputEnabled] = useState(false);
 
@@ -78,9 +79,9 @@ const Create = () => {
 
     const handleToggle = () => {
         if (formInput.isCryptoBound == true) {
-            setFormInput({ ...formInput, isCryptoBound: false });
-        } else {
             setFormInput({ ...formInput, isCryptoBound: true });
+        } else {
+            setFormInput({ ...formInput, isCryptoBound: false });
         }
     };
 
@@ -113,23 +114,23 @@ const Create = () => {
     };
 
     async function formURI() {
-        console.log("1")
-        let { supply, name, description, isCryptoBound, price, cover} = formInput;
-        console.log("2")
+        // console.log("1")
+        let { supply, name, isCryptoBound, price, cover} = formInput;
+        // console.log("2")
         if ( !supply || !name ) return;
-        console.log("3")
+        // console.log("3")
         if (cover == "") {
             console.log("4")
             cover = "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg";
         }
-        console.log("5")
-        const data = JSON.stringify({ supply, name, description, isCryptoBound, cover });
-        console.log("6")
+        // console.log("5")
+        const data = JSON.stringify({ supply, name, isCryptoBound, cover });
+        // console.log("6")
         const files = [new File([data], "data.json")];
-        console.log("7")
-        console.log("files",files)
+        // console.log("7")
+        console.log("files", files)
         const metaCID = await uploadToIPFS(files);
-        console.log("8")
+        // console.log("8")
         console.log(metaCID,"cid")
         const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
         console.log("inside here")
@@ -320,7 +321,7 @@ const Create = () => {
                         <label className="pb-2 w-[90%] text-lg font-semibold">Reward Name</label>
                         <input
                             type="text"
-                            id="event-name"
+                            id="reward-name"
                             placeholder="eg. Discord Trivia 23rd Oct"
                             className="bg-[#1E1E1E] w-[90%] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 mb-6"
                             onChange={(e) => {
@@ -351,7 +352,7 @@ const Create = () => {
                         <label className="pb-2 w-[90%] text-lg font-semibold">Supply</label>
                         <input
                             type="text"
-                            id="event-name"
+                            id="c"
                             placeholder="5"
                             className="bg-[#1E1E1E] w-[90%] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 mb-6"
                             onChange={(e) =>
@@ -376,7 +377,7 @@ const Create = () => {
                                     onChange={(e) =>
                                         setFormInput({
                                             ...formInput,
-                                            supply: e.target.value,
+                                            price: e.target.value,
                                         })
                                     }
                                     disabled={imgLoading}

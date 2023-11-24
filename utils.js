@@ -35,10 +35,16 @@ import { Web3Storage } from "web3.storage";
 
 let allEvents = [];
 let allEventsInfura = [];
-let purchasesEvents = [];
 let allRewards = [];
 
 // --contract-instance functions
+
+export async function getUserAddress() {
+    const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+    });
+    return accounts[0];
+}
 
 export async function getIKSContractAddress(username) {
     const contract = await getFactoryContract();
@@ -52,13 +58,6 @@ export async function getFeaturedContractAddress() {
     const contract = await getFactoryContract();
     const address = await contract.featuredEventsInstanceAddress();
     return address;
-}
-
-export async function getUserAddress() {
-    const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-    });
-    return accounts[0];
 }
 
 export async function getFactoryContract(providerOrSigner) {
@@ -78,7 +77,7 @@ export async function getFactoryContract(providerOrSigner) {
     return contract;
 }
 
-export async function getEventifyContract(username, providerOrSigner) {
+export async function getIKSContract(username, providerOrSigner) {
     const contractAddress = await getIKSContractAddress(username);
     const modal = new web3modal();
     const connection = await modal.connect();
@@ -140,7 +139,7 @@ export async function getIKSContractWithInfura(username) {
     return eventifyContract;
 }
 
-// --contract-fetching-variables functions
+// --contract-fetching-hostData functions
 
 export async function fetchIfDeployed() {
     const contract = await getFactoryContract();
@@ -149,7 +148,7 @@ export async function fetchIfDeployed() {
     return data;
 }
 
-export async function fetchUsername() {
+export async function fetchCurrentUsername() {
     const contract = await getFactoryContract();
     const address = await getUserAddress();
     const check = await fetchIfDeployed();
@@ -165,6 +164,12 @@ export async function fetchAddressFromUsername(username) {
     return data;
 }
 
+export async function fetchUsernameFromAddress(address) {
+    const contract = await getFactoryContract();
+    const data = await contract.addressToUsername(address.toString());
+    return data;
+}
+
 export async function fetchUsernameValidity(username) {
     const contract = await getFactoryContract();
     const data = await contract.usernameExist(username);
@@ -177,11 +182,43 @@ export async function fetchUsernameValidityInfura(username) {
     return data;
 }
 
+// --contract-fetching-userData functions
+
+export async function fetchIfWhitelistEvents(address) {
+    const contract = await getFactoryContract();
+    const data = await contract.isWhitelisted(address);
+    return data;
+}
+
+export async function fetchIfWhitelistRewards(rewardId, username) {
+    const contract = await getIKSContract(username, true);
+    const userAddress = await fetchAddressFromUsername(username)
+    const data = await contract.checkIfWhitelistedReward(rewardId, userAddress);
+    return data;
+}
+
+export async function fetchFeaturedRequest() {
+    const contract = await getFactoryContract();
+    const data = await contract.fetchAllFeaturedRequest();
+    const items = await Promise.all(
+        data.map(async (i) => {
+            let item = {
+                host: i.host.toString(),
+                tokenId: i.ticketId.toString(),
+                isApproved: i.isApproved.toString(),
+            };
+            return item;
+        })
+    );
+    console.log("Featured Request", items);
+    return items;
+}
+
 // --contract-fetching-tickets functions
 
 export async function fetchAllEvents() {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username);
 
     const data = await contract.fetchAllEvents();
     // console.log("data", data)
@@ -215,6 +252,43 @@ export async function fetchAllEvents() {
     );
     allEvents = items;
     console.log("All Events", items);
+    return items;
+}
+
+export async function fetchAllEventsWithUsername(username) {
+    const contract = await getIKSContractWithInfura(username);
+
+    const data = await contract.fetchAllEvents();
+    const items = await Promise.all(
+        data.map(async (i) => {
+            const tokenUri = await contract.uri(i.ticketId.toString());
+            // console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i.price);
+            let item = {
+                name: meta.data.name,
+                venue: meta.data.venue,
+                date: meta.data.date,
+                description: meta.data.description,
+                cover: meta.data.cover,
+                NftURI: tokenUri,
+                host: i.host.toString(),
+                supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
+                price,
+                owner: i.owner.toString(),
+                tokenId: i.ticketId.toString(),
+                isActive: i.isActive,
+                isPublished: i.isPublished,
+                isShortlist: i.isShortlist,
+                isExistingTicket: i.isExistingTicket,
+                isStaking: i.isStaking,
+            };
+            return item;
+        })
+    );
+    allEventsInfura = items;
+    console.log("all infura", items);
     return items;
 }
 
@@ -304,8 +378,33 @@ export async function fetchShortlistEvents() {
     }
 }
 
+export async function fetchActiveEventsWithUsername(username) {
+    // console.log("length", activeEventsInfura.length)
+    if (allEventsInfura.length > 0) {
+        const filteredArray = allEventsInfura.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true
+        );
+        console.log("Active Events", filteredArray);
+        return filteredArray;
+    } else {
+        const fetchedAllEvents = await fetchAllEventsWithUsername(username);
+        const filteredArray = fetchedAllEvents.filter(
+            (subarray) =>
+                subarray.remaining > 0 &&
+                subarray.isActive == true &&
+                subarray.isPublished == true
+        );
+        allEventsInfura = filteredArray;
+        console.log("Active Events", filteredArray);
+        return filteredArray;
+    }
+}
+
 export async function fetchCommonInventory() {
-    if (purchasesEvents.length > 0) return;
+    let purchasesEvents = []
 
     const factoryContract = await getFactoryContract(true);
 
@@ -325,8 +424,9 @@ export async function fetchCommonInventory() {
             const username = await factoryContract.addressToUsername(
                 j.toString()
             );
-            const eventifyContract = await getEventifyContract(username, true);
+            const eventifyContract = await getIKSContract(username, true);
             const inventory = await eventifyContract.fetchPurchasedTickets();
+            console.log("inventory", inventory)
             const subItems = await Promise.all(
                 inventory.map(async (i) => {
                     const tokenUri = await eventifyContract.uri(
@@ -395,75 +495,12 @@ export async function fetchFeaturedEventsWithInfura() {
     return items;
 }
 
-export async function fetchAllEventsWithInfura(username) {
-    const contract = await getIKSContractWithInfura(username);
-
-    const data = await contract.fetchAllEvents();
-    const items = await Promise.all(
-        data.map(async (i) => {
-            const tokenUri = await contract.uri(i.ticketId.toString());
-            // console.log(tokenUri);
-            const meta = await axios.get(tokenUri);
-            let price = ethers.utils.formatEther(i.price);
-            let item = {
-                name: meta.data.name,
-                venue: meta.data.venue,
-                date: meta.data.date,
-                description: meta.data.description,
-                cover: meta.data.cover,
-                NftURI: tokenUri,
-                host: i.host.toString(),
-                supply: i.supply.toNumber(),
-                remaining: i.remaining.toNumber(),
-                price,
-                owner: i.owner.toString(),
-                tokenId: i.ticketId.toString(),
-                isActive: i.isActive,
-                isPublished: i.isPublished,
-                isShortlist: i.isShortlist,
-                isExistingTicket: i.isExistingTicket,
-                isStaking: i.isStaking,
-            };
-            return item;
-        })
-    );
-    allEventsInfura = items;
-    console.log("all infura", items);
-    return items;
-}
-
-export async function fetchActiveEventsWithInfura(username) {
-    // console.log("length", activeEventsInfura.length)
-    if (allEventsInfura.length > 0) {
-        const filteredArray = allEventsInfura.filter(
-            (subarray) =>
-                subarray.remaining > 0 &&
-                subarray.isActive == true &&
-                subarray.isPublished == true
-        );
-        console.log("Active Events", filteredArray);
-        return filteredArray;
-    } else {
-        const fetchedAllEvents = await fetchAllEventsWithInfura(username);
-        const filteredArray = fetchedAllEvents.filter(
-            (subarray) =>
-                subarray.remaining > 0 &&
-                subarray.isActive == true &&
-                subarray.isPublished == true
-        );
-        allEventsInfura = filteredArray;
-        console.log("Active Events", filteredArray);
-        return filteredArray;
-    }
-}
-
 export async function fetchAllActiveEvents() {}
 
-export async function fetchAllRewards() {
-    const username = await fetchUsername();
+export async function fetchHostedRewards() {
+    const username = await fetchCurrentUsername();
     if (!username) return;
-    const contract = await getEventifyContract(username);
-    // const contract = await getIKSContractWithInfura(username);
+    const contract = await getIKSContract(username);
 
     const data = await contract.fetchAllRewards();
     // console.log("data", data)
@@ -493,10 +530,9 @@ export async function fetchAllRewards() {
     return items;
 }
 
-export async function fetchAllRewardsThroughUsername(username) {
-    // const username = await fetchUsername();
-    const contract = await getEventifyContract(username);
-    // const contract = await getIKSContractWithInfura(username);
+export async function fetchRewardsThroughUsername(username) {
+    if (!username) return;
+    const contract = await getIKSContract(username);
 
     const data = await contract.fetchAllRewards();
     // console.log("data", data)
@@ -526,14 +562,14 @@ export async function fetchAllRewardsThroughUsername(username) {
     return items;
 }
 
-export async function fetchClaimedRewards() {
+export async function fetchClaimedRewardsThroughUsername() {
     if (allRewards.length > 0) {
         const filteredArray = allRewards.filter(
             (subarray) => subarray.isClaimed == true
         );
         return filteredArray;
     } else {
-        const data = await fetchAllRewards();
+        const data = await fetchRewardsThroughUsername();
         const filteredArray = data.filter(
             (subarray) => subarray.isClaimed == true
         );
@@ -541,31 +577,19 @@ export async function fetchClaimedRewards() {
     }
 }
 
-export async function fetchUnclaimedEvents() {
+export async function fetchUnclaimedRewardsThroughUsername() {
     if (allRewards.length > 0) {
         const filteredArray = allRewards.filter(
             (subarray) => subarray.isClaimed == false
         );
         return filteredArray;
     } else {
-        const data = await fetchAllRewards();
+        const data = await fetchRewardsThroughUsername();
         const filteredArray = data.filter(
             (subarray) => subarray.isClaimed == false
         );
         return filteredArray;
     }
-}
-
-export async function fetchIfShortlistedEvents() {}
-
-export async function fetchIfWhitelistedRewards(rewardId, user) {
-    // console.log(2)
-    console.log(user, "user here");
-    const contract = await getEventifyContract(user);
-    // console.log(3)
-    const data = await contract.checkIfWhitelistedReward(rewardId, user);
-    // console.log(4)
-    return data;
 }
 
 // --contract-update functions
@@ -584,8 +608,8 @@ export async function deploy(username) {
 }
 
 export async function mint(_price, _supply, _isShortlist, _isStaking, NftURI) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
 
     const price = ethers.utils.parseEther(_price);
     const tx = await contract.mintTickets(
@@ -601,8 +625,8 @@ export async function mint(_price, _supply, _isShortlist, _isStaking, NftURI) {
 }
 
 export async function updateShortlist(ticketId, shortlistArray) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
 
     const tx = await contract.updateShortlist(ticketId, shortlistArray);
     await tx.wait();
@@ -610,8 +634,8 @@ export async function updateShortlist(ticketId, shortlistArray) {
 }
 
 export async function publishTickets(ticketId) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
 
     const tx = await contract.publishTickets(ticketId);
     await tx.wait();
@@ -620,8 +644,8 @@ export async function publishTickets(ticketId) {
 }
 
 export async function pauseEvent(ticketId) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
 
     const tx = await contract.pauseActiveEvent(ticketId);
     await tx.wait();
@@ -631,8 +655,8 @@ export async function pauseEvent(ticketId) {
 }
 
 export async function runEvent(ticketId) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
 
     const tx = await contract.runPausedEvent(ticketId);
     await tx.wait();
@@ -660,13 +684,6 @@ export async function buyTicket(username, ticketId, price) {
     console.log("Purchased successfully");
 }
 
-export async function fetchIfWhitelist(address) {
-    const contract = await getFactoryContract();
-
-    const data = await contract.isWhitelisted(address);
-    return data;
-}
-
 export async function whitelistUser(address) {
     const contract = await getFactoryContract(true);
 
@@ -675,24 +692,6 @@ export async function whitelistUser(address) {
     const tx = await contract.whitelistUser(address);
     await tx.wait();
     console.log("Whitelisted");
-}
-
-export async function fetchFeaturedRequest() {
-    const contract = await getFactoryContract();
-
-    const data = await contract.fetchAllFeaturedRequest();
-    const items = await Promise.all(
-        data.map(async (i) => {
-            let item = {
-                host: i.host.toString(),
-                tokenId: i.ticketId.toString(),
-                isApproved: i.isApproved.toString(),
-            };
-            return item;
-        })
-    );
-    console.log("Featured Request", items);
-    return items;
 }
 
 export async function approveFeaturedRequest(host, ticketId) {
@@ -705,28 +704,29 @@ export async function approveFeaturedRequest(host, ticketId) {
 
 export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
     console.log(_supply, _tokenURI, _isCryptoBound, _price);
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
+    const price = ethers.utils.parseEther(_price);
 
     if (_isCryptoBound == false) {
         const tx = await contract.mintReward(
             _supply,
             _tokenURI,
             _isCryptoBound,
-            _price
+            price
         );
         await tx.wait();
         console.log("Reward minted");
         return true;
     } else {
-        const weiPrice = ethers.utils.parseUnits(_price.toString(), "ether");
+        // const weiPrice = ethers.utils.parseUnits(_price.toString(), "ether");
         const tx = await contract.mintReward(
             _supply,
             _tokenURI,
             _isCryptoBound,
-            _price,
+            price,
             {
-                value: weiPrice,
+                value: price,
                 gasLimit: 1000000,
             }
         );
@@ -737,8 +737,8 @@ export async function mintReward(_supply, _tokenURI, _isCryptoBound, _price) {
 }
 
 export async function updateWhitelist(rewardId, user) {
-    const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const username = await fetchCurrentUsername();
+    const contract = await getIKSContract(username, true);
 
     const tx = await contract.updateWhitelist(rewardId, user);
     await tx.wait();
@@ -747,7 +747,7 @@ export async function updateWhitelist(rewardId, user) {
 
 export async function claimReward(rewardId, username) {
     // const username = await fetchUsername();
-    const contract = await getEventifyContract(username, true);
+    const contract = await getIKSContract(username, true);
 
     const tx = await contract.claimReward(rewardId);
     await tx.wait();
@@ -795,7 +795,7 @@ export const uploadToIPFS = async (files) => {
 // }
 
 // export async function buyTicket(username, ticketId, price) {
-//     const contract = await getEventifyContract(username, true);
+//     const contract = await getIKSContract(username, true);
 
 //     const weiPrice = ethers.utils.parseUnits(price.toString(), "ether");
 //     const tx = await contract.buyTicket(ticketId, {
@@ -808,7 +808,7 @@ export const uploadToIPFS = async (files) => {
 
 // export async function fetchActiveEvents() {
 //     const username = await fetchUsername();
-//     const contract = await getEventifyContract(username);
+//     const contract = await getIKSContract(username);
 
 //     let data = []
 //     const tokenId = await contract._tokenId();
@@ -873,7 +873,7 @@ export const uploadToIPFS = async (files) => {
 
 // export async function fetchInactiveEvents() {
 //     const username = await fetchUsername();
-//     const contract = await getEventifyContract(username);
+//     const contract = await getIKSContract(username);
 
 //     const data = await contract.fetchPausedEvents();
 //     const items = await Promise.all(
@@ -902,7 +902,7 @@ export const uploadToIPFS = async (files) => {
 
 // export async function fetchMintedCollection() {
 //     const username = await fetchUsername();
-//     const contract = await getEventifyContract(username, false);
+//     const contract = await getIKSContract(username, false);
 
 //     const data = await contract.fetchMintedTickets();
 //     const items = await Promise.all(
@@ -931,7 +931,7 @@ export const uploadToIPFS = async (files) => {
 
 // export async function fetchShortlistEvents() {
 //     const username = await fetchUsername();
-//     const contract = await getEventifyContract(username);
+//     const contract = await getIKSContract(username);
 
 //     const data = await contract.fetchShortlistEvents();
 //     const items = await Promise.all(
@@ -984,7 +984,7 @@ export const uploadToIPFS = async (files) => {
 // })
 
 // export async function fetchInventory(username) {
-//     const contract = await getEventifyContract(username, true);
+//     const contract = await getIKSContract(username, true);
 
 //     const data = await contract.fetchPurchasedTickets();
 //     console.log("data", data);

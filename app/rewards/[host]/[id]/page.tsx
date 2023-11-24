@@ -1,30 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import Navbar from "@/components/dashboard/claim-rewards/ClaimNavbar";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
-    buyTicket,
-    fetchIfWhitelistedRewards,
+    fetchRewardsThroughUsername,
+    fetchIfWhitelistRewards,
     claimReward,
-    fetchAllRewardsThroughUsername,
 } from "@/utils";
 import { usePathname } from "next/navigation";
+import { useAccount } from "wagmi";
+import Image from "next/image";
 import { currency } from "@/config";
 import Link from "next/link";
 import FooterSection from "@/components/landing/FooterSection";
-import { useAccount } from "wagmi";
 
 const Reward = () => {
-    const [allRewards, setAllRewards] = useState<any>([]);
-
     const { address, isConnected } = useAccount();
 
     const pathName = usePathname();
-    const username = pathName?.split("/")[1];
-    let host_Id = pathName?.split("/")[2];
+    let host_username = pathName?.split("/")[2];
     let reward_Id = pathName?.split("/")[3];
-    // console.log("host id", host_Id);
+    // console.log("host id", host_username);
 
     const [rewardData, setRewardData] = useState({
         name: "",
@@ -45,8 +41,8 @@ const Reward = () => {
     }, []);
 
     async function fetchIsWhitelistedData() {
-        const data = await fetchIfWhitelistedRewards(reward_Id, address);
-        console.log("params", reward_Id, address);
+        console.log("params", reward_Id, host_username);
+        const data = await fetchIfWhitelistRewards(reward_Id, host_username);
         console.log("whitelisted?", data);
         setIsWhitelisted(data);
     }
@@ -54,7 +50,7 @@ const Reward = () => {
     async function fetchAllRewardsData() {
         setLoading(true);
 
-        let fetchedRewards: any = await fetchAllRewardsThroughUsername(host_Id);
+        let fetchedRewards: any = await fetchRewardsThroughUsername(host_username);
         const event = fetchedRewards.find(
             (obj: any) => obj.rewardId == reward_Id
         );
@@ -66,7 +62,7 @@ const Reward = () => {
     }
 
     async function claimRewardCall() {
-        await claimReward(reward_Id, host_Id);
+        await claimReward(reward_Id, host_username);
     }
 
     return (

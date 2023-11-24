@@ -3,7 +3,7 @@ import Navbar from "@/components/hostee/Navbar";
 import Rewards from "@/components/inventory/Rewards";
 import MyCalender from "@/components/inventory/MyCalender";
 import CardsInventory from "@/components/cardsInventory";
-import { fetchUsername, fetchCommonInventory } from "@/utils";
+import { fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
 import FooterSection from "@/components/landing/FooterSection";
 import Link from "next/link";

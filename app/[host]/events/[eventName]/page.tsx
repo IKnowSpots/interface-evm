@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-// import Navbar from "@/components/dashboard/create/Navbar";
 import Navbar from "@/components/hostee/Navbar";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { fetchActiveEventsWithInfura, buyTicket } from "@/utils";
+import { fetchAllEventsWithUsername, buyTicket } from "@/utils";
 import { usePathname } from "next/navigation";
 import { currency } from "@/config";
 import Link from "next/link";
@@ -44,7 +43,7 @@ const Event = () => {
 
     async function fetchActiveEventsData() {
         setLoading(true);
-        let fetchedEvents: any = await fetchActiveEventsWithInfura(username);
+        let fetchedEvents: any = await fetchAllEventsWithUsername(username);
         const event = fetchedEvents.find((obj: any) => obj.tokenId == eventId);
         setEventData(event);
         console.log("event", event);
@@ -118,9 +117,9 @@ const Event = () => {
                             </div>
                             <div className="flex text-lg font-semibold gap-2 text-white/60"> Event Type:
                             {eventData?.isShortlist ? (
-                                <p className="text-white text-xl font-bold">Public Event</p>
+                                <p className="text-white text-xl font-bold">Private Event</p>
                             ) : (
-                                <p className="text-white text-xl font-bold"> Private Event</p>
+                                <p className="text-white text-xl font-bold">Public Event</p>
                             )}
                             </div>
                         </div>

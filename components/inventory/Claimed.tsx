@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ClaimedRewards from "@/components/cardsClaimedRewards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { fetchClaimedRewards } from "@/utils";
+import { fetchClaimedRewardsThroughUsername } from "@/utils";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -21,7 +21,7 @@ export default function Claimed() {
 
     async function fetchInventoryData() {
         setLoading(true);
-        const data: any = await fetchClaimedRewards();
+        const data: any = await fetchClaimedRewardsThroughUsername();
         setClaimedRewardsData(data);
         setLoading(false);
     }

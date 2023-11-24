@@ -4,7 +4,7 @@ import Image from "next/image";
 import CardsActive from "@/components/cardsActive";
 import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
-import { fetchActiveEvents } from "../../../utils";
+import { fetchActiveEvents } from "@/utils";
 import LoadingModal from "@/components/LoadingModal";
 
 const ActiveEvents = () => {
