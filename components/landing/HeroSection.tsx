@@ -33,7 +33,16 @@ const HeroSection = () => {
 
   return (
     <div className="w-full h-[625px] md:h-[650px] lg:h-[800px] xl:h-auto">
-      <div className="top-[17%] lg:top-[35%] flex flex-col justify-center items-center text-center w-full absolute z-[5]">
+      <div className="top-[30%] lg:top-[40%] flex flex-col justify-center items-center text-center w-full absolute z-[5]">
+        <div className="w-full hidden md:flex justify-end items-end top-[30%] absolute">
+          <Image
+            src="/icon2.svg"
+            width="400"
+            height="400"
+            className="absolute w-[60%] sm:w-[30%]"
+            alt="Card"
+          />
+        </div>
         <h1 className="text-[2.5rem] sm:text-8xl font-bold text-gradient ">
           Introducing <span className="block">iknowspots</span>
         </h1>
@@ -61,9 +70,9 @@ const HeroSection = () => {
         <div className="w-full flex justify-normal items-end my-5">
           <Image
             src="/icon.svg"
-            width="200"
-            height="100"
-            className="relative w-[60%] md:w-[25%] flex justify-center"
+            width="400"
+            height="400"
+            className="relative w-[60%] sm:w-[30%] flex justify-center"
             alt="Card"
           />
         </div>
@@ -71,16 +80,18 @@ const HeroSection = () => {
       
       <div id="parent-div" className="relative hidden sm:flex w-full p-6 justify-center items-center">
         <Image
-          src="/circles.png"
+          src="/circles.svg"
+          // src="/circles.png"
           width="1500"
           height="50"
-          className="opacity-20  "
+          className="opacity-20"
           alt="Circle" />
         <Image
-          src="/circles-mirror.png"
+          src="/circles-mirror.svg"
+          // src="/circles-mirror.png"
           width="1500"
           height="100"
-          className="absolute top-0 rotate-12 opacity-20"
+          className="absolute top-0 -rotate-12 opacity-20"
           alt="Circle" />
       </div>
       <div>

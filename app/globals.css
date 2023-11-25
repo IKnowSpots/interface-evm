@@ -416,3 +416,8 @@ body {
 .swiper-pagination .swiper-pagination-bullet-active {
   background: var(--primary);
 }
+
+.grad-001 {
+  overflow: hidden;
+  background-image: radial-gradient(#18a018, #1a6b25, #38c04e);
+}

@@ -2,13 +2,20 @@
 "use client";
 import Navbar from "@/components/hostee/Navbar";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { fetchAllEventsWithUsername, buyTicket } from "@/utils";
 import { usePathname } from "next/navigation";
 import { currency } from "@/config";
 import Link from "next/link";
 import FooterSection from "@/components/landing/FooterSection";
 import LoadingModal from "@/components/LoadingModal";
+
+const paragraphStyles = {
+    WebkitLineClamp: 5,
+    // WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+    display: '-webkit-box'
+}
 
 const Event = () => {
     const pathName = usePathname();
@@ -34,12 +41,24 @@ const Event = () => {
         fetchActiveEventsData();
     }, []);
 
-    const [toggle,setToggle]=useState(false)
-    const [more,setMore]=useState(eventData?.description.slice(0,350))
-    function handleClick() {
-        toggle?setMore(eventData?.description.slice(0,350)):setMore(eventData?.description)
-        setToggle(!toggle)
-    }
+    // const [toggle,setToggle]=useState(false)
+    // const [more,setMore]=useState(eventData?.description.slice(0,350))
+    // function handleClick() {
+    //     toggle?setMore(eventData?.description.slice(0,350)):setMore(eventData?.description)
+    //     setToggle(!toggle)
+    // }
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    // const [showReadMore, setShowReadMore] = useState(false)
+
+    // const ref = useRef(null)
+    // useEffect(() => {
+    //     if (ref.current) {
+    //         console.log(ref.current.scrollHeight, ref.current.clientHeight)
+    //         setShowReadMore( ref.current.scrollHeight !== ref.current.clientHeight)
+    //     }
+    // })
 
     async function fetchActiveEventsData() {
         setLoading(true);
@@ -96,13 +115,14 @@ const Event = () => {
                             </p>
                         </div>
                         <div className="flex flex-col py-4">
-                            <div className="flex mb-6">
-                                <Image
+                            <div className="flex items-center mb-6">
+                                {/* <Image
                                     src={"/icons/person_avatar.png"}
                                     width={50}
                                     height={30}
                                     alt="person avatar"
-                                />
+                                /> */}
+                                <div className="h-[3rem] w-[3rem] grad1 rounded-full"></div>
                                 <div className="pl-4">
                                     <p className="text-[rgba(255,255,255,0.65)] text-lg">
                                         Host
@@ -134,12 +154,14 @@ const Event = () => {
                                     {eventData?.venue}
                                 </h1>
                             </div>
-                            <p className=" text-white mb-4">
-                                {/* {eventData?.description} */}
-                                {more}
-                                <br />
-                                <button className='text-[#3E8BFF] font-bold' onClick={()=>handleClick()}>{toggle?"Read Less":"Read More"}</button>
+                            <p className={`text-white mb-1 ${isOpen ? "line-clamp-none" : "line-clamp-5"}`}
+                                // style={isOpen ? undefined : paragraphStyles}
+                                // ref={ref}
+                            >
+                                {eventData?.description}
+                                {/* {more} */}
                             </p>
+                                <button className='text-[#3E8BFF] font-bold' onClick={()=>setIsOpen(!isOpen)}>{isOpen ? "Read Less" : "Read More"}</button>
                             {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
                             Know More
                             <img src="/external-link.svg" alt="" />
