@@ -70,8 +70,7 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                         Run
                     </button>
                 </div> */}
-            </div>
-            <ToastContainer
+                <ToastContainer
                 position="top-center"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -83,6 +82,19 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                 pauseOnHover
                 theme="dark"
             />
+            </div>
+            {/* <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            /> */}
         </div>
         </>
     );

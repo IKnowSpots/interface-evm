@@ -29,10 +29,10 @@ const InactiveEvents = () => {
 
     if (loading == true){
         return (
-            // <Layout>
-            //     <div className="text-white">Fetching..</div>
-            // </Layout>
-            <LoadingModal visible={true}/>
+            <Layout>
+                {/* <div className="text-white">Fetching..</div> */}
+                <LoadingModal visible={true}/>
+            </Layout>
             );
         }
 
