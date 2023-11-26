@@ -26,6 +26,23 @@ const MintedCollections = () => {
         }
     }
 
+    function CreateButton() {
+        return (
+            <a href="/dashboard/create">
+                <div className="create-event-btn text-[0.8rem] flex justify-around w-[10rem] mx-auto px-4 py-2 border rounded-xl z-[10]">
+                    <Image
+                        src={"/icons/qr.svg"}
+                        width={20}
+                        height={20}
+                        alt="qr code svg"
+                        className=""
+                    />
+                    <p className="z-[10] text-white">Create an Event</p>
+                </div>
+            </a>
+        );
+    }
+
     if (loading == true)
         return (
             <Layout>
@@ -37,7 +54,19 @@ const MintedCollections = () => {
     if (loading == false && mintedCollection.length == 0)
         return (
             <Layout>
-                <div className="text-white p-4">No Events</div>
+                {/* <div className="text-white p-4">No Events</div> */}
+                <div className="flex justify-center items-center mt-10 mb-10">
+                    <Image
+                        src={"/nominted-banner.svg"}
+                        width={17}
+                        height={20}
+                        alt="back-btn"
+                        className="w-[30%] h-fit"
+                    />
+                </div>
+                <div>
+                    <CreateButton />
+                </div>
             </Layout>
         );
 

@@ -43,7 +43,7 @@ const HeroSection = () => {
             alt="Card"
           />
         </div>
-        <h1 className="text-[2.5rem] sm:text-8xl font-bold text-gradient ">
+        <h1 className="text-[2.5rem] sm:text-8xl font-bold text-white ">
           Introducing <span className="block">iknowspots</span>
         </h1>
         <p className="m-5 text-lg sm:text-xl">
