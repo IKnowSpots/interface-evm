@@ -2,10 +2,12 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import copy from "clipboard-copy";
 import { pauseEvent } from "@/utils";
 import { currency } from "@/config";
 import Link from "next/link";
 import { fetchCurrentUsername } from "@/utils"
+import CopytoClipboardButton from "@/components/CopytoClipboardButton"
 
 const CardsReward = ({
     image,
@@ -32,6 +34,8 @@ const CardsReward = ({
 
     console.log("fds",rewardId)
 
+    const textToCopy = 'This is the text to be copied.';
+
     return (
         <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
             <div className="flex flex-col gap-6">
@@ -45,7 +49,12 @@ const CardsReward = ({
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        <Link href={`/rewards/${username}/${rewardId}`}><p>Link</p></Link>
+                        <div className="flex justify-center items-center gap-2 w-[45%]">
+                            <Link href={`/rewards/${username}/${rewardId}`} className="flex justify-end w-full">
+                                <p>Link</p>
+                            </Link>
+                            <CopytoClipboardButton textToCopy={textToCopy} />
+                        </div>
                         <p>
                             {price} {currency}
                         </p>
