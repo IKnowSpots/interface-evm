@@ -21,6 +21,7 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 <link rel="icon" href="/favicon.ico" />
+                <title>iKnowSpots</title>
             </head>
             <body >
                 <Providers>{children}</Providers>
