@@ -199,28 +199,6 @@ const Create = () => {
                       />
                     </svg>
                   </span>
-                  {/* {imgLoading ? (
-                    <div>Uploading to IPFS..</div>
-                  ) : formInput.cover == "" ? (
-                    <div>
-                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold">Click to upload</span>{" "}
-                        or drag and drop
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        SVG, PNG, JPG or GIF (MAX. 800x400px)
-                      </p>
-                    </div>
-                  ) : (
-                    <div>We got your image</div>
-                  )}
-                  <input
-                    type="file"
-                    name="file_upload"
-                    className="hidden"
-                    onChange={changeImage}
-                    disabled={imgLoading}
-                  /> */}
                   {imgLoading ? (
                     <div>Uploading to IPFS..</div>
                   ) : formInput.cover == "" ? (
@@ -242,11 +220,6 @@ const Create = () => {
                       />
                     </div>
                   )}
-                  {/* <img
-  src={formInput.cover}
-//   alt="uploaded-cover"
-  className="rounded-lg"
-/> */}
                   <input
                     type="file"
                     name="file_upload"
