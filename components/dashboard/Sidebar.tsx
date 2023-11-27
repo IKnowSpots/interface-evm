@@ -44,7 +44,7 @@ const Sidebar = () => {
         <div id="sidebar" className="pl-8 bg-[rgb(61,23,111)] w-[20%] pt-8 h-screen sticky top-0">
             <div className="bg-dashboard blur-[220px] absolute w-[60%] h-[400px]"></div>
 
-            <Link href="/">
+            <Link href="/" className="relative z-10">
                 <Image
                     src="/iks-logo.png"
                     width="200"
