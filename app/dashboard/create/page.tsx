@@ -11,6 +11,7 @@ import FooterSection from "@/components/landing/FooterSection";
 import { text } from "stream/consumers";
 import PopUp from "@/components/Popup";
 import LoadingModal from "@/components/LoadingModal";
+import { isImageUri } from "viem/_types/utils/ens/avatar/utils";
 
 const Create = () => {
   const [formInput, setFormInput] = useState({
@@ -164,9 +165,9 @@ const Create = () => {
                 <div className="flex items-center w-full">
                   <div className="relative w-[20%] flex justify-center">
                     <Link href="/dashboard/active" className="w-full p-4">
-                      <img
+                      <Image
                         src={"/icons/back-btn.svg"}
-                        width={30}
+                        width={40}
                         height={20}
                         alt="back-btn"
                         className="back-btn"
@@ -181,11 +182,11 @@ const Create = () => {
                     Upload or choose your file to upload
                   </p>
                 </div>
-                <label className="flex justify-center py-44 w-96 mx-auto  border-2 bg-[#1E1E1E] bg-opacity-75 border-[#E0E0E0] border-opacity-40 border-dashed  rounded-md  cursor-pointer ">
+                <label className={`flex justify-center mx-auto w-[120%] border-2 bg-[rgb(30,30,30)] bg-opacity-75 border-[#E0E0E0] border-opacity-40 border-dashed  rounded-md  cursor-pointer ${formInput.cover ? "py-8 px-8" : "py-44 px-0" } `}>
                   <span className="flex items-center ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 text-gray"
+                      className={`w-6 h-6 text-gray ${formInput.cover ? "hidden" : "flex" } `}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -221,38 +222,38 @@ const Create = () => {
                     disabled={imgLoading}
                   /> */}
                   {imgLoading ? (
-  <div>Uploading to IPFS..</div>
-) : formInput.cover == "" ? (
-  <div>
-    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-      <span className="font-semibold">Click to upload</span>{" "}
-      or drag and drop
-    </p>
-    <p className="text-xs text-gray-500 dark:text-gray-400">
-      SVG, PNG, JPG or GIF (MAX. 800x400px)
-    </p>
-  </div>
-) : (
-  <div>
-    <img
-  src={formInput.cover}
-//   alt="uploaded-cover"
-  className="rounded-lg"
-/>
-  </div>
-)}
-{/* <img
+                    <div>Uploading to IPFS..</div>
+                  ) : formInput.cover == "" ? (
+                    <div>
+                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <span className="font-semibold">Click to upload</span>{" "}
+                        or drag and drop
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        SVG, PNG, JPG or GIF (MAX. 800x400px)
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <img
+                        src={formInput.cover}
+                        //   alt="uploaded-cover"
+                        className="rounded-lg h-[350px] w-full"
+                      />
+                    </div>
+                  )}
+                  {/* <img
   src={formInput.cover}
 //   alt="uploaded-cover"
   className="rounded-lg"
 /> */}
-<input
-  type="file"
-  name="file_upload"
-  className="hidden"
-  onChange={changeImage}
-  disabled={imgLoading}
-/>
+                  <input
+                    type="file"
+                    name="file_upload"
+                    className="hidden"
+                    onChange={changeImage}
+                    disabled={imgLoading}
+                  />
                 </label>
                 <div className="flex justify-center mt-4 gap-4 items-center">
                   <Image

@@ -44,7 +44,7 @@ const HeroSection = () => {
           />
         </div>
         <h1 className="text-[2.5rem] sm:text-8xl font-bold text-white ">
-          Introducing <span className="block">iknowspots</span>
+          Introducing <span className="block">iKnowSpots</span>
         </h1>
         <p className="m-5 text-lg sm:text-xl">
           Seamless granular events hosting with NFT tickets.
