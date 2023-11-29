@@ -6,6 +6,8 @@ import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
 import { fetchActiveEvents } from "@/utils";
 import LoadingModal from "@/components/LoadingModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ActiveEvents = () => {
     // to run this page static comment 42-51 and uncomment 52-57
@@ -30,7 +32,7 @@ const ActiveEvents = () => {
 
     function CreateButton() {
         return (
-            <a href="/dashboard/create">
+            <a href="/dashboard/create-event">
                 <div className="create-event-btn text-[0.8rem] flex justify-around w-[10rem] mx-auto px-4 py-2 border rounded-xl z-[10]">
                     <Image
                         src={"/icons/qr.svg"}
@@ -53,11 +55,28 @@ const ActiveEvents = () => {
             </Layout>
         );
 
-    if (loading == false && activeEvents.length == 0)
-        return (
-            <Layout>
-                {/* <div className="text-white p-4">No Events</div> */}
-                <div className="flex justify-center items-center mt-10 mb-10">
+    // if (loading == false && activeEvents.length == 0)
+    //     return (
+    //         <Layout>
+    //             {/* <div className="text-white p-4">No Events</div> */}
+    //             <div className="flex justify-center items-center mt-10 mb-10">
+    //                 <Image
+    //                     src={"/noactive-banner.svg"}
+    //                     width={17}
+    //                     height={20}
+    //                     alt="back-btn"
+    //                     className="w-[30%] h-fit"
+    //                 />
+    //             </div>
+    //             <div>
+    //                 <CreateButton />
+    //             </div>
+    //         </Layout>
+    //     );
+
+    return (
+        <Layout>
+            {(loading == false && activeEvents.length == 0) ? <><div className="flex justify-center items-center mt-10 mb-10">
                     <Image
                         src={"/noactive-banner.svg"}
                         width={17}
@@ -68,12 +87,7 @@ const ActiveEvents = () => {
                 </div>
                 <div>
                     <CreateButton />
-                </div>
-            </Layout>
-        );
-
-    return (
-        <Layout>
+                </div></> : <></>}
             <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6 ">
                 {activeEvents.map((nft: any, i: any) => {
                     return (
@@ -87,6 +101,7 @@ const ActiveEvents = () => {
                             date={nft?.date}
                             remaining={nft?.remaining}
                             supply={nft?.supply}
+                            toast={toast}
                         />
                     );
                 })}
@@ -101,6 +116,18 @@ const ActiveEvents = () => {
                         <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " />
                     </div> */}
             </div>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </Layout>
     );
 

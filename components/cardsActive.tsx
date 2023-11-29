@@ -5,30 +5,35 @@ import { useState } from "react";
 import { pauseEvent } from "@/utils"
 import { currency } from "@/config"
 import LoadingModal from "./LoadingModal";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, setActiveEvents }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any,setActiveEvents: any }) => {
+const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, setActiveEvents, toast }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any,setActiveEvents: any, toast: any }) => {
 
   const [loading, setLoading] = useState(false)
 
   async function pauseEventCall(tokenId: any) {
     setLoading(true)
     console.log(tokenId)
-    const isPaused = await pauseEvent(tokenId)
-    setActiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
-    if (isPaused == true) {
-            toast.success("Event Paused!", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    }
+    await pauseEvent(tokenId)
+    setTimeout(() => {
+        
+        setActiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
+    }, 3000);
+        toast.success("Event Paused!", {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                
+            });
+        console.log("running")
+
+
     setLoading(false)
   }
 
@@ -47,6 +52,9 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
+                        {/* <p>
+                            { (price == 0) ? ["Free"] : {price} } {currency}
+                        </p> */}
                         <p>{price} {currency}</p>
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
@@ -57,7 +65,20 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                     {/* <p>{remaining}/{supply}</p> */}
                     {/* <p>1.20 Weth</p> */}
                     <div className="flex justify-center items-center">
-                        <button className="view-btn px-4 py-0.5 outline rounded-lg" onClick={() => pauseEventCall(tokenId)}>
+                        <button className="view-btn px-4 py-0.5 outline rounded-lg" 
+                        onClick={() => pauseEventCall(tokenId)}
+                        // onClick={()=> toast.success("Event Paused!", {
+                        //     position: "bottom-left",
+                        //     autoClose: 5000,
+                        //     hideProgressBar: true,
+                        //     closeOnClick: true,
+                        //     pauseOnHover: true,
+                        //     draggable: true,
+                        //     progress: undefined,
+                        //     theme: "dark",
+                            
+                        // })}
+                        >
                             Pause
                         </button>
                     </div>
@@ -70,21 +91,11 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                         Run
                     </button>
                 </div> */}
-                <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
             </div>
-            {/* <ToastContainer
-                position="top-center"
+            
+        </div>
+        {/* <ToastContainer
+                position="bottom-left"
                 autoClose={5000}
                 hideProgressBar={false}
                 newestOnTop={false}
@@ -95,7 +106,6 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                 pauseOnHover
                 theme="dark"
             /> */}
-        </div>
         </>
     );
 };

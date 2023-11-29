@@ -248,7 +248,7 @@ const Create = () => {
                   <div>
                     <h3 className="text-xl">Private Event</h3>
                     <p className="opacity-40">
-                      Display this on feature section of landing page.
+                      Community Cohesion in Private Spaces
                     </p>
                   </div>
                   <div className={`flex items-center cursor-pointer`}>

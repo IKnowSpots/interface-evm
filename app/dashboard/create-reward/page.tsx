@@ -78,9 +78,9 @@ const Create = () => {
 
   const handleToggle = () => {
     if (formInput.isCryptoBound == true) {
-      setFormInput({ ...formInput, isCryptoBound: true });
-    } else {
       setFormInput({ ...formInput, isCryptoBound: false });
+    } else {
+      setFormInput({ ...formInput, isCryptoBound: true });
     }
   };
 
@@ -286,33 +286,25 @@ const Create = () => {
           </div>
         </div>
 
-        <div className="py-16">
+        <div className="py-16 min-h-[30rem]">
           <div className="flex flex-col w-3/4 mx-auto  ">
             <div className="pt-4 flex justify-between">
               <div className="w-full flex justify-between items-baseline">
-                <div className={`w-full flex flex-col min-h-[6rem]`}>
+                <div className={`w-full flex flex-col min-h-[3rem]`}>
                   <label className="pb-2 text-lg font-semibold">
                     Crypto Bound
                   </label>
-                  <input
-                    type="text"
-                    className={`bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 mb-6 ${
-                      !isInputEnabled ? "hidden" : ""
-                    }`}
-                    placeholder="Dropping some tokens along makes it more engaging :)"
-                    disabled={!isInputEnabled}
-                  />
                 </div>
                 <div className={`flex items-center justify-end cursor-pointer`}>
                   <div
                     className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${
-                      isInputEnabled ? "bg-green-500" : "bg-[#1E1E1E]"
+                      formInput.isCryptoBound ? "bg-green-500" : "bg-[#1E1E1E]"
                     }`}
                     onClick={handleToggle}
                   >
                     <div
                       className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${
-                        isInputEnabled ? "translate-x-6" : ""
+                        formInput.isCryptoBound ? "translate-x-6" : ""
                       }`}
                     ></div>
                   </div>
@@ -337,22 +329,6 @@ const Create = () => {
               disabled={imgLoading}
             />
 
-            {/* <label className="pb-2 w-[90%] text-lg font-semibold">Description</label>
-                        <textarea
-                            placeholder="Description here"
-                            className="bg-[#1E1E1E] w-[90%] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg resize-none p-2 mb-6"
-                            onChange={(e) => {
-                                setFormInput({
-                                    ...formInput,
-                                    description: e.target.value,
-                                });
-                                handleChange(e);
-                            }}
-                            disabled={imgLoading}
-                            //   change this if scroll bar is appearing
-                            rows={4}
-                        ></textarea> */}
-
             <label className="pb-2 w-[90%] text-lg font-semibold">Supply</label>
             <input
               type="text"
@@ -370,9 +346,9 @@ const Create = () => {
 
             {/* comment out this section when price functionality is toh be used and integrated */}
 
-            <div className=" flex justify-between w-[90%]">
+            <div className={` flex justify-between w-[90%] ${ !formInput.isCryptoBound ? "hidden" : "" } `}>
               <div className="flex flex-col w-[60%] my-4">
-                <label className="pb-2 text-lg font-semibold">Price</label>
+                <label className={`pb-2 text-lg font-semibold`}>Price</label>
                 <input
                   type="text"
                   id="event-name"
