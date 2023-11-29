@@ -47,32 +47,32 @@ const HeroSection = () => {
           Introducing <span className="block">iKnowSpots</span>
         </h1>
         <p className="m-5 text-lg sm:text-xl">
-          Seamless granular events hosting with NFT tickets.
+          Community engagegment protocol via NFT ticketing.
         </p>
-        <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <div className="flex flex-col md:flex-row gap-4 mt-4 w-full justify-center items-center">
           <Link className="" target="_blank" href="https://www.loom.com/share/5cee5fd7ee6d477e976f246fbda9ac21?sid=666d8812-f4a4-4d07-ab34-4310cdd08c4b">
-            <button className="cta-button w-full px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
+            <button className="cta-button w-48 px-4 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
           </Link>
           <Link className="" href={isDeployed ? "/dashboard/active" : "/dashboard"}>
-            <button className="box-background w-full flex justify-center items-center gap-2 px-4 sm:px-6 py-1 text-[0.8rem] sm:text-[1rem]">
+            <button className="btn-bg w-48 flex justify-center items-center gap-2 px-4 py-1 text-[0.8rem] sm:text-[1rem]">
               Launch dApp
               <Image
-                src={"/icons/arrow.svg"}
-                width={17}
+                src={"/icons/arrow-launch.svg"}
+                width={30}
                 height={20}
                 alt="back-btn"
-                className="back-btn rotate-180"
+                className=""
               />
             </button>
           </Link>
         </div>
 
-        <div className="w-full flex justify-normal items-end my-5">
+        <div className="w-full flex justify-normal items-end my-5 md:my-0">
           <Image
             src="/icon.svg"
             width="400"
             height="400"
-            className="relative w-[60%] sm:w-[30%] flex justify-center"
+            className="relative w-[60%] sm:w-[25%] flex justify-center"
             alt="Card"
           />
         </div>
@@ -80,18 +80,18 @@ const HeroSection = () => {
       
       <div id="parent-div" className="relative hidden sm:flex w-full p-6 justify-center items-center">
         <Image
-          src="/circles.svg"
+          src="/circles.png"
           // src="/circles.png"
           width="1500"
           height="50"
           className="opacity-20"
           alt="Circle" />
         <Image
-          src="/circles-mirror.svg"
+          src="/circles-mirror.png"
           // src="/circles-mirror.png"
           width="1500"
           height="100"
-          className="absolute top-0 -rotate-12 opacity-20"
+          className="absolute top-0 opacity-20"
           alt="Circle" />
       </div>
       <div>

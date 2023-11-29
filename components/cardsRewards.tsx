@@ -49,7 +49,7 @@ const CardsReward = ({
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        <div className="flex justify-center items-center gap-2 w-[45%]">
+                        <div className="flex justify-center items-center gap-2 w-[35%]fixed">
                             <Link href={`/rewards/${username}/${rewardId}`} className="flex justify-end w-full">
                                 <p>Link</p>
                             </Link>

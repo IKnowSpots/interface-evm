@@ -421,3 +421,11 @@ body {
   overflow: hidden;
   background-image: radial-gradient(#18a018, #1a6b25, #38c04e);
 }
+
+.btn-bg{
+  border-radius: 1.25rem;
+  border: 2px solid #3c3c3c;
+  background: rgba(68, 68, 68, 0.302);
+  box-shadow: 2px 4px 2px 0px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+}
