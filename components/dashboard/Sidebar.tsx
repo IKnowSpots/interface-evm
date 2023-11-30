@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 
 import WalletsProvider from "@/components/wallets";
 
-const Sidebar = () => {
+const Sidebar = (activeRoute: any) => {
   // const { publicKey, wallets, sendTransaction } = useWallet();
   const [shortPublicKey, setPublicKey] = useState<String>();
 

@@ -11,11 +11,13 @@ import "react-toastify/dist/ReactToastify.css";
 const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, setActiveEvents, toast }: { image: any; name: string; price: any; date: any; tokenId: any; remaining: any; supply: any,setActiveEvents: any, toast: any }) => {
 
   const [loading, setLoading] = useState(false)
+  const [remove, setRemove] = useState(false)
 
   async function pauseEventCall(tokenId: any) {
     setLoading(true)
     console.log(tokenId)
     await pauseEvent(tokenId)
+    setRemove(true)
     setTimeout(() => {
         
         setActiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
@@ -40,7 +42,7 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
     return (
         <>
         <LoadingModal visible={loading}/>
-        <div className="text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl">
+        <div className={`text-white w-[23%] px-4 box-background pt-4 pb-5 rounded-xl ${remove ? "hidden" : ""}`}>
             <div className="flex flex-col gap-6">
                 <img
                     src={image}
@@ -52,10 +54,10 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                 <div className="flex gap-2 text-[0.85rem] flex-col">
                     <div className="flex justify-between items-center">
                         <p>{name}</p>
-                        {/* <p>
-                            { (price == 0) ? ["Free"] : {price} } {currency}
-                        </p> */}
-                        <p>{price} {currency}</p>
+                        <p>
+                            { (price == 0.0) ? "Free" : price +" "+ currency }
+                        </p>
+                        {/* <p>{price} {currency}</p> */}
                     </div>
                     <div className="h-[2px] rounded-full bg-white"></div>
                     <div className="flex justify-between items-center">

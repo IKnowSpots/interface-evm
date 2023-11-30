@@ -1,5 +1,6 @@
 import { updateWhitelist } from "@/utils";
 import React, { useState } from "react";
+import LoadingModal from "./LoadingModal";
 
 export default function Manual(tokenId: any) {
     const [address, setAddress] = useState("");
@@ -13,6 +14,7 @@ export default function Manual(tokenId: any) {
 
     return (
         <div className="flex flex-col justify-center items-center mt-8 gap-10">
+            <LoadingModal visible={loading} />
             <div className="w-full flex flex-col">
                 <label className="pb-3 text-[1.5rem] font-semibold">
                     Wallet Address

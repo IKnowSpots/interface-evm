@@ -102,6 +102,7 @@ const Create = () => {
     const inputFile = e.target.files[0];
     const inputFileName = e.target.files[0].name;
     const files = [new File([inputFile], inputFileName)];
+    console.log(inputFile)
     const metaCID = await uploadToIPFS(files);
     const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`;
     console.log(url);
@@ -236,7 +237,35 @@ const Create = () => {
                     alt="cat"
                     className="rounded-lg"
                   />
-                  <p className="text-white opacity-40">default cover image</p>
+                  <Image
+                    src={"/dash-1.jpg"}
+                    width={60}
+                    height={60}
+                    alt="cat"
+                    className="rounded-lg"
+                  />
+                  <Image
+                    src={"/dash-2.jpg"}
+                    width={60}
+                    height={60}
+                    alt="cat"
+                    className="rounded-lg"
+                  />
+                  <Image
+                    src={"/dash-3.jpg"}
+                    width={60}
+                    height={60}
+                    alt="cat"
+                    className="rounded-lg"
+                  />
+                  <Image
+                    src={"/dash-4.jpg"}
+                    width={60}
+                    height={60}
+                    alt="cat"
+                    className="rounded-lg"
+                  />
+                  {/* <p className="text-white opacity-40">default cover image</p> */}
                 </div>
               </div>
             </div>

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import FooterSection from "@/components/landing/FooterSection";
 import Link from "next/link";
 import Image from "next/image";
+import LoadingModal from "@/components/LoadingModal";
 
 const Inventory = () => {
     const [inventoryData, setInventoryData] = useState<any>([]);
@@ -51,6 +52,7 @@ const Inventory = () => {
             </div>
 
             <div className="w-full my-[5rem] flex ">
+                <LoadingModal visible={loading} />
                 <div className="flex flex-col md:flex-row gap-6 w-full mx-6">
                     <div className="flex w-[60%] ">
                         <div className="w-full flex relative z-5">
@@ -68,14 +70,19 @@ const Inventory = () => {
                                 </div>
                                 {inventoryData.map((nft: any, i: any) => {
                                     return (
+                                        <>
                                         <CardsInventory
                                             key={i}
                                             image={nft?.cover}
                                             name={nft?.name}
-                                            description={nft?.description}
+                                            // description={nft?.description}
                                             username={""}
-                                            date={""}
+                                            date={nft?.date}
+                                            remaining={nft?.remaining}
+                                            supply={nft?.supply}
+                                            price={nft?.price}
                                         />
+                                        </>
                                     );
                                 })}
                                 {/* <CardsInventory
