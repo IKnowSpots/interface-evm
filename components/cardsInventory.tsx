@@ -23,10 +23,11 @@ const CardsInventory = ({
     }
 
     return (
-        <div className="flex flex-col md:flex-row w-[90%] gap-4 justify-between items-center box-background p-8 my-6 sm:my-8 rounded-xl gap-12">
-          <div className="flex flex-col gap-4">
+        <div onClick={pushPage} className="flex flex-col md:flex-row w-[90%] gap-4 justify-between items-center box-background p-8 my-6 sm:my-8 rounded-xl gap-12">
+          <div  className="flex flex-col gap-4">
             <p className="text-3xl font-semibold">{name}</p>
             <p>{description}</p>
+            <p>{date}</p>
           </div>
           <img
             src={image}

@@ -78,7 +78,7 @@ const ActiveEvents = () => {
         <Layout>
             {(loading == false && activeEvents.length == 0) ? <><div className="flex justify-center items-center mt-10 mb-10">
                     <Image
-                        src={"/noactive-banner.svg"}
+                        src={"/NOEVENTS--active.svg"}
                         width={17}
                         height={20}
                         alt="back-btn"

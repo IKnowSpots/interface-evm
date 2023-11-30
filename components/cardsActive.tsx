@@ -31,7 +31,7 @@ const CardsActive = ({ image, name, price, date, tokenId, remaining, supply, set
                 theme: "dark",
                 
             });
-        console.log("running")
+        console.log("Pausing")
 
 
     setLoading(false)

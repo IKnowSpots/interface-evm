@@ -6,6 +6,8 @@ import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
 import { fetchMintedCollection } from "../../../utils";
 import LoadingModal from "@/components/LoadingModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MintedCollections = () => {
     const [mintedCollection, setMintedCollection] = useState<any>([]);
@@ -51,11 +53,28 @@ const MintedCollections = () => {
             </Layout>
         );
 
-    if (loading == false && mintedCollection.length == 0)
-        return (
-            <Layout>
-                {/* <div className="text-white p-4">No Events</div> */}
-                <div className="flex justify-center items-center mt-10 mb-10">
+    // if (loading == false && mintedCollection.length == 0)
+    //     return (
+    //         <Layout>
+    //             {/* <div className="text-white p-4">No Events</div> */}
+    //             <div className="flex justify-center items-center mt-10 mb-10">
+    //                 <Image
+    //                     src={"/nominted-banner.svg"}
+    //                     width={17}
+    //                     height={20}
+    //                     alt="back-btn"
+    //                     className="w-[30%] h-fit"
+    //                 />
+    //             </div>
+    //             <div>
+    //                 <CreateButton />
+    //             </div>
+    //         </Layout>
+    //     );
+
+    return (
+        <Layout>
+            {(loading == false && mintedCollection.length == 0) ? <><div className="flex justify-center items-center mt-10 mb-10">
                     <Image
                         src={"/nominted-banner.svg"}
                         width={17}
@@ -66,12 +85,7 @@ const MintedCollections = () => {
                 </div>
                 <div>
                     <CreateButton />
-                </div>
-            </Layout>
-        );
-
-    return (
-        <Layout>
+                </div></> : <></>}
             <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6">
                 {mintedCollection.map((nft: any, i: any) => {
                     return (
@@ -82,6 +96,7 @@ const MintedCollections = () => {
                             name={nft.name}
                             tokenId={nft.tokenId}
                             supply={nft.supply}
+                            toast={toast}
                         />
                     );
                 })}
@@ -96,6 +111,18 @@ const MintedCollections = () => {
                         <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " />
                     </div> */}
             </div>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </Layout>
     );
 

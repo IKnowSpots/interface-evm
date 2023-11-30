@@ -31,6 +31,9 @@ const DashNav = () => {
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
+        setTimeout(() => {
+            setIsOpen(isOpen)
+        }, 5000);
       };
 
     function CreateButton() {

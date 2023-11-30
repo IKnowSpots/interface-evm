@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fetchInactiveEvents } from "../../../utils";
 import LoadingModal from "@/components/LoadingModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const InactiveEvents = () => {
     const [inactiveEvents, setInactiveEvents] = useState<any>([]);
@@ -53,13 +55,30 @@ const InactiveEvents = () => {
             );
         }
 
-    if (loading == false && inactiveEvents.length == 0)
-        return (
-            <Layout>
-                {/* <div className="text-white p-4">No Events</div> */}
-                <div className="flex justify-center items-center mt-10 mb-10">
+    // if (loading == false && inactiveEvents.length == 0)
+    //     return (
+    //         <Layout>
+    //             {/* <div className="text-white p-4">No Events</div> */}
+    //             <div className="flex justify-center items-center mt-10 mb-10">
+    //                 <Image
+    //                     src={"/NOEVENTSinactive.svg"}
+    //                     width={17}
+    //                     height={20}
+    //                     alt="back-btn"
+    //                     className="w-[30%] h-fit"
+    //                 />
+    //             </div>
+    //             <div>
+    //                 <CreateButton />
+    //             </div>
+    //         </Layout>
+    //     );
+
+    return (
+        <Layout>
+            {(loading == false && inactiveEvents.length == 0) ? <><div className="flex justify-center items-center mt-10 mb-10">
                     <Image
-                        src={"/noinactive-banner.svg"}
+                        src={"/NOEVENTSinactive.svg"}
                         width={17}
                         height={20}
                         alt="back-btn"
@@ -68,12 +87,7 @@ const InactiveEvents = () => {
                 </div>
                 <div>
                     <CreateButton />
-                </div>
-            </Layout>
-        );
-
-    return (
-        <Layout>
+                </div></> : <></>}
             <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6">
                 {inactiveEvents.map((nft: any, i: any) => {
                     return (
@@ -83,6 +97,7 @@ const InactiveEvents = () => {
                             tokenId={nft.tokenId}
                             image={nft.cover}
                             name={nft.name}
+                            toast={toast}
                         />
                     );
                 })}
@@ -97,6 +112,18 @@ const InactiveEvents = () => {
                         <Calender className="rounded-xl py-8 px-2 items-center bg-black text-center justify-around " />
                     </div> */}
             </div>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </Layout>
     );
 

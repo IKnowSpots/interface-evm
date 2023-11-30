@@ -161,7 +161,8 @@ const Event = () => {
                                 {eventData?.description}
                                 {/* {more} */}
                             </p>
-                                <button className='text-[#3E8BFF] font-bold' onClick={()=>setIsOpen(!isOpen)}>{isOpen ? "Read Less" : "Read More"}</button>
+                            {/* {eventData?.description>=100?"":<button className='text-[#3E8BFF] font-bold' onClick={()=>setIsOpen(!isOpen)}>{isOpen ? "Read Less" : "Read More"}</button>} */}
+                            <button className='text-[#3E8BFF] font-bold' onClick={()=>setIsOpen(!isOpen)}>{isOpen ? "Read Less" : "Read More"}</button>
                             {/* <Link href={"/"} className="text-[#3E8BFF] text-lg font-semibold cursor-pointer flex items-center gap-2">
                             Know More
                             <img src="/external-link.svg" alt="" />

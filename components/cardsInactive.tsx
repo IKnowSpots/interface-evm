@@ -3,15 +3,29 @@ import Image from "next/image";
 import { useState } from "react";
 import { runEvent } from "@/utils"
 import LoadingModal from "./LoadingModal";
+import "react-toastify/dist/ReactToastify.css";
 
-const CardsInactive = ({ image, name, tokenId,setInactiveEvents }: { image: any, name: string, tokenId: any,setInactiveEvents:any }) => {
+const CardsInactive = ({ image, name, tokenId,setInactiveEvents, toast }: { image: any, name: string, tokenId: any,setInactiveEvents:any, toast: any }) => {
 
   const [loading, setLoading] = useState(false)
 
   async function runEventCall(ticketId: any) {
     setLoading(true)
     await runEvent(ticketId)
-    setInactiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
+    setTimeout(() => {
+        setInactiveEvents((events:any)=>events.filter((event:any)=>event.tokenId!==tokenId));
+    }, 3000);
+    toast.success("Event Resumed!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+    console.log("Running")
     setLoading(false)
   }
 
