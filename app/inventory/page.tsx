@@ -81,6 +81,8 @@ const Inventory = () => {
                                             remaining={nft?.remaining}
                                             supply={nft?.supply}
                                             price={nft?.price}
+                                            venue={nft?.venue}
+                                            tokenId={nft?.tokenId}
                                         />
                                         </>
                                     );
