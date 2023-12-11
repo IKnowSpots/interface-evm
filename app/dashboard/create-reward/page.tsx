@@ -20,6 +20,39 @@ interface Option {
 }
 
 const Create = () => {
+  const [avtarInfo] = useState([
+    {
+      index: 0,
+      cover:
+        "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg",
+    },
+    {
+      index: 1,
+      cover:
+        "https://ipfs.io/ipfs/bafybeifocgqvlmvyxc7w5z7parm2xymykjzgtqdfxufpic3jlilian2i54/dash-1.jpg",
+    },
+    {
+      index: 2,
+      cover:
+        "https://ipfs.io/ipfs/bafybeidovjvhgowhbisny2sw3u7bh6iwbwirueydzlnytf4yackvg7i5rm/dash-2.jpg",
+    },
+    {
+      index: 3,
+      cover:
+        "https://ipfs.io/ipfs/bafybeibvng6hhiwzranrs7hxmreukii4w4a6mvkgadhxpvbfitsjukc3ba/dash-3.jpg",
+    },
+    {
+      index: 4,
+      cover:
+        "https://ipfs.io/ipfs/bafybeicl6fv6nuyladn3zril5lge4kz2oc7yjqz3x6xwwnx5otrqi5kv2m/dash-4.jpg",
+    },
+  ]);
+
+  function setAvatar(cover: any) {
+    setFormInput({ ...formInput, cover });
+    console.log(cover);
+  }
+
   const options: Option[] = [
     { value: "Matic", imageUrl: "/matic.png" },
     { value: "Ethereum", imageUrl: "/ethereum.png" },
@@ -198,8 +231,8 @@ const Create = () => {
       <CreateNav />
       <div className="grid grid-cols-2 mb-20">
         <div className="">
-          <div>
-            <div className="flex flex-col w-1/2 mx-auto justify-center">
+          <div className="flex justify-center items-center">
+            <div className={`flex flex-col justify-center ${formInput.cover ? "" : "w-[60%]" }`}>
               <div className="flex items-center w-full">
                 <div className="relative w-[20%] flex justify-center">
                   <Link href="/dashboard/rewards" className="w-full p-4">
@@ -221,8 +254,8 @@ const Create = () => {
                 </p>
               </div>
               <label
-                className={`flex justify-center mx-auto w-[120%] border-2 bg-[rgb(30,30,30)] bg-opacity-75 border-[#E0E0E0] border-opacity-40 border-dashed  rounded-md  cursor-pointer ${
-                  formInput.cover ? "py-8 px-8" : "py-36 px-0"
+                className={`flex justify-center bg-[rgb(30,30,30)] bg-opacity-75 rounded-md  cursor-pointer ${
+                  formInput.cover ? "" : "border-2 border-dashed border-[#E0E0E0] border-opacity-40 py-40 px-0"
                 } `}
               >
                 <span className="flex items-center ">
@@ -275,12 +308,44 @@ const Create = () => {
               <div className="flex justify-center mt-4 gap-4 items-center">
                 <Image
                   src={"/cattt.jpeg"}
-                  width={60}
-                  height={60}
+                  width={50}
+                  height={50}
                   alt="cat"
-                  className="rounded-lg"
+                  onClick={() => setAvatar(avtarInfo[0].cover)}
+                  className="rounded-lg cursor-pointer"
                 />
-                <p className="text-white opacity-40">default cover image</p>
+                <Image
+                  src={"/dash-1.jpg"}
+                  width={50}
+                  height={50}
+                  alt="cat"
+                  onClick={() => setAvatar(avtarInfo[1].cover)}
+                  className="rounded-lg cursor-pointer"
+                />
+                <Image
+                  src={"/dash-2.jpg"}
+                  width={50}
+                  height={50}
+                  alt="cat"
+                  onClick={() => setAvatar(avtarInfo[2].cover)}
+                  className="rounded-lg cursor-pointer"
+                />
+                <Image
+                  src={"/dash-3.jpg"}
+                  width={50}
+                  height={50}
+                  alt="cat"
+                  onClick={() => setAvatar(avtarInfo[3].cover)}
+                  className="rounded-lg cursor-pointer"
+                />
+                <Image
+                  src={"/dash-4.jpg"}
+                  width={50}
+                  height={50}
+                  alt="cat"
+                  onClick={() => setAvatar(avtarInfo[4].cover)}
+                  className="rounded-lg cursor-pointer"
+                />
               </div>
             </div>
           </div>
@@ -346,7 +411,11 @@ const Create = () => {
 
             {/* comment out this section when price functionality is toh be used and integrated */}
 
-            <div className={` flex justify-between w-[90%] ${ !formInput.isCryptoBound ? "hidden" : "" } `}>
+            <div
+              className={` flex justify-between w-[90%] ${
+                !formInput.isCryptoBound ? "hidden" : ""
+              } `}
+            >
               <div className="flex flex-col w-[60%] my-4">
                 <label className={`pb-2 text-lg font-semibold`}>Price</label>
                 <input
