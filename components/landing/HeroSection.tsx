@@ -33,7 +33,7 @@ const HeroSection = () => {
 
   return (
     <div className="w-full h-[625px] md:h-[650px] lg:h-[800px] xl:h-auto">
-      <div className="top-[30%] lg:top-[40%] flex flex-col justify-center items-center text-center w-full absolute z-[5]">
+      <div className="top-[30%] lg:top-[40%] flex flex-col justify-center items-center text-center w-full absolute sm:z-[5]">
         <div className="w-full hidden md:flex justify-end items-end top-[30%] absolute">
           <Image
             src="/icon2.svg"
@@ -72,7 +72,7 @@ const HeroSection = () => {
             src="/icon.svg"
             width="400"
             height="400"
-            className="relative w-[60%] sm:w-[25%] flex justify-center"
+            className="hidden relative w-[60%] sm:w-[25%] sm:flex justify-center"
             alt="Card"
           />
         </div>
