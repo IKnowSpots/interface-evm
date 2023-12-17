@@ -20,10 +20,11 @@ export default function Home() {
       </head>
       <div className=" text-white w-full overflow-hidden">
         <Navbar />
+        <HeroSection />
         <div className="w-full flex justify-end">
           <div className="grad1 blur-[140px] flex h-[1200px] w-[660px] absolute"></div>
         </div>
-        <HeroSection />
+        {/* <HeroSection /> */}
         <div className="relative z-[5] mb-[5rem] sm:mb-[10rem]">
           <Partners />
         </div>
