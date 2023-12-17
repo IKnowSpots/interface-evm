@@ -37,7 +37,8 @@ const CardsInventory = ({
     return (
       
         <div className="flex flex-col md:flex-row w-[90%] gap-4 justify-between items-center box-background p-8 my-6 sm:my-8 rounded-xl">
-          <Link href={`/inventory/${username}/${tokenId}`} className="flex w-full flex-col md:flex-row justify-between items-center gap-12" >
+          {/* <Link href={`/inventory/${username}/${tokenId}`} className="flex w-full flex-col md:flex-row justify-between items-center gap-12" > */}
+          <div className="flex w-full flex-col md:flex-row justify-between items-center gap-12">
           <div  className="flex flex-col gap-4 w-full">
             <div className="flex items-center gap-2">
               <img src="/icons/calender-inventory.png" alt="" />
@@ -62,7 +63,8 @@ const CardsInventory = ({
             alt="bubble png"
             className="h-[150px] rounded-xl w-[60%]"
           />
-          </Link>
+          {/* </Link> */}
+          </div>
         </div>
     );
 };
