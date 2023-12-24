@@ -217,10 +217,16 @@ export async function fetchFeaturedRequest() {
 // --contract-fetching-tickets functions
 
 export async function fetchAllEvents() {
+    console.log("1")
     const username = await fetchCurrentUsername();
     const contract = await getIKSContract(username);
 
+    console.log("2")
+
     const data = await contract.fetchAllEvents();
+
+    console.log("3")
+
     // console.log("data", data)
     const items = await Promise.all(
         data.map(async (i) => {
@@ -250,6 +256,9 @@ export async function fetchAllEvents() {
             return item;
         })
     );
+
+    console.log("4")
+
     allEvents = items;
     console.log("All Events", items);
     return items;
@@ -312,6 +321,7 @@ export async function fetchMintedCollection() {
 }
 
 export async function fetchActiveEvents() {
+    console.log("all events", allEvents)
     if (allEvents.length > 0) {
         const filteredArray = allEvents.filter(
             (subarray) =>

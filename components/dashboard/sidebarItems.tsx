@@ -5,8 +5,8 @@ const SidebarItems = ({ section_name, icon_name,page_name } : {section_name: str
  const location = window.location.pathname.split("/").at(-1);
   // console.log(section_name, icon_name);
   // console.log(active,section_name)
-  console.log(window.location.pathname.split("/").at(-1));
-  console.log(window.location.pathname.split("/").at(-1) == (page_name || "manage") )
+  // console.log(window.location.pathname.split("/").at(-1));
+  // console.log(window.location.pathname.split("/").at(-1) == (page_name || "manage") )
   return (
     <div className={`items-center mb-4 py-2 pl-2 flex text-lg ${(location == (page_name) || location == "manage") ? "sidebar-bg" : " "} `}>
       <Image
