@@ -1,25 +1,47 @@
 "use client";
 import { uploadToIPFS, mint } from "@/utils";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CreateNav from "@/components/dashboard/CreateNav";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { redirect } from "next/navigation";
 import FooterSection from "@/components/landing/FooterSection";
-import { text } from "stream/consumers";
 import PopUp from "@/components/Popup";
 import LoadingModal from "@/components/LoadingModal";
-import { isImageUri } from "viem/_types/utils/ens/avatar/utils";
 
 const Create = () => {
+  const [avtarInfo] = useState([
+    {
+      index: 0,
+      cover:
+        "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg",
+    },
+    {
+      index: 1,
+      cover:
+        "https://ipfs.io/ipfs/bafybeifocgqvlmvyxc7w5z7parm2xymykjzgtqdfxufpic3jlilian2i54/dash-1.jpg",
+    },
+    {
+      index: 2,
+      cover:
+        "https://ipfs.io/ipfs/bafybeidovjvhgowhbisny2sw3u7bh6iwbwirueydzlnytf4yackvg7i5rm/dash-2.jpg",
+    },
+    {
+      index: 3,
+      cover:
+        "https://ipfs.io/ipfs/bafybeibvng6hhiwzranrs7hxmreukii4w4a6mvkgadhxpvbfitsjukc3ba/dash-3.jpg",
+    },
+    {
+      index: 4,
+      cover:
+        "https://ipfs.io/ipfs/bafybeicl6fv6nuyladn3zril5lge4kz2oc7yjqz3x6xwwnx5otrqi5kv2m/dash-4.jpg",
+    },
+  ]);
 
-  const [avtarInfo] = useState([{index:0,cover:"https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg"},{index:1,cover:"https://ipfs.io/ipfs/bafybeifocgqvlmvyxc7w5z7parm2xymykjzgtqdfxufpic3jlilian2i54/dash-1.jpg"},{index:2,cover:"https://ipfs.io/ipfs/bafybeidovjvhgowhbisny2sw3u7bh6iwbwirueydzlnytf4yackvg7i5rm/dash-2.jpg"},{index:3,cover:"https://ipfs.io/ipfs/bafybeibvng6hhiwzranrs7hxmreukii4w4a6mvkgadhxpvbfitsjukc3ba/dash-3.jpg"},{index:4,cover:"https://ipfs.io/ipfs/bafybeicl6fv6nuyladn3zril5lge4kz2oc7yjqz3x6xwwnx5otrqi5kv2m/dash-4.jpg"}])
-
-  function setAvatar ( cover: any){
+  function setAvatar(cover: any) {
     setFormInput({ ...formInput, cover });
-    console.log(cover)
+    console.log(cover);
   }
 
   const [formInput, setFormInput] = useState({
@@ -44,22 +66,11 @@ const Create = () => {
     }
   };
 
-  // console.log(formInput);
-
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
-  const [isFieldDisabled, setIsFieldDisabled] = useState(false);
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [enableInput, setEnableInput] = useState(true);
   const [popUpVisible, setPopUpVisible] = useState(false);
-  const toggleInput = () => {
-    setEnableInput(!enableInput);
-  };
-  const handleBothClicks = () => {
-    setIsButtonClicked(!isButtonClicked);
-    setIsFieldDisabled((prev) => !prev);
-  };
-
+  
   const enableButton = () => {
     setEnableInput(true);
     setFormInput({ ...formInput, isStakingEnabled: true });
@@ -75,7 +86,6 @@ const Create = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const data = e.target.value.split(" ");
-    // console.log(data);
 
     if (data.length <= 160) {
       setVal(e.target.value);
@@ -110,7 +120,7 @@ const Create = () => {
     const inputFile = e.target.files[0];
     const inputFileName = e.target.files[0].name;
     const files = [new File([inputFile], inputFileName)];
-    console.log(inputFile)
+    console.log(inputFile);
     const metaCID = await uploadToIPFS(files);
     const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`;
     console.log(url);
@@ -119,7 +129,6 @@ const Create = () => {
   }
 
   async function publish() {
-    // try {
     setLoading(true);
     const NftURI = await formURI();
     let floatNumber = parseFloat(formInput.stakePrice);
@@ -143,23 +152,8 @@ const Create = () => {
       });
       setPopUpVisible(true);
     }
-    // if (isMinted == true) {
-    //     setPopUpVisible(true);
-    // }
 
     setLoading(false);
-    // } catch (error) {
-    //     toast.warn("Error occurred, try again in a while!", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: true,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //     });
-    // }
   }
 
   return (
@@ -170,7 +164,11 @@ const Create = () => {
         <div className="grid grid-cols-2">
           <div className="">
             <div className="flex justify-center items-center">
-              <div className={`flex flex-col justify-center ${formInput.cover ? "" : "w-[60%]" }`}>
+              <div
+                className={`flex flex-col justify-center ${
+                  formInput.cover ? "" : "w-[60%]"
+                }`}
+              >
                 <div className="flex items-center w-full">
                   <div className="relative w-[20%] flex justify-center">
                     <Link href="/dashboard/active" className="w-full p-4">
@@ -191,11 +189,19 @@ const Create = () => {
                     Upload or choose your file to upload
                   </p>
                 </div>
-                <label className={`flex justify-center bg-[rgb(30,30,30)] bg-opacity-75 rounded-md  cursor-pointer ${formInput.cover ? "" : "border-2 border-[#E0E0E0] border-opacity-40 border-dashed py-40 px-0" } `}>
+                <label
+                  className={`flex justify-center bg-[rgb(30,30,30)] bg-opacity-75 rounded-md  cursor-pointer ${
+                    formInput.cover
+                      ? ""
+                      : "border-2 border-[#E0E0E0] border-opacity-40 border-dashed py-40 px-0"
+                  } `}
+                >
                   <span className="flex items-center ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`w-6 h-6 text-gray ${formInput.cover ? "hidden" : "flex" } `}
+                      className={`w-6 h-6 text-gray ${
+                        formInput.cover ? "hidden" : "flex"
+                      } `}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -224,7 +230,7 @@ const Create = () => {
                     <div>
                       <img
                         src={formInput.cover}
-                        //   alt="uploaded-cover"
+                        alt="uploaded-cover"
                         className="rounded-lg h-[350px] w-full"
                       />
                     </div>
@@ -278,7 +284,6 @@ const Create = () => {
                     onClick={() => setAvatar(avtarInfo[4].cover)}
                     className="rounded-lg cursor-pointer"
                   />
-                  {/* <p className="text-white opacity-40">default cover image</p> */}
                 </div>
               </div>
             </div>
@@ -308,11 +313,8 @@ const Create = () => {
                         }`}
                       ></div>
                     </div>
-                    {/* <span className="ml-2 text-sm">{isShortlistEnabled ? 'ON' : 'OFF'}</span> */}
                   </div>
                 </div>
-                {/* https://gdowens.github.io/react-toggle-button/ to use toggle in the actual code */}
-                {/* <ToggleButton value={false} /> */}
               </div>
               <label className="pb-2">Event Name</label>
               <input
@@ -397,51 +399,10 @@ const Create = () => {
                 disabled={imgLoading}
               />
             </div>
-            {/*  */}
 
-            {/* <div className="flex flex-col w-3/4 mx-auto my-4 ">
-                        <label>Stake price</label>
-                        <div className="">
-                        <input
-                        type="text"
-                        id="event-name"
-                        placeholder="0.01ETH"
-                        className="bg-[#1E1e1ea6] rounded-lg  relative p-2"
-                        onChange={(e) =>
-                            setFormInput({
-                                ...formInput,
-                                stakePrice: e.target.value,
-                            })
-                                }
-                            />
-                        </div>
-                    </div> */}
-
-            {/*  */}
             <div className="flex flex-col w-3/4 mx-auto my-4 ">
               <label className="pb-2">Stake price</label>
               <div className="relative flex flex-col items-center  w-full ">
-                {/* <input
-                                type="text"
-                                id="event-name"
-                                placeholder="0.01 ETH"
-                                className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4 ${
-                                    isFieldDisabled
-                                    ? "bg-red-800 text-gray-600"
-                                    : " text-black"
-                                }`}
-                                // className="bg-[#1E1E1E] bg-opacity-75 border border-[#989898] border-opacity-30 rounded-lg p-2 w-full py-4"
-                                disabled={isFieldDisabled && imgLoading}
-                                // disabled
-                                onChange={(e) =>
-                                    setFormInput({
-                                        ...formInput,
-                                        stakePrice: e.target.value,
-                                    })
-                                }
-                                // disabled={imgLoading}
-                                // disabled = "true"
-                            /> */}
                 <input
                   type="text"
                   className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] 
@@ -465,9 +426,6 @@ const Create = () => {
                       ? "bg-white text-black"
                       : "bg-[#252542] text-white"
                   }`}
-                  // onClick={enableButton}
-                  // onClick={toggleInput}
-                  // onClick={()=> setEnableInput(true)}
                   onClick={enableButton}
                 >
                   Enable
@@ -478,9 +436,6 @@ const Create = () => {
                       ? "bg-[#252542] text-white"
                       : "bg-white text-black"
                   }`}
-                  // onClick={disableButton}
-                  // onClick={toggleInput}
-                  // onClick={()=> setEnableInput(false)}
                   onClick={disableButton}
                 >
                   Free
@@ -488,9 +443,6 @@ const Create = () => {
               </div>
             </div>
             <div className="w-3/4 mx-auto flex justify-evenly my-6">
-              {/* <button className="px-4 py-2 border rounded-lg">
-                            Preview
-                        </button> */}
               <button className="px-4 py-2 border rounded-lg" onClick={publish}>
                 Mint
               </button>

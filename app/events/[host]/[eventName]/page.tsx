@@ -19,8 +19,11 @@ const paragraphStyles = {
 
 const Event = () => {
     const pathName = usePathname();
-    const username = pathName?.split("/")[1];
+    const username = pathName?.split("/")[2];
+    
     let eventId = pathName?.split("/")[3];
+    console.log({username})
+    console.log({eventId})
 
     const [eventData, setEventData] = useState({
         name: "",

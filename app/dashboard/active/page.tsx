@@ -1,7 +1,7 @@
 "use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import CardsActive from "@/components/cardsActive";
+import CardsActive from "@/components/cards/cardsActive";
 import DashNav from "@/components/dashboard/Navbar";
 import { useEffect, useState } from "react";
 import { fetchActiveEvents } from "@/utils";

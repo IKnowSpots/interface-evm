@@ -15,7 +15,7 @@ const EventsByHost = () => {
     // comment 88-100 and uncomment 102-166
 
     const pathName = usePathname();
-    const id = pathName?.split("/")[1];
+    const id = pathName?.split("/")[2];
 
     const [isUsernameValid, setIsUsernameValid] = useState(false);
     const [activeEvents, setActiveEvents] = useState([]);
@@ -169,7 +169,7 @@ const EventsByHost = () => {
                     <div className="flex justify-between px-[6rem]  ">
                         <div className="pb-8 ">
                             <div className="cursor-pointer text-white bg-[#070708] py-2 text-base font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">
-                                <p className="">@{username}</p>
+                                <p className="">@{id}</p>
                                 <div className="h-[1.5rem] w-[1.5rem] grad1 rounded-full"></div>
                             </div>
                         </div>

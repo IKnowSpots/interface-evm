@@ -93,7 +93,7 @@ const DashNav = () => {
 
             <div className="flex gap-2 w-[22%] justify-center items-center">
                 {/* <Link href="/test/events"> */}
-                <Link href={`/${username}/events`}>
+                <Link href={`/events/${username}`}>
                     <div className="text-white bg-[#070708] py-3 text-sm font-semibold flex items-center gap-2 pl-5 pr-3 border border-transparent rounded-full hover:bg-white hover:text-black">
                         <p className="">Hii, @{username}</p>
                         <div className="h-[1.5rem] w-[1.5rem] grad1 rounded-full"></div>

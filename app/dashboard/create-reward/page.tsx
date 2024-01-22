@@ -2,7 +2,7 @@
 "use client";
 import { uploadToIPFS, mintReward } from "@/utils";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CreateNav from "@/components/dashboard/CreateNav";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,9 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 import FooterSection from "@/components/landing/FooterSection";
 import CreateRewardPopup from "@/components/CreateRewardPopup";
 import Select from "react-select";
-import { redirect } from "next/navigation";
-import { text } from "stream/consumers";
-import ValueType from "react-select";
 
 interface Option {
   value: string;
@@ -55,8 +52,7 @@ const Create = () => {
 
   const options: Option[] = [
     { value: "Matic", imageUrl: "/matic.png" },
-    { value: "Ethereum", imageUrl: "/ethereum.png" },
-    // { value: "Option 3", imageUrl: "/rewardmockup.png" },
+    { value: "Ethereum", imageUrl: "/ethereum.png" }
   ];
 
   const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
@@ -98,16 +94,9 @@ const Create = () => {
     isCryptoBound: false,
     price: "0",
     cover: "",
-    // uri: "",
   });
 
   console.log(formInput);
-
-  const [isInputEnabled, setIsInputEnabled] = useState(false);
-
-  // const handleToggle = () => {
-  //     setIsInputEnabled(!isInputEnabled);
-  // };
 
   const handleToggle = () => {
     if (formInput.isCryptoBound == true) {
@@ -117,57 +106,26 @@ const Create = () => {
     }
   };
 
-  // console.log(formInput);
-
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
   const [enableInput, setEnableInput] = useState(true);
   const [popUpVisible, setPopUpVisible] = useState(false);
-  const toggleInput = () => {
-    setEnableInput(!enableInput);
-  };
-
-  const [val, setVal] = useState("");
-  const [word, setWord] = useState(0);
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const data = e.target.value.split(" ");
-    // console.log(data);
-
-    if (data.length <= 160) {
-      setVal(e.target.value);
-      setWord(data.length);
-      if (e.target.value == "") {
-        setWord(0);
-      }
-    } else {
-      alert("you can type only 1000 characters");
-    }
-  };
 
   async function formURI() {
-    // console.log("1")
     let { supply, name, isCryptoBound, price, cover } = formInput;
-    // console.log("2")
     if (!supply || !name) return;
-    // console.log("3")
     if (cover == "") {
       console.log("4");
       cover =
         "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg";
     }
-    // console.log("5")
     const data = JSON.stringify({ supply, name, isCryptoBound, cover });
-    // console.log("6")
     const files = [new File([data], "data.json")];
-    // console.log("7")
     console.log("files", files);
     const metaCID = await uploadToIPFS(files);
-    // console.log("8")
     console.log(metaCID, "cid");
     const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
     console.log("inside here");
-    // setFormInput({ ...formInput, uri: url });
     console.log(url, "here is URL");
     return url;
   }
@@ -185,7 +143,6 @@ const Create = () => {
   }
 
   async function publish() {
-    // try {
     setLoading(true);
     const NftURI = await formURI();
     console.log(NftURI, "here is URI");
@@ -212,18 +169,6 @@ const Create = () => {
     }
 
     setLoading(false);
-    // } catch (error) {
-    //     toast.warn("Error occurred, try again in a while!", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: true,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //     });
-    // }
   }
 
   return (
@@ -232,7 +177,11 @@ const Create = () => {
       <div className="grid grid-cols-2 mb-20">
         <div className="">
           <div className="flex justify-center items-center">
-            <div className={`flex flex-col justify-center ${formInput.cover ? "" : "w-[60%]" }`}>
+            <div
+              className={`flex flex-col justify-center ${
+                formInput.cover ? "" : "w-[60%]"
+              }`}
+            >
               <div className="flex items-center w-full">
                 <div className="relative w-[20%] flex justify-center">
                   <Link href="/dashboard/rewards" className="w-full p-4">
@@ -255,7 +204,9 @@ const Create = () => {
               </div>
               <label
                 className={`flex justify-center bg-[rgb(30,30,30)] bg-opacity-75 rounded-md  cursor-pointer ${
-                  formInput.cover ? "" : "border-2 border-dashed border-[#E0E0E0] border-opacity-40 py-40 px-0"
+                  formInput.cover
+                    ? ""
+                    : "border-2 border-dashed border-[#E0E0E0] border-opacity-40 py-40 px-0"
                 } `}
               >
                 <span className="flex items-center ">
@@ -292,7 +243,7 @@ const Create = () => {
                   <div>
                     <img
                       src={formInput.cover}
-                      //   alt="uploaded-cover"
+                      alt="uploaded-cover"
                       className="rounded-lg h-[350px] w-full"
                     />
                   </div>
