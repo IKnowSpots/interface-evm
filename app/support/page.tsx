@@ -1,5 +1,5 @@
 import FooterSection from "@/components/landing/FooterSection";
-import Navbar from "@/components/landing/Navbar";
+import Navbar from "@/components/navbar/NavbarLanding";
 import Script from "next/script";
 
 const Support = () => {

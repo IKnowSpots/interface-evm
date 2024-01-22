@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/dashboard/Sidebar";
-import DashNav from "@/components/dashboard/Navbar";
+import DashNav from "@/components/navbar/NavbarDashboard";
 import Manual from "@/components/Manual";
 import Bulk from "@/components/Bulk";
 import { usePathname } from "next/navigation";

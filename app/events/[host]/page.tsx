@@ -1,6 +1,6 @@
 "use client";
-import CardsHostee from "@/components/cardsHostee";
-import Navbar from "@/components/hostee/Navbar";
+import CardsHostee from "@/components/cards/cardsHostee";
+import Navbar from "@/components/navbar/NavbarHost";
 import {
     fetchUsernameValidityInfura,
     fetchActiveEventsWithUsername,

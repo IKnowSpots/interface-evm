@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ClaimedRewards from "@/components/cardsClaimedRewards";
+import ClaimedRewards from "@/components/cards/cardsClaimedRewards";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchClaimedRewardsThroughUsername } from "@/utils";
 

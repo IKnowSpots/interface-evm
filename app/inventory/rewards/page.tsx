@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/hostee/Navbar";
+import Navbar from "@/components/navbar/NavbarHost";
 import FooterSection from "@/components/landing/FooterSection";
 import Claimed from "@/components/inventory/Claimed";
 import Unclaimed from "@/components/inventory/Unclaimed";

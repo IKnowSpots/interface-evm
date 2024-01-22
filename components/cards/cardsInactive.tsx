@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { runEvent } from "@/utils"
-import LoadingModal from "./LoadingModal";
+import LoadingModal from "../LoadingModal";
 import "react-toastify/dist/ReactToastify.css";
 
 const CardsInactive = ({ image, name, tokenId,setInactiveEvents, toast }: { image: any, name: string, tokenId: any,setInactiveEvents:any, toast: any }) => {

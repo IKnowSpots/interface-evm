@@ -1,10 +1,10 @@
 "use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import DashNav from "@/components/dashboard/Navbar";
+import DashNav from "@/components/navbar/NavbarDashboard";
 import { useEffect, useState } from "react";
 import { fetchShortlistEvents } from "../../../utils";
-import CardsShortlist from "@/components/cardsShortlist";
+import CardsShortlist from "@/components/cards/cardsShortlist";
 import LoadingModal from "@/components/LoadingModal";
 
 const Shortlist = () => {

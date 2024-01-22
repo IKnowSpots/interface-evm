@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import WalletsProvider from "../../wallets";
+import WalletsProvider from "../wallets";
 import { useState, useEffect } from "react";
 import { fetchCurrentUsername } from "@/utils";
 

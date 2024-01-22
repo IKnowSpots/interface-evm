@@ -3,7 +3,7 @@
 import { uploadToIPFS, mintReward } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
-import CreateNav from "@/components/dashboard/CreateNav";
+import CreateNav from "@/components/navbar/CreateNav";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

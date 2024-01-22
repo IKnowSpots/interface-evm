@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/dashboard/Sidebar";
-import DashNav from "@/components/dashboard/Navbar";
+import DashNav from "@/components/navbar/NavbarDashboard";
 import Script from "next/script";
 import Manual from "@/components/ManualReward";
 import Bulk from "@/components/BulkReward";

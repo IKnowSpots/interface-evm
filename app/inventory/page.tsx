@@ -1,8 +1,8 @@
 "use client";
-import Navbar from "@/components/hostee/Navbar";
+import Navbar from "@/components/navbar/NavbarHost";
 import Rewards from "@/components/inventory/Rewards";
 import MyCalender from "@/components/inventory/MyCalender";
-import CardsInventory from "@/components/cardsInventory";
+import CardsInventory from "@/components/cards/cardsInventory";
 import { fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
 import FooterSection from "@/components/landing/FooterSection";

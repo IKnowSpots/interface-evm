@@ -1,8 +1,8 @@
 "use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import CardsMinted from "@/components/cardsMinted";
-import DashNav from "@/components/dashboard/Navbar";
+import CardsMinted from "@/components/cards/cardsMinted";
+import DashNav from "@/components/navbar/NavbarDashboard";
 import { useEffect, useState } from "react";
 import { fetchMintedCollection } from "../../../utils";
 import LoadingModal from "@/components/LoadingModal";

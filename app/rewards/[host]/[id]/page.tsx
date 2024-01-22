@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Navbar from "@/components/dashboard/claim-rewards/ClaimNavbar";
+import Navbar from "@/components/navbar/ClaimNavbar";
 import { useState, useEffect } from "react";
 import {
     fetchRewardsThroughUsername,

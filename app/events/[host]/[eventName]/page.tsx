@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Navbar from "@/components/hostee/Navbar";
+import Navbar from "@/components/navbar/NavbarHost";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { fetchAllEventsWithUsername, buyTicket } from "@/utils";

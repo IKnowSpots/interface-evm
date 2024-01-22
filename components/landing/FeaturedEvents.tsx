@@ -1,4 +1,4 @@
-import CardsFeatured from "../cardsFeatured";
+import CardsFeatured from "../cards/cardsFeatured";
 
 const FeaturedEvents = () => {
     return (

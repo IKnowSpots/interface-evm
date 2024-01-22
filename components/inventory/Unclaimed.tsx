@@ -1,7 +1,7 @@
 import { updateWhitelist } from "@/utils";
 import React, { useState } from "react";
 import Image from "next/image";
-import Unclaimedcard from "@/components/cardsUnclaimedRewards"
+import Unclaimedcard from "@/components/cards/cardsUnclaimedRewards"
 import { Swiper,SwiperSlide } from "swiper/react";
 import { fetchUnclaimedRewardsThroughUsername } from "@/utils"
 

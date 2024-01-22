@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { publishTickets } from "@/utils";
-import LoadingModal from "./LoadingModal";
+import LoadingModal from "../LoadingModal";
 import "react-toastify/dist/ReactToastify.css";
 
 const CardsMinted = ({
