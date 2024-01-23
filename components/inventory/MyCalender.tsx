@@ -1,6 +1,6 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+"use client";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(moment());
@@ -15,7 +15,7 @@ const Calendar: React.FC = () => {
 
   const renderCalendar = () => {
     const daysInMonth = currentDate.daysInMonth();
-    const firstDayOfMonth = moment(currentDate).startOf('month').day();
+    const firstDayOfMonth = moment(currentDate).startOf("month").day();
 
     const days = [];
     for (let i = 0; i < firstDayOfMonth; i++) {
@@ -23,12 +23,13 @@ const Calendar: React.FC = () => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      const isCurrentDay = day === moment().date() && currentDate.isSame(moment(), 'month');
+      const isCurrentDay =
+        day === moment().date() && currentDate.isSame(moment(), "month");
       days.push(
         <div
           key={day}
           className={`w-10 h-10 flex items-center justify-center rounded-full ${
-            isCurrentDay ? 'bg-blue-500 text-white' : ''
+            isCurrentDay ? "bg-blue-500 text-white" : ""
           }`}
         >
           {day}
@@ -42,9 +43,13 @@ const Calendar: React.FC = () => {
   return (
     <div className=" my-8">
       <div className="mycalender-background rounded-tl-3xl rounded-tr-3xl rounded-bl-none rounded-br-none text-center py-4">
-        <h2 className="text-lg font-semibold">{currentDate.format('MMMM YYYY')}</h2>
+        <h2 className="text-lg font-semibold">
+          {currentDate.format("MMMM YYYY")}
+        </h2>
       </div>
-      <div className="mycalender-background rounded-tl-none rounded-tr-none rounded-bl-3xl rounded-br-3xl p-6 grid grid-cols-7 gap-2">{renderCalendar()}</div>
+      <div className="mycalender-background rounded-tl-none rounded-tr-none rounded-bl-3xl rounded-br-3xl p-6 grid grid-cols-7 gap-2">
+        {renderCalendar()}
+      </div>
     </div>
   );
 };

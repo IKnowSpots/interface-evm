@@ -2,43 +2,24 @@
 import Image from "next/image";
 import SidebarItems from "./sidebarItems";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
-// import { ConnectButton } from '@rainbow-me/rainbowkit';
-
-// const WalletsProvider = dynamic(
-//     () => import("../../components-integration/wallets"),
-//     {
-//         ssr: false,
-//     }
-// );
-
+import { useState } from "react";
 import WalletsProvider from "@/components/wallets";
 
 const Sidebar = (activeRoute: any) => {
-  // const { publicKey, wallets, sendTransaction } = useWallet();
   const [shortPublicKey, setPublicKey] = useState<String>();
 
-  function shortenString(input: String, maxLength: any) {
-    // if (input === null) return
-    if (input.length <= maxLength) {
-      return input; // No need to shorten if it's already shorter than maxLength.
-    } else {
-      const firstPart = input.slice(0, maxLength / 2);
-      const lastPart = input.slice(-maxLength / 2);
-      let finalString = firstPart + "..." + lastPart;
-      setPublicKey(finalString);
-      // return firstPart + "..." + lastPart;
-    }
-  }
+  // function shortenString(input: String, maxLength: any) {
+  //   if (input.length <= maxLength) {
+  //     return input; // No need to shorten if it's already shorter than maxLength.
+  //   } else {
+  //     const firstPart = input.slice(0, maxLength / 2);
+  //     const lastPart = input.slice(-maxLength / 2);
+  //     let finalString = firstPart + "..." + lastPart;
+  //     setPublicKey(finalString);
+  //   }
+  // }
 
   let publicKey = undefined;
-
-  // useEffect(() => {
-  //     console.log("Public Key is ", publicKey);
-  //     if (publicKey == null) return
-  //     shortenString(publicKey?.toBase58(), 10);
-  // }, [publicKey]);
 
   return (
     <div
@@ -57,8 +38,6 @@ const Sidebar = (activeRoute: any) => {
       </Link>
       <div className="flex flex-col justify-around h-[90%]">
         <div className="py-[10%] text-white pr-4 relative">
-          {/* <SidebarItems icon_name="Home_fill" section_name="Dashboard" /> */}
-
           <Link href="/dashboard/active" className="opacity-75 sidebar-btn">
             <SidebarItems
               icon_name="Fire_fill"
@@ -82,11 +61,6 @@ const Sidebar = (activeRoute: any) => {
               page_name="minted"
             />
           </Link>
-
-          {/* <SidebarItems
-                    icon_name="Ticket_use_fill"
-                    section_name="Minted Collection"
-                /> */}
 
           <Link href="/dashboard/shortlist" className="opacity-75 sidebar-btn">
             <SidebarItems
@@ -147,12 +121,6 @@ const Sidebar = (activeRoute: any) => {
             {publicKey ? (
               <button className="block">
                 <div className="flex border border-white px-3 py-4">
-                  {/* <Image
-                                src={wallets[0].adapter.icon}
-                                width="30"
-                                height="100"
-                                alt="wallet logo"
-                            /> */}
                   <p className="px-4 text-white">
                     {/* {shortPublicKey} */}
                     <WalletsProvider />

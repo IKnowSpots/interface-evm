@@ -9,10 +9,6 @@ import {
 } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useAccount } from "wagmi";
-import Image from "next/image";
-import { currency } from "@/config";
-import Link from "next/link";
-import FooterSection from "@/components/landing/FooterSection";
 
 const Reward = () => {
     const { address, isConnected } = useAccount();
@@ -20,7 +16,6 @@ const Reward = () => {
     const pathName = usePathname();
     let host_username = pathName?.split("/")[2];
     let reward_Id = pathName?.split("/")[3];
-    // console.log("host id", host_username);
 
     const [rewardData, setRewardData] = useState({
         name: "",
@@ -33,7 +28,6 @@ const Reward = () => {
 
     const [loading, setLoading] = useState(false);
     const [isWhitelisted, setIsWhitelisted] = useState(false);
-    const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
         fetchAllRewardsData();

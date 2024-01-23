@@ -75,7 +75,6 @@ const CardsActive = ({
             <div className="flex justify-between items-center">
               <p>{name}</p>
               <p>{price == 0.0 ? "Free" : price + " " + currency}</p>
-              {/* <p>{price} {currency}</p> */}
             </div>
             <div className="h-[2px] rounded-full bg-white"></div>
             <div className="flex justify-between items-center">

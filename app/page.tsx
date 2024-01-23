@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import footerGradient from "../public/mediumGradient.png";
 import Navbar from "@/components/navbar/NavbarLanding";
 import HeroSection from "@/components/landing/HeroSection";
 import FeaturedEvents from "@/components/landing/FeaturedEvents";
@@ -20,7 +17,6 @@ export default function Home() {
       </head>
       <div className=" text-white w-full overflow-hidden">
         <Navbar />
-        {/* <HeroSection /> */}
         <div className="w-full hidden sm:flex justify-end z-[-1]">
           <div className="grad1 blur-[180px] flex h-[1200px] w-[660px] absolute"></div>
         </div>

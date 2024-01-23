@@ -1,35 +1,35 @@
-"use client"
-import Image from "next/image"
-import Link from "next/link"
+"use client";
+import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { fetchIfDeployed, deploy } from "@/utils";
 
 const HeroSection = () => {
   const [isDeployed, setIsDeployed] = useState<Boolean>();
-    const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<Boolean>(false);
 
-    // comment line 18-26 to make this page static
+  // comment line 18-26 to make this page static
 
-    // useEffect(() => {
-    //     if (isDeployed == true) {
-    //         pushPage();
-    //     }
-    // }, [isDeployed]);
+  // useEffect(() => {
+  //     if (isDeployed == true) {
+  //         pushPage();
+  //     }
+  // }, [isDeployed]);
 
-    // function pushPage() {
-    //     window.location.replace("/dashboard/active");
-    // }
-    useEffect(() => {
-          checkDeployment();
-      }, []);
+  // function pushPage() {
+  //     window.location.replace("/dashboard/active");
+  // }
+  useEffect(() => {
+    checkDeployment();
+  }, []);
 
-    async function checkDeployment() {
-        setLoading(true);
-        const data = await fetchIfDeployed();
-        console.log("deploy", data);
-        setIsDeployed(data);
-        setLoading(false);
-    }
+  async function checkDeployment() {
+    setLoading(true);
+    const data = await fetchIfDeployed();
+    console.log("deploy", data);
+    setIsDeployed(data);
+    setLoading(false);
+  }
 
   return (
     <div className="w-full h-[575px] md:h-[650px] lg:h-[800px] xl:h-auto z-1 relative">
@@ -50,10 +50,19 @@ const HeroSection = () => {
           Community engagegment protocol via NFT ticketing.
         </p>
         <div className="flex flex-col md:flex-row gap-4 mt-4 w-full justify-center items-center">
-          <Link className="" target="_blank" href="https://www.loom.com/share/5cee5fd7ee6d477e976f246fbda9ac21?sid=666d8812-f4a4-4d07-ab34-4310cdd08c4b">
-            <button className="cta-button w-48 px-4 py-1 text-[0.8rem] sm:text-[1rem]">Demo Video</button>
+          <Link
+            className=""
+            target="_blank"
+            href="https://www.loom.com/share/5cee5fd7ee6d477e976f246fbda9ac21?sid=666d8812-f4a4-4d07-ab34-4310cdd08c4b"
+          >
+            <button className="cta-button w-48 px-4 py-1 text-[0.8rem] sm:text-[1rem]">
+              Demo Video
+            </button>
           </Link>
-          <Link className="" href={isDeployed ? "/dashboard/active" : "/dashboard"}>
+          <Link
+            className=""
+            href={isDeployed ? "/dashboard/active" : "/dashboard"}
+          >
             <button className="btn-bg w-48 flex justify-center items-center gap-2 px-4 py-1 text-[0.8rem] sm:text-[1rem]">
               Launch dApp
               <Image
@@ -77,27 +86,29 @@ const HeroSection = () => {
           />
         </div>
       </div>
-      
-      <div id="parent-div" className="relative flex w-full p-6 justify-center items-center top-[20%] sm:top-[0%]">
+
+      <div
+        id="parent-div"
+        className="relative flex w-full p-6 justify-center items-center top-[20%] sm:top-[0%]"
+      >
         <Image
           src="/circles.png"
-          // src="/circles.png"
           width="1500"
           height="50"
           className="opacity-20"
-          alt="Circle" />
+          alt="Circle"
+        />
         <Image
           src="/circles-mirror.png"
-          // src="/circles-mirror.png"
           width="1500"
           height="100"
           className="absolute opacity-20 top-0"
-          alt="Circle" />
+          alt="Circle"
+        />
       </div>
       <div>
-        {/* <img src="/tpg.jpeg" alt="" className="absolute top-[95%] left-[10%] h-auto w-[30%] rotate-[25deg] skew-y-6 rounded-2xl"/> */}
       </div>
     </div>
-  )
-}
-export default HeroSection
+  );
+};
+export default HeroSection;

@@ -7,10 +7,12 @@ const ToolSection = () => {
         <div className="w-full flex justify-end">
           <div className="grad1 blur-[300px] z-[-1] flex h-[639px] w-[660px] absolute"></div>
         </div>
-        <h1 className="text-2xl sm:text-5xl font-bold pt-4 sm:pt-12 ">Powerful suite of tools</h1>
+        <h1 className="text-2xl sm:text-5xl font-bold pt-4 sm:pt-12 ">
+          Powerful suite of tools
+        </h1>
         <p className="sm:w-[60%] py-4 pb-14">
-          iknowspots desires to lead the ticketing industry, both
-          operationally and in digital ticketing.
+          iknowspots desires to lead the ticketing industry, both operationally
+          and in digital ticketing.
         </p>
         <div className="flex justify-between w-full sm:w-3/4 box-background px-2 sm:px-4 py-4 sm:py-6 my-6 text-[0.75rem] sm:text-[1rem] sm:my-8 rounded-xl">
           <p>Custom Subdomains.</p>
@@ -39,7 +41,13 @@ const ToolSection = () => {
         <div className="w-full hidden md:flex justify-end">
           <div className="grad1 blur-[100px] z-[-1] flex h-[639px] w-[40%] absolute"></div>
         </div>
-        <Image src="/collage.svg" className="" width="800" height="200" alt="" />
+        <Image
+          src="/collage.svg"
+          className=""
+          width="800"
+          height="200"
+          alt=""
+        />
       </div>
     </div>
   );
