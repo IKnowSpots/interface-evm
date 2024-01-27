@@ -9,7 +9,8 @@ import {
     RPCUrl,
 } from "./config";
 import axios from "axios";
-import { Web3Storage } from "web3.storage";
+// import { Web3Storage } from "web3.storage";
+import { create } from '@web3-storage/w3up-client'
 
 // import {
 //     PolygonAddressFactory,
@@ -770,20 +771,49 @@ export async function isWallet() {
 
 // --web3-storage-token functions
 
-function getAccessToken() {
-    // return process.env.NEXT_PUBLIC_Web3StorageID
-    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyMjkyQjQ5YzFjN2ExMzhERWQxQzQ3NGNlNmEyNmM1NURFNWQ0REQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUyMzg2MDc1NDEsIm5hbWUiOiJNZXRhRmkifQ.cwyjEIx8vXtTnn8Y3vctroo_rooHV4ww_2xKY-MT0rs";
-}
 
-function makeStorageClient() {
-    return new Web3Storage({ token: getAccessToken() });
+// const space = await client.createSpace('iks')
+
+async function makeStorageClient() {
+    console.log("0")
+    const client = await create()
+    console.log("1")
+    const space = await client.createSpace('iks')
+    const myAccount = await client.login('anshsaxena4190@gmail.com')
+    console.log(space)
+    console.log("2")
+    await myAccount.provision(space.did())
+    await space.createRecovery(myAccount.did())
+    await space.save()
+    await client.setCurrentSpace(space.did())
+    // await client.setCurrentSpace("z6MkhLHFoz5Bxv4ncpozxK3DWt8z7se76nwDt8sAfNZM1QzN")
+    console.log("3")
+    return client
 }
 
 export const uploadToIPFS = async (files) => {
-    const client = makeStorageClient();
-    const cid = await client.put(files);
-    return cid;
+       
+    const client = await makeStorageClient();
+    const directoryCid = await client.uploadDirectory(files)
+
+    // const cid = await client.put(files);
+    return directoryCid;
 };
+
+// function getAccessToken() {
+//     // return process.env.NEXT_PUBLIC_Web3StorageID
+//     return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyMjkyQjQ5YzFjN2ExMzhERWQxQzQ3NGNlNmEyNmM1NURFNWQ0REQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUyMzg2MDc1NDEsIm5hbWUiOiJNZXRhRmkifQ.cwyjEIx8vXtTnn8Y3vctroo_rooHV4ww_2xKY-MT0rs";
+// }
+
+// function makeStorageClient() {
+//     return new Web3Storage({ token: getAccessToken() });
+// }
+
+// export const uploadToIPFS = async (files) => {
+//     const client = makeStorageClient();
+//     const cid = await client.put(files);
+//     return cid;
+// };
 
 // ----
 

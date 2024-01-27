@@ -109,7 +109,7 @@ const Create = () => {
     const data = JSON.stringify({ name, description, venue, date, cover });
     const files = [new File([data], "data.json")];
     const metaCID = await uploadToIPFS(files);
-    const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
+    const url = `https://${metaCID}.ipfs.w3s.link/data.json`;
     setFormInput({ ...formInput, uri: url });
     console.log(url);
     return url;
@@ -122,7 +122,7 @@ const Create = () => {
     const files = [new File([inputFile], inputFileName)];
     console.log(inputFile);
     const metaCID = await uploadToIPFS(files);
-    const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`;
+    const url = `https://${metaCID}.ipfs.w3s.link/${inputFileName}`;
     console.log(url);
     setFormInput({ ...formInput, cover: url });
     setImgLoading(false);

@@ -124,7 +124,7 @@ const Create = () => {
     console.log("files", files);
     const metaCID = await uploadToIPFS(files);
     console.log(metaCID, "cid");
-    const url = `https://ipfs.io/ipfs/${metaCID}/data.json`;
+    const url = `https://${metaCID}.ipfs.w3s.link/data.json`;
     console.log("inside here");
     console.log(url, "here is URL");
     return url;
@@ -136,7 +136,7 @@ const Create = () => {
     const inputFileName = e.target.files[0].name;
     const files = [new File([inputFile], inputFileName)];
     const metaCID = await uploadToIPFS(files);
-    const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`;
+    const url = `https://${metaCID}.ipfs.w3s.link/${inputFileName}`;
     console.log(url);
     setFormInput({ ...formInput, cover: url });
     setImgLoading(false);

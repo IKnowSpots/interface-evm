@@ -14,6 +14,7 @@
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
+    "@web3-storage/w3up-client": "^12.2.1",
     "autoprefixer": "10.4.16",
     "axios": "^1.5.1",
     "bn.js": "^5.2.1",
