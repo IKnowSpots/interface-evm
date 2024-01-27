@@ -5,7 +5,7 @@ export const PolygonAddressFactory = `0xdECc088f9135b7b071Aa2535b24627e4Dc4c506A
 export const PolygonCurrency = `Matic`;
 export const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
-export const SepoliaAddressFactory = `0x9488e8282518a472d27cDaE73b92A0A1B48825B0`;
+export const SepoliaAddressFactory = `0x40994D85cE91B9E8b52669f4dCeD748D5aF68e3b`;
 export const SepoliaCurrency = `Eth`;
 export const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`;
 
