@@ -58,6 +58,11 @@ const Create = () => {
     eventPrice: "0",
   });
 
+  const today = new Date();
+  today.setDate(today.getDate() + 1); // Set to tomorrow
+
+  const minDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
   const toggleSwitch = () => {
     if (formInput.isShortlistEnabled == true) {
       setFormInput({ ...formInput, isShortlistEnabled: false });
@@ -389,13 +394,14 @@ const Create = () => {
               <input
                 type="date"
                 id="event-name"
-                className="bg-[#E1E1E1] text-black invert bg-opacity-75 border border-[#676767] border-opacity-30  rounded-lg p-2"
+                className="bg-[#E1E1E1] text-black invert bg-opacity-75 border border-[#676767] border-opacity-30  rounded-lg p-2 flex justify-end"
                 onChange={(e) =>
                   setFormInput({
                     ...formInput,
                     date: e.target.value,
                   })
-                }
+                } 
+                min = {minDate}
                 disabled={imgLoading}
               />
             </div>
