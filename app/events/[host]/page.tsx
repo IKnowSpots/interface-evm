@@ -7,7 +7,6 @@ import {
 } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import FooterSection from "@/components/landing/FooterSection";
 import LoadingModal from "@/components/LoadingModal";
 

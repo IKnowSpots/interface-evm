@@ -7,10 +7,30 @@ import { fetchCommonInventory } from "@/utils";
 import { useEffect, useState } from "react";
 import FooterSection from "@/components/landing/FooterSection";
 import LoadingModal from "@/components/LoadingModal";
+import { fetchCurrentUsername, getIKSContractAddress } from "@/utils";
 
 const Inventory = () => {
   const [inventoryData, setInventoryData] = useState<any>([]);
   const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState();
+  const [contractAddr, setContractAddr] = useState("");
+
+  useEffect(() => {
+    fetchUsernameCall();
+  }, []);
+
+  async function getIKSContractAddressCall(user: any) {
+    const addr = await getIKSContractAddress(user);
+    setContractAddr(addr);
+  }
+
+  async function fetchUsernameCall() {
+    setLoading(true);
+    let user = await fetchCurrentUsername();
+    setUsername(user);
+    await getIKSContractAddressCall(user);
+    setLoading(false);
+  }
 
   useEffect(() => {
     fetchInventoryData();
@@ -73,7 +93,7 @@ const Inventory = () => {
                         key={i}
                         image={nft?.cover}
                         name={nft?.name}
-                        username={""}
+                        username={`${username}`}
                         date={nft?.date}
                         remaining={nft?.remaining}
                         supply={nft?.supply}
