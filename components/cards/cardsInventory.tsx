@@ -26,13 +26,13 @@ const CardsInventory = ({
   tokenId: any;
 }) => {
   function pushPage() {
-    redirect(`/events/${username}/${tokenId}`);
+    redirect(`/inventory/${username}/${tokenId}`);
   }
 
   return (
     <div className="flex flex-col md:flex-row w-[90%] gap-4 justify-between items-center box-background p-8 my-6 sm:my-8 rounded-xl">
       <Link
-        href={`/events/${username}/${tokenId}`}
+        href={`/inventory/${username}/${tokenId}`}
         className="flex w-full flex-col md:flex-row justify-between items-center gap-12"
         onClick={pushPage}
       >
