@@ -61,7 +61,7 @@ const Create = () => {
   const today = new Date();
   today.setDate(today.getDate() + 1); // Set to tomorrow
 
-  const minDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+  const minDate = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
 
   const toggleSwitch = () => {
     if (formInput.isShortlistEnabled == true) {
@@ -75,7 +75,7 @@ const Create = () => {
   const [imgLoading, setImgLoading] = useState(false);
   const [enableInput, setEnableInput] = useState(true);
   const [popUpVisible, setPopUpVisible] = useState(false);
-  
+
   const enableButton = () => {
     setEnableInput(true);
     setFormInput({ ...formInput, isStakingEnabled: true });
@@ -400,8 +400,8 @@ const Create = () => {
                     ...formInput,
                     date: e.target.value,
                   })
-                } 
-                min = {minDate}
+                }
+                min={minDate}
                 disabled={imgLoading}
               />
             </div>
@@ -452,7 +452,7 @@ const Create = () => {
               <button className="px-4 py-2 border rounded-lg" onClick={publish}>
                 Mint
               </button>
-              {/* <PopUp/> */}
+              {/* <PopUp /> */}
             </div>
           </div>
         </div>
@@ -471,7 +471,9 @@ const Create = () => {
         />
         {popUpVisible ? <PopUp /> : <></>}
 
-        <FooterSection />
+        <div className="relative z-0">
+          <FooterSection />
+        </div>
       </div>
     </>
   );

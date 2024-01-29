@@ -383,3 +383,10 @@ body {
   cursor: pointer;
   /* width: 70%; */
 }
+
+.pop-background{
+  border: 3px solid #3c3c3c;
+  background: rgba(68, 68, 68, 0.302);
+  box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(-1px);
+}
