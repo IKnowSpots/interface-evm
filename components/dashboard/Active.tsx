@@ -1,27 +1,29 @@
 "use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
-import CardsInactive from "@/components/cards/cardsInactive";
+import CardsActive from "@/components/cards/cardsActive";
 import DashNav from "@/components/navbar/NavbarDashboard";
 import { useEffect, useState } from "react";
-import { fetchInactiveEvents } from "../../../utils";
+import { fetchActiveEvents } from "@/utils";
 import LoadingModal from "@/components/LoadingModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const InactiveEvents = () => {
-  const [inactiveEvents, setInactiveEvents] = useState<any>([]);
+const ActiveEvents = () => {
+  // to run this page static comment 42-51 and uncomment 52-57
+
+  const [activeEvents, setActiveEvents] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchInactiveEventsData();
+    fetchActiveEventsData();
   }, []);
 
-  async function fetchInactiveEventsData() {
+  async function fetchActiveEventsData() {
     try {
       setLoading(true);
-      let data: any = await fetchInactiveEvents();
-      setInactiveEvents(data);
+      let data: any = await fetchActiveEvents();
+      setActiveEvents(data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -45,21 +47,27 @@ const InactiveEvents = () => {
     );
   }
 
-  if (loading == true) {
+  if (loading == true)
     return (
-      <Layout>
+      <>
+        <DashNav />
         <LoadingModal visible={true} />
-      </Layout>
+      </>
     );
-  }
 
   return (
-    <Layout>
-      {loading == false && inactiveEvents.length == 0 ? (
+    <>
+      <DashNav />
+      <div className="px-12 ">
+        <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[75vh] z-[-1]" />
+
+        <p className="text-white font-semibold pl-4 pt-2">ACTIVE EVENTS</p>
+      </div>
+      {loading == false && activeEvents.length == 0 ? (
         <>
           <div className="flex justify-center items-center mt-10 mb-10">
             <Image
-              src={"/NOEVENTSinactive.svg"}
+              src={"/NOEVENTS--active.svg"}
               width={17}
               height={20}
               alt="back-btn"
@@ -73,15 +81,19 @@ const InactiveEvents = () => {
       ) : (
         <></>
       )}
-      <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6">
-        {inactiveEvents.map((nft: any, i: any) => {
+      <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6 ">
+        {activeEvents.map((nft: any, i: any) => {
           return (
-            <CardsInactive
-              setInactiveEvents={setInactiveEvents}
+            <CardsActive
+              setActiveEvents={setActiveEvents}
               key={i}
-              tokenId={nft.tokenId}
-              image={nft.cover}
-              name={nft.name}
+              tokenId={nft?.tokenId}
+              image={nft?.cover}
+              name={nft?.name}
+              price={nft?.price}
+              date={nft?.date}
+              remaining={nft?.remaining}
+              supply={nft?.supply}
               toast={toast}
             />
           );
@@ -99,27 +111,8 @@ const InactiveEvents = () => {
         pauseOnHover
         theme="dark"
       />
-    </Layout>
+    </>
   );
-
-  function Layout({ children }: { children: React.ReactNode }) {
-    return (
-      <div className="flex w-full">
-        <Sidebar />
-        <div className="bg-[#25143a] w-[80%] min-h-screen overflow-y-auto">
-          <DashNav />
-          <div className="px-12 ">
-            <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[75vh] z-[-1]" />
-
-            <p className="text-white font-semibold pl-4 pt-2">
-              INACTIVE EVENTS
-            </p>
-          </div>
-          {children}
-        </div>
-      </div>
-    );
-  }
 };
 
-export default InactiveEvents;
+export default ActiveEvents;

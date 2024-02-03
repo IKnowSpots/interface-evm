@@ -4,7 +4,7 @@ import Image from "next/image";
 import CardsMinted from "@/components/cards/cardsMinted";
 import DashNav from "@/components/navbar/NavbarDashboard";
 import { useEffect, useState } from "react";
-import { fetchMintedCollection } from "../../../utils";
+import { fetchMintedCollection } from "../../utils";
 import LoadingModal from "@/components/LoadingModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,13 +47,20 @@ const MintedCollections = () => {
 
   if (loading == true)
     return (
-      <Layout>
+      <>
+        <DashNav />
         <LoadingModal visible={true} />
-      </Layout>
+      </>
     );
 
   return (
-    <Layout>
+    <>
+      <DashNav />
+      <div className="px-12 ">
+        <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[75vh] z-[-1]" />
+
+        <p className="text-white font-semibold pl-4 pt-2">MINTED COLLECTIONS</p>
+      </div>
       {loading == false && mintedCollection.length == 0 ? (
         <>
           <div className="flex justify-center items-center mt-10 mb-10">
@@ -99,7 +106,7 @@ const MintedCollections = () => {
         pauseOnHover
         theme="dark"
       />
-    </Layout>
+    </>
   );
 
   function Layout({ children }: { children: React.ReactNode }) {

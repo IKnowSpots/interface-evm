@@ -48,25 +48,31 @@ const Rewards = () => {
 
   if (loading == true)
     return (
-      <Layout>
+      <>
+        <NavbarRewards />
         <LoadingModal visible={true} />
-      </Layout>
-    );
-
-  if (loading == false && allRewards.length == 0)
-    return (
-      <Layout>
-        <div className="flex justify-center items-center mt-10 mb-10">
-          <img src="/empty.svg" className="w-[50%] h-fit" alt="" />
-        </div>
-        <div>
-          <CreateReward />
-        </div>
-      </Layout>
+      </>
     );
 
   return (
-    <Layout>
+    <>
+      <NavbarRewards />
+      <div className="bg-createEvent blur-[220px] absolute w-[80%] h-[75vh] z-[-1]" />
+      <div className="px-6">
+        <p className="text-white text-xl font-semibold pl-4 pt-2">Rewards</p>
+      </div>
+      {loading == false && allRewards.length == 0 ? (
+        <>
+          <div className="flex justify-center items-center mt-10 mb-10">
+            <img src="/empty.svg" className="w-[50%] h-fit" alt="" />
+          </div>
+          <div>
+            <CreateReward />
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6 ">
         {allRewards.map((nft: any, i: any) => {
           return (
@@ -93,7 +99,7 @@ const Rewards = () => {
         pauseOnHover
         theme="dark"
       />
-    </Layout>
+    </>
   );
 
   function Layout({ children }: { children: React.ReactNode }) {

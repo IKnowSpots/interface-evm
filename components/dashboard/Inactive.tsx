@@ -1,25 +1,27 @@
 "use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Image from "next/image";
+import CardsInactive from "@/components/cards/cardsInactive";
 import DashNav from "@/components/navbar/NavbarDashboard";
 import { useEffect, useState } from "react";
-import { fetchShortlistEvents } from "../../../utils";
-import CardsShortlist from "@/components/cards/cardsShortlist";
+import { fetchInactiveEvents } from "../../utils";
 import LoadingModal from "@/components/LoadingModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Shortlist = () => {
-  const [activeEvents, setActiveEvents] = useState<any>([]);
+const InactiveEvents = () => {
+  const [inactiveEvents, setInactiveEvents] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchShortlistEventsData();
+    fetchInactiveEventsData();
   }, []);
 
-  async function fetchShortlistEventsData() {
+  async function fetchInactiveEventsData() {
     try {
       setLoading(true);
-      let data: any = await fetchShortlistEvents();
-      setActiveEvents(data);
+      let data: any = await fetchInactiveEvents();
+      setInactiveEvents(data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -43,13 +45,14 @@ const Shortlist = () => {
     );
   }
 
-  if (loading == true)
+  if (loading == true) {
     return (
       <>
         <DashNav />
         <LoadingModal visible={true} />
       </>
     );
+  }
 
   return (
     <>
@@ -57,13 +60,13 @@ const Shortlist = () => {
       <div className="px-12 ">
         <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[75vh] z-[-1]" />
 
-        <p className="text-white font-semibold pl-4 pt-2">SHORTLIST EVENTS</p>
+        <p className="text-white font-semibold pl-4 pt-2">INACTIVE EVENTS</p>
       </div>
-      {loading == false && activeEvents.length == 0 ? (
+      {loading == false && inactiveEvents.length == 0 ? (
         <>
           <div className="flex justify-center items-center mt-10 mb-10">
             <Image
-              src={"/noshortlisted-banner.svg"}
+              src={"/NOEVENTSinactive.svg"}
               width={17}
               height={20}
               alt="back-btn"
@@ -77,22 +80,32 @@ const Shortlist = () => {
       ) : (
         <></>
       )}
-      <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6 ">
-        {activeEvents.map((nft: any, i: any) => {
+      <div className="flex gap-x-6 gap-y-5 flex-wrap pt-4 px-6">
+        {inactiveEvents.map((nft: any, i: any) => {
           return (
-            <CardsShortlist
+            <CardsInactive
+              setInactiveEvents={setInactiveEvents}
               key={i}
-              tokenId={nft?.tokenId}
-              image={nft?.cover}
-              name={nft?.name}
-              price={nft?.price}
-              date={nft?.date}
-              remaining={nft?.remaining}
-              supply={nft?.supply}
+              tokenId={nft.tokenId}
+              image={nft.cover}
+              name={nft.name}
+              toast={toast}
             />
           );
         })}
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   );
 
@@ -106,7 +119,7 @@ const Shortlist = () => {
             <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[75vh] z-[-1]" />
 
             <p className="text-white font-semibold pl-4 pt-2">
-              SHORTLIST EVENTS
+              INACTIVE EVENTS
             </p>
           </div>
           {children}
@@ -116,4 +129,4 @@ const Shortlist = () => {
   }
 };
 
-export default Shortlist;
+export default InactiveEvents;

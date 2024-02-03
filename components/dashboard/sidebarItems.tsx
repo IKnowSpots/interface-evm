@@ -4,10 +4,12 @@ const SidebarItems = ({
   section_name,
   icon_name,
   page_name,
+  isActive,
 }: {
   section_name: string;
   icon_name: string;
   page_name: string;
+  isActive: boolean;
 }) => {
   const location = window.location.pathname.split("/").at(-1);
   // console.log(section_name, icon_name);
@@ -17,7 +19,7 @@ const SidebarItems = ({
   return (
     <div
       className={`items-center mb-4 py-2 pl-2 flex text-lg ${
-        location == page_name || location == "manage" ? "sidebar-bg" : " "
+        location == page_name || location == "manage" || isActive ? "sidebar-bg" : " "
       } `}
     >
       <Image

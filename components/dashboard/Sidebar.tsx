@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import SidebarItems from "./sidebarItems";
+import NewSidebarItems from "./SidebarItems";
 import Link from "next/link";
 import { useState } from "react";
 import WalletsProvider from "@/components/wallets";
 
-const Sidebar = (activeRoute: any) => {
+const Sidebar = (props: any) => {
   const [shortPublicKey, setPublicKey] = useState<String>();
 
   // function shortenString(input: String, maxLength: any) {
@@ -38,45 +38,50 @@ const Sidebar = (activeRoute: any) => {
       </Link>
       <div className="flex flex-col justify-around h-[90%]">
         <div className="py-[10%] text-white pr-4 relative">
-          <Link href="/dashboard/active" className="opacity-75 sidebar-btn">
-            <SidebarItems
+          <span onClick={() => props.setActivePage("ActivePage")} className="cursor-pointer opacity-75 sidebar-btn">
+            <NewSidebarItems
               icon_name="Fire_fill"
               section_name="Active Events"
               page_name="active"
+              isActive={props.activePage=="ActivePage"}
             />
-          </Link>
+          </span>
 
-          <Link href="/dashboard/inactive" className="opacity-75 sidebar-btn">
-            <SidebarItems
+          <span onClick={() => props.setActivePage("InactivePage")}className="cursor-pointer opacity-75 sidebar-btn">
+            <NewSidebarItems
               icon_name="3d_box_fill"
               section_name="Inactive Events"
               page_name="inactive"
+              isActive={props.activePage=="InactivePage"}
             />
-          </Link>
+          </span>
 
-          <Link href="/dashboard/minted" className="opacity-75 sidebar-btn">
-            <SidebarItems
+          <span onClick={() => props.setActivePage("MintedPage")} className="cursor-pointer opacity-75 sidebar-btn">
+            <NewSidebarItems
               icon_name="Fire_fill"
               section_name="Minted Collections"
               page_name="minted"
+              isActive={props.activePage=="MintedPage"}
             />
-          </Link>
+          </span>
 
-          <Link href="/dashboard/shortlist" className="opacity-75 sidebar-btn">
-            <SidebarItems
+          <span onClick={() => props.setActivePage("ShortlistPage")} className="cursor-pointer opacity-75 sidebar-btn">
+            <NewSidebarItems
               icon_name="CPU"
               section_name="Shortlist"
               page_name="shortlist"
+              isActive={props.activePage=="ShortlistPage"}
             />
-          </Link>
+          </span>
 
-          <Link href="/dashboard/rewards" className="opacity-75 sidebar-btn">
-            <SidebarItems
+          <span onClick={() => props.setActivePage("RewardsPage")} className="cursor-pointer opacity-75 sidebar-btn">
+            <NewSidebarItems
               icon_name="lightning_fill"
               section_name="Rewards"
               page_name="rewards"
+              isActive={props.activePage=="RewardsPage"}
             />
-          </Link>
+          </span>
         </div>
         <div>
           <div className="text-base pl-4 text-white">
