@@ -1,11 +1,11 @@
 // export const InfuraRPCKey = process.env.NEXT_PUBLIC_INFURA_KEY;
 export const InfuraRPCKey = `eec39d04a1064883bf94ec917264ce9a`;
 
-export const PolygonAddressFactory = `0xdECc088f9135b7b071Aa2535b24627e4Dc4c506A`;
+export const PolygonAddressFactory = `0x92942599d660F2a6cf10a5F8Bc3a39555331C0eB`;
 export const PolygonCurrency = `Matic`;
 export const PolygonInfuraUrl = `https://polygon-mumbai.infura.io/v3/`;
 
-export const SepoliaAddressFactory = `0x40994D85cE91B9E8b52669f4dCeD748D5aF68e3b`;
+export const SepoliaAddressFactory = `0xAE7e2aD4aAAc74810da24A0E87557304Fe689867`;
 export const SepoliaCurrency = `Eth`;
 export const SepoliaInfuraUrl = `https://sepolia.infura.io/v3/`;
 
@@ -18,9 +18,9 @@ export const SkaleInfuraRPCKey = ``;
 // export let currency = PolygonCurrency;
 // export let RPCUrl = `${PolygonInfuraUrl}${InfuraRPCKey}`;
 
-export let addressFactory = SepoliaAddressFactory;
-export let currency = SepoliaCurrency;
-export let RPCUrl = `${SepoliaInfuraUrl}${InfuraRPCKey}`;
+export let addressFactory = PolygonAddressFactory;
+export let currency = PolygonCurrency;
+export let RPCUrl = `${PolygonInfuraUrl}${InfuraRPCKey}`;
 
 // let chain = `polygon`;
 
