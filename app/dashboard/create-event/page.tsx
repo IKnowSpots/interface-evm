@@ -1,5 +1,5 @@
 "use client";
-import { uploadToIPFS, mint } from "@/utils";
+import { uploadToIPFS, mint, uploadToPinataIPFS } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import CreateNav from "@/components/navbar/CreateNav";
@@ -112,9 +112,19 @@ const Create = () => {
         "https://ipfs.io/ipfs/bafybeiheek47zlbg5kklzdz572mm7pu7men2xo5pra3cslbqplkda2qphq/cat.jpeg";
     }
     const data = JSON.stringify({ name, description, venue, date, cover });
-    const files = [new File([data], "data.json")];
-    const metaCID = await uploadToIPFS(files);
-    const url = `https://${metaCID}.ipfs.w3s.link/data.json`;
+    const file = new File([data], "data.json");
+    // const pinataData = new FormData();
+    // pinataData.set('file', file);
+    // const uploadToPinata = await fetch('/api/files', {
+    //   method: 'POST',
+    //   body: pinataData
+    // });
+    // console.log("Hello from formURI")
+    // console.log(uploadToPinata)
+    console.log(file)
+    const metaCID = await uploadToPinataIPFS(file);
+    const url = `https://plum-abstract-tern-191.mypinata.cloud/ipfs/${metaCID}?pinataGatewayToken=bk0ge8Y_nSn2kavXs9HcA8OEaYDbNVhQ_U0Ku6vfaPphY9paKnbsvbW1Wmdhqwvq`;
+    console.log('uri url', url)
     setFormInput({ ...formInput, uri: url });
     console.log(url);
     return url;
@@ -126,13 +136,13 @@ const Create = () => {
     const inputFileName = e.target.files[0].name;
     const files = [new File([inputFile], inputFileName)];
     console.log(inputFile);
-    const metaCID = await uploadToIPFS(files);
-    const url = `https://${metaCID}.ipfs.w3s.link/${inputFileName}`;
+    const metaCID = await uploadToPinataIPFS(inputFile);
+    const url = `https://ipfs.io/ipfs/${metaCID}`;
     console.log(url);
     setFormInput({ ...formInput, cover: url });
     setImgLoading(false);
   }
-
+  console.log(formInput.cover)
   async function publish() {
     setLoading(true);
     const NftURI = await formURI();
@@ -170,9 +180,8 @@ const Create = () => {
           <div className="">
             <div className="flex justify-center items-center">
               <div
-                className={`flex flex-col justify-center ${
-                  formInput.cover ? "" : "w-[60%]"
-                }`}
+                className={`flex flex-col justify-center ${formInput.cover ? "" : "w-[60%]"
+                  }`}
               >
                 <div className="flex items-center w-full">
                   <div className="relative w-[20%] flex justify-center">
@@ -195,18 +204,16 @@ const Create = () => {
                   </p>
                 </div>
                 <label
-                  className={`flex justify-center bg-[rgb(30,30,30)] bg-opacity-75 rounded-md  cursor-pointer ${
-                    formInput.cover
-                      ? ""
-                      : "border-2 border-[#E0E0E0] border-opacity-40 border-dashed py-40 px-0"
-                  } `}
+                  className={`flex justify-center bg-[rgb(30,30,30)] bg-opacity-75 rounded-md  cursor-pointer ${formInput.cover
+                    ? ""
+                    : "border-2 border-[#E0E0E0] border-opacity-40 border-dashed py-40 px-0"
+                    } `}
                 >
                   <span className="flex items-center ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`w-6 h-6 text-gray ${
-                        formInput.cover ? "hidden" : "flex"
-                      } `}
+                      className={`w-6 h-6 text-gray ${formInput.cover ? "hidden" : "flex"
+                        } `}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -221,7 +228,8 @@ const Create = () => {
                   </span>
                   {imgLoading ? (
                     <div>Uploading to IPFS..</div>
-                  ) : formInput.cover == "" ? (
+                  ) : formInput.cover == '' ? (
+
                     <div>
                       <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                         <span className="font-semibold">Click to upload</span>{" "}
@@ -232,13 +240,11 @@ const Create = () => {
                       </p>
                     </div>
                   ) : (
-                    <div>
-                      <img
-                        src={formInput.cover}
-                        alt="uploaded-cover"
-                        className="rounded-lg h-[350px] w-full"
-                      />
-                    </div>
+                    <img
+                      src={formInput.cover}
+                      alt="uploaded-cover"
+                      className="rounded-lg  w-full"
+                    />
                   )}
                   <input
                     type="file"
@@ -305,17 +311,15 @@ const Create = () => {
                   </div>
                   <div className={`flex items-center cursor-pointer`}>
                     <div
-                      className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${
-                        formInput.isShortlistEnabled
-                          ? "bg-green-500"
-                          : "bg-[#1E1E1E]"
-                      }`}
+                      className={`w-12 h-6 bg-[#1E1E1E] rounded-full p-1 duration-300 ease-in-out ${formInput.isShortlistEnabled
+                        ? "bg-green-500"
+                        : "bg-[#1E1E1E]"
+                        }`}
                       onClick={toggleSwitch}
                     >
                       <div
-                        className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${
-                          formInput.isShortlistEnabled ? "translate-x-6" : ""
-                        }`}
+                        className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${formInput.isShortlistEnabled ? "translate-x-6" : ""
+                          }`}
                       ></div>
                     </div>
                   </div>
@@ -412,9 +416,8 @@ const Create = () => {
                 <input
                   type="text"
                   className={`border bg-[#1E1E1E] text-white bg-opacity-75 border-[#989898] 
-                            border-opacity-30 rounded-lg p-2 w-full py-4 ${
-                              enableInput ? "bg-[#1E1E1E]" : "bg-gray-600"
-                            }`}
+                            border-opacity-30 rounded-lg p-2 w-full py-4 ${enableInput ? "bg-[#1E1E1E]" : "bg-gray-600"
+                    }`}
                   id="myInput"
                   placeholder="0.01 ETH"
                   disabled={!enableInput}
@@ -427,21 +430,19 @@ const Create = () => {
                 />
 
                 <button
-                  className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${
-                    enableInput
-                      ? "bg-white text-black"
-                      : "bg-[#252542] text-white"
-                  }`}
+                  className={`border w-1/6 absolute right-24 my-3 mr-4 px-4 py-1 rounded-lg bg-[#252542] border-[#1E1E1ED9] ${enableInput
+                    ? "bg-white text-black"
+                    : "bg-[#252542] text-white"
+                    }`}
                   onClick={enableButton}
                 >
                   Enable
                 </button>
                 <button
-                  className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${
-                    enableInput
-                      ? "bg-[#252542] text-white"
-                      : "bg-white text-black"
-                  }`}
+                  className={`w-1/6 absolute right-2 my-3 px-4 py-1 rounded-lg border-[#1E1E1ED9] ${enableInput
+                    ? "bg-[#252542] text-white"
+                    : "bg-white text-black"
+                    }`}
                   onClick={disableButton}
                 >
                   Free

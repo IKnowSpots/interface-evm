@@ -506,7 +506,7 @@ export async function fetchFeaturedEventsWithInfura() {
     return items;
 }
 
-export async function fetchAllActiveEvents() {}
+export async function fetchAllActiveEvents() { }
 
 export async function fetchHostedRewards() {
     const username = await fetchCurrentUsername();
@@ -792,13 +792,33 @@ async function makeStorageClient() {
 }
 
 export const uploadToIPFS = async (files) => {
-       
+
     const client = await makeStorageClient();
     const directoryCid = await client.uploadDirectory(files)
 
     // const cid = await client.put(files);
     return directoryCid;
 };
+
+export const uploadToPinataIPFS = async (files, metaData) => {
+    try {
+        console.log(files)
+        console.log(metaData)
+        const data = new FormData()
+        data.set('file', files)
+
+        const uploadData = await fetch('/api/files', {
+            method: 'POST',
+            body: data
+        })
+        const metaCID = await uploadData.json()
+        console.log("Reached here", metaCID)
+        return metaCID.IpfsHash.IpfsHash
+    } catch (error) {
+
+    }
+
+}
 
 // function getAccessToken() {
 //     // return process.env.NEXT_PUBLIC_Web3StorageID
