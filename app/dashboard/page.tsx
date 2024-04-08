@@ -6,11 +6,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import LoadingModal from "@/components/LoadingModal";
 import DashboardComponent from "@/components/dashboard/DashboardComponent";
+import Navbar from "@/components/navbar/NavbarCreate";
+import { useAccount } from "wagmi";
+import WalletsProvider from "@/components/wallets";
+
 
 const Dashboard = () => {
   const [isDeployed, setIsDeployed] = useState<Boolean>(false);
   const [loading, setLoading] = useState<Boolean>(false);
   const [username, setUsername] = useState<String>()
+  const account = useAccount()
+  console.log("The account is", account)
   useEffect(() => {
     checkDeployment();
   }, []);
@@ -32,10 +38,23 @@ const Dashboard = () => {
     const data = await fetchIfDeployed();
     console.log("deploy", data);
     setIsDeployed(data);
+    if (isDeployed) {
+      window.location.reload()
+    }
     setLoading(false);
   }
 
   async function setUsernameCall() {
+    if (!account.address) {
+      // can be made beautiful
+      //can add custom module for this
+      window.alert("Connect your wallet first")
+      return
+    }
+    console.log("username: ", username)
+    if (username == '') {
+      window.alert('Username should not be blank')
+    }
     setLoading(true);
     await deploy(username);
     setIsDeployed(true);
@@ -49,7 +68,7 @@ const Dashboard = () => {
     <div>
       <LoadingModal visible={loading ? true : false} />
       {/* <RenderSetUsername /> */}
-      {isDeployed ? <DashboardComponent/> : (<>
+      {isDeployed ? <DashboardComponent /> : (<>
         <div className="text-white flex bg-[#25143a] h-screen gap-4">
           <div className="bg-[#624c9ba6] border-white border-opacity-60 rounded-lg">
             <div className="w-[45vw] h-[100%] flex rounded-xl justify-center items-center">
@@ -65,7 +84,11 @@ const Dashboard = () => {
 
           <div className="flex flex-col m-6 justify-between items-center w-[100%]">
             <div className="flex justify-start items-start overflow-hidden">
-              <div className="grad1 blur-[100px] h-[80vh] w-[20%] flex absolute"></div>
+              <div className="grad1 blur-[100px] h-[80vh] w-[20%] flex absolute">
+              </div>
+              <div className="ml-[500px]">
+                <WalletsProvider />
+              </div>
             </div>
             <div className="my-6">
               <Link href="/">
@@ -117,7 +140,7 @@ const Dashboard = () => {
           </div>
         </div>{" "}
       </>)}
-      
+
     </div>
   );
 };

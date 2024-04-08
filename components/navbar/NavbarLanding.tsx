@@ -11,27 +11,27 @@ import { isWallet } from "@/utils";
 const Navbar = () => {
   const [Toggle, setToggle] = useState(true);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const handleClick = () => {
     setToggle(!Toggle);
   };
 
   function pushingDashboard() {
-    if (!isWallet) {
-      toast.warn("Connect your wallet to proceed further!", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      window.location.replace("/dashboard");
-    }
+    // if (!isWallet) {
+    //   toast.warn("Connect your wallet to proceed further!", {
+    //     position: "bottom-left",
+    //     autoClose: 5000,
+    //     hideProgressBar: true,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "dark",
+    //   });
+    // } else {
+    //   window.location.replace("/dashboard");
+    // }
   }
 
   function pushingInventory() {
@@ -86,15 +86,19 @@ const Navbar = () => {
           </Link>
 
           <div className="flex gap-[0.75rem] text-[0.5rem] lg:text-base">
-            <p className="w-[150px] lg:w-[205px]">
+            {/* <p className="w-[150px] lg:w-[205px]">
               <WalletsProvider />
-            </p>
+            </p> */}
+            <Link href="/dashboard">
+              <button className="border border-[#C584F5] px-4 py-2 rounded-xl">Launch Dapp</button>
+            </Link>
 
             <button onClick={pushingInventory}>
               <p className="border border-[#C584F5] px-4 py-2 rounded-xl">
                 Inventory
               </p>
             </button>
+
           </div>
         </div>
 
@@ -115,9 +119,8 @@ const Navbar = () => {
         )}
 
         <div
-          className={`delay-300 md:hidden flex text-center gap-8 p-12 h-screen bg-black/90 w-full fixed top-[80px] text-white text-left  flex-col ${
-            Toggle ? "right-[100%]" : "left-[100%]}"
-          }`}
+          className={`delay-300 md:hidden flex text-center gap-8 p-12 h-screen bg-black/90 w-full fixed top-[80px] text-white text-left  flex-col ${Toggle ? "right-[100%]" : "left-[100%]}"
+            }`}
         >
           <button onClick={pushingDashboard}>
             <p className="hoverUnderline">Dashboard</p>

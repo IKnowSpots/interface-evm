@@ -19,17 +19,17 @@ const HeroSection = () => {
   // function pushPage() {
   //     window.location.replace("/dashboard/active");
   // }
-  useEffect(() => {
-    checkDeployment();
-  }, []);
+  // useEffect(() => {
+  //   checkDeployment();
+  // }, []);
 
-  async function checkDeployment() {
-    setLoading(true);
-    const data = await fetchIfDeployed();
-    console.log("deploy", data);
-    setIsDeployed(data);
-    setLoading(false);
-  }
+  // async function checkDeployment() {
+  //   setLoading(true);
+  //   const data = await fetchIfDeployed();
+  //   console.log("deploy", data);
+  //   setIsDeployed(data);
+  //   setLoading(false);
+  // }
 
   return (
     <div className="w-full h-[575px] md:h-[650px] lg:h-[800px] xl:h-auto z-1 relative">
@@ -61,7 +61,7 @@ const HeroSection = () => {
           </Link>
           <Link
             className=""
-            href={isDeployed ? "/dashboard/active" : "/dashboard"}
+            href="/dashboard"
           >
             <button className="btn-bg w-48 flex justify-center items-center gap-2 px-4 py-1 text-[0.8rem] sm:text-[1rem]">
               Launch dApp

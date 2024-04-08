@@ -15,7 +15,9 @@ export default function RootLayout({
                 <title>iKnowSpots</title>
             </head>
             <body >
-                <Providers>{children}</Providers>
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     );
