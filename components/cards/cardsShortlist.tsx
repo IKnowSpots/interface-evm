@@ -41,6 +41,7 @@ const CardsShortlist = ({
             <p>{date}</p>
           </div>
           <div className="flex justify-center items-center">
+            {/* temparary remving and redirecting this to dashboard */}
             <Link href={`/dashboard/shortlist/${tokenId}/manage`}>
               <p className="view-btn px-4 py-0.5 outline rounded-lg">
                 Add Shortlist

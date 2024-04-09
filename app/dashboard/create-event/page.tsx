@@ -185,7 +185,7 @@ const Create = () => {
               >
                 <div className="flex items-center w-full">
                   <div className="relative w-[20%] flex justify-center">
-                    <Link href="/dashboard/active" className="w-full p-4">
+                    <Link href="/dashboard" className="w-full p-4">
                       <Image
                         src={"/icons/back-btn.svg"}
                         width={40}

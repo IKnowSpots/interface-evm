@@ -25,7 +25,8 @@ const ManageShortlist = () => {
         <div className="relative z-10">
           <div className="bg-createEvent blur-[220px] absolute w-[70%] h-[700px] z-[-1]" />
           <div className="flex">
-            <Link href="/dashboard/rewards" className="px-4">
+            {/* Route fix: temparary fixing to dashboard */}
+            <Link href="/dashboard" className="px-4">
               <Image
                 src={"/icons/back-btn.svg"}
                 width={45}
@@ -40,21 +41,19 @@ const ManageShortlist = () => {
               <div className=" flex flex-col justify-center items-center gap-10">
                 <div className="w-[85%] flex justify-center items-center p-0.5 border-2 border-[#A0A0A038] rounded-lg">
                   <button
-                    className={`flex justify-center items-center p-2 w-[50%] rounded-lg ${
-                      choose
-                        ? "bg-transparent"
-                        : "bg-[#201A24] border-2 border-[#A0A0A038]"
-                    }`}
+                    className={`flex justify-center items-center p-2 w-[50%] rounded-lg ${choose
+                      ? "bg-transparent"
+                      : "bg-[#201A24] border-2 border-[#A0A0A038]"
+                      }`}
                     onClick={() => setChoose(false)}
                   >
                     Manual
                   </button>
                   <button
-                    className={`flex justify-center items-center p-2 w-[50%] rounded-lg ${
-                      choose
-                        ? "bg-[#201A24] border-2 border-[#A0A0A038]"
-                        : "bg-transparent"
-                    }`}
+                    className={`flex justify-center items-center p-2 w-[50%] rounded-lg ${choose
+                      ? "bg-[#201A24] border-2 border-[#A0A0A038]"
+                      : "bg-transparent"
+                      }`}
                     onClick={() => setChoose(true)}
                   >
                     Bulk

@@ -38,21 +38,24 @@ const Sidebar = (props: any) => {
       </Link>
       <div className="flex flex-col justify-around h-[90%]">
         <div className="py-[10%] text-white pr-4 relative">
-          <span onClick={() => props.setActivePage("ActivePage")} className="cursor-pointer opacity-75 sidebar-btn">
+          <span onClick={() => {
+            props.setActivePage("ActivePage")
+            console.log('clicked active page')
+          }} className="cursor-pointer opacity-75 sidebar-btn">
             <NewSidebarItems
               icon_name="Fire_fill"
               section_name="Active Events"
               page_name="active"
-              isActive={props.activePage=="ActivePage"}
+              isActive={props.activePage == "ActivePage"}
             />
           </span>
 
-          <span onClick={() => props.setActivePage("InactivePage")}className="cursor-pointer opacity-75 sidebar-btn">
+          <span onClick={() => props.setActivePage("InactivePage")} className="cursor-pointer opacity-75 sidebar-btn">
             <NewSidebarItems
               icon_name="3d_box_fill"
               section_name="Inactive Events"
               page_name="inactive"
-              isActive={props.activePage=="InactivePage"}
+              isActive={props.activePage == "InactivePage"}
             />
           </span>
 
@@ -61,7 +64,7 @@ const Sidebar = (props: any) => {
               icon_name="Fire_fill"
               section_name="Minted Collections"
               page_name="minted"
-              isActive={props.activePage=="MintedPage"}
+              isActive={props.activePage == "MintedPage"}
             />
           </span>
 
@@ -70,7 +73,7 @@ const Sidebar = (props: any) => {
               icon_name="CPU"
               section_name="Shortlist"
               page_name="shortlist"
-              isActive={props.activePage=="ShortlistPage"}
+              isActive={props.activePage == "ShortlistPage"}
             />
           </span>
 
@@ -79,7 +82,7 @@ const Sidebar = (props: any) => {
               icon_name="lightning_fill"
               section_name="Rewards"
               page_name="rewards"
-              isActive={props.activePage=="RewardsPage"}
+              isActive={props.activePage == "RewardsPage"}
             />
           </span>
         </div>

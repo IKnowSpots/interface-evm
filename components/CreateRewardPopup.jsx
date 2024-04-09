@@ -28,7 +28,8 @@ const CreateRewardPopup = () => {
             Go & Whitelist Attendees for the Event now!
           </p>
           <div className="flex justify-center items-center w-full bg-black bg-opacity-70 mt-6">
-            <Link href="/dashboard/rewards" className="w-full">
+            {/* Route fix: temparary redirecting to dashboard */}
+            <Link href="/dashboard" className="w-full">
               <button
                 onClick={togglePopup}
                 className="w-full text-white text-lg font-semibold py-4 px-8 rounded flex justify-between items-center"
