@@ -2,19 +2,22 @@
 "use client";
 import { fetchIfDeployed, deploy } from "@/utils";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import LoadingModal from "@/components/LoadingModal";
 import DashboardComponent from "@/components/dashboard/DashboardComponent";
 import Navbar from "@/components/navbar/NavbarCreate";
 import { useAccount } from "wagmi";
 import WalletsProvider from "@/components/wallets";
-
+import { SectionContext } from "./ContextProvider";
+// some shit things coming up
 
 const Dashboard = () => {
   const [isDeployed, setIsDeployed] = useState<Boolean>(false);
   const [loading, setLoading] = useState<Boolean>(false);
   const [username, setUsername] = useState<String>()
+  const counterState = useContext(SectionContext)
+  console.log("Counter Context", counterState)
   const account = useAccount()
   console.log("The account is", account)
   useEffect(() => {

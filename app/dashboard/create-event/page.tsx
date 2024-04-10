@@ -1,7 +1,7 @@
 "use client";
-import { uploadToIPFS, mint, uploadToPinataIPFS } from "@/utils";
+import { mint, uploadToPinataIPFS } from "@/utils";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CreateNav from "@/components/navbar/CreateNav";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FooterSection from "@/components/landing/FooterSection";
 import PopUp from "@/components/Popup";
 import LoadingModal from "@/components/LoadingModal";
-
+import { SectionContext } from "../ContextProvider";
 const Create = () => {
   const [avtarInfo] = useState([
     {
@@ -38,7 +38,9 @@ const Create = () => {
         "https://ipfs.io/ipfs/bafybeicl6fv6nuyladn3zril5lge4kz2oc7yjqz3x6xwwnx5otrqi5kv2m/dash-4.jpg",
     },
   ]);
+  const SidebarActiveElementState = useContext(SectionContext)
 
+  console.log(SidebarActiveElementState)
   function setAvatar(cover: any) {
     setFormInput({ ...formInput, cover });
     console.log(cover);
@@ -155,6 +157,9 @@ const Create = () => {
       NftURI
     );
     if (isMinted == true) {
+      if (SidebarActiveElementState != null)
+        //@ts-ignore
+        SidebarActiveElementState.setActiveElement('MintedPage')
       toast.success("Minted!", {
         position: "bottom-left",
         autoClose: 5000,
