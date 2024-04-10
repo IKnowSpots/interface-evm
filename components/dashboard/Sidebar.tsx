@@ -93,7 +93,7 @@ const Sidebar = (props: any) => {
                 Support
               </p>
             </Link>
-            <Link target="_blank" href="/">
+            <Link target="_blank" href="https://drive.google.com/file/d/1AksnU1BU4UNidCx0Pw0ts2m76i2gqDDR/view">
               <p className="py-1 relative z-10 opacity-50 sidebar-elements">
                 Docs
               </p>
